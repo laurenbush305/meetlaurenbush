@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://meetlaurenbush.com/sitemap.xml

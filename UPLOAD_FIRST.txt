@@ -1,0 +1,9 @@
+GITHUB PREVIEW-FIRST UPLOAD
+
+1. Upload the CONTENTS of this folder to the root of the GitHub repository.
+2. Turn on GitHub Pages from main / (root).
+3. Review the temporary github.io site first.
+4. Do NOT add the custom domain yet.
+5. After approval, add meetlaurenbush.com in GitHub Pages settings and then update Porkbun DNS. A CNAME file can be added at that stage.
+
+This package intentionally omits CNAME so GitHub will not redirect the temporary preview to the custom domain before DNS is ready.
