@@ -56,7 +56,7 @@
         "Deliverable": "Hosted field segment, shot and cut for social distribution.",
         "Lauren's role": "Host and on-camera talent, plus creator, editor and product storyteller.",
         "Proof": "Handheld mic, live noise, unscripted moments, and the brand message still lands.",
-        "Also on camera": "Scrambled Up | Television Game Show Contestant | Advanced to Final Round | 2026"
+        "Also on camera": "Scrambled Up | Television Game Show Contestant | 2026"
       },
       evidence: ["ev-host-04.jpg", "ev-host-02.jpg", "ev-host-03.jpg", "ev-host-05.jpg", "ev-host-01.jpg"]
     },
