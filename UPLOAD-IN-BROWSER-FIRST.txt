@@ -1,4 +1,0 @@
-Upload the CONTENTS of this folder to the root of the GitHub repository.
-Do not upload this parent folder as one nested directory.
-After upload, configure GitHub Pages: Settings > Pages > Deploy from a branch > main > /(root).
-The custom domain file is intentionally named CNAME-LATER.txt until the github.io preview works.
