@@ -1,0 +1,134 @@
+/* SEASON ZERO — FULLSITE A4 / FINAL ART DIRECTION + ENCOUNTER POLISH
+   A3 is donor. Architecture unchanged. Fewer unresolved decisions. */
+:root{--a4-ink:#08090b;--a4-paper:#fbfaf6;--a4-line:rgba(17,16,18,.16)}
+
+/* Mixed-source media, one property: judgment not one filter. */
+.a3-moment img,.a3-moment video{filter:saturate(1.025) contrast(1.04)}
+.a3-thirdparty img,.a4-program-tv img{filter:saturate(1.06) contrast(1.045)}
+.a3-archive-strip img,.a4-program-archive img{filter:saturate(.92) contrast(1.035)}
+
+/* Person: real clean tail excerpt; face + mic dominate, no social overlay. */
+.a3-person{min-height:78svh}
+.a3-person-media{height:78svh;background:#09090c}
+.a3-person-media video{object-fit:cover;object-position:center 34%}
+.a3-person-media figcaption{bottom:clamp(18px,3vw,40px)}
+
+/* Thinking: poster and active state prove behavior. Finance is only a supporting light-emitting receipt. */
+.a3-thinking{min-height:98svh;padding-bottom:clamp(82px,9vw,130px);background:linear-gradient(180deg,#fbfcf8 0%,#fbfaf6 88%)}
+.a3-thinking-field{height:min(840px,76vw)}
+.a3-thinking-field video{left:8%;width:57%;height:86%;object-position:center 28%;box-shadow:0 44px 120px rgba(15,59,60,.15)}
+.a3-thinking-field:after{content:"";position:absolute;left:3%;bottom:3%;width:70%;height:64%;background:radial-gradient(ellipse,rgba(35,202,207,.10),transparent 68%);filter:blur(28px);z-index:-1}
+.a3-thinking-field figcaption{left:70%;top:14%;max-width:22ch}
+.a3-thinking-play{left:70%;top:30%}
+.a3-thinking-margin{width:min(290px,26vw);gap:.7rem}
+.a4-authority-screen{margin:0 0 .45rem auto;width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:#05070a;box-shadow:0 18px 50px rgba(28,35,45,.12)}
+.a4-authority-screen video{position:static!important;width:100%!important;height:100%!important;object-fit:cover!important;box-shadow:none!important}
+.a4-authority-screen figcaption{position:absolute!important;left:8px!important;right:auto!important;top:auto!important;bottom:7px!important;color:#fff!important;font:500 .52rem/1.2 var(--f-mono)!important;letter-spacing:.06em;text-transform:uppercase;text-shadow:0 1px 8px #000}
+
+/* Authorship remains artifact-led. Only optical tightening. */
+.a3-authorship{min-height:108svh;padding-bottom:clamp(90px,10vw,145px)}
+.a3-auth-signature{max-width:22ch}
+
+/* Third Party stays source-led; transition light comes from production color, not another section color. */
+.a3-thirdparty{padding-bottom:clamp(80px,8vw,120px)}
+.a3-thirdparty:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:120px;background:linear-gradient(180deg,transparent,#08090b);pointer-events:none}
+
+/* Host: cinematic. No ghost HOST. The media is the drama. */
+.a3-host{min-height:104svh;padding:clamp(70px,8vw,115px) 0;background:#08090b}
+.a4-host-edge{position:absolute;left:clamp(20px,4vw,62px);bottom:clamp(30px,5vw,72px);margin:0;color:rgba(255,255,255,.5);font:600 .57rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
+.a3-host-frame{width:min(610px,44vw);height:min(870px,84svh);box-shadow:0 52px 145px rgba(0,0,0,.52)}
+.a3-host-frame:before{content:"";position:absolute;z-index:-1;inset:10% -35%;background:radial-gradient(ellipse,rgba(50,210,214,.08),rgba(255,45,135,.035) 38%,transparent 68%);filter:blur(32px)}
+.a3-host-frame video{object-position:center 31%}
+.a3-host-frame figcaption{left:18px;bottom:18px}.a3-host-frame figcaption b{font-size:1.12rem}.a3-host-frame figcaption span{font-size:.64rem}
+.a3-host-frame .a3-sound{right:18px;bottom:19px}
+
+/* Activate: receipt sits on the scene, never in a dashboard box. */
+.a3-activate{min-height:102svh;padding-bottom:clamp(60px,7vw,100px)}
+.a3-activate-copy{background:rgba(255,254,250,.68);backdrop-filter:blur(8px);padding:.75rem .9rem}
+.a3-activate-result{mix-blend-mode:normal;text-shadow:0 3px 22px rgba(0,0,0,.68)}
+.a3-activate-result strong{font-weight:650}
+
+/* WATCH: programming in a grid with controlled overlap, not absolute-card choreography. */
+.a4-watch{padding:clamp(80px,8vw,120px) 0 clamp(88px,9vw,130px);background:#f8f7f3;overflow:hidden}
+.a4-watch-stage{width:min(1320px,94vw);margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(18,minmax(55px,5.3vw));position:relative}
+.a4-watch-title{grid-column:1/8;grid-row:1/7;margin:0!important;width:auto!important;z-index:5;align-self:start;padding-top:1.4rem}
+.a4-watch-title h2{font-size:clamp(4.4rem,8.6vw,9.5rem);max-width:7.2ch;margin-top:.6rem}
+.a4-host-cue{margin-top:2rem;display:grid;gap:.35rem;border:0;border-top:1px solid var(--a4-line);background:transparent;color:#111;padding:1rem 0 0;width:min(430px,90%);text-align:left;cursor:pointer}
+.a4-host-cue small{font:600 .55rem/1 var(--f-mono);letter-spacing:.1em}.a4-host-cue b{font-size:1.02rem;font-weight:600}
+.a4-program{position:relative;overflow:hidden;background:#0b0b0e;color:#fff;box-shadow:0 26px 75px rgba(26,18,29,.16)}
+.a4-program>img,.a4-program>video{width:100%;height:100%;object-fit:cover;display:block}
+.a4-program:after{content:"";position:absolute;inset:52% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.82));pointer-events:none}
+.a4-program>div{position:absolute;z-index:3;left:15px;right:15px;bottom:15px;display:grid;gap:.28rem}.a4-program span{font:600 .54rem/1 var(--f-mono);letter-spacing:.1em}.a4-program b{font-size:clamp(1.35rem,2.25vw,2.6rem);line-height:.96}.a4-program .a3-link{width:max-content;color:#fff;margin-top:.35rem}
+.a4-program-tv{grid-column:7/13;grid-row:2/10;z-index:2;transform:translateX(1.5vw)}.a4-program-tv img{object-position:center 20%}
+.a4-program-explain{grid-column:1/5;grid-row:8/16;z-index:4;transform:translateY(-1vw)}.a4-program-explain video{object-position:center 20%}
+.a4-program-create{grid-column:5/9;grid-row:11/18;z-index:5;transform:translate(-1.25vw,1.5vw)}.a4-program-create video{object-position:center}
+.a4-program-archive{grid-column:9/13;grid-row:12/17;z-index:3;transform:translateX(-.5vw)}.a4-program-archive img{object-position:center 45%}
+.a4-program-archive b{font-size:clamp(1.2rem,1.8vw,2rem)}
+
+/* Trust: human + capable + deliberate. The wardrobe room is part of the frame now. */
+.a3-trust{background:#eeebe5;padding:clamp(80px,8vw,125px) max(5vw,20px);grid-template-columns:.95fr 1.05fr;gap:clamp(36px,6vw,90px)}
+.a3-trust-photo{max-width:680px;width:100%;overflow:hidden;box-shadow:0 24px 70px rgba(38,31,30,.10)}
+.a3-trust-photo img{width:100%;aspect-ratio:10/7;object-fit:cover;display:block;filter:saturate(.96) contrast(1.035)}
+.a3-trust-copy h2{font-size:clamp(2.5rem,4.15vw,4.4rem);max-width:12ch}
+
+/* Casting Imagination: preserve the A3 distinction; make the campaign close a little quieter and larger-than-life. */
+.a3-casting-copy p{max-width:34ch}
+.a3-casting-copy>span{opacity:.7}
+
+/* Book: audience → producer, not campaign → component. */
+.a4-booking{position:relative;background:linear-gradient(180deg,#090a0d 0%,#130d17 100%)!important;padding:clamp(82px,9vw,132px) 0!important}
+.a4-booking:before{content:"";position:absolute;left:8%;right:8%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent)}
+.a4-booking .contact{display:grid!important;grid-template-columns:.82fr 1.18fr!important;gap:clamp(44px,8vw,120px)!important;align-items:start!important;padding:0!important}
+.a4-booking-intro{position:sticky;top:80px}
+.a4-booking .eyebrow{font-size:.56rem;letter-spacing:.13em;opacity:.68}
+.a4-booking h2{font-size:clamp(3.5rem,6vw,6.8rem)!important;line-height:.84!important;letter-spacing:-.055em!important;max-width:8ch;margin:.8rem 0 1.2rem!important}
+.a4-booking .lede{max-width:42ch;color:rgba(255,255,255,.76)!important}.a4-booking .muted{max-width:48ch;font-size:.8rem}
+.a4-booking-form{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 1.6rem;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+.a4-producer-cue{grid-column:1/-1;display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:1rem;margin-bottom:.6rem}.a4-producer-cue span{font:600 .56rem/1 var(--f-mono);letter-spacing:.13em}.a4-producer-cue b{font:500 .68rem/1 var(--f-mono);color:rgba(255,255,255,.56)}
+.a4-booking-form label{display:grid;gap:.5rem;font:500 .61rem/1 var(--f-mono);letter-spacing:.07em;text-transform:uppercase}.a4-booking-form label.full{grid-column:1/-1}
+.a4-booking input,.a4-booking select,.a4-booking textarea{border:0!important;border-bottom:1px solid rgba(255,255,255,.28)!important;border-radius:0!important;background:transparent!important;padding:.8rem .05rem!important;box-shadow:none!important;outline-offset:4px!important}
+.a4-booking textarea{min-height:110px;resize:vertical}
+.a4-booking input:focus,.a4-booking select:focus,.a4-booking textarea:focus{border-bottom-color:#fff!important;outline:2px solid rgba(255,255,255,.22)!important}
+.a4-booking .booking-submit{grid-column:1/-1;width:max-content;margin-top:.6rem;border-radius:0!important;padding:.9rem 1.1rem!important}
+.a4-booking .booking-note{grid-column:1/-1;max-width:56ch}.a4-booking-status{grid-column:1/-1;margin:0;color:#fff;font:600 .65rem/1.3 var(--f-mono);letter-spacing:.06em;text-transform:uppercase}.a4-booking-status[hidden]{display:none!important}
+.a4-booking .btnrow{margin-top:1.2rem}.a4-booking .btn.ghost{border:0!important;border-bottom:1px solid rgba(255,255,255,.36)!important;border-radius:0!important;padding:.4rem 0!important;margin-right:1.1rem}
+
+/* Deliberate media/loading fallback. */
+.a3-moment video{background:#0a0a0d;color:#fff}
+.a3-moment video:not([poster]){background:linear-gradient(135deg,#0a0a0d,#18111b)}
+
+@media(max-width:760px){
+ .a3-person{min-height:69svh}.a3-person-media{height:69svh}.a3-person-media video{object-position:center 35%}.a3-person-media figcaption{font-size:.55rem}
+ .a3-thinking{padding:52px 0 76px}.a3-thinking-field{height:83svh}.a3-thinking-field video{left:0;width:80%;height:82%;object-position:center 24%}.a3-thinking-field figcaption{top:8%;right:14px;width:42%}.a3-thinking-play{top:27%;right:14px}.a3-thinking-margin{margin:18px 16px 0;padding-left:12%;text-align:right}.a4-authority-screen{width:58%;margin-left:auto}
+ .a3-authorship{min-height:970px;padding-bottom:84px}
+ .a3-host{min-height:92svh;padding:62px 0 68px}.a3-host-frame{width:84vw;height:75svh}.a3-host-frame video{object-position:center 31%}.a4-host-edge{left:8px;bottom:28px;font-size:.48rem}
+ .a3-activate{min-height:930px;padding-bottom:66px}
+ .a4-watch{padding:62px 0 82px}.a4-watch-stage{width:100%;display:block}.a4-watch-title{width:calc(100% - 32px)!important;margin:0 16px!important;padding:0 0 18px;position:relative;z-index:6}.a4-watch-title h2{font-size:17.5vw;max-width:6ch}.a4-host-cue{margin-top:1.3rem;width:90%}
+ .a4-program{position:relative!important;transform:none!important;box-shadow:0 22px 58px rgba(28,18,28,.13)}
+ .a4-program-tv{width:88%;height:61svh;margin:-3.5rem 0 0 auto;z-index:2}.a4-program-tv img{object-position:center 18%}
+ .a4-program-explain{width:72%;height:68svh;margin:18px 0 0 0;z-index:3}.a4-program-explain video{object-position:center 18%}
+ .a4-program-create{width:64%;height:57svh;margin:-4.2rem 5% 0 auto;z-index:4}.a4-program-archive{width:90%;height:43svh;margin:18px auto 0 0;z-index:2}.a4-program>div{left:13px;right:13px;bottom:13px}.a4-program b{font-size:1.55rem}.a4-program-archive b{font-size:1.25rem}
+ .a3-trust{padding:68px 16px;gap:24px}.a3-trust-photo{order:-1;width:100%;max-width:none}.a3-trust-photo img{aspect-ratio:10/7}.a3-trust-copy h2{font-size:2.6rem}
+ .a4-booking{padding:68px 0!important}.a4-booking .contact{display:block!important}.a4-booking-intro{position:static}.a4-booking h2{font-size:14.5vw!important;max-width:7ch}.a4-booking-form{margin-top:42px;grid-template-columns:1fr;gap:1.15rem}.a4-booking-form label.full,.a4-producer-cue,.a4-booking .booking-submit,.a4-booking .booking-note,.a4-booking-status{grid-column:1}.a4-producer-cue{display:grid}.a4-booking .booking-submit{width:100%;text-align:center}
+}
+
+@media(prefers-reduced-motion:reduce){.a4-program video,.a4-authority-screen video{animation:none!important}}
+
+/* A4 optical QA corrections after first rendered pixels. */
+.a4-watch{margin-top:-90px;padding-top:clamp(120px,10vw,155px)}
+.a4-booking h2{text-transform:none!important;font-size:clamp(2.9rem,4.3vw,4.9rem)!important;line-height:.9!important;max-width:9ch}
+.a4-booking-form label{background:transparent!important;padding:0!important}
+.a4-booking input,.a4-booking select,.a4-booking textarea{background:transparent!important}
+
+@media(max-width:760px){
+ .a3-thinking-field figcaption{right:14px!important;left:auto!important;top:8%!important;width:43%!important;text-align:right!important;max-width:none!important}
+ .a3-thinking-field figcaption b{font-size:1.18rem!important;line-height:.96!important;overflow-wrap:anywhere!important;word-break:normal!important}
+ .a3-thinking-field figcaption span{font-size:.48rem!important;line-height:1.25!important}
+ .a3-thinking-play{right:14px!important;left:auto!important;top:24%!important;font-size:.50rem!important;white-space:nowrap!important}
+ .a4-watch{margin-top:-48px;padding-top:92px}
+ .a4-watch-title{padding-bottom:52px!important}
+ .a4-host-cue{margin-bottom:0}
+ .a4-program-tv{margin-top:-26px!important}
+ .a4-booking h2{font-size:3.35rem!important;line-height:.88!important;max-width:8ch!important;text-transform:none!important}
+ .a4-booking-form label{background:transparent!important;padding:0!important}
+}

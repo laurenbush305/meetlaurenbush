@@ -1,0 +1,123 @@
+/* A5.6.1 — Lauren Bush Television / Network Finish */
+body.a561-network-finish{--a561-aqua:#9ce9e5;--a561-powder:#b9dff0;--a561-cream:#f7f0e5;--a561-pink:#ff2d86;--a561-lime:#b9ef27;--a561-screen:#42a9eb;--a561-black:#08090b}
+
+/* Material graphics are source-derived production assets, never fake proof. */
+.a561-signal-seam{height:clamp(18px,2.1vw,34px);position:relative;z-index:20;background:url('../network/a5.6.2/LBTV_NetworkSignalSeam.svg') center/cover no-repeat;overflow:hidden}
+.a561-signal-seam:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 48%,rgba(255,255,255,.52) 52%,transparent 56%);transform:translateX(-120%);animation:a561Seam 8s ease-in-out infinite}
+.a561-seam-field{filter:hue-rotate(-8deg) saturate(.9)}
+@keyframes a561Seam{0%,78%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
+
+.a561-paper-interruption{height:clamp(34px,4vw,64px);position:relative;z-index:10;margin-top:-1px;background:url('../network/a5.6.2/LBTV_AuthoredPaper.webp') center 47%/cover no-repeat;clip-path:polygon(0 20%,12% 10%,34% 20%,58% 7%,77% 16%,100% 4%,100% 82%,82% 73%,64% 91%,39% 78%,18% 92%,0 82%)}
+
+/* THINKING: source-derived explainer signal only kisses the media, it doesn't become a banner. */
+.a56-thinking-stage:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url('../network/a5.6.2/LBTV_SpelmanDaytimeSignal.webp') center/cover no-repeat;mix-blend-mode:screen;opacity:.13}
+.a56-thinking-lower-third:before{background-image:url('../network/a5.6.2/LBTV_SpelmanDaytimeSignal.webp')!important;background-size:cover!important}
+.a56-finance-transmission:after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:url('../network/a5.6.2/LBTV_DaylightSignal.webp') center 58%/cover no-repeat;opacity:.72}
+
+/* Scrambled → Host: authored after-hours transmission bands, not generic static. */
+body.a561-network-finish .a56-host.a56-signal-in:before{background-image:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp')!important;background-size:cover!important;background-position:center!important;mix-blend-mode:normal!important;animation:a561HostBreak .215s steps(3,end) both!important;transform-origin:center;filter:saturate(1.04) contrast(1.05)}
+body.a561-network-finish .a56-host.a56-signal-in:after{height:2px!important;background:#f6f7f5!important;box-shadow:0 0 18px #fff,0 0 32px rgba(154,226,215,.48)!important;animation:a561Specular .215s linear both!important}
+@keyframes a561HostBreak{0%{opacity:0;clip-path:inset(0 0 100% 0)}18%{opacity:.97;clip-path:inset(0 0 68% 0);transform:translateX(2%)}44%{clip-path:inset(21% 0 26% 0);transform:translateX(-1.4%)}72%{clip-path:inset(57% 0 7% 0);transform:translateX(.6%)}100%{opacity:0;clip-path:inset(100% 0 0 0)}}
+@keyframes a561Specular{0%{opacity:0;top:18%}28%{opacity:1;top:41%}72%{opacity:.8;top:71%}100%{opacity:0;top:84%}}
+
+/* HOST: mic-metal material edge. */
+.a56-host-talent:after{content:"";position:absolute;right:-2px;top:0;width:10px;height:100%;background:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp') right center/500px 100% no-repeat;opacity:.72;mix-blend-mode:screen;pointer-events:none}
+.a56-host-lower-third:before{background-image:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp')!important}
+
+/* WATCH — one tactile frequency rail integrated with active media. */
+body.a561-network-finish .a56-watch{--rail-text:#fff;--rail-line:rgba(255,255,255,.55)}
+body.a561-network-finish .a56-watch[data-a56-program="wimpb"]{--rail-text:#10222c;--rail-line:rgba(19,54,60,.38)}
+body.a561-network-finish .a56-watch-stage{height:86vh}
+body.a561-network-finish .a56-watch-bug{top:2.1vh;background:rgba(7,10,11,.52);padding:.48rem .65rem;backdrop-filter:blur(8px)}
+body.a561-network-finish .a56-tuner{left:6vw;right:6vw;bottom:3.5vh;height:10.5vh;padding:0 1vw;gap:0;overflow:visible;border:0;background:rgba(8,10,12,.34);backdrop-filter:blur(13px) saturate(1.12);box-shadow:0 11px 35px rgba(0,0,0,.16);border-radius:2px;display:grid;grid-template-columns:repeat(5,1fr);align-items:center}
+body.a561-network-finish .a56-tuner:before{content:"";position:absolute;left:4%;right:4%;top:43%;height:2px;background:var(--rail-line);box-shadow:0 1px 0 rgba(255,255,255,.15)}
+body.a561-network-finish .a56-tuner button{position:relative;z-index:3;width:100%;padding:2.35rem .45rem .5rem;color:color-mix(in srgb,var(--rail-text) 62%,transparent);text-align:center;white-space:normal;line-height:1.05;min-height:76px;transition:color .18s ease,transform .18s ease}
+body.a561-network-finish .a56-tuner button:before{content:"";position:absolute;left:50%;top:calc(43% - 7px);width:14px;height:14px;border-radius:50%;transform:translateX(-50%);background:rgba(245,247,244,.62);border:2px solid rgba(7,9,10,.28);box-shadow:0 0 0 4px rgba(255,255,255,.08);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+body.a561-network-finish .a56-tuner button span{position:absolute;left:50%;top:.5rem;transform:translateX(-50%);margin:0;color:color-mix(in srgb,var(--rail-text) 45%,transparent)}
+body.a561-network-finish .a56-tuner button.is-active{color:var(--rail-text)!important;transform:translateY(-2px)}
+body.a561-network-finish .a56-tuner button.is-active:before{transform:translateX(-50%) scale(1.24);background:var(--a561-pink);box-shadow:0 0 0 5px rgba(255,45,134,.15),0 0 24px rgba(255,45,134,.55)}
+body.a561-network-finish .a56-watch[data-a56-program="wimpb"] .a56-tuner button.is-active:before{background:var(--a561-lime);box-shadow:0 0 0 5px rgba(185,239,39,.18),0 0 25px rgba(93,181,176,.52)}
+body.a561-network-finish .a56-watch[data-a56-program="archive"] .a56-tuner button.is-active:before{background:#e4d9c8;box-shadow:0 0 0 5px rgba(228,217,200,.13),0 0 18px rgba(228,217,200,.22)}
+.a561-frequency-line{position:absolute;left:4%;right:4%;top:43%;height:2px;pointer-events:none;z-index:2}.a561-frequency-line i{position:absolute;left:0;top:-1px;width:20%;height:4px;background:linear-gradient(90deg,transparent,var(--a561-aqua),#fff);opacity:.55}.a561-frequency-line b{position:absolute;width:6px;height:6px;border-radius:50%;right:0;top:-2px;background:var(--a561-pink);opacity:.75}
+
+/* Watch signal species: actual production-asset surfaces. */
+body.a561-network-finish .a56-watch.is-tuning .a56-tune-disturbance{animation:a561TuneLock .205s steps(3,end)!important;background:#050708}
+body.a561-network-finish .a56-watch.is-tuning .a56-tune-disturbance i{inset:0!important;background:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp') center/cover no-repeat!important;mix-blend-mode:normal!important;filter:none!important;opacity:1!important}
+body.a561-network-finish .a56-watch[data-a56-program="wimpb"].is-tuning .a56-tune-disturbance{background:#eefeff}
+body.a561-network-finish .a56-watch[data-a56-program="wimpb"].is-tuning .a56-tune-disturbance i{background:url('../network/a5.6.2/LBTV_DaylightSignal.webp') center/cover no-repeat!important}
+body.a561-network-finish .a56-watch[data-a56-program="archive"].is-tuning .a56-tune-disturbance{background:#746d66}
+body.a561-network-finish .a56-watch[data-a56-program="archive"].is-tuning .a56-tune-disturbance i{background:url('../network/a5.6.2/LBTV_ArchiveSignal.webp') center/cover no-repeat!important}
+body.a561-network-finish .a56-watch[data-a56-program="apq"].is-tuning .a56-tune-disturbance i{background:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp') center/cover no-repeat!important;filter:hue-rotate(20deg) saturate(1.15)!important}
+body.a561-network-finish .a56-watch.is-tuning .a56-tune-disturbance b{height:2px;background:#fff!important;box-shadow:0 0 16px #fff!important;animation:a561TuneLine .205s linear both}
+@keyframes a561TuneLock{0%{opacity:0}14%{opacity:.92;clip-path:inset(0 0 73% 0);transform:translateX(1.6%)}42%{opacity:.95;clip-path:inset(28% 0 23% 0);transform:translateX(-1.1%)}71%{opacity:.82;clip-path:inset(66% 0 8% 0);transform:translateX(.4%)}100%{opacity:0;clip-path:inset(100% 0 0 0)}}
+@keyframes a561TuneLine{0%{top:14%}45%{top:54%}100%{top:86%}}
+
+/* Brief program identifier: 460ms, then get out of Lauren's way. */
+body.a561-network-finish .a56-program-open{padding:0 4vw 7vh;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.42))}
+body.a561-network-finish .a56-watch.is-opening .a56-program-open{animation:a561ProgramID .54s cubic-bezier(.2,.8,.2,1) both}
+body.a561-network-finish .a56-program-open strong{font-size:clamp(2.5rem,5vw,5.7rem);max-width:13ch}.a56-program-open small{background:rgba(7,9,10,.62);padding:.34rem .5rem;margin-bottom:.45rem}
+@keyframes a561ProgramID{0%{opacity:0;transform:translateY(12px)}16%,64%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px)}}
+
+/* TRUST — daylight returns: blue screen, cream work light, warm wood, black equipment. */
+body.a561-network-finish .a56-trust{min-height:105vh;background:#edf4f1;color:#101416}
+body.a561-network-finish .a56-trust-glow{background:radial-gradient(circle at 72% 16%,rgba(80,180,236,.24),transparent 31%),linear-gradient(112deg,rgba(247,240,229,.98) 0 48%,rgba(188,229,238,.68) 48% 69%,rgba(255,255,255,.35) 69%)}
+.a561-trust-daylight{position:absolute;inset:0;z-index:1;background:url('../network/a5.6.2/LBTV_BackOfRoomSignal.webp') center/cover no-repeat;opacity:.17;mix-blend-mode:multiply;pointer-events:none}
+body.a561-network-finish .a56-trust-equipment{left:0;top:6vh;width:48vw;height:83vh;box-shadow:0 18px 44px rgba(54,58,53,.15)}
+body.a561-network-finish .a56-trust-equipment img{filter:saturate(.93) contrast(1.02) brightness(1.08)}
+body.a561-network-finish .a56-trust-lauren{right:5vw;top:9vh;width:48vw;height:73vh;box-shadow:0 22px 50px rgba(50,64,64,.18)}
+body.a561-network-finish .a56-trust-copy{left:53vw;top:68vh;width:39vw;color:#101416}.a56-trust-copy span{color:#2f769d!important}.a56-trust-copy p{color:#3d4749!important}.a56-trust-copy h2{font-size:clamp(2.8rem,4.6vw,5.4rem)}
+body.a561-network-finish .a56-trust-bug{right:auto;left:1.2rem;bottom:1.2rem;color:#235c78;background:rgba(248,245,237,.74);padding:.38rem .48rem}
+.a561-operator-dots{position:absolute;right:2vw;bottom:2.2vh;display:flex;gap:.35rem;z-index:7}.a561-operator-dots i{width:7px;height:7px;border-radius:50%;background:#4de084;box-shadow:0 0 12px rgba(77,224,132,.55)}.a561-operator-dots i:nth-child(2){background:#e7b54a}.a561-operator-dots i:nth-child(3){background:#4ba9e7}
+
+/* Book = quiet network off-air. */
+.a561-off-air{display:inline-block;margin-right:.55rem;padding:.28rem .46rem;background:rgba(167,231,227,.12);border:1px solid rgba(167,231,227,.4);color:#a7e7e3;font-size:.56rem;letter-spacing:.1em}
+body.a561-network-finish #contact:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:url('../network/a5.6.2/LBTV_NetworkSignalSeam.svg') center/cover no-repeat;opacity:.85}
+
+@media(max-width:760px){
+ .a561-signal-seam{height:18px}.a561-paper-interruption{height:36px}
+ body.a561-network-finish .a56-watch{min-height:110vh}
+ body.a561-network-finish .a56-watch-stage{height:79vh}
+ body.a561-network-finish .a56-tuner{left:0;right:0;bottom:0;height:27vh;padding:.8rem 5vw 1rem;display:flex;align-items:flex-start;gap:2.1rem;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:0;background:rgba(8,10,12,.82)}
+ body.a561-network-finish .a56-tuner:before{left:5vw;right:5vw;top:42px}
+ body.a561-network-finish .a56-tuner button{flex:0 0 42vw;min-height:86px;padding:3.1rem .2rem .8rem;text-align:left;scroll-snap-align:center;font-size:.62rem;color:rgba(255,255,255,.63)}
+ body.a561-network-finish .a56-tuner button:before{left:12px;top:35px;transform:none;width:15px;height:15px}
+ body.a561-network-finish .a56-tuner button.is-active:before{transform:scale(1.2)}
+ body.a561-network-finish .a56-tuner button span{left:0;top:.6rem;transform:none}
+ .a561-frequency-line{left:5vw;right:5vw;top:42px}
+ body.a561-network-finish .a56-program-open{padding:0 5vw 8vh}.a56-program-open strong{font-size:10vw!important}
+ body.a561-network-finish .a56-trust{min-height:142vh;background:#eef4f0}
+ body.a561-network-finish .a56-trust-equipment{left:0;top:0;width:100vw;height:58vh}
+ body.a561-network-finish .a56-trust-lauren{right:5vw;top:48vh;width:84vw;height:64vh}
+ body.a561-network-finish .a56-trust-copy{left:6vw;top:115vh;width:88vw}.a56-trust-copy h2{font-size:12vw}
+ body.a561-network-finish .a56-trust-bug{left:5vw;bottom:1rem}
+ .a561-operator-dots{right:5vw;bottom:1.2rem}
+}
+@media(max-width:390px){body.a561-network-finish .a56-trust{min-height:140vh}}
+@media(prefers-reduced-motion:reduce){.a561-signal-seam:after{animation:none}.a56-host.a56-signal-in:before,.a56-host.a56-signal-in:after,.a56-watch.is-tuning .a56-tune-disturbance{display:none!important}}
+
+.a561-operator-dots.is-live i{animation:a561Led 2.4s ease-in-out infinite}.a561-operator-dots.is-live i:nth-child(2){animation-delay:.35s}.a561-operator-dots.is-live i:nth-child(3){animation-delay:.7s}@keyframes a561Led{0%,100%{opacity:.45;transform:scale(.86)}45%{opacity:1;transform:scale(1)}}
+/* A5.6.1 tuning-rail beauty correction: a real bright network control, not a utility row. */
+body.a561-network-finish .a56-tuner{
+  left:4vw;right:4vw;bottom:2.8vh;height:15vh;padding:0 1.4vw;
+  background:linear-gradient(96deg,rgba(247,240,229,.96) 0 28%,rgba(202,242,239,.95) 28% 72%,rgba(234,243,247,.96) 72% 100%);
+  color:#10181b;box-shadow:0 18px 50px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.58);backdrop-filter:blur(10px) saturate(1.08)
+}
+body.a561-network-finish .a56-tuner:before{left:5%;right:5%;top:46%;height:2px;background:rgba(20,48,55,.34);box-shadow:0 1px rgba(255,255,255,.74)}
+body.a561-network-finish .a56-tuner button{color:rgba(16,30,34,.58)!important;padding:3.4rem .6rem .7rem;min-height:96px;font-size:.69rem;letter-spacing:.015em}
+body.a561-network-finish .a56-tuner button span{top:.7rem;color:rgba(16,30,34,.43)!important;font-size:.55rem}
+body.a561-network-finish .a56-tuner button:before{top:calc(46% - 8px);width:16px;height:16px;background:#eef4f2;border:2px solid rgba(15,39,45,.38);box-shadow:0 0 0 5px rgba(255,255,255,.44)}
+body.a561-network-finish .a56-tuner button.is-active{color:#10181b!important;font-weight:800}
+body.a561-network-finish .a56-tuner button.is-active:before{background:var(--a561-pink);box-shadow:0 0 0 6px rgba(255,45,134,.13),0 0 26px rgba(255,45,134,.48)}
+body.a561-network-finish .a56-watch[data-a56-program="wimpb"] .a56-tuner button.is-active:before{background:var(--a561-lime)}
+body.a561-network-finish .a56-watch[data-a56-program="archive"] .a56-tuner button.is-active:before{background:#b7aa97}
+body.a561-network-finish .a561-frequency-line{left:5%;right:5%;top:46%}.a561-frequency-line i{height:5px;background:linear-gradient(90deg,transparent,#67c9c6,#f8ffff);opacity:.82}.a561-frequency-line b{width:7px;height:7px;background:var(--a561-pink)}
+@media(max-width:760px){
+ body.a561-network-finish .a56-watch-stage{height:81vh}
+ body.a561-network-finish .a56-tuner{height:25vh;left:0;right:0;bottom:0;padding:.85rem 5vw 1.1rem;gap:1.8rem;background:linear-gradient(100deg,rgba(247,240,229,.97),rgba(190,237,236,.96) 62%,rgba(229,241,246,.97));border-left:0;border-right:0;border-bottom:0;box-shadow:0 -10px 34px rgba(0,0,0,.22)}
+ body.a561-network-finish .a56-tuner:before{left:5vw;right:5vw;top:46px;background:rgba(20,48,55,.32)}
+ body.a561-network-finish .a56-tuner button{flex:0 0 52vw;color:rgba(16,30,34,.58)!important;padding:3.4rem .25rem .8rem;min-height:100px;font-size:.69rem}
+ body.a561-network-finish .a56-tuner button span{top:.65rem;color:rgba(16,30,34,.42)!important}
+ body.a561-network-finish .a56-tuner button:before{top:39px;left:13px}
+ body.a561-network-finish .a561-frequency-line{left:5vw;right:5vw;top:46px}
+}

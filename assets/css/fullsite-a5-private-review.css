@@ -1,0 +1,782 @@
+/*
+  SEASON ZERO — A5 PRIVATE REVIEW
+  Final art-direction / encounter rebuild layered over A4.4 Foundation Lock.
+  Review only. GitHub/live untouched.
+*/
+
+body.a5-private-review{
+  --a5-ink:#07090b;
+  --a5-paper:#f6f5ef;
+  --a5-mint:#e9f8f3;
+  --a5-warm:#f3dfd1;
+  --a5-plum:#1b0c21;
+  --a5-coral:#ff6f5d;
+  --a5-aqua:#92ede0;
+  background:var(--a5-paper);
+}
+
+/* quiet the interface so the media property carries the experience */
+.a5-private-review .world-dial{opacity:.52;mix-blend-mode:difference;color:#fff}
+.a5-private-review .rig{background:transparent;border:0;box-shadow:none;backdrop-filter:none}
+.a5-private-review .rig:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,11,.28),rgba(7,9,11,0));pointer-events:none;opacity:.38}
+.a5-private-review .rig a{position:relative;z-index:1}
+.a5-private-review .rig nav a:not(.book){opacity:.76}
+.a5-private-review .rig nav a:hover{opacity:1}
+.a5-private-review .rig .book{border-color:currentColor;background:rgba(255,255,255,.05)}
+
+/* Hero stays protected. We only make the seam behave like an encounter. */
+.a5-private-review #onair{z-index:3}
+.a5-private-review .a3-light-seam{height:0;position:relative;z-index:6;overflow:visible}
+.a5-private-review .a3-light-seam i{position:absolute;left:0;right:0;top:-11svh;height:22svh;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(232,250,246,.7) 54%,rgba(232,250,246,0));filter:blur(18px);opacity:.55;pointer-events:none}
+
+/* --------------------------------------------------
+   PERSON — intimate moving portrait, not source-video container
+-------------------------------------------------- */
+.a5-private-review #behavior.a3-person{
+  min-height:100svh;
+  height:100svh;
+  background:#dff1ed;
+  color:#fff;
+  overflow:hidden;
+}
+.a5-private-review #behavior .a44-person-room{
+  display:block;
+  position:absolute;
+  inset:-7% -4% -7% -4%;
+  width:108%;
+  height:114%;
+  object-fit:cover;
+  object-position:46% 44%;
+  filter:saturate(.78) contrast(1.04) brightness(.62);
+  opacity:.96;
+  transform:scale(1.02);
+}
+.a5-private-review #behavior:before{
+  content:"";
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(90deg,rgba(5,15,15,.78) 0%,rgba(5,15,15,.32) 31%,rgba(5,15,15,.03) 58%,rgba(5,15,15,.2) 100%),
+    linear-gradient(0deg,rgba(4,8,9,.52) 0%,transparent 42%);
+  pointer-events:none;
+}
+.a5-private-review #behavior .a44-person-seam{display:none}
+.a5-private-review #behavior .a44-person-stage{
+  position:absolute;
+  z-index:2;
+  right:3.6vw;
+  top:4.5svh;
+  width:min(59vw,920px);
+  height:91svh;
+  margin:0;
+  overflow:hidden;
+  background:transparent;
+  box-shadow:0 46px 130px rgba(1,8,8,.24);
+  clip-path:polygon(4% 0,100% 0,100% 100%,0 100%,0 6%);
+}
+.a5-private-review #behavior .a44-person-stage video{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:53% 17%;
+  filter:saturate(1.04) contrast(1.025) brightness(1.025);
+}
+.a5-private-review #behavior .a44-person-stage:after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,transparent 54%,rgba(3,8,9,.5) 100%);
+}
+.a5-private-review #behavior .a44-person-credit{
+  position:absolute;z-index:4;
+  left:clamp(22px,3vw,52px);right:clamp(22px,3vw,52px);bottom:clamp(22px,3vw,44px);
+  width:auto;padding:0;background:transparent;color:#fff;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;
+  text-shadow:0 2px 24px rgba(0,0,0,.45);
+}
+.a5-private-review #behavior .a44-person-credit span{
+  max-width:18ch;font:500 .62rem/1.35 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;
+}
+.a5-private-review #behavior .a44-person-credit .a3-sound{
+  color:#fff;border:0;border-bottom:1px solid rgba(255,255,255,.72);padding:.32rem 0;background:transparent;
+}
+.a5-private-review #behavior:after{
+  content:"THE PERSON BEFORE THE CATEGORY";
+  position:absolute;z-index:3;left:4.4vw;bottom:6.4svh;width:19ch;
+  font:500 .58rem/1.35 var(--f-mono);letter-spacing:.13em;color:rgba(255,255,255,.72);
+}
+
+/* --------------------------------------------------
+   THINKING — explanation changes the page, proof arrives after the thought
+-------------------------------------------------- */
+.a5-private-review #thinking.a3-thinking{
+  min-height:118svh;
+  padding:0;
+  background:#eef8f3;
+  color:#14383a;
+  overflow:hidden;
+}
+.a5-private-review #thinking:before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 12% 26%,rgba(255,255,255,.96),rgba(255,255,255,0) 29%),
+    linear-gradient(112deg,#eff8f3 0 52%,#dcefeb 52% 100%);
+}
+.a5-private-review #thinking .a44-thinking-main{
+  position:absolute;
+  z-index:1;
+  left:-3vw;top:7svh;
+  width:70vw;
+  height:94svh;
+  min-height:0;
+  margin:0;padding:0;
+  overflow:hidden;
+  background:none;
+  box-shadow:0 50px 120px rgba(11,55,55,.12);
+  clip-path:polygon(0 0,92% 0,100% 14%,100% 100%,0 100%);
+}
+.a5-private-review #thinking .a44-thinking-main:before,
+.a5-private-review #thinking .a44-thinking-main:after{display:none}
+.a5-private-review #thinking .a44-thinking-main video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:51% 13%;
+  mask-image:none;
+  filter:saturate(1.02) contrast(1.02) brightness(1.03);
+}
+.a5-private-review #thinking .a44-thinking-main figcaption{
+  position:absolute;z-index:5;
+  left:4.2vw;right:auto;top:auto;bottom:5svh;
+  width:min(430px,34vw);
+  padding:0;color:#fff;text-align:left;
+  text-shadow:0 2px 20px rgba(0,0,0,.55);
+}
+.a5-private-review #thinking .a44-thinking-main figcaption b{
+  font-size:clamp(2.5rem,4.4vw,5rem);line-height:.82;letter-spacing:-.055em;max-width:7ch;
+}
+.a5-private-review #thinking .a44-thinking-main figcaption span{color:rgba(255,255,255,.72)}
+.a5-private-review #thinking .a3-thinking-play{
+  position:absolute;z-index:7;left:4.2vw;top:8%;bottom:auto;
+  color:#fff;border-color:rgba(255,255,255,.5);text-shadow:0 1px 12px rgba(0,0,0,.45);
+}
+.a5-private-review #thinking .a44-thinking-copy{
+  position:absolute;z-index:4;
+  right:5vw;top:15svh;
+  width:min(390px,27vw);
+  margin:0;padding:0;
+  color:#123638;
+}
+.a5-private-review #thinking .a44-thinking-copy:before{
+  content:"SAME BRAIN";display:block;margin-bottom:1.1rem;
+  font:600 .58rem/1 var(--f-mono);letter-spacing:.13em;color:#4d7472;
+}
+.a5-private-review #thinking .a44-thinking-copy p{
+  margin:0;
+  font:650 clamp(3.3rem,5.8vw,6.5rem)/.77 var(--f-display);
+  letter-spacing:-.065em;
+  max-width:6.2ch;
+}
+.a5-private-review #thinking .a44-authority-transmission{
+  position:absolute;z-index:5;
+  right:4.2vw;bottom:8svh;
+  width:min(34vw,520px);height:29svh;
+  margin:0;
+  overflow:hidden;
+  background:#091215;
+  box-shadow:0 30px 90px rgba(24,61,59,.18);
+  transform:rotate(.8deg);
+}
+.a5-private-review #thinking .a44-authority-transmission video{width:100%;height:100%;object-fit:cover}
+.a5-private-review #thinking .a44-authority-transmission figcaption{
+  position:absolute;left:14px;right:14px;bottom:12px;color:#fff;
+  font:500 .55rem/1.35 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;
+  text-shadow:0 1px 10px #000;
+}
+
+/* --------------------------------------------------
+   AUTHORSHIP — keep the tactile donor, deepen the physical handoff
+-------------------------------------------------- */
+.a5-private-review #authorship.a3-authorship{
+  background:linear-gradient(180deg,#f6e7d9 0%,#fff7ef 24%,#f7e8dc 100%);
+  border-top:0;
+}
+.a5-private-review #authorship:before{
+  content:"";position:absolute;left:0;right:0;top:0;height:24svh;
+  background:linear-gradient(180deg,#dcefeb 0%,rgba(246,231,217,0) 100%);pointer-events:none;
+}
+.a5-private-review #authorship .a3-auth-title{position:relative;z-index:2}
+
+/* Third-party stays genuinely television, not normalized. */
+.a5-private-review #third-party.a3-thirdparty{background:#110713}
+.a5-private-review #third-party .a3-interruption{opacity:.62}
+
+/* --------------------------------------------------
+   HOST — second hero / room command
+-------------------------------------------------- */
+.a5-private-review #host-command.a3-host{
+  min-height:100svh;height:100svh;padding:0;
+  background:#04080a;color:#fff;overflow:hidden;
+}
+.a5-private-review #host-command .a44-host-ambient{
+  display:block;position:absolute;z-index:0;
+  inset:-9%;width:118%;height:118%;
+  object-fit:cover;object-position:43% 46%;
+  filter:brightness(.24) saturate(.86) contrast(1.12) blur(1.5px);
+  opacity:1;mask-image:none;transform:scale(1.02);
+}
+.a5-private-review #host-command:before{
+  content:"";position:absolute;z-index:1;inset:0;
+  background:
+    linear-gradient(90deg,rgba(1,5,7,.82) 0%,rgba(1,5,7,.42) 26%,rgba(1,5,7,.05) 52%,rgba(1,5,7,.28) 100%),
+    radial-gradient(circle at 76% 18%,rgba(125,238,227,.18),transparent 31%),
+    linear-gradient(0deg,rgba(5,3,8,.66),transparent 40%);
+}
+.a5-private-review #host-command .a44-host-stage{
+  position:absolute;z-index:3;
+  right:5vw;top:0;
+  width:min(61vw,980px);height:100svh;min-height:0;
+  margin:0;padding:0;background:transparent;
+  overflow:hidden;box-shadow:none;
+  clip-path:polygon(8% 0,100% 0,100% 100%,0 100%,0 12%);
+}
+.a5-private-review #host-command .a44-host-stage video{
+  width:100%;height:100%;object-fit:cover;object-position:58% 13%;
+  transform:none;filter:saturate(1.04) contrast(1.03) brightness(1.03);
+}
+.a5-private-review #host-command .a44-host-glass,
+.a5-private-review #host-command .a44-host-specular{display:none}
+.a5-private-review #host-command .a44-host-stage:before{
+  content:"";position:absolute;z-index:4;inset:0;pointer-events:none;
+  box-shadow:inset 1px 0 rgba(194,255,249,.24);
+  background:linear-gradient(180deg,transparent 52%,rgba(0,0,0,.62) 100%);
+}
+.a5-private-review #host-command .a44-host-stage:after{display:none}
+.a5-private-review #host-command .a44-host-stage figcaption{
+  position:absolute;z-index:6;
+  left:clamp(22px,3.2vw,54px);bottom:7svh;width:min(360px,29vw);
+  padding:0;color:#fff;text-align:left;text-shadow:0 2px 24px rgba(0,0,0,.72);
+}
+.a5-private-review #host-command .a44-host-stage figcaption:before{display:none}
+.a5-private-review #host-command .a44-host-stage figcaption b{
+  font-size:clamp(3rem,5.5vw,6.4rem);line-height:.78;letter-spacing:-.065em;max-width:7ch;
+}
+.a5-private-review #host-command .a44-host-stage figcaption span{color:rgba(255,255,255,.72);max-width:36ch}
+.a5-private-review #host-command .a44-host-stage .a3-sound{
+  left:auto;right:3vw;bottom:3.2svh;color:#fff;border-color:rgba(255,255,255,.6);
+}
+.a5-private-review #host-command:after{
+  content:"LIVE ROOM · LAUREN CARRIES THE MOMENT";
+  position:absolute;z-index:4;left:4.2vw;bottom:6.5svh;max-width:22ch;
+  font:500 .58rem/1.45 var(--f-mono);letter-spacing:.12em;color:rgba(255,255,255,.62);
+}
+
+/* --------------------------------------------------
+   ACTIVATE — field first, receipt as separate evidence handoff
+-------------------------------------------------- */
+.a5-private-review #activate-field.a3-activate{
+  min-height:126svh;padding:0;
+  display:block;background:#f5eee6;color:#211914;overflow:hidden;
+}
+.a5-private-review #activate-field:before{
+  content:"";position:absolute;z-index:0;left:0;right:0;top:0;height:20svh;
+  background:linear-gradient(180deg,#04080a 0%,rgba(4,8,10,.45) 18%,rgba(245,238,230,0) 100%);
+}
+.a5-private-review #activate-field .a44-activate-stage{
+  width:100%;height:126svh;min-height:0;margin:0;position:relative;
+}
+.a5-private-review #activate-field .a3-activate-room{
+  position:absolute;z-index:1;left:3vw;top:9svh;
+  width:78vw;height:79svh;margin:0;
+  overflow:hidden;box-shadow:0 40px 110px rgba(69,51,40,.15);
+}
+.a5-private-review #activate-field .a3-activate-room img{
+  width:100%;height:100%;object-fit:cover;object-position:48% 48%;filter:saturate(1.02) contrast(1.025) brightness(1.02);
+}
+.a5-private-review #activate-field .a3-activate-copy{
+  position:absolute;z-index:3;left:5vw;right:auto;top:66svh;width:min(370px,30vw);
+  padding:0;color:#fff;text-align:left;background:transparent;
+  text-shadow:0 2px 18px rgba(0,0,0,.7);
+}
+.a5-private-review #activate-field .a3-activate-copy span{color:rgba(255,255,255,.72)}
+.a5-private-review #activate-field .a3-activate-copy p{
+  margin:.42rem 0 0;font:650 clamp(2.4rem,4.3vw,4.8rem)/.82 var(--f-display);letter-spacing:-.055em;color:#fff;max-width:8ch;
+}
+.a5-private-review #activate-field .a44-activate-result{
+  position:absolute;z-index:5;
+  left:auto;right:5vw;top:89svh;bottom:auto;
+  width:min(48vw,680px);margin:0;padding:0 0 0 2vw;
+  display:grid;grid-template-columns:minmax(180px,.62fr) 1fr;gap:clamp(18px,2.6vw,42px);align-items:end;
+  color:#221a16;background:transparent;transform:none;text-decoration:none;
+  border-left:1px solid rgba(54,42,34,.34);
+}
+.a5-private-review #activate-field .a44-activate-result:before{display:none}
+.a5-private-review #activate-field .a44-activate-result:after{
+  content:"SEPARATE RECEIPT · ANOTHER ACTIVATION";position:absolute;left:2vw;top:-1.8rem;
+  font:500 .54rem/1 var(--f-mono);letter-spacing:.12em;color:#7a6559;
+}
+.a5-private-review #activate-field .a44-activate-result strong{
+  font:650 clamp(5.5rem,8.2vw,9.5rem)/.7 var(--f-display);letter-spacing:-.075em;color:#221a16;text-shadow:none;
+}
+.a5-private-review #activate-field .a44-activate-result strong:after{display:none}
+.a5-private-review #activate-field .a44-activate-result span{
+  margin:0;max-width:30ch;color:#69584f;
+  font:500 .61rem/1.45 var(--f-mono);letter-spacing:.02em;
+}
+
+/* --------------------------------------------------
+   WATCH — programmed sequence, media invades before label resolves
+-------------------------------------------------- */
+.a5-private-review #watch.a3-watch{
+  position:relative;background:#100713;color:#fff;padding:0 0 10svh;overflow:hidden;
+}
+.a5-private-review #watch .a44-watch-weather{
+  display:block;position:absolute;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:.18;filter:blur(20px) saturate(1.25);transform:scale(1.05);pointer-events:none;
+}
+.a5-private-review #watch .a44-watch-seam{display:none}
+.a5-private-review #watch .a44-watch-stage{position:relative;z-index:2;width:100%;padding-top:0}
+.a5-private-review #watch .a43-watch-entry{
+  position:relative;z-index:2;width:100%;min-height:58svh;margin:0;padding:18svh 5vw 8svh;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+  background:linear-gradient(180deg,#08070a 0%,#130916 100%);color:#fff;overflow:visible;
+}
+.a5-private-review #watch .a43-watch-entry:after{
+  content:"";position:absolute;z-index:-1;
+  right:-3vw;bottom:-28svh;width:min(61vw,960px);height:76svh;
+  background:url("../img/scrambled-podium-alt.webp") center 22%/cover no-repeat;
+  opacity:.95;box-shadow:0 44px 120px rgba(0,0,0,.48);transform:rotate(.8deg);
+}
+.a5-private-review #watch .a43-watch-entry:before{
+  content:"";position:absolute;z-index:0;left:0;right:0;bottom:-1px;height:46%;
+  background:linear-gradient(0deg,#130916 0%,rgba(19,9,22,0) 100%);pointer-events:none;
+}
+.a5-private-review #watch .a43-watch-entry>span{position:relative;z-index:2;opacity:.6}
+.a5-private-review #watch .a43-watch-entry h2{
+  position:relative;z-index:2;margin:.45rem 0 0;
+  font-size:clamp(4.7rem,8.3vw,9.4rem);line-height:.76;letter-spacing:-.07em;max-width:4.7ch;
+}
+.a5-private-review #watch .a43-host-cue{
+  position:relative;z-index:3;width:max-content;max-width:360px;margin:1.5rem 0 0;
+  padding:.7rem 0;background:transparent;border:0;border-top:1px solid rgba(255,255,255,.28);border-bottom:1px solid rgba(255,255,255,.28);
+  color:#fff;
+}
+.a5-private-review #watch .a4-program{
+  position:relative;z-index:3;
+  width:100%;height:76svh;min-height:560px;margin:0;
+  border:0;border-radius:0;overflow:hidden;box-shadow:none;transform:none;
+}
+.a5-private-review #watch .a4-program>img,
+.a5-private-review #watch .a4-program>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.a5-private-review #watch .a4-program>div{
+  position:absolute;z-index:5;left:5vw;right:auto;bottom:5svh;max-width:46ch;
+  color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.62);
+}
+.a5-private-review #watch .a4-program>div span{display:block;margin-bottom:.55rem;font:500 .58rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+.a5-private-review #watch .a4-program>div b{display:block;font-size:clamp(2.7rem,5.2vw,5.9rem);line-height:.82;letter-spacing:-.055em;max-width:12ch}
+.a5-private-review #watch .a4-program:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none}
+
+.a5-private-review #watch .a4-program-tv{
+  margin-top:-12svh;background:#14061a;z-index:4;
+  clip-path:polygon(5vw 0,100% 0,100% 100%,0 100%,0 10svh);
+}
+.a5-private-review #watch .a4-program-tv img{object-position:center 24%;filter:saturate(1.12) contrast(1.06)}
+.a5-private-review #watch .a4-program-tv>div{left:auto;right:5vw;bottom:6svh;text-align:right}
+.a5-private-review #watch .a4-program-tv .gallery-trigger{color:#fff;border-color:rgba(255,255,255,.5)}
+
+.a5-private-review #watch .a4-program-explain{
+  width:92vw;height:72svh;margin:-4svh 0 0 auto;background:#eaf6f1;color:#163a3b;z-index:5;
+  clip-path:polygon(0 0,95% 0,100% 12%,100% 100%,0 100%);
+}
+.a5-private-review #watch .a4-program-explain video{object-position:center 17%;filter:saturate(1.01) brightness(1.04)}
+.a5-private-review #watch .a4-program-explain:before{
+  content:"";position:absolute;z-index:3;inset:0;background:linear-gradient(90deg,rgba(236,249,245,.0) 46%,rgba(236,249,245,.88) 78%,rgba(236,249,245,.98) 100%);
+}
+.a5-private-review #watch .a4-program-explain:after{display:none}
+.a5-private-review #watch .a4-program-explain>div{
+  left:auto;right:4vw;bottom:7svh;width:min(34vw,500px);color:#153638;text-shadow:none;text-align:right;
+}
+.a5-private-review #watch .a4-program-explain>div b{font-size:clamp(2.5rem,4.6vw,5.2rem);max-width:9ch;margin-left:auto}
+
+.a5-private-review #watch .a4-program-create{
+  width:82vw;height:72svh;margin:-3svh auto 0 4vw;background:#f4dfd0;z-index:6;
+  clip-path:polygon(0 0,100% 4svh,96% 100%,0 100%);
+}
+.a5-private-review #watch .a4-program-create video{object-position:center 48%;filter:saturate(1.03) brightness(1.03)}
+.a5-private-review #watch .a4-program-create>div{left:4vw;bottom:5svh}
+.a5-private-review #watch .a4-program-create>div b{font-size:clamp(3rem,5.3vw,6rem)}
+
+.a5-private-review #watch .a4-program-archive{
+  width:76vw;height:52svh;min-height:410px;margin:2svh 4vw 0 auto;background:#d9d3ca;color:#201c1a;z-index:5;
+  display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+}
+.a5-private-review #watch .a4-program-archive img{
+  position:relative;grid-column:2;width:100%;height:100%;object-fit:cover;object-position:center 28%;filter:saturate(.78) contrast(.96) brightness(.96);
+}
+.a5-private-review #watch .a4-program-archive:after{display:none}
+.a5-private-review #watch .a4-program-archive>div{
+  position:relative;grid-column:1;grid-row:1;left:auto;right:auto;bottom:auto;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:5vw;color:#24201e;text-shadow:none;
+}
+.a5-private-review #watch .a4-program-archive>div b{font-size:clamp(2rem,3.8vw,4.2rem);max-width:9ch}
+
+/* --------------------------------------------------
+   TRUST — backstage environment, copy as annotation
+-------------------------------------------------- */
+.a5-private-review #about.a3-trust{
+  min-height:86svh;height:86svh;padding:0;background:#dad4cc;color:#171513;display:block;overflow:hidden;
+}
+.a5-private-review #about .a44-trust-world{
+  position:absolute;z-index:1;inset:0;margin:0;max-width:none;width:100%;height:100%;overflow:hidden;
+}
+.a5-private-review #about .a44-trust-world img{
+  width:100%;height:100%;object-fit:cover;object-position:72% 52%;filter:saturate(.84) contrast(.98) brightness(.88);
+}
+.a5-private-review #about:before{
+  content:"";position:absolute;z-index:2;inset:0;
+  background:linear-gradient(90deg,rgba(233,228,221,.96) 0%,rgba(233,228,221,.88) 31%,rgba(233,228,221,.18) 56%,rgba(20,18,18,.12) 100%);
+}
+.a5-private-review #about .a44-trust-note{
+  position:absolute;z-index:4;left:5vw;top:50%;transform:translateY(-50%);
+  width:min(380px,31vw);padding:0;color:#191715;background:transparent;max-width:none;justify-self:auto;
+}
+.a5-private-review #about .a44-trust-note:before{
+  content:"PRODUCTION HOLDING";display:block;margin-bottom:1rem;
+  font:600 .56rem/1 var(--f-mono);letter-spacing:.14em;color:#766d67;
+}
+.a5-private-review #about .a44-trust-note h2{
+  margin:0;font:650 clamp(3.4rem,6vw,6.4rem)/.78 var(--f-display);letter-spacing:-.065em;max-width:6ch;
+}
+.a5-private-review #about .a44-trust-note p{margin:1.1rem 0 0;max-width:28ch;color:#665f59;line-height:1.55}
+
+/* --------------------------------------------------
+   CASTING — let the actual painting become the campaign environment
+-------------------------------------------------- */
+.a5-private-review #picture-lauren.a3-casting{
+  min-height:100svh;height:100svh;background:#5a355c;color:#fff;overflow:hidden;
+}
+.a5-private-review #picture-lauren .a44-casting-sky{display:none}
+.a5-private-review #picture-lauren .a44-casting-art{
+  position:absolute;z-index:1;inset:0;left:0;top:0;width:100%;height:100%;margin:0;overflow:hidden;
+}
+.a5-private-review #picture-lauren .a44-casting-art picture,
+.a5-private-review #picture-lauren .a44-casting-art img{display:block;width:100%;height:100%}
+.a5-private-review #picture-lauren .a44-casting-art img{
+  object-fit:cover;object-position:43% 43%;filter:saturate(1.06) contrast(1.015) brightness(1.01);
+}
+.a5-private-review #picture-lauren .a3-casting-light{
+  display:block;position:absolute;z-index:2;inset:0;
+  background:linear-gradient(90deg,rgba(36,16,44,.08) 0%,rgba(36,16,44,.03) 48%,rgba(45,22,57,.42) 73%,rgba(39,20,49,.72) 100%);
+}
+.a5-private-review #picture-lauren .a44-casting-copy{
+  position:absolute;z-index:4;right:5vw;left:auto;top:auto;bottom:8svh;
+  width:min(450px,33vw);min-height:0;padding:0;text-align:left;display:block;color:#fff;
+}
+.a5-private-review #picture-lauren .a44-casting-copy h2{
+  margin:0;font:650 clamp(4rem,7.1vw,8.3rem)/.75 var(--f-display);letter-spacing:-.068em;max-width:5ch;
+  text-shadow:0 2px 24px rgba(43,18,52,.3);
+}
+.a5-private-review #picture-lauren .a44-casting-copy p{margin:1rem 0 0;color:rgba(255,255,255,.82)}
+.a5-private-review #picture-lauren .a44-casting-copy>div{margin-top:1.2rem;justify-content:flex-start}
+
+/* --------------------------------------------------
+   BOOK — audience becomes producer; form is a tool, not the event
+-------------------------------------------------- */
+.a5-private-review #contact.a44-contact{
+  position:relative;min-height:100svh;padding:14svh 0 10svh;background:#08080c;color:#fff;overflow:hidden;
+}
+.a5-private-review #contact:before{
+  content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 82% 16%,rgba(125,238,227,.08),transparent 28%),
+    linear-gradient(128deg,#08080c 0%,#0d0a10 56%,#120b16 100%);pointer-events:none;
+}
+.a5-private-review #contact .wrap{position:relative;z-index:2;width:min(1280px,90vw);margin:0 auto}
+.a5-private-review #contact .contact{
+  display:grid;grid-template-columns:minmax(320px,.78fr) minmax(520px,1.22fr);gap:clamp(70px,9vw,150px);align-items:start;
+  background:transparent;border:0;padding:0;box-shadow:none;
+}
+.a5-private-review #contact .a4-booking-intro{padding-top:2vh}
+.a5-private-review #contact .a4-booking-intro .eyebrow{opacity:.5}
+.a5-private-review #contact .a4-booking-intro h2{
+  font-size:clamp(3.4rem,5.3vw,6.5rem);line-height:.8;letter-spacing:-.06em;max-width:6.5ch;
+}
+.a5-private-review #contact .a4-booking-intro .lede{font-size:clamp(1.1rem,1.4vw,1.4rem);max-width:27ch}
+.a5-private-review #contact .a4-booking-intro .muted{max-width:44ch;color:rgba(255,255,255,.48)}
+.a5-private-review #contact .a4-booking-form{
+  display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(24px,3vw,48px);background:transparent;border:0;padding:0;box-shadow:none;
+}
+.a5-private-review #contact .a4-booking-form label{
+  margin:0;padding:1.2rem 0 .85rem;border-bottom:1px solid rgba(255,255,255,.24);
+  color:rgba(255,255,255,.62);font:500 .55rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;
+}
+.a5-private-review #contact .a4-booking-form label.full{grid-column:1/-1}
+.a5-private-review #contact .a4-booking-form input,
+.a5-private-review #contact .a4-booking-form select,
+.a5-private-review #contact .a4-booking-form textarea{
+  width:100%;margin:.6rem 0 0;padding:.3rem 0;background:transparent;border:0;border-radius:0;color:#fff;box-shadow:none;
+  font:500 1rem/1.4 var(--f-body);
+}
+.a5-private-review #contact .a4-booking-form input:focus,
+.a5-private-review #contact .a4-booking-form select:focus,
+.a5-private-review #contact .a4-booking-form textarea:focus{outline:2px solid var(--a5-aqua);outline-offset:4px}
+.a5-private-review #contact .a4-booking-form select option{color:#111}
+.a5-private-review #contact .booking-submit{
+  grid-column:1/-1;justify-self:start;margin-top:2.2rem;padding:.8rem 1rem;background:#f6f5ef;color:#0b0b0e;border:0;border-radius:0;
+  font:600 .62rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;
+}
+.a5-private-review #contact .booking-note,
+.a5-private-review #contact .a4-booking-status{grid-column:1/-1;color:rgba(255,255,255,.46)}
+.a5-private-review .foot{background:#08080c;color:rgba(255,255,255,.56);border-top:1px solid rgba(255,255,255,.1)}
+.a5-private-review .foot a{color:inherit}
+
+/* ---------------------------------------------
+   360–768: separately edited vertical product
+--------------------------------------------- */
+@media (max-width:768px){
+  .a5-private-review .rig{padding-left:16px;padding-right:16px}
+  .a5-private-review .rig nav a:not(.book){display:none}
+  .a5-private-review .world-dial{display:none}
+
+  .a5-private-review #behavior.a3-person{height:94svh;min-height:94svh;background:#0d1a1b}
+  .a5-private-review #behavior .a44-person-room{inset:0;width:100%;height:100%;object-position:42% 48%;filter:brightness(.45) saturate(.72)}
+  .a5-private-review #behavior:before{background:linear-gradient(180deg,rgba(3,8,9,.05) 45%,rgba(3,8,9,.75) 100%)}
+  .a5-private-review #behavior .a44-person-stage{
+    left:0;right:0;top:0;width:100%;height:94svh;clip-path:none;box-shadow:none;
+  }
+  .a5-private-review #behavior .a44-person-stage video{object-position:54% 16%}
+  .a5-private-review #behavior .a44-person-credit{left:18px;right:18px;bottom:24px}
+  .a5-private-review #behavior .a44-person-credit span{max-width:16ch;font-size:.53rem}
+  .a5-private-review #behavior:after{display:none}
+
+  .a5-private-review #thinking.a3-thinking{min-height:166svh;padding:0;background:#eef8f3}
+  .a5-private-review #thinking:before{background:linear-gradient(180deg,#eef8f3 0%,#eef8f3 62%,#dcefeb 100%)}
+  .a5-private-review #thinking .a44-thinking-main{
+    position:relative;left:0;top:0;width:100%;height:78svh;clip-path:none;box-shadow:none;overflow:hidden;
+  }
+  .a5-private-review #thinking .a44-thinking-main video{object-position:51% 13%}
+  .a5-private-review #thinking .a44-thinking-main figcaption{
+    left:18px;right:18px;bottom:24px;width:auto;text-shadow:0 2px 18px rgba(0,0,0,.58);
+  }
+  .a5-private-review #thinking .a44-thinking-main figcaption b{font-size:clamp(3.1rem,14vw,4.6rem);max-width:7ch}
+  .a5-private-review #thinking .a3-thinking-play{left:18px;top:18px}
+  .a5-private-review #thinking .a44-thinking-copy{
+    position:relative;right:auto;top:auto;width:auto;margin:0;padding:10svh 18px 8svh;
+  }
+  .a5-private-review #thinking .a44-thinking-copy p{font-size:clamp(4rem,18vw,6rem);max-width:6ch}
+  .a5-private-review #thinking .a44-authority-transmission{
+    position:relative;right:auto;bottom:auto;width:calc(100% - 36px);height:34svh;margin:0 18px 0;transform:rotate(.5deg);
+  }
+
+  .a5-private-review #host-command.a3-host{height:94svh;min-height:94svh}
+  .a5-private-review #host-command .a44-host-ambient{display:none}
+  .a5-private-review #host-command:before{background:linear-gradient(180deg,rgba(0,0,0,.02) 50%,rgba(0,0,0,.64) 100%)}
+  .a5-private-review #host-command .a44-host-stage{
+    left:0;right:0;top:0;width:100%;height:94svh;clip-path:none;
+  }
+  .a5-private-review #host-command .a44-host-stage video{object-position:58% 16%}
+  .a5-private-review #host-command .a44-host-stage figcaption{left:18px;right:18px;bottom:76px;width:auto}
+  .a5-private-review #host-command .a44-host-stage figcaption b{font-size:clamp(3.4rem,15vw,5.2rem);max-width:6ch}
+  .a5-private-review #host-command .a44-host-stage .a3-sound{left:18px;right:auto;bottom:26px}
+  .a5-private-review #host-command:after{display:none}
+
+  .a5-private-review #activate-field.a3-activate{min-height:122svh}
+  .a5-private-review #activate-field .a44-activate-stage{height:122svh}
+  .a5-private-review #activate-field .a3-activate-room{left:0;top:6svh;width:100%;height:68svh;box-shadow:none}
+  .a5-private-review #activate-field .a3-activate-room img{object-position:55% 48%}
+  .a5-private-review #activate-field .a3-activate-copy{left:18px;top:54svh;width:68vw}
+  .a5-private-review #activate-field .a3-activate-copy p{font-size:clamp(2.8rem,13vw,4.3rem);max-width:7ch}
+  .a5-private-review #activate-field .a44-activate-result{
+    left:18px;right:18px;top:80svh;width:auto;padding:1.5rem 0 0;
+    grid-template-columns:1fr;gap:.85rem;border-left:0;border-top:1px solid rgba(54,42,34,.3);
+  }
+  .a5-private-review #activate-field .a44-activate-result:after{left:0;top:-1.55rem;font-size:.48rem}
+  .a5-private-review #activate-field .a44-activate-result strong{font-size:clamp(5.2rem,24vw,7.5rem)}
+  .a5-private-review #activate-field .a44-activate-result span{max-width:31ch}
+
+  .a5-private-review #watch.a3-watch{padding-bottom:7svh}
+  .a5-private-review #watch .a43-watch-entry{min-height:54svh;padding:14svh 18px 6svh;overflow:visible}
+  .a5-private-review #watch .a43-watch-entry:after{right:-38vw;bottom:-26svh;width:112vw;height:70svh;opacity:.78}
+  .a5-private-review #watch .a43-watch-entry h2{font-size:clamp(4.4rem,19vw,6.5rem);max-width:4.8ch}
+  .a5-private-review #watch .a43-host-cue{width:100%;max-width:100%}
+  .a5-private-review #watch .a4-program{width:100%;height:64svh;min-height:460px;margin:0;clip-path:none}
+  .a5-private-review #watch .a4-program>div{left:18px;right:18px;bottom:24px;max-width:none;text-align:left}
+  .a5-private-review #watch .a4-program>div b{font-size:clamp(2.5rem,11vw,4rem);max-width:11ch}
+  .a5-private-review #watch .a4-program-tv{margin-top:-5svh;height:66svh}
+  .a5-private-review #watch .a4-program-tv>div{left:18px;right:18px;text-align:left}
+  .a5-private-review #watch .a4-program-explain{height:68svh;margin-top:-1px}
+  .a5-private-review #watch .a4-program-explain:before{background:linear-gradient(180deg,transparent 40%,rgba(236,249,245,.92) 74%,rgba(236,249,245,.99) 100%)}
+  .a5-private-review #watch .a4-program-explain>div{left:18px;right:18px;bottom:24px;width:auto;text-align:left}
+  .a5-private-review #watch .a4-program-explain>div b{font-size:clamp(2.4rem,10.5vw,3.8rem);max-width:10ch;margin:0}
+  .a5-private-review #watch .a4-program-create{height:62svh;margin-top:-1px}
+  .a5-private-review #watch .a4-program-archive{height:54svh;min-height:410px;margin:0;display:block}
+  .a5-private-review #watch .a4-program-archive img{position:absolute;inset:0;width:100%;height:100%;object-position:center 28%}
+  .a5-private-review #watch .a4-program-archive:before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(0deg,rgba(224,218,210,.96),rgba(224,218,210,0) 58%)}
+  .a5-private-review #watch .a4-program-archive>div{position:absolute;z-index:3;left:18px;right:18px;bottom:24px;padding:0;color:#221f1d}
+  .a5-private-review #watch .a4-program-archive>div b{font-size:clamp(2.1rem,10vw,3.4rem)}
+
+  .a5-private-review #about.a3-trust{height:76svh;min-height:76svh}
+  .a5-private-review #about .a44-trust-world img{object-position:74% 52%;filter:saturate(.82) brightness(.78)}
+  .a5-private-review #about:before{background:linear-gradient(0deg,rgba(237,232,225,.97) 0%,rgba(237,232,225,.88) 38%,rgba(237,232,225,.12) 72%)}
+  .a5-private-review #about .a44-trust-note{
+    left:18px;right:18px;top:auto;bottom:28px;transform:none;width:auto;
+  }
+  .a5-private-review #about .a44-trust-note h2{font-size:clamp(3.4rem,15vw,5rem)}
+  .a5-private-review #about .a44-trust-note p{max-width:30ch}
+
+  .a5-private-review #picture-lauren.a3-casting{height:94svh;min-height:94svh}
+  .a5-private-review #picture-lauren .a44-casting-art img{object-position:45% 37%}
+  .a5-private-review #picture-lauren .a3-casting-light{background:linear-gradient(0deg,rgba(38,18,45,.7) 0%,rgba(38,18,45,.05) 54%)}
+  .a5-private-review #picture-lauren .a44-casting-copy{left:18px;right:18px;bottom:30px;width:auto}
+  .a5-private-review #picture-lauren .a44-casting-copy h2{font-size:clamp(3.9rem,17vw,5.5rem);max-width:5.2ch}
+  .a5-private-review #picture-lauren .a44-casting-copy p{max-width:29ch}
+
+  .a5-private-review #contact.a44-contact{min-height:auto;padding:11svh 0 8svh}
+  .a5-private-review #contact .wrap{width:calc(100% - 36px)}
+  .a5-private-review #contact .contact{grid-template-columns:1fr;gap:8svh}
+  .a5-private-review #contact .a4-booking-intro h2{font-size:clamp(3.5rem,15vw,5.1rem);max-width:6ch}
+  .a5-private-review #contact .a4-booking-form{grid-template-columns:1fr}
+  .a5-private-review #contact .a4-booking-form label.full{grid-column:auto}
+  .a5-private-review #contact .booking-submit,
+  .a5-private-review #contact .booking-note,
+  .a5-private-review #contact .a4-booking-status{grid-column:auto}
+}
+
+/* 360-specific optical edits: intentional, not just smaller. */
+@media (max-width:390px){
+  .a5-private-review #behavior .a44-person-credit{bottom:20px}
+  .a5-private-review #behavior .a44-person-credit .a3-sound{font-size:.52rem}
+  .a5-private-review #thinking.a3-thinking{min-height:160svh}
+  .a5-private-review #thinking .a44-thinking-main{height:75svh}
+  .a5-private-review #thinking .a44-thinking-copy{padding-top:9svh;padding-bottom:7svh}
+  .a5-private-review #thinking .a44-authority-transmission{height:31svh}
+  .a5-private-review #activate-field .a44-activate-result strong{font-size:22vw}
+  .a5-private-review #watch .a4-program{min-height:430px}
+  .a5-private-review #contact .btnrow{gap:.5rem}
+}
+
+/* reduced motion: composition remains the argument */
+@media (prefers-reduced-motion:reduce){
+  .a5-private-review #behavior .a44-person-stage,
+  .a5-private-review #thinking .a44-authority-transmission,
+  .a5-private-review #watch .a43-watch-entry:after{transform:none!important}
+}
+
+/* A5 optical repair 02 — clear donor positioning residue, no new public labels. */
+.a5-private-review #behavior:after{content:none!important;display:none!important}
+.a5-private-review #host-command:after{content:none!important;display:none!important}
+.a5-private-review #thinking .a44-thinking-copy:before{content:"SAME BRAIN."}
+
+/* Host: wide-canvas re-authoring, not left-pinned mobile enlargement. */
+@media (min-width:901px){
+  .a5-private-review #host-command .a44-host-stage{
+    left:auto!important;right:3vw!important;width:min(68vw,1040px)!important;
+  }
+  .a5-private-review #host-command .a44-host-stage video{object-position:58% 13%}
+}
+
+/* Activate: remove the old KPI-card shadow and let the receipt sit on the field. */
+.a5-private-review #activate-field .a44-activate-result{
+  box-shadow:none!important;border-radius:0!important;
+}
+.a5-private-review #activate-field .a44-activate-result span{background:transparent!important;padding:0!important}
+
+/* Trust: annotation, not a card. Push the selfie out of dominance and keep the room. */
+.a5-private-review #about .a44-trust-world{box-shadow:none!important}
+.a5-private-review #about .a44-trust-world:after{display:none!important}
+.a5-private-review #about .a44-trust-world img{object-position:90% 52%!important}
+.a5-private-review #about .a44-trust-note{
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  backdrop-filter:none!important;padding:0!important;
+}
+.a5-private-review #about .a44-trust-note:before{display:none!important;content:none!important}
+
+/* Casting desktop: approved painting + approved non-human painted atmosphere become one room. */
+@media (min-width:901px){
+  .a5-private-review #picture-lauren.a3-casting{
+    background:#6d4870 url("../img/casting-sky-clean-a5.webp") center/cover no-repeat!important;
+  }
+  .a5-private-review #picture-lauren .a44-casting-art{
+    left:2vw!important;right:auto!important;top:-10svh!important;bottom:auto!important;
+    width:72vw!important;height:120svh!important;
+    background:none!important;overflow:visible!important;
+    display:block!important;
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 78%,rgba(0,0,0,.72) 88%,transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0%,#000 78%,rgba(0,0,0,.72) 88%,transparent 100%);
+  }
+  .a5-private-review #picture-lauren .a44-casting-art picture{
+    display:block!important;width:100%!important;height:100%!important;opacity:1!important;pointer-events:auto!important;
+  }
+  .a5-private-review #picture-lauren .a44-casting-art img{
+    display:block!important;width:100%!important;height:100%!important;
+    object-fit:contain!important;object-position:left center!important;
+  }
+  .a5-private-review #picture-lauren .a3-casting-light{
+    background:linear-gradient(90deg,transparent 0%,transparent 54%,rgba(67,36,77,.12) 70%,rgba(47,25,57,.48) 100%)!important;
+  }
+  .a5-private-review #picture-lauren .a44-casting-copy{
+    right:4.5vw!important;top:auto!important;bottom:8svh!important;width:min(430px,30vw)!important;
+  }
+}
+
+@media (max-width:768px){
+  .a5-private-review #about .a44-trust-world img{object-position:88% 48%!important}
+  .a5-private-review #about .a44-trust-note{padding:0!important;border:0!important}
+}
+
+/* A5 optical repair 03 — rendered-page fixes from the paired 360/1440 review. */
+.a5-private-review #behavior .a44-person-credit::before{
+  content:none!important;display:none!important;margin:0!important;
+}
+.a5-private-review #activate-field .a44-activate-result:after{
+  content:none!important;display:none!important;
+}
+
+@media (min-width:901px){
+  .a5-private-review #host-command .a44-host-ambient{
+    filter:brightness(.34) saturate(.88) contrast(1.08) blur(1.2px)!important;
+  }
+  .a5-private-review #host-command:before{
+    background:
+      linear-gradient(90deg,rgba(1,5,7,.68) 0%,rgba(1,5,7,.30) 27%,rgba(1,5,7,.03) 54%,rgba(1,5,7,.24) 100%),
+      radial-gradient(circle at 76% 18%,rgba(125,238,227,.18),transparent 31%),
+      linear-gradient(0deg,rgba(5,3,8,.60),transparent 40%)!important;
+  }
+  .a5-private-review #activate-field .a44-activate-result{
+    top:94svh!important;right:5vw!important;width:min(62vw,880px)!important;
+    padding-left:2vw!important;
+    grid-template-columns:minmax(245px,.8fr) minmax(285px,1.2fr)!important;
+    gap:clamp(26px,3vw,52px)!important;align-items:start!important;
+  }
+  .a5-private-review #activate-field .a44-activate-result strong{
+    font-size:clamp(5.4rem,7.3vw,8.7rem)!important;line-height:.72!important;
+  }
+  .a5-private-review #activate-field .a44-activate-result span{
+    max-width:36ch!important;font-size:.66rem!important;line-height:1.55!important;padding-top:.35rem!important;
+  }
+}
+
+@media (max-width:900px){
+  .a5-private-review #activate-field .a3-activate-copy{
+    top:44svh!important;width:min(76vw,360px)!important;
+  }
+  .a5-private-review #activate-field .a3-activate-copy p{
+    font-size:clamp(2.5rem,11vw,3.7rem)!important;max-width:7ch!important;
+  }
+  .a5-private-review #activate-field .a44-activate-result{
+    top:79svh!important;padding-top:1.35rem!important;
+  }
+}
+
+/* A5 optical repair 04 — remove donor bottom anchoring from the new Activate scene and let Person stay mostly wordless. */
+.a5-private-review #behavior .a44-person-credit span{display:none!important}
+.a5-private-review #behavior .a44-person-credit{
+  background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;
+}
+.a5-private-review #activate-field .a3-activate-copy{
+  bottom:auto!important;margin:0!important;
+}
+
+/* A5 optical repair 05 — tighten only unmotivated Activate acreage after receipt placement was proven. */
+@media (min-width:901px){
+  .a5-private-review #activate-field.a3-activate{min-height:112svh!important;height:112svh!important}
+  .a5-private-review #activate-field .a44-activate-stage{height:112svh!important}
+}
+@media (max-width:900px){
+  .a5-private-review #activate-field.a3-activate{min-height:108svh!important;height:108svh!important}
+  .a5-private-review #activate-field .a44-activate-stage{height:108svh!important}
+}

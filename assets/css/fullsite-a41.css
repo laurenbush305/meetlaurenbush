@@ -1,0 +1,254 @@
+/* =====================================================================
+   SEASON ZERO — FULLSITE A4.1 / 10/10 OPTICAL + RESPONSIVE COMPLETION
+   Donor: A4. No new concept. No architecture rewrite. No hero exploration.
+   Anti-AI is a QC filter, not the art direction.
+   ===================================================================== */
+
+/* 1) PERSON — rendered whole-head breathing room + sponsor demotion.
+   The A4.1 derivative is a truthful crop of the verified Host surface clip. */
+.a3-person-media video{
+  object-fit:cover!important;
+  object-position:center 7%!important;
+}
+
+/* 2) THINKING — Lauren is lead proof; finance is a supporting interruption. */
+.a3-thinking{position:relative;overflow:hidden}
+.a4-authority-screen{
+  position:absolute!important;
+  width:clamp(225px,22vw,335px)!important;
+  aspect-ratio:16/9!important;
+  right:clamp(26px,5vw,78px)!important;
+  top:auto!important;
+  bottom:clamp(185px,17vw,255px)!important;
+  margin:0!important;
+  z-index:4;
+  box-shadow:0 14px 42px rgba(22,29,38,.13)!important;
+}
+.a4-authority-screen figcaption{font-size:.45rem!important;bottom:6px!important}
+.a3-thinking-margin{
+  right:clamp(26px,5vw,78px)!important;
+  bottom:clamp(38px,4.2vw,68px)!important;
+  width:clamp(220px,21vw,305px)!important;
+  z-index:4;
+}
+.a3-thinking-margin p{font-size:.92rem!important}
+.a3-thinking-margin small{font-size:.72rem!important}
+
+/* 3) ACTIVATE — one scene + one distinct reaction, not near-duplicate inventory. */
+.a3-activate{
+  grid-template-columns:repeat(12,1fr)!important;
+  grid-template-rows:repeat(10,7.1svh)!important;
+  column-gap:1.1vw!important;
+}
+.a3-activate-room{grid-column:1/9!important;grid-row:2/10!important}
+.a3-activate-reaction{grid-column:9/13!important;grid-row:2/7!important;transform:translateY(-1.2vh)!important}
+.a3-activate-copy{grid-column:8/12!important;grid-row:6/8!important}
+.a3-activate-result{grid-column:2/7!important;grid-row:8/10!important}
+
+/* 4) WATCH — clear handoffs, no missing numbering, one-signal mobile behavior. */
+.a4-host-cue{
+  position:relative;
+  padding-left:1.4rem!important;
+  border-top:0!important;
+  border-left:2px solid #111!important;
+  margin-top:1.65rem!important;
+  width:min(390px,88%)!important;
+}
+.a4-host-cue:before{
+  content:'↺';position:absolute;left:-.42rem;top:.82rem;background:#f8f7f3;padding:.12rem 0;
+  font:600 .8rem/1 var(--f-mono)
+}
+.a4-host-cue small{opacity:.62}
+.a4-host-cue b{font-size:.96rem!important}
+.a4-program-explain b{max-width:17ch}
+
+/* 5) CASTING IMAGINATION — respect source resolution. Make the softness intentional by
+   reducing enlargement and surrounding it with campaign-scale negative space. */
+@media(min-width:901px){
+  .a3-casting{min-height:100svh;background:#090a0d}
+  .a3-casting-image{
+    inset:7svh auto 7svh clamp(24px,5vw,76px)!important;
+    width:min(44vw,620px)!important;
+    height:86svh!important;
+    box-shadow:0 42px 110px rgba(0,0,0,.36);
+  }
+  .a3-casting-image img{
+    object-position:center 28%!important;
+    filter:saturate(.95) contrast(1.06) brightness(.82)!important;
+  }
+  .a3-casting-image:after{
+    background:linear-gradient(0deg,rgba(5,6,8,.44),transparent 44%),linear-gradient(90deg,transparent 58%,rgba(5,6,8,.36))!important;
+  }
+  .a3-casting-copy{max-width:58vw!important;padding-right:clamp(40px,7vw,100px)!important}
+  .a3-casting-copy h2{font-size:clamp(5rem,9.2vw,10.5rem)!important}
+}
+
+/* 6) BOOK — keep A4 art direction; add direct visible email fallback without adding a component. */
+.a41-direct-email{margin:1rem 0 0;color:rgba(255,255,255,.57);font:.68rem/1.4 var(--f-mono)}
+.a41-direct-email a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.38)}
+
+/* --------------------------- CONTINUOUS RESPONSIVE EDIT --------------------------- */
+
+/* Small desktop / large laptop — preserve hierarchy before tablet transition. */
+@media(max-width:1280px) and (min-width:1101px){
+  .a3-thinking-field{width:min(1080px,92vw)}
+  .a3-thinking-field video{left:5%!important;width:60%!important}
+  .a3-thinking-field figcaption,.a3-thinking-play{left:68%!important}
+  .a4-authority-screen{width:250px!important;right:4vw!important;bottom:205px!important}
+  .a3-thinking-margin{right:4vw!important;width:250px!important}
+  .a4-watch-stage{width:min(1180px,94vw)!important;grid-template-rows:repeat(18,minmax(52px,5.6vw))!important}
+  .a4-watch-title h2{font-size:clamp(4rem,8.2vw,8rem)!important}
+  .a3-host-frame{width:min(590px,48vw)!important}
+}
+
+/* Narrow laptop / landscape tablet — layouts recompose rather than waiting for phone CSS. */
+@media(max-width:1100px) and (min-width:901px){
+  .a3-person{min-height:74svh!important}.a3-person-media{height:74svh!important}
+  .a3-thinking{min-height:940px!important;padding-bottom:90px!important}
+  .a3-thinking-field{width:94vw!important;height:780px!important}
+  .a3-thinking-field video{left:3%!important;width:62%!important;height:82%!important}
+  .a3-thinking-field figcaption{left:68%!important;top:12%!important;max-width:24ch!important}
+  .a3-thinking-play{left:68%!important;top:29%!important}
+  .a4-authority-screen{width:240px!important;right:4vw!important;bottom:190px!important}
+  .a3-thinking-margin{right:4vw!important;bottom:36px!important;width:255px!important}
+  .a3-host-frame{width:min(560px,54vw)!important;height:min(790px,80svh)!important}
+  .a3-activate{min-height:900px!important;grid-template-rows:repeat(10,70px)!important}
+  .a4-watch-stage{width:96vw!important;grid-template-rows:repeat(18,minmax(50px,6.3vw))!important}
+  .a4-watch-title{grid-column:1/9!important}.a4-watch-title h2{font-size:8.7vw!important}
+  .a4-program-tv{grid-column:7/13!important}
+  .a4-program-explain{grid-column:1/6!important}
+  .a4-program-create{grid-column:5/10!important}
+  .a4-program-archive{grid-column:9/13!important}
+  .a4-booking .contact{grid-template-columns:.9fr 1.1fr!important;gap:54px!important}
+}
+
+/* Tablet / compact window — one signal becomes dominant per viewport-scale beat. */
+@media(max-width:900px) and (min-width:761px){
+  .a3-person{min-height:72svh!important}.a3-person-media{height:72svh!important}
+  .a3-person-media figcaption{left:24px!important;right:24px!important}
+
+  .a3-thinking{min-height:auto!important;padding:72px 0 88px!important}
+  .a3-thinking-field{width:100%!important;height:760px!important;margin:0!important}
+  .a3-thinking-field video{left:0!important;width:70%!important;height:78%!important;bottom:0!important}
+  .a3-thinking-field figcaption{left:auto!important;right:28px!important;top:8%!important;width:30%!important;text-align:right!important}
+  .a3-thinking-play{left:auto!important;right:28px!important;top:27%!important}
+  .a4-authority-screen{position:relative!important;width:280px!important;right:auto!important;bottom:auto!important;margin:-96px 24px 0 auto!important}
+  .a3-thinking-margin{position:relative!important;right:auto!important;bottom:auto!important;width:300px!important;margin:24px 28px 0 auto!important;text-align:right!important}
+
+  .a3-host{min-height:94svh!important}.a3-host-frame{width:min(66vw,540px)!important;height:78svh!important}
+
+  .a3-activate{display:grid!important;min-height:860px!important;grid-template-columns:repeat(12,1fr)!important;grid-template-rows:repeat(10,70px)!important;padding:60px 0 80px!important}
+  .a3-activate-room{grid-column:1/10!important;grid-row:2/8!important}
+  .a3-activate-reaction{grid-column:8/13!important;grid-row:6/10!important;transform:none!important}
+  .a3-activate-copy{grid-column:8/13!important;grid-row:3/5!important}
+  .a3-activate-result{grid-column:2/7!important;grid-row:7/9!important}
+
+  .a4-watch{padding:88px 0 92px!important;margin-top:-30px!important}
+  .a4-watch-stage{display:block!important;width:100%!important}
+  .a4-watch-title{width:calc(100% - 56px)!important;margin:0 28px 36px!important;padding:0!important}
+  .a4-watch-title h2{font-size:12vw!important;max-width:6.2ch!important}
+  .a4-host-cue{width:360px!important;max-width:90%!important;margin-bottom:36px!important}
+  .a4-program{position:relative!important;transform:none!important;margin:0!important;box-shadow:0 24px 65px rgba(28,18,28,.14)!important}
+  .a4-program-tv{width:82%!important;height:76svh!important;margin-left:auto!important}
+  .a4-program-explain{width:66%!important;height:72svh!important;margin-top:22px!important}
+  .a4-program-create{width:58%!important;height:62svh!important;margin:-5svh 4% 0 auto!important}
+  .a4-program-archive{width:82%!important;height:48svh!important;margin:24px auto 0 0!important}
+  .a4-program>div{left:16px!important;right:16px!important;bottom:16px!important}
+
+  .a3-casting-copy h2{font-size:10.7vw!important}
+  .a4-booking .contact{display:block!important}.a4-booking-intro{position:static!important;max-width:620px}.a4-booking-form{margin-top:48px!important}
+}
+
+/* Phone: Notion canon = one signal per screen, proof-first, no desktop-restack collage. */
+@media(max-width:760px){
+  .a3-person-media video{object-position:center 6%!important}
+  .a4-authority-screen{position:relative!important;width:48%!important;right:auto!important;bottom:auto!important;margin:-54px 14px 0 auto!important}
+  .a3-thinking-margin{position:relative!important;width:auto!important;right:auto!important;bottom:auto!important;margin:20px 18px 0!important;padding-left:12%!important}
+
+  .a3-activate{min-height:820px!important;padding-bottom:52px!important}
+  .a3-activate-room{left:0!important;top:70px!important;width:88%!important;height:500px!important}
+  .a3-activate-reaction{right:0!important;left:auto!important;top:510px!important;width:56%!important;height:260px!important}
+  .a3-activate-copy{right:14px!important;top:245px!important;width:46%!important}
+  .a3-activate-result{left:14px!important;top:500px!important;width:52%!important}
+
+  .a4-watch{padding-bottom:74px!important}
+  .a4-watch-title{padding-bottom:28px!important}
+  .a4-host-cue{margin-top:1.15rem!important;margin-bottom:30px!important;width:94%!important}
+  .a4-program-tv,.a4-program-explain,.a4-program-create,.a4-program-archive{
+    width:100%!important;max-width:none!important;height:74svh!important;margin:0 0 20px!important;
+  }
+  .a4-program-create{height:68svh!important}
+  .a4-program-archive{height:58svh!important}
+  .a4-program-tv img{object-position:center 18%!important}
+  .a4-program-explain video{object-position:center 18%!important}
+  .a4-program:after{inset:58% 0 0!important}
+  .a4-program b{font-size:1.45rem!important;max-width:20ch!important}
+
+  .a3-casting-image{inset:0!important;width:100%!important;height:100%!important}
+}
+
+@media(max-width:430px){
+  .a3-person-media figcaption{gap:.7rem!important}.a3-person-media figcaption span{max-width:18ch}
+  .a3-thinking-field{height:80svh!important}.a3-thinking-field video{width:82%!important;height:80%!important}
+  .a4-authority-screen{width:52%!important}
+  .a4-watch-title h2{font-size:16.2vw!important}
+  .a4-program-tv,.a4-program-explain{height:71svh!important}
+  .a4-program-create{height:64svh!important}.a4-program-archive{height:54svh!important}
+}
+
+@media(max-width:390px){
+  .a3-person-media figcaption span{font-size:.49rem!important;letter-spacing:.06em!important}
+  .a4-host-cue b{font-size:.88rem!important}
+  .a4-program>div{left:13px!important;right:13px!important;bottom:13px!important}
+  .a4-program b{font-size:1.35rem!important}
+}
+
+@media(max-width:360px){
+  .a3-thinking-field figcaption{width:46%!important;right:10px!important}.a3-thinking-play{right:10px!important}
+  .a4-watch-title h2{font-size:16.8vw!important}
+  .a4-program span{font-size:.50rem!important}
+  .a4-booking .btnrow{display:grid!important;gap:.7rem!important}
+}
+
+/* Accessibility / failure state: meaning does not depend on animation. */
+@media(prefers-reduced-motion:reduce){
+  .a3-moment video{animation:none!important;transition:none!important}
+  .a4-program{transform:none!important}
+}
+
+/* A4.1 pixel-review corrections: judge the rendered crop, not the intention. */
+.a3-person-media video{object-position:center 23%!important}
+.a3-thinking-play{top:39%!important}
+
+/* Host cue is a discrete program handoff, never the caption for the Explain image below. */
+.a4-host-cue{
+  border:0!important;background:#111!important;color:#fff!important;
+  padding:.82rem .95rem!important;width:min(330px,88%)!important;
+  display:grid!important;gap:.28rem!important;margin-top:1.35rem!important;
+}
+.a4-host-cue:before{content:'↺';position:static!important;background:none!important;padding:0!important;font:.7rem/1 var(--f-mono);opacity:.55}
+
+/* Activate: one great scene. No near-duplicate photo filler. */
+.a3-activate-room{grid-column:1/11!important;grid-row:2/10!important}
+.a3-activate-copy{grid-column:9/13!important;grid-row:4/6!important;align-self:center!important}
+.a3-activate-result{grid-column:2/7!important;grid-row:8/10!important}
+
+@media(max-width:1100px) and (min-width:901px){
+ .a3-thinking-play{top:37%!important}
+ .a3-activate-room{grid-column:1/11!important;grid-row:2/10!important}
+ .a3-activate-copy{grid-column:9/13!important;grid-row:4/6!important}
+}
+@media(max-width:900px) and (min-width:761px){
+ .a3-thinking-play{top:33%!important}
+ .a3-activate-room{grid-column:1/12!important;grid-row:2/9!important}
+ .a3-activate-copy{grid-column:9/13!important;grid-row:4/6!important}
+ .a3-activate-result{grid-column:2/7!important;grid-row:7/9!important}
+}
+@media(max-width:760px){
+ .a3-person-media video{object-position:center 22%!important}
+ .a3-thinking-play{top:30%!important}
+ .a3-activate-room{left:0!important;top:70px!important;width:100%!important;height:650px!important}
+ .a3-activate-copy{right:14px!important;top:240px!important;width:48%!important}
+ .a3-activate-result{left:14px!important;top:525px!important;width:58%!important}
+ .a4-host-cue{width:100%!important;margin-bottom:26px!important}
+}

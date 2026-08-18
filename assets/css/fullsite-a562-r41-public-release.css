@@ -1,0 +1,23 @@
+/* A5.6.2 R4.1 — LBTV Public Release Patch */
+body.a562-r41-public-release{--r41-cream:#f6f0e6;--r41-ink:#10171a;--r41-aqua:#cdeeee;--r41-pink:#ff2d86}
+body.a562-r41-public-release .a56-watch-bug b{display:none!important}
+body.a562-r41-public-release .a56-watch-bug span{margin:0!important}
+body.a562-r41-public-release .a562-r3-sun i{background:radial-gradient(circle at 40% 36%,rgba(255,255,255,.82) 0 7%,rgba(223,255,255,.84) 18%,var(--r3-signal) 61%,rgba(255,255,255,.08) 72%)!important;box-shadow:0 0 0 1px rgba(26,73,78,.14),0 0 25px color-mix(in srgb,var(--r3-signal) 27%,transparent)!important}
+body.a562-r41-public-release .a562-r3-sun[aria-expanded="true"] i{transform:translate(-50%,-58%) scale(1.055)!important}
+@media(min-width:761px){body.a562-r41-public-release .a56-scrambled-room{display:none!important}}
+@media(max-width:760px){
+ body.a562-r41-public-release #about.a56-trust{min-height:88vh!important}
+ body.a562-r41-public-release .a56-trust-lauren{left:0!important;top:4vh!important;width:100vw!important;height:31vh!important;background:var(--r41-cream)!important;overflow:hidden!important}
+ body.a562-r41-public-release .a56-trust-lauren img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important}
+ body.a562-r41-public-release .a56-trust-bug{left:6vw!important;right:auto!important;top:40vh!important}
+ body.a562-r41-public-release .a56-trust-copy{left:6vw!important;right:auto!important;top:47vh!important;width:88vw!important}
+ body.a562-r41-public-release .a56-trust-copy h2{font-size:clamp(3.2rem,12.2vw,4.25rem)!important;line-height:.9!important}
+ body.a562-r41-public-release #contact .a4-booking-intro .muted{color:rgba(255,255,255,.69)!important;opacity:1!important}
+ body.a562-r41-public-release #contact .a4-booking-form label{color:rgba(255,255,255,.84)!important}
+ body.a562-r41-public-release #contact .a4-booking-form input,body.a562-r41-public-release #contact .a4-booking-form select,body.a562-r41-public-release #contact .a4-booking-form textarea{color:#f7f6f1!important;border-bottom-color:rgba(255,255,255,.36)!important}
+ body.a562-r41-public-release #contact .a4-booking-form input::placeholder,body.a562-r41-public-release #contact .a4-booking-form textarea::placeholder{color:rgba(255,255,255,.61)!important;opacity:1!important}
+ body.a562-r41-public-release #contact .booking-note,body.a562-r41-public-release #contact .a4-booking-status{color:rgba(255,255,255,.68)!important;opacity:1!important}
+ body.a562-r41-public-release #contact .a41-direct-email,body.a562-r41-public-release #contact .a41-direct-email a{color:rgba(255,255,255,.72)!important;opacity:1!important}
+ body.a562-r41-public-release #contact .eyebrow{color:rgba(255,255,255,.72)!important}
+}
+@media(max-width:390px){body.a562-r41-public-release #about.a56-trust{min-height:86vh!important}}

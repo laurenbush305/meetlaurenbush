@@ -1,0 +1,134 @@
+/* A5.6.2 R4 — LBTV Design Discipline + Release Art Direction
+   Editing pass only. Protected chapters are intentionally untargeted. */
+body.a562-design-discipline-r4{
+  --r4-cream:#f6f0e6;--r4-aqua:#a9e7e3;--r4-ink:#10171a;--r4-pink:#ff2d86;
+}
+
+/* PERSON — two photographs, one relationship. No duplicate fragment, no diagonal agency sweep. */
+body.a562-design-discipline-r4 .a56-person{min-height:118vh!important;background:#a9e7e3!important}
+body.a562-design-discipline-r4 .a56-daylight-sweep{display:none!important}
+body.a562-design-discipline-r4 .a56-person-floral{
+  left:3.5vw!important;top:8vh!important;width:51vw!important;height:96vh!important;padding:0!important;
+  border:0!important;box-shadow:none!important;transform:none!important;background:#f4eee5!important;
+}
+body.a562-design-discipline-r4 .a56-person-floral img{object-fit:contain!important;background:#f0e9df!important}
+body.a562-design-discipline-r4 .a56-person-body{right:2vw!important;bottom:0!important;width:43vw!important;height:110vh!important}
+body.a562-design-discipline-r4 .a56-person-copy{right:3.5vw!important;top:7vh!important;width:auto!important}
+body.a562-design-discipline-r4 .a56-person-exit{height:3vh!important;background:linear-gradient(180deg,transparent,#b8dcef)!important}
+
+/* SCRAMBLED — one television hero, one quiet context receipt, one title act. */
+body.a562-design-discipline-r4 .a56-scrambled{min-height:122vh!important}
+body.a562-design-discipline-r4 .a56-scrambled-shot{
+  left:0!important;top:0!important;width:69vw!important;height:122vh!important;box-shadow:none!important;
+}
+body.a562-design-discipline-r4 .a56-scrambled-shot img{object-position:center 30%!important}
+body.a562-design-discipline-r4 .a56-scrambled-room{
+  right:3.5vw!important;bottom:8vh!important;width:25vw!important;height:31vh!important;box-shadow:none!important;
+}
+body.a562-design-discipline-r4 .a56-scrambled-title{right:3.5vw!important;top:23vh!important;width:25vw!important}
+body.a562-design-discipline-r4 .a56-scrambled-title h2{font-size:clamp(3.8rem,6.4vw,7.2rem)!important;line-height:.78!important;margin:.45rem 0 1rem!important}
+body.a562-design-discipline-r4 .a56-program-credit{left:auto!important;right:3.5vw!important;top:6vh!important;width:25vw!important;line-height:1.35!important}
+
+/* HOST — real room + Lauren, with darkness coming from photography rather than a half-page slab. */
+body.a562-design-discipline-r4 .a56-host{min-height:118vh!important;background:#09100e!important}
+body.a562-design-discipline-r4 .a56-host-room img{filter:brightness(.66) saturate(.92) contrast(1.06)!important;transform:scale(1.015)!important}
+body.a562-design-discipline-r4 .a56-host-room:after{
+  background:linear-gradient(90deg,rgba(5,8,8,.02) 0 60%,rgba(5,8,8,.18) 72%,rgba(5,8,8,.62) 100%)!important;
+}
+body.a562-design-discipline-r4 .a56-host-talent{
+  left:0!important;top:0!important;width:76vw!important;height:118vh!important;box-shadow:none!important;
+  -webkit-mask-image:linear-gradient(90deg,#000 0 86%,rgba(0,0,0,.86) 92%,transparent 100%)!important;
+  mask-image:linear-gradient(90deg,#000 0 86%,rgba(0,0,0,.86) 92%,transparent 100%)!important;
+}
+body.a562-design-discipline-r4 .a56-host-title{right:3.5vw!important;top:18vh!important;width:24vw!important;text-align:right!important}
+body.a562-design-discipline-r4 .a56-host-title h2{font-size:clamp(5rem,8vw,9rem)!important;line-height:.72!important;margin:0 0 1rem!important}
+body.a562-design-discipline-r4 .a56-host-title p{font-size:.72rem!important;line-height:1.35!important;color:#e4ece8!important;max-width:22ch!important;margin-left:auto!important}
+body.a562-design-discipline-r4 .a56-host-play{right:3.5vw!important;top:52vh!important}
+body.a562-design-discipline-r4 .a56-host-bug{right:3.5vw!important;top:5vh!important;left:auto!important;color:#a8e8d8!important}
+
+/* ACTIVATE — public release uses Centerline + GoTennis only. */
+body.a562-design-discipline-r4 .a56-activate{min-height:196vh!important;background:#f4efe5!important}
+body.a562-design-discipline-r4 .a56-centerline{top:21vh!important;height:80vh!important}
+body.a562-design-discipline-r4 .a56-assignment-wide{width:72vw!important;height:76vh!important}
+body.a562-design-discipline-r4 .a56-assignment-credit{right:5vw!important;top:15vh!important;width:17vw!important}
+body.a562-design-discipline-r4 .a56-gotennis{top:112vh!important;height:72vh!important;background:#d9ecf0!important}
+body.a562-design-discipline-r4 .a56-gotennis-image{right:5vw!important;top:4vh!important;width:42vw!important;height:62vh!important}
+body.a562-design-discipline-r4 .a56-gotennis-copy{left:6vw!important;top:16vh!important;width:35vw!important}
+
+/* TRUST — R3 composition preserved, provenance corrected to the public-safe between-cues donor. */
+body.a562-design-discipline-r4 #about.a56-trust{min-height:106vh!important;background:#f6f0e6!important;color:#10171a!important}
+body.a562-design-discipline-r4 .a56-trust-lauren{left:0!important;top:10vh!important;width:64vw!important;height:78vh!important}
+body.a562-design-discipline-r4 .a56-trust-lauren img{object-position:30% 48%!important;filter:none!important}
+body.a562-design-discipline-r4 .a56-trust-copy{right:5vw!important;top:30vh!important;width:25vw!important}
+body.a562-design-discipline-r4 .a56-trust-copy h2{font-size:clamp(3.2rem,5vw,5.9rem)!important;line-height:.9!important;max-width:7.6ch!important}
+body.a562-design-discipline-r4 .a56-trust-bug{right:5vw!important;top:13vh!important;left:auto!important;color:#2d5969!important}
+
+/* Release candidate: fewer decorative micro-signals around edited chapters. */
+body.a562-design-discipline-r4 .a56-working-credit{display:none!important}
+
+@media(max-width:760px){
+  body.a562-design-discipline-r4 .a56-person{min-height:170vh!important}
+  body.a562-design-discipline-r4 .a56-person-floral{left:4vw!important;top:5vh!important;width:92vw!important;height:73vh!important}
+  body.a562-design-discipline-r4 .a56-person-body{right:-8vw!important;bottom:0!important;width:104vw!important;height:91vh!important}
+  body.a562-design-discipline-r4 .a56-person-copy{left:6vw!important;right:auto!important;top:82vh!important}
+
+  body.a562-design-discipline-r4 .a56-scrambled{min-height:150vh!important}
+  body.a562-design-discipline-r4 .a56-program-credit{left:5vw!important;right:auto!important;top:3vh!important;width:88vw!important}
+  body.a562-design-discipline-r4 .a56-scrambled-shot{left:0!important;top:8vh!important;width:100vw!important;height:101vh!important}
+  body.a562-design-discipline-r4 .a56-scrambled-room{display:none!important}
+  body.a562-design-discipline-r4 .a56-scrambled-title{left:5vw!important;right:auto!important;top:114vh!important;width:90vw!important}
+  body.a562-design-discipline-r4 .a56-scrambled-title h2{font-size:15vw!important;max-width:8ch!important}
+
+  body.a562-design-discipline-r4 .a56-host{min-height:136vh!important}
+  body.a562-design-discipline-r4 .a56-host-room{inset:0!important;height:136vh!important}
+  body.a562-design-discipline-r4 .a56-host-room img{object-position:center 42%!important;filter:brightness(.58) saturate(.92) contrast(1.06)!important}
+  body.a562-design-discipline-r4 .a56-host-room:after{background:linear-gradient(180deg,transparent 0 58%,rgba(5,8,8,.12) 68%,rgba(5,8,8,.72) 100%)!important}
+  body.a562-design-discipline-r4 .a56-host-talent{left:0!important;top:0!important;width:100vw!important;height:118vh!important;-webkit-mask-image:none!important;mask-image:none!important}
+  body.a562-design-discipline-r4 .a56-host-talent video{object-position:center 18%!important}
+  body.a562-design-discipline-r4 .a56-host-title{left:5vw!important;right:auto!important;top:92vh!important;width:90vw!important;text-align:left!important}
+  body.a562-design-discipline-r4 .a56-host-title h2{font-size:19vw!important;margin-bottom:.6rem!important}
+  body.a562-design-discipline-r4 .a56-host-title p{margin-left:0!important;max-width:26ch!important}
+  body.a562-design-discipline-r4 .a56-host-play{left:1rem!important;right:auto!important;top:1rem!important}
+  body.a562-design-discipline-r4 .a56-host-bug{left:auto!important;right:5vw!important;top:2.3vh!important}
+
+  body.a562-design-discipline-r4 .a56-activate{min-height:238vh!important}
+  body.a562-design-discipline-r4 .a56-activate-head{left:6vw!important;top:4vh!important;width:88vw!important}
+  body.a562-design-discipline-r4 .a56-centerline{top:20vh!important;height:92vh!important}
+  body.a562-design-discipline-r4 .a56-assignment-wide{width:100vw!important;height:70vh!important}
+  body.a562-design-discipline-r4 .a56-assignment-credit{left:6vw!important;right:auto!important;top:75vh!important;width:82vw!important}
+  body.a562-design-discipline-r4 .a56-gotennis{top:125vh!important;height:102vh!important}
+  body.a562-design-discipline-r4 .a56-gotennis-image{right:5vw!important;top:0!important;width:72vw!important;height:60vh!important}
+  body.a562-design-discipline-r4 .a56-gotennis-copy{left:6vw!important;top:65vh!important;width:88vw!important}
+
+  body.a562-design-discipline-r4 #about.a56-trust{min-height:104vh!important}
+  body.a562-design-discipline-r4 .a56-trust-lauren{left:0!important;top:0!important;width:100vw!important;height:65vh!important}
+  body.a562-design-discipline-r4 .a56-trust-lauren img{object-position:27% 46%!important}
+  body.a562-design-discipline-r4 .a56-trust-copy{left:6vw!important;right:auto!important;top:74vh!important;width:88vw!important}
+  body.a562-design-discipline-r4 .a56-trust-copy h2{font-size:12.6vw!important}
+  body.a562-design-discipline-r4 .a56-trust-bug{left:6vw!important;right:auto!important;top:68vh!important}
+}
+
+@media(max-width:390px){
+  body.a562-design-discipline-r4 .a56-person{min-height:168vh!important}
+  body.a562-design-discipline-r4 .a56-scrambled{min-height:148vh!important}
+  body.a562-design-discipline-r4 .a56-host{min-height:134vh!important}
+  body.a562-design-discipline-r4 .a56-activate{min-height:236vh!important}
+  body.a562-design-discipline-r4 #about.a56-trust{min-height:103vh!important}
+}
+
+/* R4 human edit corrections from normal-size mobile review. */
+@media(max-width:760px){
+ body.a562-design-discipline-r4 .a56-person{min-height:160vh!important}
+ body.a562-design-discipline-r4 .a56-person-body{top:91vh!important;bottom:auto!important;height:68vh!important;width:100vw!important;right:-5vw!important}
+ body.a562-design-discipline-r4 .a56-person-copy{top:79vh!important}
+ body.a562-design-discipline-r4 .a56-host{min-height:130vh!important}
+ body.a562-design-discipline-r4 .a56-host-room{height:130vh!important}
+ body.a562-design-discipline-r4 .a56-gotennis{top:112vh!important;height:102vh!important}
+ body.a562-design-discipline-r4 .a56-activate{min-height:222vh!important}
+}
+@media(max-width:390px){
+ body.a562-design-discipline-r4 .a56-person{min-height:158vh!important}
+ body.a562-design-discipline-r4 .a56-host{min-height:128vh!important}
+ body.a562-design-discipline-r4 .a56-host-room{height:128vh!important}
+ body.a562-design-discipline-r4 .a56-activate{min-height:220vh!important}
+}

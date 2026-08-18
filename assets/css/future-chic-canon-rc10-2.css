@@ -1,0 +1,309 @@
+/* ========================================================================
+   SEASON ZERO — RC10.2 / PRISMATIC BROADCAST GLAMOUR
+   Donor: RC10.1b. Test C typography + composition remain frozen.
+   Scope: beauty micro-pass only — photo finish, proof jewel, light/depth,
+   optical finesse, one title-sequence entrance. No redesign / no new UI.
+   ======================================================================== */
+
+/* 1) CAMPAIGN PHOTOGRAPHY FINISH — richer, not beauty-filtered. */
+.stage.fc-canon-hero{
+  background:
+    radial-gradient(ellipse at 34% 103%,rgba(255,211,193,.16),transparent 42%),
+    linear-gradient(180deg,#fffefa 0%,#fbfaf6 61%,#fff8f3 100%);
+}
+.fc-canon-hero .fc-primary{
+  box-shadow:0 28px 100px rgba(32,25,28,.055);
+}
+.fc-canon-hero .fc-primary img{
+  filter:saturate(1.035) contrast(1.068) brightness(.992);
+}
+
+/* The real sunlight becomes the signature visual event. The first layer is the
+   beam already present in the photograph; the second is a restrained spectral
+   fringe that only exists where that beam is already traveling. */
+.fc-canon-hero .fc-primary::before{
+  left:40.5%;
+  top:28.7%;
+  width:72%;
+  height:24px;
+  opacity:.62;
+  transform:rotate(-6.7deg);
+  background:
+    linear-gradient(180deg,transparent 0 30%,rgba(255,255,255,.16) 34%,rgba(255,255,255,.92) 47%,rgba(255,250,221,.64) 55%,transparent 68%),
+    linear-gradient(90deg,transparent 0 60%,rgba(35,208,218,.10) 72%,rgba(255,65,147,.10) 84%,rgba(255,194,128,.10) 94%,transparent 100%);
+  filter:blur(.55px);
+}
+.fc-canon-hero .fc-primary::after{
+  right:-34px;
+  top:18.7%;
+  width:132px;
+  height:132px;
+  opacity:.82;
+  transform:rotate(-7deg);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 49% 50%,rgba(255,255,255,.98) 0 2.1%,rgba(255,255,255,.45) 2.3% 4%,transparent 9%),
+    conic-gradient(from 8deg at 49% 50%,transparent 0 10%,rgba(255,255,255,.55) 10.5% 11%,transparent 11.5% 25%,rgba(39,198,204,.28) 25.5% 26.4%,transparent 27% 46%,rgba(255,45,135,.22) 46.5% 47.4%,transparent 48% 68%,rgba(255,201,129,.25) 68.5% 69.2%,transparent 70% 100%),
+    radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.12),rgba(39,198,204,.07) 32%,rgba(255,45,135,.055) 48%,transparent 67%);
+  filter:blur(.2px) saturate(1.12);
+  mix-blend-mode:screen;
+  animation:rc102-flare-breathe 8.5s ease-in-out 1.2s infinite;
+}
+@keyframes rc102-flare-breathe{
+  0%,78%,100%{opacity:.68;transform:rotate(-7deg) scale(.96)}
+  84%{opacity:.92;transform:rotate(-6deg) scale(1.035)}
+  90%{opacity:.74;transform:rotate(-7deg) scale(1)}
+}
+
+/* The photograph's architectural extension gets a faint lacquered light catch,
+   not another panel. */
+.fc-canon-hero .fc-world .chrome-arm{
+  opacity:.48;
+  filter:saturate(.92) contrast(1.025);
+}
+.fc-canon-hero .fc-world::before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  right:1.2vw;
+  top:20.5vh;
+  width:9.5vw;
+  height:18vh;
+  pointer-events:none;
+  opacity:.42;
+  background:
+    radial-gradient(circle at 22% 44%,rgba(255,255,255,.68) 0 1.1px,transparent 2px),
+    radial-gradient(circle at 52% 30%,rgba(39,198,204,.32) 0 1px,transparent 2px),
+    radial-gradient(circle at 71% 58%,rgba(255,45,135,.25) 0 .9px,transparent 1.9px),
+    radial-gradient(ellipse at 42% 52%,rgba(255,255,255,.12),transparent 62%);
+  filter:blur(.1px);
+  mix-blend-mode:screen;
+  animation:rc102-signal-dust 9s ease-in-out infinite;
+}
+@keyframes rc102-signal-dust{
+  0%,100%{opacity:.30;transform:translate3d(0,0,0)}
+  52%{opacity:.48;transform:translate3d(0,-2px,0)}
+}
+
+/* 2) HOST PROOF AS A MEDIA JEWEL — media stays real, treatment gets richer. */
+@media(min-width:901px){
+  .fc-canon-hero .signals{
+    right:2.45vw !important;
+    bottom:4.15vh !important;
+    width:clamp(370px,29.2vw,462px) !important;
+    aspect-ratio:5/3;
+    border:1px solid rgba(255,255,255,.68);
+    box-shadow:
+      0 32px 78px rgba(24,19,23,.17),
+      0 2px 12px rgba(24,19,23,.06),
+      inset 0 1px 0 rgba(255,255,255,.38);
+    transform:rotate(-.18deg) translateZ(0);
+    isolation:isolate;
+  }
+  .fc-canon-hero .signals::after{
+    display:block !important;
+    content:"";
+    position:absolute;
+    z-index:4;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(118deg,transparent 0 44%,rgba(255,255,255,.18) 48%,transparent 53% 100%);
+    opacity:.32;
+    transform:translateX(-68%);
+    animation:rc102-proof-glint 6.8s cubic-bezier(.2,.7,.2,1) 1.4s infinite;
+  }
+  @keyframes rc102-proof-glint{
+    0%,74%,100%{transform:translateX(-68%);opacity:0}
+    78%{opacity:.28}
+    87%{transform:translateX(72%);opacity:.18}
+    90%{opacity:0}
+  }
+  .fc-canon-hero .signal video,
+  .fc-canon-hero .signal img.plate{
+    filter:saturate(1.055) contrast(1.045) brightness(.995);
+  }
+  .fc-canon-hero .signal[data-lane="host"] video{object-position:50% 39%}
+  .fc-canon-hero .fc-signal-meta{
+    right:32.6vw !important;
+    bottom:5.6vh !important;
+  }
+}
+
+/* 3) OPTICAL FINISH — no new type direction, just make relationships inevitable. */
+@media(min-width:901px){
+  .fc-canon-hero .fc-name{top:40.9vh}
+  .fc-canon-hero .fc-bush{left:19.15vw;top:9.65vh}
+  .fc-canon-hero .deck{top:34.1vh}
+  .fc-canon-hero .fc-copy{left:3.05vw}
+}
+
+/* 4) ONE TITLE-SEQUENCE ENTRANCE. Lauren is already there; the name resolves,
+   then the proof cues in. Nothing else performs. */
+.fc-canon-hero.woke .fc-lauren{
+  animation:rc102-name-resolve .72s cubic-bezier(.2,.76,.18,1) both;
+}
+.fc-canon-hero.woke .fc-bush{
+  animation:rc102-bush-resolve .58s cubic-bezier(.2,.76,.18,1) .10s both;
+}
+@keyframes rc102-name-resolve{
+  from{opacity:.02;transform:translateY(10px) scaleX(1.18)}
+  to{opacity:1;transform:translateY(0) scaleX(1.18)}
+}
+@keyframes rc102-bush-resolve{
+  from{opacity:0;transform:translateY(8px) rotate(-.25deg)}
+  to{opacity:1;transform:translateY(0) rotate(-.25deg)}
+}
+
+/* 5) ON AIR = SAME ROOM, SEXIER LIGHTING — not generic dark mode. */
+:root[data-cue="broadcast"] .stage.fc-canon-hero{
+  background:
+    radial-gradient(ellipse at 75% 19%,rgba(102,80,216,.16),transparent 31%),
+    radial-gradient(ellipse at 45% 103%,rgba(255,45,135,.09),transparent 42%),
+    linear-gradient(180deg,#151119 0%,#100d14 100%);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary img{
+  filter:brightness(.735) contrast(1.095) saturate(1.13);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary::before{
+  opacity:.72;
+  filter:blur(.45px) saturate(1.12);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary::after{
+  opacity:.96;
+  background:
+    radial-gradient(circle at 49% 50%,rgba(255,255,255,1) 0 2.2%,rgba(255,255,255,.48) 2.4% 4%,transparent 9%),
+    conic-gradient(from 8deg at 49% 50%,transparent 0 9%,rgba(255,255,255,.62) 9.5% 10%,transparent 10.6% 24%,rgba(39,198,204,.42) 24.5% 25.5%,transparent 26% 45%,rgba(255,45,135,.42) 45.5% 46.6%,transparent 47% 68%,rgba(148,108,255,.38) 68.5% 69.5%,transparent 70% 100%),
+    radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.12),rgba(39,198,204,.09) 30%,rgba(255,45,135,.08) 50%,transparent 68%);
+  filter:saturate(1.3);
+  animation:rc102-live-flare .78s cubic-bezier(.2,.7,.2,1) both,rc102-flare-breathe 8.5s ease-in-out 2s infinite;
+}
+@keyframes rc102-live-flare{
+  from{transform:rotate(-7deg) scale(.78);opacity:.32}
+  65%{transform:rotate(-6deg) scale(1.08);opacity:1}
+  to{transform:rotate(-7deg) scale(1);opacity:.96}
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world .reflection{
+  opacity:.28;
+  filter:blur(19px) saturate(1.18);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .signals{
+  border-color:rgba(255,255,255,.36);
+  box-shadow:
+    0 34px 88px rgba(0,0,0,.40),
+    0 0 46px color-mix(in srgb,var(--lane) 10%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.24);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world::before{opacity:.58}
+
+/* MOBILE: eye candy stays small and authored; no sparkle wallpaper. */
+@media(max-width:900px){
+  .fc-canon-hero .fc-primary img{filter:saturate(1.03) contrast(1.055) brightness(.995)}
+  .fc-canon-hero .fc-primary::before{
+    left:36%;top:29.5%;width:76%;height:18px;opacity:.48;
+  }
+  .fc-canon-hero .fc-primary::after{
+    right:-42px;top:21.5%;width:104px;height:104px;opacity:.62;
+  }
+  .fc-canon-hero .fc-world::before{display:none}
+  .fc-canon-hero .signals{
+    border:1px solid rgba(255,255,255,.58);
+    box-shadow:0 15px 34px rgba(24,19,23,.14),0 1px 7px rgba(24,19,23,.06);
+    transform:rotate(-.12deg);
+  }
+  .fc-canon-hero .signals::after{display:none !important}
+  .fc-canon-hero .fc-name{top:42.8svh}
+  .fc-canon-hero .fc-bush{top:8.5svh}
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-primary img{filter:brightness(.74) contrast(1.09) saturate(1.12)}
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-primary::after{opacity:.78}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fc-canon-hero.woke .fc-lauren,
+  .fc-canon-hero.woke .fc-bush,
+  .fc-canon-hero .fc-primary::after,
+  .fc-canon-hero .fc-world::before,
+  .fc-canon-hero .signals::after{animation:none !important}
+}
+
+/* RC10.2 visual-event refinement: one lens/refraction bloom exactly where the
+   real beam exits the set. This replaces decorative sparkle scatter with a
+   single memorable optical event. */
+.fc-canon-hero .fc-world::before{
+  right:6.0vw;
+  top:20.7vh;
+  width:74px;
+  height:74px;
+  opacity:.74;
+  border-radius:50%;
+  background:
+    linear-gradient(90deg,transparent 0 47%,rgba(255,255,255,.72) 49.2% 50.8%,transparent 53%),
+    linear-gradient(0deg,transparent 0 47%,rgba(255,255,255,.62) 49.2% 50.8%,transparent 53%),
+    linear-gradient(45deg,transparent 0 48.5%,rgba(255,255,255,.28) 49.4% 50.6%,transparent 51.5%),
+    linear-gradient(-45deg,transparent 0 48.5%,rgba(255,255,255,.22) 49.4% 50.6%,transparent 51.5%),
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.96) 0 3%,rgba(255,245,209,.52) 4% 7%,rgba(39,198,204,.12) 13%,transparent 31%);
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.25));
+  mix-blend-mode:screen;
+  animation:rc102-star-breathe 7.8s ease-in-out 1.1s infinite;
+}
+.fc-canon-hero .fc-world::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  right:-42px;
+  top:13.8vh;
+  width:174px;
+  height:174px;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:.42;
+  background:conic-gradient(from 208deg,
+    rgba(39,198,204,.42),rgba(255,255,255,.05) 16%,
+    rgba(255,45,135,.33) 33%,rgba(255,255,255,.03) 49%,
+    rgba(255,201,129,.34) 66%,rgba(155,113,255,.28) 82%,
+    rgba(39,198,204,.42));
+  -webkit-mask:radial-gradient(circle,transparent 0 62%,#000 66% 69%,transparent 73% 100%);
+  mask:radial-gradient(circle,transparent 0 62%,#000 66% 69%,transparent 73% 100%);
+  filter:blur(.2px) drop-shadow(0 0 13px rgba(255,255,255,.10));
+  transform:rotate(-18deg);
+  animation:rc102-lens-turn 18s linear infinite;
+}
+@keyframes rc102-star-breathe{
+  0%,76%,100%{transform:scale(.78);opacity:.38}
+  83%{transform:scale(1.08);opacity:.90}
+  89%{transform:scale(.94);opacity:.58}
+}
+@keyframes rc102-lens-turn{to{transform:rotate(342deg)}}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world::before{
+  opacity:.96;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.34)) drop-shadow(0 0 18px rgba(39,198,204,.10));
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world::after{
+  opacity:.68;
+  background:conic-gradient(from 208deg,
+    rgba(39,198,204,.58),rgba(255,255,255,.08) 16%,
+    rgba(255,45,135,.54) 33%,rgba(255,255,255,.04) 49%,
+    rgba(151,106,255,.48) 66%,rgba(255,191,115,.36) 82%,
+    rgba(39,198,204,.58));
+}
+@media(max-width:900px){
+  .fc-canon-hero .fc-world::before{
+    display:block;
+    right:-7px;
+    top:21.8svh;
+    width:48px;
+    height:48px;
+    opacity:.46;
+  }
+  .fc-canon-hero .fc-world::after{
+    right:-29px;
+    top:18.2svh;
+    width:94px;
+    height:94px;
+    opacity:.30;
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-world::after{opacity:.46}
+}
+@media(prefers-reduced-motion:reduce){
+  .fc-canon-hero .fc-world::before,
+  .fc-canon-hero .fc-world::after{animation:none !important}
+}

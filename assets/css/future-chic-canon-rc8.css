@@ -1,0 +1,1362 @@
+/* ========================================================================
+   SEASON ZERO — CANON RC8 / BEAUTY RECOVERY PASS
+   Structural donor: RC6. RC7 informs only the anti-template blacklist.
+
+   Three equal gates:
+   1) human-authored, 2) unmistakably Season Zero / Lauren, 3) gorgeous.
+   ======================================================================== */
+
+.stage.fc-canon-hero{
+  --paper:#fbfaf6;
+  --ink:#111113;
+  --soft:#6c6866;
+  --aqua:#27c6cc;
+  --pink:#ff2d87;
+  --violet:#6650d8;
+  --coral:#f47a62;
+  --sun:#fff8d6;
+  --lane:var(--aqua);
+  --topbar:58px;
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+  isolation:isolate;
+  padding:0;
+  background:var(--paper);
+  color:var(--ink);
+}
+.stage.fc-canon-hero[data-active-lane="create"]{--lane:var(--pink)}
+.stage.fc-canon-hero[data-active-lane="explain"]{--lane:var(--violet)}
+.stage.fc-canon-hero[data-active-lane="host"]{--lane:var(--aqua)}
+.stage.fc-canon-hero[data-active-lane="activate"]{--lane:var(--coral)}
+
+/* Blacklist: do not reintroduce interface theater. */
+.fc-canon-hero .wake-flash,
+.fc-canon-hero .signal-field,
+.fc-canon-hero .field,
+.fc-canon-hero .rings,
+.fc-canon-hero .sigbug,
+.fc-canon-hero .monitor-foot,
+.fc-canon-hero .fc-timecode,
+.fc-canon-hero .fc-lore,
+.fc-canon-hero .fc-onair,
+.fc-canon-hero .fc-world,
+.world-dial{display:none !important}
+
+/* Masthead stays commercially obvious, but not chrome-heavy. */
+.rig{
+  height:var(--topbar);
+  min-height:var(--topbar);
+  padding:0 3.1vw;
+  background:rgba(251,250,246,.96);
+  border-bottom:1px solid rgba(17,17,19,.12);
+  box-shadow:none;
+}
+.rig::after{display:none !important}
+.rig .wordmark{
+  font-family:'ArchivoBlack','Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.86rem;
+  letter-spacing:-.045em;
+  text-transform:uppercase;
+}
+.rig .wordmark .tally{display:none}
+.rig nav{gap:1.8rem}
+.rig nav a{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.76rem;
+  letter-spacing:0;
+  text-transform:none;
+  border:0;
+  padding:4px 0;
+}
+.rig .book{
+  min-height:38px;
+  padding:0 19px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--pink);
+  color:#fff;
+  clip-path:none;
+  border-radius:0;
+  font-weight:700;
+}
+
+/* ------------------------------------------------------------
+   THE PHOTOGRAPH IS THE SET
+   More breathing room around Lauren, but no portrait-card boundary.
+   ------------------------------------------------------------ */
+.fc-canon-hero .fc-primary{
+  position:absolute;
+  z-index:2;
+  margin:0;
+  left:27vw;
+  top:var(--topbar);
+  width:66vw;
+  height:calc(100vh - var(--topbar));
+  height:calc(100svh - var(--topbar));
+  overflow:hidden;
+  background:#e9ece8;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+.fc-canon-hero .fc-primary img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:51% 39%;
+  transform:scale(1.01);
+  filter:saturate(1.015) contrast(1.01);
+}
+
+/* Let the real sunlight produce one tiny, specific impossible thing:
+   a soft prismatic exit where the beam leaves the photograph. */
+.fc-canon-hero .fc-primary::before{
+  content:"";
+  position:absolute;
+  z-index:3;
+  left:44%;
+  top:29.2%;
+  width:66%;
+  height:10px;
+  opacity:.42;
+  pointer-events:none;
+  transform:rotate(-6.8deg);
+  transform-origin:left center;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.82) 42%,
+    rgba(255,252,223,.62) 57%,
+    rgba(255,255,255,0) 100%);
+  filter:blur(.8px);
+  mix-blend-mode:screen;
+}
+.fc-canon-hero .fc-primary::after{
+  content:"";
+  position:absolute;
+  z-index:4;
+  right:-23px;
+  top:22.8%;
+  width:84px;
+  height:62px;
+  opacity:.78;
+  pointer-events:none;
+  transform:rotate(-7deg);
+  background:
+    linear-gradient(180deg, transparent 0 23%, rgba(255,255,255,.68) 25% 29%, transparent 31%),
+    linear-gradient(180deg, transparent 0 37%, color-mix(in srgb,var(--lane) 62%,white) 39% 44%, transparent 46%),
+    linear-gradient(180deg, transparent 0 49%, rgba(255,84,149,.45) 51% 55%, transparent 57%),
+    linear-gradient(180deg, transparent 0 61%, rgba(244,122,98,.40) 63% 67%, transparent 69%);
+  filter:blur(.45px);
+  transition:opacity .24s ease,filter .24s ease;
+}
+
+/* Warm paper edge: creates shape instead of a giant blank field. */
+.fc-canon-hero::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:0;
+  bottom:0;
+  width:42vw;
+  height:21vh;
+  background:linear-gradient(145deg,rgba(255,242,233,.82),rgba(255,255,255,0) 62%);
+  pointer-events:none;
+}
+.fc-canon-hero::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  right:0;
+  bottom:0;
+  width:14vw;
+  height:31vh;
+  background:linear-gradient(160deg,transparent 12%,color-mix(in srgb,var(--lane) 14%,transparent) 100%);
+  pointer-events:none;
+  transition:background .25s ease;
+}
+
+/* ------------------------------------------------------------
+   TITLE SEQUENCE TYPOGRAPHY
+   The photo edge literally changes the word. LAU lives on paper;
+   REN enters Lauren's set. Her face stays unobstructed.
+   ------------------------------------------------------------ */
+.fc-canon-hero .fc-copy{
+  position:absolute;
+  z-index:6;
+  left:3.15vw;
+  top:13.5vh;
+  width:88vw;
+  height:auto;
+  color:var(--ink);
+  pointer-events:none;
+}
+.fc-canon-hero .fc-kicker{
+  margin:0;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.76rem;
+  line-height:1;
+  font-weight:650;
+  letter-spacing:.005em;
+  text-transform:none;
+  color:var(--soft);
+}
+.fc-canon-hero .fc-kicker::before{content:none}
+.fc-canon-hero .fc-name{
+  position:absolute;
+  left:0;
+  top:16.4vh;
+  width:72vw;
+  height:27vh;
+  margin:0;
+  font-family:'ArchivoBlack','Archivo','Helvetica Neue',Arial,sans-serif;
+  line-height:.76;
+  color:var(--ink);
+  text-shadow:none;
+}
+.fc-canon-hero .fc-lauren{
+  position:absolute;
+  left:0;
+  top:0;
+  display:flex;
+  align-items:baseline;
+  gap:0;
+  white-space:nowrap;
+  font-size:clamp(6.2rem,10.15vw,10.4rem);
+  letter-spacing:-.092em;
+  line-height:.74;
+  text-transform:uppercase;
+  font-style:normal;
+}
+.fc-canon-hero .fc-lauren i,
+.fc-canon-hero .fc-lauren b{
+  display:block;
+  font:inherit;
+  font-style:normal;
+  font-weight:900;
+}
+.fc-canon-hero .fc-lauren i{color:var(--ink)}
+.fc-canon-hero .fc-lauren b{
+  color:#fffdf8;
+  text-shadow:0 1px 12px rgba(16,16,18,.08);
+  transform:translateX(-.045em);
+}
+.fc-canon-hero .fc-bush{
+  position:absolute;
+  left:16.3vw;
+  top:11.2vh;
+  display:block;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(3rem,4.75vw,4.9rem);
+  line-height:.9;
+  letter-spacing:-.075em;
+  font-weight:430;
+  color:var(--pink);
+  transform:rotate(-1.4deg);
+}
+
+/* Supporting words occupy the paper with rhythm, not dead air. */
+.fc-canon-hero .fc-role{
+  position:absolute;
+  left:0;
+  top:2.65rem;
+  margin:0;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.86rem;
+  font-weight:760;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--ink);
+}
+.fc-canon-hero .fc-promise{
+  position:absolute;
+  left:0;
+  top:4.55rem;
+  margin:0;
+  max-width:20ch;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(1.08rem,1.5vw,1.35rem);
+  line-height:1.22;
+  letter-spacing:-.03em;
+  color:var(--ink);
+}
+.fc-canon-hero .fc-promise b{font-weight:430;color:inherit}
+.fc-canon-hero .fc-reel-link{
+  position:absolute;
+  left:0;
+  top:7.95rem;
+  pointer-events:auto;
+  margin:0;
+  padding:0 0 5px;
+  color:var(--ink);
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.84rem;
+  line-height:1;
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+  background:none;
+  box-shadow:none;
+}
+.fc-canon-hero .fc-reel-link:hover{color:var(--pink)}
+
+/* ON AIR is a companion action to the reel, not a status widget. */
+.fc-canon-hero .fc-cue{
+  position:absolute;
+  z-index:9;
+  left:14.3vw;
+  top:calc(13.5vh + 7.55rem);
+  width:auto;
+  height:auto;
+  min-height:0;
+  padding:0 0 5px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:0;
+  border-bottom:1px solid color-mix(in srgb,var(--pink) 65%,var(--ink));
+  border-radius:0;
+  background:transparent;
+  color:var(--ink);
+  box-shadow:none;
+  transform:none;
+}
+.fc-canon-hero .fc-cue::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--pink);
+  box-shadow:none;
+}
+.fc-canon-hero .fc-cue::after{content:none}
+.fc-canon-hero .fc-cue .cue-copy{padding:0;background:none;writing-mode:horizontal-tb;transform:none}
+.fc-canon-hero .fc-cue .state{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.82rem;
+  font-weight:650;
+  line-height:1;
+  letter-spacing:0;
+  text-transform:none;
+}
+.fc-canon-hero .fc-cue:hover{color:var(--pink)}
+
+/* ------------------------------------------------------------
+   PROOF HAS DIGNITY
+   One real moving receipt interrupts the spread instead of behaving like a card.
+   ------------------------------------------------------------ */
+.fc-canon-hero .signals{
+  position:absolute;
+  z-index:7;
+  right:4.1vw;
+  bottom:5.7vh;
+  width:clamp(310px,27vw,410px);
+  height:auto;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#111;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  transform:rotate(.55deg);
+}
+.fc-canon-hero .signals::before,
+.fc-canon-hero .signals::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+}
+.fc-canon-hero .signals::before{
+  left:-8px;
+  top:-8px;
+  width:28px;
+  height:28px;
+  border-left:2px solid var(--pink);
+  border-top:2px solid var(--pink);
+}
+.fc-canon-hero .signals::after{
+  right:-8px;
+  bottom:-8px;
+  width:28px;
+  height:28px;
+  border-right:2px solid var(--lane);
+  border-bottom:2px solid var(--lane);
+  transition:border-color .25s ease;
+}
+.fc-canon-hero .signal{
+  position:absolute;
+  inset:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  transition:opacity .18s ease;
+}
+.fc-canon-hero .signal::after{content:none}
+.fc-canon-hero .signal video,
+.fc-canon-hero .signal img.plate{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:none;
+  transform:none;
+}
+.fc-canon-hero .signal[data-lane="host"] video{object-position:50% 42%}
+.fc-canon-hero .signal[data-lane="create"] video{object-position:50% 50%}
+.fc-canon-hero .signal[data-lane="explain"] img.plate{object-position:50% 24%}
+.fc-canon-hero .signal[data-lane="activate"] img.plate{object-position:50% 42%}
+.fc-canon-hero .srcmon{display:none !important}
+
+.fc-canon-hero .fc-signal-meta{
+  position:absolute;
+  z-index:8;
+  right:calc(4.1vw + clamp(310px,27vw,410px) + 28px);
+  bottom:4.7vh;
+  width:min(28vw,390px);
+  min-width:270px;
+  padding:0;
+  color:var(--ink);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  backdrop-filter:none;
+  transform:none;
+}
+.fc-canon-hero .fc-signal-meta::before{
+  content:"";
+  display:block;
+  width:82px;
+  height:4px;
+  margin-bottom:12px;
+  background:linear-gradient(90deg,var(--lane),var(--pink));
+  transition:background .25s ease;
+}
+.fc-canon-hero .fc-signal-meta .ey{
+  margin:0 0 6px;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.71rem;
+  line-height:1;
+  font-weight:760;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--ink);
+}
+.fc-canon-hero .fc-signal-meta h2{
+  margin:0;
+  max-width:19ch;
+  font-family:'ArchivoBlack','Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(1.15rem,1.7vw,1.58rem);
+  line-height:1.02;
+  letter-spacing:-.047em;
+  text-transform:none;
+}
+.fc-canon-hero .fc-signal-meta > p:not(.ey):not(.fc-castline){
+  margin:9px 0 0;
+  max-width:37ch;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.77rem;
+  line-height:1.38;
+  color:var(--soft);
+}
+.fc-canon-hero .fc-castline{
+  margin:9px 0 0;
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.7rem;
+  line-height:1.3;
+  color:var(--ink);
+}
+.fc-canon-hero .fc-castline span{display:block;margin-bottom:2px;color:var(--soft)}
+.fc-canon-hero .fc-castline strong{font-weight:680}
+.fc-canon-hero .open-file{
+  margin-top:10px;
+  padding:0 0 4px;
+  min-height:0;
+  border:0;
+  border-bottom:1px solid currentColor;
+  border-radius:0;
+  background:none;
+  color:var(--ink);
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.76rem;
+  font-weight:650;
+  text-transform:none;
+  letter-spacing:0;
+}
+.fc-canon-hero .open-file:hover{color:var(--pink)}
+
+/* ------------------------------------------------------------
+   DIFFERENT DOORS
+   A concept sentence with natural-width choices, not a component strip.
+   ------------------------------------------------------------ */
+.fc-canon-hero .deck{
+  position:absolute;
+  z-index:9;
+  left:3.15vw;
+  bottom:4.5vh;
+  width:45vw;
+  min-width:0;
+  height:auto;
+  padding:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  backdrop-filter:none;
+  transform:none;
+}
+.fc-canon-hero .deck-inner{display:block;height:auto;padding:0;background:none;border:0}
+.fc-canon-hero .tune{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:8px 18px;
+  width:100%;
+}
+.fc-canon-hero .tune::before{
+  content:"Different doors:";
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:.72rem;
+  font-weight:630;
+  color:var(--soft);
+  margin-right:2px;
+}
+.fc-canon-hero .tune button{
+  position:relative;
+  min-height:0;
+  padding:0 0 4px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--soft);
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-size:clamp(.9rem,1.05vw,1.02rem);
+  line-height:1;
+  font-weight:540;
+  letter-spacing:-.02em;
+  text-transform:none;
+  text-align:left;
+  border-bottom:1px solid transparent;
+  transition:color .16s ease,transform .16s ease,border-color .16s ease;
+}
+.fc-canon-hero .tune button span.n{display:none}
+.fc-canon-hero .tune button::before{content:none}
+.fc-canon-hero .tune button:hover{color:var(--ink);transform:translateY(-1px)}
+.fc-canon-hero .tune button[aria-selected="true"]{
+  color:var(--ink);
+  font-weight:780;
+  padding-left:0;
+  border-bottom-color:var(--lane);
+  background:transparent;
+}
+.fc-canon-hero .tune button[aria-selected="true"]::after{
+  content:"↗";
+  margin-left:5px;
+  font-size:.72em;
+  color:var(--lane);
+}
+
+/* Same world, after the lights change: plum/ink, not generic dark mode. */
+:root[data-cue="broadcast"] .stage.fc-canon-hero{
+  --paper:#17131a;
+  --ink:#fffaf6;
+  --soft:#c6bcc5;
+  background:#17131a;
+  color:var(--ink);
+}
+:root[data-cue="broadcast"] .rig{
+  background:rgba(23,19,26,.98);
+  color:#fff;
+  border-bottom-color:rgba(255,255,255,.14);
+}
+:root[data-cue="broadcast"] .rig nav a,
+:root[data-cue="broadcast"] .rig .wordmark{color:#fff}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary img{
+  filter:brightness(.74) contrast(1.055) saturate(1.13) sepia(.02);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary::before{opacity:.7;filter:blur(1px)}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary::after{opacity:1;filter:blur(.2px) saturate(1.2)}
+:root[data-cue="broadcast"] .fc-canon-hero::before{
+  background:linear-gradient(145deg,rgba(102,80,216,.18),rgba(255,45,135,.08) 45%,rgba(255,255,255,0) 72%);
+}
+:root[data-cue="broadcast"] .fc-canon-hero::after{
+  background:linear-gradient(160deg,transparent 10%,color-mix(in srgb,var(--lane) 18%,transparent) 100%);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-lauren i,
+:root[data-cue="broadcast"] .fc-canon-hero .fc-role,
+:root[data-cue="broadcast"] .fc-canon-hero .fc-promise,
+:root[data-cue="broadcast"] .fc-canon-hero .fc-reel-link,
+:root[data-cue="broadcast"] .fc-canon-hero .fc-signal-meta,
+:root[data-cue="broadcast"] .fc-canon-hero .open-file,
+:root[data-cue="broadcast"] .fc-canon-hero .tune button[aria-selected="true"],
+:root[data-cue="broadcast"] .fc-canon-hero .fc-cue{color:var(--ink)}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-bush{color:#ff6aa9}
+
+@media (max-width:900px){
+  .rig{padding:0 18px}
+  .rig nav{gap:14px}
+  .rig nav a{font-size:.72rem}
+  .rig .book{padding:0 13px}
+
+  .stage.fc-canon-hero{min-height:100svh;overflow:hidden}
+
+  /* Mobile is authored separately: portrait first, then title and proof overlap
+     its lower edge. No floating labels and no tab-footer fallback. */
+  .fc-canon-hero .fc-primary{
+    left:0;
+    top:var(--topbar);
+    width:100vw;
+    height:58svh;
+  }
+  .fc-canon-hero .fc-primary img{
+    object-fit:cover;
+    object-position:49% 27%;
+    transform:scale(1.01);
+  }
+  .fc-canon-hero .fc-primary::before{
+    left:42%;
+    top:31%;
+    width:72%;
+    height:9px;
+  }
+  .fc-canon-hero .fc-primary::after{
+    right:-18px;
+    top:26.5%;
+    width:66px;
+    height:52px;
+  }
+  .fc-canon-hero::before{
+    left:0;
+    width:100vw;
+    height:26vh;
+    background:linear-gradient(155deg,rgba(255,240,231,.92),rgba(255,255,255,0) 68%);
+  }
+  .fc-canon-hero::after{width:42vw;height:19vh;right:-4vw}
+
+  .fc-canon-hero .fc-copy{
+    left:18px;
+    top:0;
+    width:calc(100vw - 36px);
+    height:100%;
+  }
+  .fc-canon-hero .fc-kicker{
+    position:absolute;
+    left:0;
+    top:calc(var(--topbar) + 18px);
+    margin:0;
+    padding:0;
+    background:none;
+    color:#28292b;
+    font-size:.67rem;
+    text-shadow:0 1px 8px rgba(255,255,255,.62);
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-kicker{color:#fff;background:none;text-shadow:0 1px 8px rgba(0,0,0,.3)}
+
+  .fc-canon-hero .fc-name{
+    left:0;
+    top:43.5svh;
+    width:calc(100vw - 18px);
+    height:22svh;
+  }
+  .fc-canon-hero .fc-lauren{
+    font-size:clamp(4.65rem,22vw,6.25rem);
+    letter-spacing:-.095em;
+  }
+  .fc-canon-hero .fc-lauren i{color:#fffdf8;text-shadow:0 1px 10px rgba(16,16,18,.08)}
+  .fc-canon-hero .fc-lauren b{color:#fffdf8}
+  .fc-canon-hero .fc-bush{
+    left:11vw;
+    top:8.9svh;
+    font-size:clamp(3rem,15vw,4.25rem);
+    color:var(--pink);
+  }
+
+  .fc-canon-hero .fc-role{
+    left:0;
+    top:64svh;
+    font-size:.79rem;
+  }
+  .fc-canon-hero .fc-promise{
+    left:0;
+    top:67.2svh;
+    max-width:22ch;
+    font-size:1rem;
+  }
+  .fc-canon-hero .fc-reel-link{
+    left:0;
+    top:72.2svh;
+    font-size:.78rem;
+  }
+  .fc-canon-hero .fc-cue{
+    left:135px;
+    top:72.2svh;
+    font-size:.78rem;
+  }
+  .fc-canon-hero .fc-cue::before{width:7px;height:7px}
+  .fc-canon-hero .fc-cue .state{font-size:.78rem}
+
+  /* Proof comes up in scale and overlaps the page/photo seam like a real insert. */
+  .fc-canon-hero .signals{
+    left:18px;
+    right:auto;
+    bottom:74px;
+    width:156px;
+    height:88px;
+    aspect-ratio:auto;
+    transform:rotate(-.7deg);
+  }
+  .fc-canon-hero .signals::before{left:-5px;top:-5px;width:20px;height:20px}
+  .fc-canon-hero .signals::after{right:-5px;bottom:-5px;width:20px;height:20px}
+  .fc-canon-hero .fc-signal-meta{
+    left:190px;
+    right:16px;
+    bottom:67px;
+    width:auto;
+    min-width:0;
+  }
+  .fc-canon-hero .fc-signal-meta::before{width:52px;height:3px;margin-bottom:7px}
+  .fc-canon-hero .fc-signal-meta .ey{font-size:.62rem;margin-bottom:4px}
+  .fc-canon-hero .fc-signal-meta h2{font-size:.91rem;line-height:1.02;max-width:24ch}
+  .fc-canon-hero .fc-signal-meta > p:not(.ey):not(.fc-castline){display:none}
+  .fc-canon-hero .fc-castline{display:none}
+  .fc-canon-hero .open-file{margin-top:7px;font-size:.66rem}
+
+  .fc-canon-hero .deck{
+    left:18px;
+    right:18px;
+    bottom:18px;
+    width:auto;
+  }
+  .fc-canon-hero .tune{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:7px 13px;
+    width:100%;
+    border:0;
+    padding:0;
+  }
+  .fc-canon-hero .tune::before{
+    flex:0 0 100%;
+    margin:0 0 2px;
+    font-size:.64rem;
+  }
+  .fc-canon-hero .tune button{
+    min-height:0;
+    justify-content:flex-start;
+    padding:0 0 3px;
+    font-size:.72rem;
+    text-align:left;
+    border:0;
+    border-bottom:1px solid transparent;
+  }
+  .fc-canon-hero .tune button[aria-selected="true"]{padding-left:0;border-bottom-color:var(--lane)}
+}
+
+@media (max-width:430px){
+  .rig .hide-sm{display:none !important}
+  .rig nav{gap:10px}
+  .fc-canon-hero .fc-primary{height:56svh}
+  .fc-canon-hero .fc-name{top:42.3svh}
+  .fc-canon-hero .fc-role{top:62.7svh}
+  .fc-canon-hero .fc-promise{top:65.8svh}
+  .fc-canon-hero .fc-reel-link{top:70.5svh}
+  .fc-canon-hero .fc-cue{top:70.5svh;left:132px}
+  .fc-canon-hero .signals{bottom:78px;width:148px;height:83px}
+  .fc-canon-hero .fc-signal-meta{left:180px;bottom:70px}
+  .fc-canon-hero .fc-signal-meta h2{font-size:.86rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fc-canon-hero .fc-primary::after,
+  .fc-canon-hero::after,
+  .fc-canon-hero .signal,
+  .fc-canon-hero .tune button{transition:none !important}
+}
+
+/* ======================== RC8 VISUAL TUNING 01 ======================== */
+@media (min-width:901px){
+  .fc-canon-hero .fc-primary{
+    left:28vw;
+    width:60.5vw;
+  }
+  .fc-canon-hero .fc-primary img{
+    object-position:50% 40%;
+    transform:scale(1.002);
+  }
+
+  /* Keep the face clear. The title arrives lower, over hair / wardrobe. */
+  .fc-canon-hero .fc-name{
+    top:39.5vh;
+    width:68vw;
+  }
+  .fc-canon-hero .fc-lauren{
+    font-size:clamp(6.6rem,10.7vw,10.9rem);
+  }
+  .fc-canon-hero .fc-bush{
+    left:18.2vw;
+    top:10.9vh;
+    font-size:clamp(3rem,4.5vw,4.7rem);
+  }
+
+  /* Proof caption belongs to the paper; footage interrupts the photo edge. */
+  .fc-canon-hero .signals{
+    top:auto !important;
+    right:3.5vw;
+    bottom:5.2vh;
+    width:clamp(320px,25vw,385px);
+  }
+  .fc-canon-hero .fc-signal-meta{
+    top:auto !important;
+    left:3.15vw;
+    right:auto;
+    bottom:11.7vh;
+    width:23vw;
+    min-width:286px;
+  }
+  .fc-canon-hero .fc-signal-meta h2{max-width:18ch}
+
+  .fc-canon-hero .deck{
+    left:3.15vw;
+    bottom:4.1vh;
+    width:54vw;
+  }
+
+  /* Companion action sits with the reel but never on top of it. */
+  .fc-canon-hero .fc-cue{
+    left:12.1vw;
+    top:calc(13.5vh + 7.55rem);
+  }
+}
+
+/* ======================== RC8 VISUAL TUNING 02 ======================== */
+.rig .book{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  letter-spacing:0;
+  text-transform:none;
+}
+.fc-canon-hero .fc-lauren{
+  display:block;
+  position:absolute;
+  left:0;
+  top:0;
+  color:var(--ink);
+  font-family:'ArchivoBlack','Archivo','Helvetica Neue',Arial,sans-serif;
+  font-weight:900;
+  font-style:normal;
+}
+.fc-canon-hero .fc-lauren::after{
+  content:attr(data-word);
+  position:absolute;
+  inset:0;
+  color:#fffdf8;
+  clip-path:inset(0 0 0 24.85vw);
+  pointer-events:none;
+  text-shadow:0 1px 12px rgba(16,16,18,.08);
+}
+.fc-canon-hero .fc-lauren i,
+.fc-canon-hero .fc-lauren b{display:none !important}
+.fc-canon-hero .fc-cue::before{content:none}
+
+/* Diffraction is a tiny optical kiss, not a decorative stripe stack. */
+.fc-canon-hero .fc-primary::after{
+  right:-8px;
+  top:24.7%;
+  width:44px;
+  height:38px;
+  opacity:.38;
+  clip-path:polygon(0 43%,100% 0,100% 100%);
+  background:linear-gradient(180deg,
+    rgba(39,198,204,.15) 0 28%,
+    rgba(255,255,255,.05) 28% 37%,
+    rgba(255,45,135,.26) 37% 62%,
+    rgba(244,122,98,.22) 62% 100%);
+  filter:blur(1.15px);
+}
+
+@media (min-width:901px){
+  .fc-canon-hero .fc-name{top:42vh}
+  .fc-canon-hero .deck{
+    top:31.5vh;
+    bottom:auto;
+    width:21vw;
+  }
+  .fc-canon-hero .tune{gap:9px 14px}
+  .fc-canon-hero .tune::before{flex:0 0 100%;margin-bottom:2px}
+  .fc-canon-hero .fc-signal-meta{
+    bottom:2.8vh;
+    width:23vw;
+  }
+  .fc-canon-hero .fc-cue{
+    left:15vw;
+  }
+}
+
+@media (max-width:900px){
+  .fc-canon-hero .fc-lauren::after{clip-path:inset(0)}
+}
+.fc-canon-hero .deck{opacity:1 !important;visibility:visible !important}
+
+/* ======================== RC8 MOBILE TUNING 01 ======================== */
+@media (max-width:900px){
+  .fc-canon-hero .signals{
+    top:auto !important;
+    bottom:128px;
+    width:150px;
+    height:84px;
+  }
+  .fc-canon-hero .fc-signal-meta{
+    top:auto !important;
+    left:181px;
+    bottom:119px;
+  }
+  .fc-canon-hero .fc-cue{left:154px}
+  .fc-canon-hero .tune{
+    display:grid;
+    grid-template-columns:max-content max-content;
+    justify-content:start;
+    column-gap:48px;
+    row-gap:8px;
+  }
+  .fc-canon-hero .tune::before{grid-column:1 / 3;flex:none;margin-bottom:1px}
+  .fc-canon-hero .tune button{width:max-content}
+  .fc-canon-hero #tab-host{margin-left:22px}
+  .fc-canon-hero .deck{bottom:14px}
+}
+@media (max-width:430px){
+  .fc-canon-hero .signals{bottom:132px;width:144px;height:81px}
+  .fc-canon-hero .fc-signal-meta{left:174px;bottom:123px}
+  .fc-canon-hero .fc-cue{left:150px}
+}
+
+/* ======================== RC8 VISUAL TUNING 03 ======================== */
+.fc-canon-hero::before,
+.fc-canon-hero::after{top:auto !important}
+@media (min-width:901px){
+  .fc-canon-hero .fc-signal-meta h2{font-size:clamp(1.12rem,1.48vw,1.38rem)}
+}
+@media (max-width:900px){
+  .fc-canon-hero .fc-cue{left:166px}
+}
+@media (max-width:430px){
+  .fc-canon-hero .fc-cue{left:162px}
+}
+
+/* Final beauty pass: color should feel like light in the room, never a panel. */
+.fc-canon-hero::before{
+  background:radial-gradient(ellipse at 8% 105%,rgba(255,222,211,.62) 0%,rgba(255,239,231,.32) 34%,rgba(255,255,255,0) 72%);
+}
+:root[data-cue="broadcast"] .fc-canon-hero::before{
+  background:radial-gradient(ellipse at 8% 105%,rgba(102,80,216,.20) 0%,rgba(255,45,135,.10) 38%,rgba(255,255,255,0) 72%);
+}
+
+
+/* ======================== TYPOGRAPHY TEST C — PASSED FORWARD ======================== */
+.fc-canon-hero .fc-lauren{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif !important;
+  font-weight:620 !important;
+  font-variation-settings:'wght' 620,'wdth' 72 !important;
+  letter-spacing:-.055em !important;
+  line-height:.76 !important;
+}
+.fc-canon-hero .fc-lauren::after{
+  content:'LAUREN' !important;
+  font:inherit;
+  font-variation-settings:'wght' 620,'wdth' 72 !important;
+  letter-spacing:-.055em !important;
+}
+@media (min-width:901px){
+  .fc-canon-hero .fc-lauren{font-size:clamp(6.9rem,11.35vw,11.55rem) !important;}
+}
+@media (max-width:900px){
+  .fc-canon-hero .fc-lauren{font-size:clamp(5.1rem,24vw,6.55rem) !important;letter-spacing:-.06em !important;}
+}
+
+/* ========================================================================
+   RC9 — BEAUTY / DESIRE / WORLD PASS
+   Anti-AI is QC, not art direction. Every addition must earn its place.
+   ======================================================================== */
+
+/* Reclaim only three physical set details from the dormant world markup.
+   Everything else remains banned. */
+.fc-canon-hero .fc-world{
+  display:block !important;
+  position:absolute;
+  inset:0;
+  z-index:5;
+  overflow:hidden;
+  pointer-events:none;
+}
+.fc-canon-hero .fc-world > *{display:none !important}
+.fc-canon-hero .fc-world .chrome-arm,
+.fc-canon-hero .fc-world .reflection,
+.fc-canon-hero .fc-world .prism{display:block !important}
+
+/* A real-feeling sliver of production hardware at frame edge, not UI chrome. */
+.fc-canon-hero .fc-world .chrome-arm{
+  position:absolute;
+  right:1.15vw;
+  top:12vh;
+  width:7px;
+  height:46vh;
+  border-radius:999px;
+  opacity:.52;
+  transform:rotate(8deg);
+  background:linear-gradient(90deg,
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.92) 28%,
+    rgba(112,114,118,.55) 52%,
+    rgba(255,255,255,.78) 76%,
+    rgba(70,72,76,.22));
+  box-shadow:0 0 0 1px rgba(17,17,19,.08), 0 12px 28px rgba(17,17,19,.06);
+}
+.fc-canon-hero .fc-world .chrome-arm::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-8px;
+  width:9px;
+  height:9px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:#cfd0d2;
+  box-shadow:0 0 0 1px rgba(17,17,19,.12);
+  transition:background .25s ease,box-shadow .25s ease;
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world .chrome-arm::after{
+  background:var(--pink);
+  box-shadow:0 0 14px rgba(255,45,135,.42);
+}
+
+/* Pool light is allowed to touch the room, but it has to read as reflected light,
+   not a gradient panel. */
+.fc-canon-hero .fc-world .reflection{
+  position:absolute;
+  z-index:-1;
+  left:18vw;
+  right:-8vw;
+  bottom:-9vh;
+  height:27vh;
+  opacity:.34;
+  transform:rotate(-4deg);
+  filter:blur(13px);
+  background:
+    radial-gradient(ellipse at 13% 52%,rgba(39,198,204,.18) 0 13%,transparent 31%),
+    radial-gradient(ellipse at 37% 35%,rgba(255,255,255,.58) 0 9%,transparent 27%),
+    radial-gradient(ellipse at 58% 70%,rgba(39,198,204,.15) 0 11%,transparent 29%),
+    radial-gradient(ellipse at 83% 38%,rgba(255,239,224,.38) 0 10%,transparent 26%);
+  animation:rc9-water 13s ease-in-out infinite alternate;
+}
+@keyframes rc9-water{
+  from{transform:translate3d(-1.5%,1%,0) rotate(-4deg) scaleX(1)}
+  to{transform:translate3d(2.2%,-1.5%,0) rotate(-3deg) scaleX(1.035)}
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world .reflection{
+  opacity:.42;
+  background:
+    radial-gradient(ellipse at 16% 52%,rgba(102,80,216,.22) 0 14%,transparent 31%),
+    radial-gradient(ellipse at 39% 35%,rgba(39,198,204,.16) 0 10%,transparent 27%),
+    radial-gradient(ellipse at 60% 70%,rgba(255,45,135,.15) 0 10%,transparent 29%),
+    radial-gradient(ellipse at 84% 38%,rgba(255,255,255,.15) 0 9%,transparent 26%);
+}
+
+/* One little impossible object: a tiny prism catches the real sunbeam exactly
+   where it leaves the photograph. It is not a floating decoration. */
+.fc-canon-hero .fc-world .prism{
+  position:absolute;
+  left:87.9vw;
+  top:25.4vh;
+  width:27px;
+  height:34px;
+  opacity:.68;
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+  transform:rotate(9deg);
+  background:
+    linear-gradient(132deg,rgba(255,255,255,.82),rgba(255,255,255,.04) 34%,transparent 35%),
+    linear-gradient(170deg,rgba(39,198,204,.22),rgba(255,45,135,.19) 52%,rgba(244,122,98,.18));
+  border:1px solid rgba(255,255,255,.65);
+  filter:drop-shadow(0 7px 10px rgba(20,20,22,.08));
+  animation:rc9-prism 7.5s ease-in-out infinite;
+}
+@keyframes rc9-prism{
+  0%,84%,100%{transform:rotate(9deg) translateY(0);filter:drop-shadow(0 7px 10px rgba(20,20,22,.08))}
+  90%{transform:rotate(12deg) translateY(-2px);filter:drop-shadow(0 7px 12px color-mix(in srgb,var(--lane) 26%,transparent))}
+}
+
+/* Photograph: a little more luminous, never beauty-filtered. */
+.fc-canon-hero .fc-primary img{
+  filter:saturate(1.035) contrast(1.015) brightness(1.008);
+}
+
+/* Proof enters like a cut in a title sequence, not a thumbnail module. */
+.fc-canon-hero .signals{
+  clip-path:polygon(1.5% 4%,98% 0,100% 94%,2.5% 100%);
+  transform:rotate(-.8deg);
+  box-shadow:0 16px 36px rgba(23,19,26,.11);
+  animation:rc9-proof-in .78s cubic-bezier(.22,.75,.16,1) .36s both;
+}
+.fc-canon-hero .signals::before,
+.fc-canon-hero .signals::after{display:none}
+@keyframes rc9-proof-in{
+  from{clip-path:polygon(0 47%,100% 45%,100% 53%,0 55%);opacity:.12;transform:rotate(-.8deg) translateY(10px)}
+  to{clip-path:polygon(1.5% 4%,98% 0,100% 94%,2.5% 100%);opacity:1;transform:rotate(-.8deg) translateY(0)}
+}
+.fc-canon-hero .signal video,
+.fc-canon-hero .signal img.plate{filter:saturate(1.06) contrast(1.025)}
+
+/* The proof caption gets dignity without a generic gradient bar. */
+.fc-canon-hero .fc-signal-meta::before{display:none}
+.fc-canon-hero .fc-signal-meta .ey{
+  color:var(--lane);
+  margin-bottom:7px;
+  transition:color .22s ease;
+}
+.fc-canon-hero .fc-signal-meta h2{
+  font-family:'Archivo','Helvetica Neue',Arial,sans-serif;
+  font-weight:720;
+  font-variation-settings:'wght' 720,'wdth' 86;
+  letter-spacing:-.04em;
+}
+.fc-canon-hero .fc-castline span{color:#8c8784}
+
+/* A small beauty polish on the pink signature: less rotation, more confidence. */
+.fc-canon-hero .fc-bush{transform:rotate(-.6deg)}
+
+/* Route choices stay editorial, but active color feels like ink changing on paper. */
+.fc-canon-hero .tune button[aria-selected="true"]{
+  border-bottom-color:transparent;
+}
+.fc-canon-hero .tune button[aria-selected="true"]::after{
+  content:"";
+  width:18px;
+  height:2px;
+  margin-left:7px;
+  background:var(--lane);
+  border-radius:2px;
+  transform:translateY(-1px);
+}
+
+@media (max-width:900px){
+  .fc-canon-hero .fc-world .chrome-arm{
+    right:-1px;
+    top:12svh;
+    height:34svh;
+    width:5px;
+    opacity:.42;
+  }
+  .fc-canon-hero .fc-world .prism{
+    left:auto;
+    right:3px;
+    top:27.5svh;
+    width:20px;
+    height:26px;
+    opacity:.55;
+  }
+  .fc-canon-hero .fc-world .reflection{
+    left:-18vw;
+    right:-20vw;
+    bottom:-5svh;
+    height:24svh;
+    opacity:.28;
+  }
+  .fc-canon-hero .signals{
+    clip-path:polygon(2% 5%,98% 0,100% 94%,3% 100%);
+    box-shadow:0 10px 24px rgba(23,19,26,.10);
+  }
+  .fc-canon-hero .fc-bush{transform:rotate(-.4deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fc-canon-hero .fc-world .reflection,
+  .fc-canon-hero .fc-world .prism,
+  .fc-canon-hero .signals{animation:none !important}
+}
+
+/* RC9 browser QA corrections: give the split wordmark real geometry, and keep
+   the production hardware from reading like a status rail. */
+.fc-canon-hero .fc-lauren{
+  width:3.75em;
+  height:.82em;
+}
+.fc-canon-hero .fc-lauren::before,
+.fc-canon-hero .fc-lauren::after{
+  content:'LAUREN' !important;
+  position:absolute;
+  inset:0 auto auto 0;
+  width:max-content;
+  white-space:nowrap;
+  font:inherit;
+  font-variation-settings:'wght' 620,'wdth' 72 !important;
+  letter-spacing:-.055em !important;
+}
+.fc-canon-hero .fc-lauren::before{color:var(--ink)}
+.fc-canon-hero .fc-lauren::after{
+  color:#fffdf8;
+  clip-path:inset(0 0 0 24.85vw);
+  text-shadow:0 1px 12px rgba(16,16,18,.08);
+}
+.fc-canon-hero .fc-world .chrome-arm{
+  right:-112px;
+  top:8.5vh;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  opacity:.34;
+  transform:rotate(13deg);
+  background:none;
+  border:1px solid rgba(92,94,98,.22);
+  border-left-color:rgba(255,255,255,.86);
+  border-bottom-color:rgba(171,173,177,.42);
+  box-shadow:inset 1px -1px 0 rgba(255,255,255,.7), 0 10px 32px rgba(17,17,19,.035);
+}
+.fc-canon-hero .fc-world .chrome-arm::after{display:none}
+.fc-canon-hero .fc-world .prism{top:28vh}
+@media (max-width:900px){
+  .fc-canon-hero .fc-lauren{width:3.75em;height:.83em}
+  .fc-canon-hero .fc-lauren::before{color:#fffdf8;text-shadow:0 1px 10px rgba(16,16,18,.08)}
+  .fc-canon-hero .fc-lauren::after{clip-path:inset(0);color:#fffdf8}
+  .fc-canon-hero .fc-world .chrome-arm{
+    right:-86px;
+    top:8svh;
+    width:150px;
+    height:150px;
+    opacity:.22;
+  }
+  .fc-canon-hero .fc-world .prism{top:30svh}
+}
+
+/* RC9 beauty refinement: the photograph itself supplies the architectural
+   texture outside its crop. No decorative chrome arc or floating prism. */
+.fc-canon-hero .fc-world{z-index:3}
+.fc-canon-hero .fc-world .prism{display:none !important}
+.fc-canon-hero .fc-world .chrome-arm{
+  display:block !important;
+  position:absolute;
+  right:0;
+  top:var(--topbar);
+  width:13.2vw;
+  height:calc(100svh - var(--topbar));
+  border:0;
+  border-radius:0;
+  opacity:.56;
+  transform:none;
+  background:
+    linear-gradient(90deg,rgba(251,250,246,0),rgba(251,250,246,.13) 22%,rgba(251,250,246,.02)),
+    url('../img/hero-window-texture.webp') 61% 38% / cover no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 28%,#000 70%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 28%,#000 70%);
+  box-shadow:none;
+}
+.fc-canon-hero .fc-world .reflection{
+  z-index:0;
+  opacity:.30;
+  mix-blend-mode:screen;
+  filter:blur(18px);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-world .chrome-arm{
+  opacity:.22;
+  filter:saturate(.85) brightness(.78) hue-rotate(8deg);
+}
+@media(max-width:900px){
+  .fc-canon-hero .fc-world .chrome-arm{display:none !important}
+  .fc-canon-hero .fc-world .reflection{opacity:.25}
+}
+
+/* Match the passed Test C optical width. The self-hosted variable font remains
+   the same face; this is a visual-width correction, not a new typography idea. */
+.fc-canon-hero .fc-lauren{
+  transform:scaleX(1.18);
+  transform-origin:left top;
+}
+.stage.fc-canon-hero{
+  background:linear-gradient(180deg,#fffdfa 0%,#fbfaf6 62%,#fff8f4 100%);
+}
+.fc-canon-hero::before{
+  opacity:1;
+  background:radial-gradient(ellipse at 5% 102%,rgba(255,190,168,.30) 0%,rgba(255,228,217,.20) 33%,rgba(255,255,255,0) 70%);
+}
+:root[data-cue="broadcast"] .stage.fc-canon-hero{background:#17131a}
+@media(max-width:900px){
+  .fc-canon-hero .fc-lauren{transform:scaleX(1.18);transform-origin:left top}
+  .stage.fc-canon-hero{background:linear-gradient(180deg,#fffdfa 0%,#fbfaf6 62%,#fff8f4 100%)}
+  :root[data-cue="broadcast"] .stage.fc-canon-hero{background:#17131a}
+}
+
+/* Let the pool-aqua light actually register on the paper/photo seam. */
+.fc-canon-hero .fc-world .reflection{
+  mix-blend-mode:normal;
+  left:13vw;
+  right:-12vw;
+  bottom:-2vh;
+  height:24vh;
+  opacity:.16;
+  filter:blur(22px);
+}
+@media(max-width:900px){
+  .fc-canon-hero .fc-world .reflection{
+    left:-22vw;
+    right:-25vw;
+    top:53svh;
+    bottom:auto;
+    height:19svh;
+    opacity:.13;
+    filter:blur(18px);
+  }
+}
+
+/* RC9 proof integration: on desktop the receipt and its interpretation become
+   one editorial interruption inside the photograph. Mobile keeps the clearer
+   below-photo reading order. */
+@media(min-width:901px){
+  .fc-canon-hero .fc-signal-meta{
+    left:55vw !important;
+    right:auto !important;
+    bottom:4.8vh !important;
+    width:15.5vw !important;
+    min-width:220px !important;
+    color:#fffdf8 !important;
+    text-shadow:0 1px 10px rgba(0,0,0,.22);
+  }
+  .fc-canon-hero .fc-signal-meta .ey{color:var(--lane) !important}
+  .fc-canon-hero .fc-signal-meta h2{
+    max-width:17ch !important;
+    color:#fffdf8 !important;
+    font-size:clamp(1.05rem,1.15vw,1.18rem) !important;
+    line-height:1.04 !important;
+  }
+  .fc-canon-hero .fc-signal-meta > p:not(.ey):not(.fc-castline){display:none !important}
+  .fc-canon-hero .fc-castline{
+    color:#fffdf8 !important;
+    font-size:.67rem !important;
+    line-height:1.25 !important;
+  }
+  .fc-canon-hero .fc-castline span{color:rgba(255,253,248,.66) !important}
+  .fc-canon-hero .open-file{
+    color:#fffdf8 !important;
+    font-size:.70rem !important;
+    text-shadow:0 1px 8px rgba(0,0,0,.18);
+  }
+  .fc-canon-hero .signals{right:3.4vw !important;bottom:5vh !important}
+}
+
+/* The environment answers the selected door with light, not a new component. */
+.fc-canon-hero .fc-world .reflection{
+  background:
+    radial-gradient(ellipse at 13% 52%,color-mix(in srgb,var(--lane) 19%,transparent) 0 13%,transparent 31%),
+    radial-gradient(ellipse at 37% 35%,rgba(255,255,255,.42) 0 9%,transparent 27%),
+    radial-gradient(ellipse at 58% 70%,color-mix(in srgb,var(--lane) 12%,transparent) 0 11%,transparent 29%),
+    radial-gradient(ellipse at 83% 38%,rgba(255,224,211,.22) 0 10%,transparent 26%);
+  transition:background .28s ease;
+}
+.fc-canon-hero .signal[data-active]{animation:rc9-signal-cut .38s cubic-bezier(.22,.72,.18,1)}
+@keyframes rc9-signal-cut{
+  from{opacity:0;transform:translateX(10px) scale(1.012)}
+  to{opacity:1;transform:translateX(0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){.fc-canon-hero .signal[data-active]{animation:none !important}}

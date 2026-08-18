@@ -1,0 +1,347 @@
+/*
+  SEASON ZERO — A5.2 FINAL PIXEL CORRECTION + 360 CASTING HARD FIX
+  Donor: exact A5.1 private review candidate, 2026-08-14
+  PRIVATE REVIEW ONLY · NO DEPLOYMENT · NO GITHUB/LIVE MUTATION
+  Surgical overrides only. A5.1 wins remain donor authority.
+*/
+
+body.a52-final-pixel{--a52-paper:#f2eee7;--a52-ink:#090b0c;--a52-room:#0a1110}
+
+/* HOST — verified source-first repair.
+   Person stays in the blue White Claw live-room moment; Host moves to the verified
+   Honcho League Night / Celsius source: different outfit, different room, active venue,
+   mic leadership and speaking gesture. No synthetic environment. */
+.a52-final-pixel #host-command.a3-host{
+  background:#08100f!important;
+  min-height:100svh!important;height:100svh!important;
+}
+.a52-final-pixel #host-command:before{
+  background:linear-gradient(90deg,#08100f 0 34%,rgba(8,16,15,.86) 42%,rgba(8,16,15,.12) 70%,transparent 100%)!important;
+}
+.a52-final-pixel #host-command .a44-host-stage{
+  left:auto!important;right:2.5vw!important;top:3svh!important;
+  width:58vw!important;height:94svh!important;
+  overflow:hidden!important;background:#121917!important;
+}
+.a52-final-pixel #host-command .a44-host-stage video{
+  width:100%!important;height:100%!important;object-fit:cover!important;
+  object-position:50% 34%!important;transform:none!important;
+}
+.a52-final-pixel #host-command .a44-host-stage:before{
+  background:linear-gradient(90deg,rgba(7,13,12,.16),transparent 22%),linear-gradient(180deg,transparent 74%,rgba(4,8,8,.28) 100%)!important;
+}
+.a52-final-pixel #host-command .a44-host-stage figcaption{
+  left:-32vw!important;right:auto!important;bottom:9svh!important;width:27vw!important;
+  color:#fff!important;text-align:left!important;
+}
+.a52-final-pixel #host-command .a44-host-stage figcaption b{
+  display:block!important;margin:0 0 .7rem!important;
+  font:650 clamp(2.1rem,3.4vw,4.3rem)/.84 var(--f-display)!important;
+  letter-spacing:-.055em!important;max-width:8ch!important;
+}
+.a52-final-pixel #host-command .a44-host-stage figcaption span{
+  font:500 .66rem/1.5 var(--f-body)!important;letter-spacing:0!important;text-transform:none!important;
+  color:rgba(255,255,255,.68)!important;max-width:28ch!important;
+}
+.a52-final-pixel #host-command .a44-host-stage .a3-sound{
+  right:1.2rem!important;bottom:1.2rem!important;
+  font-size:.58rem!important;letter-spacing:.05em!important;
+}
+
+/* THINKING 360 — preserve the desktop win. On phone, thesis begins while Lauren still has
+   visual presence and the finance receipt arrives immediately after the thought lands. */
+@media (max-width:900px){
+  .a52-final-pixel #thinking.a3-thinking{min-height:111svh!important;height:111svh!important}
+  .a52-final-pixel #thinking:after{
+    top:49svh!important;height:62svh!important;
+    background:linear-gradient(180deg,rgba(234,245,240,0) 0%,rgba(234,245,240,.94) 22%,#eaf5f0 48%,#eaf5f0 100%)!important;
+  }
+  .a52-final-pixel #thinking .a44-thinking-main{height:72svh!important}
+  .a52-final-pixel #thinking .a44-thinking-main figcaption{bottom:15svh!important;width:58vw!important}
+  .a52-final-pixel #thinking .a44-thinking-main figcaption span{display:none!important}
+  .a52-final-pixel #thinking .a3-thinking-play{
+    left:18px!important;top:auto!important;bottom:4.5svh!important;
+    font-size:.56rem!important;letter-spacing:.03em!important;text-transform:none!important;
+  }
+  .a52-final-pixel #thinking .a44-thinking-copy{
+    top:65svh!important;left:18px!important;right:18px!important;z-index:5!important;
+  }
+  .a52-final-pixel #thinking .a44-thinking-copy p{
+    font-size:clamp(2.55rem,11vw,3.75rem)!important;line-height:.83!important;max-width:7.2ch!important;
+  }
+  .a52-final-pixel #thinking .a44-authority-transmission{
+    top:88svh!important;left:18px!important;right:18px!important;height:18svh!important;min-height:112px!important;
+    border-top:0!important;
+  }
+  .a52-final-pixel #thinking .a44-authority-transmission figcaption{font-size:.47rem!important}
+}
+
+/* DEAR DIARY — optical tighten only. Keep artifact physics; remove unmotivated mobile acreage. */
+@media (max-width:760px){
+  .a52-final-pixel #authorship.a3-authorship{
+    min-height:900px!important;padding-top:54px!important;padding-bottom:60px!important;
+  }
+  .a52-final-pixel #authorship .a3-auth-signature{bottom:4%!important}
+}
+
+/* ACTIVATE — the second proof now has its own verified source identity: Lauren filming the
+   GoTennis / ARSA rooftop promo. The number becomes one part of the record, not the design. */
+.a52-final-pixel #activate-field.a3-activate{height:112svh!important;min-height:112svh!important}
+.a52-final-pixel #activate-field .a44-activate-stage{height:112svh!important}
+.a52-final-pixel #activate-field .a44-activate-result{
+  top:84svh!important;left:5vw!important;right:5vw!important;width:auto!important;
+  display:grid!important;grid-template-columns:minmax(118px,15vw) minmax(0,1fr)!important;
+  align-items:center!important;gap:clamp(18px,3vw,46px)!important;padding:0!important;
+  border:0!important;background:transparent!important;text-decoration:none!important;
+}
+.a52-final-pixel #activate-field .a52-gotennis-proof{
+  width:100%!important;height:21svh!important;min-height:170px!important;object-fit:cover!important;object-position:50% 44%!important;
+  display:block!important;border:0!important;
+}
+.a52-final-pixel #activate-field .a52-result-copy{
+  display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;align-items:end!important;
+  gap:clamp(18px,3vw,44px)!important;padding:1rem 0!important;border-top:1px solid rgba(54,42,34,.34)!important;
+}
+.a52-final-pixel #activate-field .a52-result-copy strong{
+  font-size:clamp(3rem,4.7vw,5.3rem)!important;line-height:.76!important;white-space:nowrap!important;
+}
+.a52-final-pixel #activate-field .a52-result-copy>span{
+  font-size:.66rem!important;line-height:1.55!important;max-width:48ch!important;padding:0 0 .12rem!important;
+}
+
+/* WATCH 360 — edit duration, don't redesign the program worlds. */
+@media (max-width:900px){
+  .a52-final-pixel #watch{padding-bottom:2svh!important}
+  .a52-final-pixel #watch .a43-watch-entry{min-height:31svh!important;padding:6.5svh 18px 2svh!important}
+  .a52-final-pixel #watch .a43-watch-entry>span{display:none!important}
+  .a52-final-pixel #watch .a43-watch-entry h2{font-size:clamp(3.45rem,15vw,5.1rem)!important;margin-bottom:.7rem!important}
+  .a52-final-pixel #watch .a43-host-cue{margin-top:.5rem!important;min-height:0!important;padding:.55rem 0!important}
+  .a52-final-pixel #watch .a43-host-cue small{font-size:.48rem!important}
+  .a52-final-pixel #watch .a43-host-cue b{font-size:.82rem!important}
+  .a52-final-pixel #watch .a4-program{height:48svh!important;min-height:340px!important}
+  .a52-final-pixel #watch .a4-program-tv{height:50svh!important;min-height:350px!important;margin-top:-2svh!important}
+  .a52-final-pixel #watch .a4-program-explain{height:47svh!important;min-height:335px!important;margin-top:-1px!important}
+  .a52-final-pixel #watch .a4-program-create{height:44svh!important;min-height:315px!important;margin-top:-1px!important}
+  .a52-final-pixel #watch .a4-program-archive{height:39svh!important;min-height:285px!important;margin-top:-1px!important}
+  .a52-final-pixel #watch .a4-program-explain>div span,
+  .a52-final-pixel #watch .a4-program-create>div span{display:none!important}
+  .a52-final-pixel #watch .a4-program>div{bottom:16px!important}
+  .a52-final-pixel #watch .a4-program>div b{font-size:clamp(2rem,9.5vw,3.25rem)!important}
+}
+
+/* TRUST — no stronger verified BTS source was found in the one archive search.
+   Stop pretending the selfie is a hero photograph. Treat it as an observed production fragment
+   and let the room / wardrobe / chairs carry more of the evidence. */
+.a52-final-pixel #about.a3-trust{
+  height:76svh!important;min-height:76svh!important;background:#d8d1c8!important;overflow:hidden!important;
+}
+.a52-final-pixel #about .a44-trust-world{
+  left:12vw!important;right:auto!important;top:6svh!important;width:80vw!important;height:58svh!important;
+  background:#cfc8bf!important;overflow:hidden!important;
+}
+.a52-final-pixel #about .a44-trust-world img{
+  width:100%!important;height:100%!important;object-fit:cover!important;object-position:69% 47%!important;
+  filter:saturate(.92) contrast(.99) brightness(.97)!important;
+}
+.a52-final-pixel #about .a44-trust-note{
+  left:5vw!important;right:auto!important;top:auto!important;bottom:4.5svh!important;width:min(320px,27vw)!important;z-index:4!important;
+}
+.a52-final-pixel #about .a44-trust-note h2{
+  font-size:clamp(2.3rem,3.7vw,4rem)!important;max-width:7ch!important;margin:0!important;
+}
+.a52-final-pixel #about .a44-trust-note p{
+  margin:.65rem 0 0!important;font-size:.78rem!important;line-height:1.5!important;max-width:31ch!important;color:#514b46!important;
+}
+
+/* CASTING P0 — authoritative mobile flow hard fix.
+   The approved painting is normal-flow mobile media, not an absolutely positioned child that
+   can disappear in a full-page capture. The page itself—not an isolated capture—must show it. */
+@media (max-width:900px){
+  .a52-final-pixel #picture-lauren.a3-casting{
+    display:block!important;position:relative!important;height:auto!important;min-height:94svh!important;
+    overflow:hidden!important;background:#6d4870!important;
+  }
+  .a52-final-pixel #picture-lauren .a44-casting-sky{display:none!important}
+  .a52-final-pixel #picture-lauren .a44-casting-art{
+    position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:94svh!important;margin:0!important;display:block!important;overflow:hidden!important;z-index:1!important;
+    transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;content-visibility:visible!important;contain:none!important;
+  }
+  .a52-final-pixel #picture-lauren .a44-casting-art picture,
+  .a52-final-pixel #picture-lauren .a44-casting-art img{
+    display:block!important;width:100%!important;height:100%!important;visibility:visible!important;opacity:1!important;
+  }
+  .a52-final-pixel #picture-lauren .a44-casting-art img{
+    object-fit:cover!important;object-position:45% 37%!important;filter:saturate(1.06) contrast(1.015) brightness(1.01)!important;
+  }
+  .a52-final-pixel #picture-lauren .a3-casting-light{z-index:2!important;pointer-events:none!important}
+  .a52-final-pixel #picture-lauren .a44-casting-copy{
+    position:absolute!important;z-index:4!important;left:18px!important;right:18px!important;bottom:28px!important;top:auto!important;width:auto!important;
+  }
+}
+
+/* BOOK — optical cleanup only. Keep the accessible producer-action form. */
+.a52-final-pixel #contact .a41-direct-email{font-size:.72rem!important;opacity:.72!important}
+
+/* Final known anti-AI sweep: remove decorative seasoning where it is not proof/action. */
+.a52-final-pixel #activate-field .a44-activate-result:after{content:none!important;display:none!important}
+
+@media (max-width:900px){
+  /* Host phone crop: whole head + mic + gesturing hand + active court remain visible. */
+  .a52-final-pixel #host-command.a3-host{height:90svh!important;min-height:90svh!important}
+  .a52-final-pixel #host-command:before{background:linear-gradient(180deg,transparent 55%,rgba(4,9,9,.38) 100%)!important}
+  .a52-final-pixel #host-command .a44-host-stage{
+    left:0!important;right:0!important;top:0!important;width:100%!important;height:90svh!important;
+  }
+  .a52-final-pixel #host-command .a44-host-stage video{object-position:50% 35%!important}
+  .a52-final-pixel #host-command .a44-host-stage figcaption{
+    left:18px!important;right:92px!important;bottom:22px!important;width:auto!important;
+  }
+  .a52-final-pixel #host-command .a44-host-stage figcaption b{font-size:2.05rem!important;max-width:9ch!important}
+  .a52-final-pixel #host-command .a44-host-stage figcaption span{font-size:.64rem!important}
+  .a52-final-pixel #host-command .a44-host-stage .a3-sound{right:18px!important;bottom:20px!important}
+
+  /* Activate phone: real second-source receipt, compact and unmistakably separate from Centerline. */
+  .a52-final-pixel #activate-field.a3-activate{height:105svh!important;min-height:105svh!important}
+  .a52-final-pixel #activate-field .a44-activate-stage{height:105svh!important}
+  .a52-final-pixel #activate-field .a3-activate-room{height:61svh!important}
+  .a52-final-pixel #activate-field .a3-activate-copy{top:45svh!important}
+  .a52-final-pixel #activate-field .a44-activate-result{
+    top:69svh!important;left:18px!important;right:18px!important;
+    grid-template-columns:31vw minmax(0,1fr)!important;gap:13px!important;align-items:stretch!important;
+  }
+  .a52-final-pixel #activate-field .a52-gotennis-proof{height:28svh!important;min-height:190px!important;object-position:50% 42%!important}
+  .a52-final-pixel #activate-field .a52-result-copy{
+    display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-end!important;
+    gap:.55rem!important;padding:.7rem 0 .4rem!important;
+  }
+  .a52-final-pixel #activate-field .a52-result-copy strong{font-size:clamp(2.9rem,13.5vw,4.4rem)!important;line-height:.78!important}
+  .a52-final-pixel #activate-field .a52-result-copy>span{font-size:.52rem!important;line-height:1.45!important;max-width:25ch!important}
+
+  /* Trust phone: fragment, not selfie hero + beige text panel. */
+  .a52-final-pixel #about.a3-trust{height:73svh!important;min-height:73svh!important}
+  .a52-final-pixel #about .a44-trust-world{
+    left:12vw!important;right:auto!important;top:4svh!important;width:88vw!important;height:52svh!important;
+  }
+  .a52-final-pixel #about .a44-trust-world img{object-position:72% 47%!important}
+  .a52-final-pixel #about .a44-trust-note{
+    left:18px!important;right:18px!important;bottom:3svh!important;width:auto!important;
+  }
+  .a52-final-pixel #about .a44-trust-note h2{font-size:2.55rem!important;max-width:8ch!important}
+  .a52-final-pixel #about .a44-trust-note p{font-size:.74rem!important;max-width:34ch!important}
+}
+
+@media (max-width:390px){
+  .a52-final-pixel #thinking.a3-thinking{min-height:108svh!important;height:108svh!important}
+  .a52-final-pixel #thinking .a44-authority-transmission{top:87svh!important;height:17svh!important;min-height:108px!important}
+  .a52-final-pixel #authorship.a3-authorship{min-height:875px!important}
+  .a52-final-pixel #watch .a4-program{min-height:320px!important}
+  .a52-final-pixel #watch .a4-program-tv{min-height:330px!important}
+  .a52-final-pixel #watch .a4-program-explain{min-height:315px!important}
+  .a52-final-pixel #watch .a4-program-create{min-height:295px!important}
+  .a52-final-pixel #watch .a4-program-archive{min-height:270px!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .a52-final-pixel #picture-lauren .a44-casting-art{transform:none!important}
+}
+
+/* FINAL OPTICAL QA REPAIRS — derived from authoritative A5.2 test renders. */
+@media (min-width:901px){
+  /* Allow the source-specific Host credit to sit in the dark field outside the media crop. */
+  .a52-final-pixel #host-command .a44-host-stage{overflow:visible!important}
+  .a52-final-pixel #host-command .a44-host-stage video{border-radius:0!important}
+
+  /* Give the GoTennis receipt enough reading width; no one-word metadata column. */
+  .a52-final-pixel #activate-field .a44-activate-result{
+    grid-template-columns:minmax(150px,15vw) minmax(0,1fr)!important;
+    max-width:940px!important;right:auto!important;
+  }
+  .a52-final-pixel #activate-field .a52-result-copy{
+    grid-template-columns:minmax(220px,auto) minmax(320px,1fr)!important;
+    align-items:end!important;
+  }
+  .a52-final-pixel #activate-field .a52-result-copy>span{
+    font-size:.72rem!important;line-height:1.45!important;max-width:54ch!important;
+  }
+
+  /* Trust stays a fragment: room first, selfie second, annotation fully off-image. */
+  .a52-final-pixel #about.a3-trust{height:72svh!important;min-height:72svh!important}
+  .a52-final-pixel #about .a44-trust-world{
+    left:14vw!important;top:4svh!important;width:78vw!important;height:52svh!important;
+  }
+  .a52-final-pixel #about .a44-trust-world img{object-position:72% 47%!important}
+  .a52-final-pixel #about .a44-trust-note{
+    left:5vw!important;bottom:2.6svh!important;width:min(390px,32vw)!important;
+  }
+  .a52-final-pixel #about .a44-trust-note h2{font-size:clamp(2.25rem,3vw,3.35rem)!important;max-width:9ch!important}
+  .a52-final-pixel #about .a44-trust-note p{font-size:.76rem!important;max-width:38ch!important;margin-top:.45rem!important}
+}
+
+@media (max-width:900px){
+  /* Trust copy lives in the beige room tone below the fragment, never on Lauren's shirt. */
+  .a52-final-pixel #about.a3-trust{height:70svh!important;min-height:70svh!important}
+  .a52-final-pixel #about .a44-trust-world{
+    left:12vw!important;top:3svh!important;width:88vw!important;height:47svh!important;
+  }
+  .a52-final-pixel #about .a44-trust-world img{object-position:72% 47%!important}
+  .a52-final-pixel #about .a44-trust-note{
+    left:18px!important;right:18px!important;bottom:2.2svh!important;width:auto!important;
+    background:#d8d1c8!important;padding:.45rem 0 0!important;
+  }
+  .a52-final-pixel #about .a44-trust-note h2{font-size:2.3rem!important;max-width:9ch!important}
+  .a52-final-pixel #about .a44-trust-note p{font-size:.71rem!important;line-height:1.45!important;max-width:36ch!important;margin-top:.4rem!important}
+}
+@media (max-width:900px){
+  .a52-final-pixel #about .a44-trust-world{min-height:0!important}
+}
+
+/* TRUST FINAL SOURCE-FIRST COMPOSITION — show the real photograph at an honest scale rather
+   than turning a self-shot production image into a cinematic crop. */
+@media (min-width:901px){
+  .a52-final-pixel #about.a3-trust{height:68svh!important;min-height:68svh!important}
+  .a52-final-pixel #about .a44-trust-world{
+    left:25vw!important;right:auto!important;top:5svh!important;
+    width:62vw!important;height:auto!important;aspect-ratio:10/7!important;min-height:0!important;
+    background:transparent!important;
+  }
+  .a52-final-pixel #about .a44-trust-world img{
+    width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 50%!important;
+  }
+  .a52-final-pixel #about .a44-trust-note{
+    left:5vw!important;right:auto!important;bottom:4svh!important;width:min(330px,26vw)!important;
+  }
+}
+@media (max-width:900px){
+  .a52-final-pixel #about.a3-trust{height:61svh!important;min-height:61svh!important}
+  .a52-final-pixel #about .a44-trust-world{
+    left:12vw!important;right:0!important;top:3svh!important;width:88vw!important;height:38svh!important;min-height:0!important;
+  }
+  .a52-final-pixel #about .a44-trust-world img{object-fit:cover!important;object-position:64% 48%!important}
+  .a52-final-pixel #about .a44-trust-note{
+    left:18px!important;right:18px!important;bottom:2.4svh!important;width:auto!important;background:transparent!important;padding:0!important;
+  }
+  .a52-final-pixel #about .a44-trust-note h2{font-size:2.18rem!important}
+  .a52-final-pixel #about .a44-trust-note p{font-size:.69rem!important;max-width:38ch!important}
+}
+/* Trust copy is annotation, not a chapter headline. */
+.a52-final-pixel #about .a44-trust-note h2{font-size:clamp(1.65rem,2.25vw,2.35rem)!important;line-height:.92!important;max-width:none!important}
+.a52-final-pixel #about .a44-trust-note p{font-size:.7rem!important;line-height:1.45!important;max-width:40ch!important}
+@media (max-width:900px){
+  .a52-final-pixel #about .a44-trust-note h2{font-size:1.55rem!important;line-height:.94!important}
+  .a52-final-pixel #about .a44-trust-note p{font-size:.67rem!important}
+}
+/* Keep the verified GoTennis receipt visually present even in Chromium full-page raster passes
+   that may drop an offscreen <img> tile. This is the SAME truthful source, painted underneath
+   the real image—not a substitute proof or a contact-sheet-only patch. */
+.a52-final-pixel #activate-field .a44-activate-result{
+  background-image:url('../img/gotennis-rooftop-atl-a52.jpg')!important;
+  background-repeat:no-repeat!important;
+  background-position:left top!important;
+  background-size:min(216px,15vw) 21svh!important;
+}
+@media (max-width:900px){
+  .a52-final-pixel #activate-field .a44-activate-result{
+    background-size:31vw 28svh!important;
+  }
+}

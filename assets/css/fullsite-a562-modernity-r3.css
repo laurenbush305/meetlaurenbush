@@ -1,0 +1,330 @@
+/* A5.6.2 — LBTV Modernity R3
+   Public-preview polish: subtraction, safe zones, network-mark hierarchy, Trust rebuild,
+   and signal-deck presentation. Protected Hero / Person / Dear Diary / Scrambled source treatment / Casting are intentionally untargeted. */
+body.a562-modernity-r3{
+  --r3-cream:#f6f0e6;--r3-aqua:#cdeeee;--r3-aqua-strong:#7ed7d5;--r3-powder:#b9dff0;
+  --r3-pink:#ff2d86;--r3-ink:#10171a;--r3-muted:#5d6a6e;--r3-silver:#dce7e8;
+}
+
+/* STATIC NETWORK MARKS — useful state only, no decorative dots/cards. */
+body.a562-modernity-r3 .a56-thinking-bug:before{display:none!important}
+body.a562-modernity-r3 .a56-thinking-bug,
+body.a562-modernity-r3 .a56-host-bug,
+body.a562-modernity-r3 .a56-trust-bug,
+body.a562-modernity-r3 .a56-watch-bug{
+  font:700 .58rem/1 var(--f-mono)!important;letter-spacing:.08em!important;
+}
+body.a562-modernity-r3 .a56-thinking-bug{right:2vw!important;top:2.2vh!important;color:#274a58!important}
+body.a562-modernity-r3 .a56-thinking-lower-third{display:none!important}
+body.a562-modernity-r3 .a56-host-lower-third{display:none!important}
+body.a562-modernity-r3 .a561-operator-dots{display:none!important}
+
+/* THINKING — explainer first, thesis in a true safe zone, archive interruption integrated rather than collaged. */
+body.a562-modernity-r3 .a56-thinking-hand,
+body.a562-modernity-r3 .a56-thinking-macro{display:none!important}
+body.a562-modernity-r3 .a56-thinking-stage{width:61vw!important;box-shadow:none!important}
+body.a562-modernity-r3 .a56-thinking-thesis{
+  left:auto!important;right:4.5vw!important;top:19vh!important;width:31vw!important;z-index:6!important;
+}
+body.a562-modernity-r3 .a56-thinking-thesis h2{
+  max-width:7.2ch!important;font-size:clamp(4.3rem,6.8vw,7.2rem)!important;line-height:.86!important;
+  letter-spacing:-.065em!important;margin-top:.65rem!important;
+}
+body.a562-modernity-r3 .a56-finance-transmission{
+  right:4.5vw!important;bottom:7vh!important;width:39vw!important;height:34vh!important;
+  box-shadow:none!important;border-left:0!important;background:#0b1118!important;
+}
+body.a562-modernity-r3 .a56-finance-face{
+  right:0!important;top:0!important;width:24%!important;height:100%!important;border:0!important;
+  box-shadow:none!important;object-position:center!important;opacity:.88!important;
+}
+body.a562-modernity-r3 .a56-finance-transmission figcaption{left:1rem!important;right:27%!important;bottom:.8rem!important}
+body.a562-modernity-r3 .a56-paper-exit{
+  height:2.2vh!important;clip-path:none!important;opacity:.55!important;filter:saturate(.55) brightness(1.08)!important;
+}
+body.a562-modernity-r3 .a561-paper-interruption{display:none!important}
+
+/* HOST — the room and Lauren carry the chapter; eliminate the floating proof fragment / lower-third pileup. */
+body.a562-modernity-r3 .a56-host-mic{display:none!important}
+body.a562-modernity-r3 .a56-host-bug{
+  left:auto!important;right:3vw!important;top:5.2vh!important;bottom:auto!important;color:#bde8dc!important;
+  background:none!important;padding:0!important;
+}
+body.a562-modernity-r3 .a56-host-title{z-index:8!important}
+body.a562-modernity-r3 .a56-host-title small{letter-spacing:.09em!important}
+body.a562-modernity-r3 .a56-host-play{z-index:8!important}
+
+/* ACTIVATE — real environments, fewer framed collage pieces. */
+body.a562-modernity-r3 .a56-assignment-detail{display:none!important}
+body.a562-modernity-r3 .a56-assignment-wide{width:79vw!important}
+body.a562-modernity-r3 .a56-assignment-credit{right:5vw!important;width:14vw!important;top:18vh!important;letter-spacing:.055em!important}
+body.a562-modernity-r3 .a56-gotennis-image{
+  transform:none!important;box-shadow:none!important;width:42vw!important;height:68vh!important;
+}
+body.a562-modernity-r3 .a56-bentley-wide{box-shadow:none!important;width:67vw!important}
+body.a562-modernity-r3 .a56-bentley-detail{
+  right:4vw!important;top:34vh!important;width:35vw!important;height:22vh!important;box-shadow:none!important;
+  border:0!important;transform:none!important;
+}
+body.a562-modernity-r3 .a56-working-credit{font-size:.54rem!important;letter-spacing:.045em!important}
+
+/* WATCH — full-size program first. No photo-in-photo/card framing. */
+body.a562-modernity-r3 .a56-watch{--r3-signal:var(--r3-pink);--r3-signal-2:#8641a5;min-height:104vh!important}
+body.a562-modernity-r3 .a56-watch[data-a56-program="wimpb"]{--r3-signal:#87d9d6;--r3-signal-2:#a8d53b}
+body.a562-modernity-r3 .a56-watch[data-a56-program="finance"]{--r3-signal:#8ec6e9;--r3-signal-2:#617794}
+body.a562-modernity-r3 .a56-watch[data-a56-program="apq"]{--r3-signal:#22bde0;--r3-signal-2:#ff438e}
+body.a562-modernity-r3 .a56-watch[data-a56-program="archive"]{--r3-signal:#d7cdbd;--r3-signal-2:#9e9187}
+body.a562-modernity-r3 .a56-watch-stage{
+  left:0!important;top:0!important;width:100vw!important;height:100vh!important;box-shadow:none!important;
+}
+body.a562-modernity-r3 .a56-program-detail{display:none!important}
+body.a562-modernity-r3 .a56-program-open{display:none!important}
+body.a562-modernity-r3 .a56-watch-bug{
+  left:2vw!important;top:2.2vh!important;padding:.45rem .55rem!important;background:rgba(7,10,11,.54)!important;
+  color:#fff!important;backdrop-filter:blur(6px)!important;z-index:25!important;
+}
+body.a562-modernity-r3 .a56-watch-bug b{margin-left:.55rem!important;color:var(--r3-signal)!important}
+
+/* Signal deck: previous signal -> LBTV sun control -> acquired program -> next signal. */
+body.a562-modernity-r3 .a562-r3-signal-deck{
+  position:absolute;left:0;right:0;bottom:0;z-index:24;height:17vh;min-height:132px;
+  display:grid;grid-template-columns:minmax(170px,.75fr) 112px minmax(360px,1.65fr) minmax(210px,.9fr);
+  align-items:stretch;background:rgba(247,241,231,.96);color:var(--r3-ink);
+  border-top:1px solid rgba(24,64,70,.18);isolation:isolate;
+}
+body.a562-modernity-r3 .a562-r3-signal-deck:before{
+  content:"";position:absolute;left:0;right:0;top:-1px;height:2px;z-index:4;pointer-events:none;
+  background:linear-gradient(90deg,transparent 2%,rgba(114,205,205,.65) 18%,rgba(255,255,255,.98) 44%,var(--r3-signal) 67%,transparent 98%);
+  opacity:.88;
+}
+body.a562-modernity-r3 .a562-r3-step,
+body.a562-modernity-r3 .a562-r3-sun{
+  appearance:none;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;border-radius:0;
+}
+body.a562-modernity-r3 .a562-r3-step{
+  position:relative;text-align:left;padding:1.7rem 1.5rem 1.35rem;display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid rgba(24,64,70,.12);
+}
+body.a562-modernity-r3 .a562-r3-next{border-left:1px solid rgba(24,64,70,.12);border-right:0}
+body.a562-modernity-r3 .a562-r3-step small,
+body.a562-modernity-r3 .a562-r3-current small{
+  display:block;font:700 .52rem/1 var(--f-mono);letter-spacing:.085em;color:#637276;margin-bottom:.58rem;
+}
+body.a562-modernity-r3 .a562-r3-step span{
+  display:block;font:760 clamp(.85rem,1.15vw,1.12rem)/1.05 var(--f-display);max-width:15ch;letter-spacing:-.025em;
+}
+body.a562-modernity-r3 .a562-r3-current{
+  padding:1.25rem 2.1rem 1rem;display:flex;flex-direction:column;justify-content:center;min-width:0;
+}
+body.a562-modernity-r3 .a562-r3-current strong{
+  display:block;font:850 clamp(2.3rem,4.3vw,4.8rem)/.82 var(--f-display);letter-spacing:-.065em;white-space:normal;
+  max-width:15ch;
+}
+body.a562-modernity-r3 .a562-r3-current em{
+  margin-top:.72rem;font:700 .58rem/1 var(--f-mono);font-style:normal;letter-spacing:.08em;color:#536368;
+}
+body.a562-modernity-r3 .a562-r3-sun{
+  position:relative;display:grid;place-items:center;align-content:center;gap:.18rem;overflow:hidden;
+  background:linear-gradient(180deg,rgba(213,242,241,.72),rgba(247,241,231,.2));
+}
+body.a562-modernity-r3 .a562-r3-sun i{
+  width:52px;height:52px;border-radius:50%;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);
+  background:radial-gradient(circle at 38% 32%,#fff 0 12%,#dfffff 24%,var(--r3-signal) 63%,rgba(255,255,255,.18) 68%);
+  box-shadow:0 0 0 1px rgba(26,73,78,.18),0 0 32px color-mix(in srgb,var(--r3-signal) 34%,transparent);
+}
+body.a562-modernity-r3 .a562-r3-sun span,
+body.a562-modernity-r3 .a562-r3-sun small{position:relative;z-index:2;color:#0d1a1d;text-shadow:0 1px rgba(255,255,255,.65)}
+body.a562-modernity-r3 .a562-r3-sun span{font:900 .72rem/1 var(--f-display);letter-spacing:-.02em;margin-top:1px}
+body.a562-modernity-r3 .a562-r3-sun small{font:700 .42rem/1 var(--f-mono);letter-spacing:.12em;margin-top:1.5rem}
+body.a562-modernity-r3 .a562-r3-sun[aria-expanded="true"] i{transform:translate(-50%,-58%) scale(1.08)}
+body.a562-modernity-r3 .a562-r3-step:hover span,
+body.a562-modernity-r3 .a562-r3-step:focus-visible span{color:#006c75}
+body.a562-modernity-r3 .a562-r3-step:focus-visible,
+body.a562-modernity-r3 .a562-r3-sun:focus-visible,
+body.a562-modernity-r3 .a562-r3-guide button:focus-visible{outline:2px solid var(--r3-pink)!important;outline-offset:-3px!important}
+
+/* Complete programming guide: opened only from the LBTV sun/signal control. */
+body.a562-modernity-r3 .a562-r3-guide[hidden]{display:none!important}
+body.a562-modernity-r3 .a562-r3-guide{
+  position:absolute!important;left:0!important;right:0!important;bottom:100%!important;height:auto!important;min-height:0!important;
+  padding:1.25rem 2vw 1.35rem!important;margin:0!important;display:grid!important;grid-template-columns:repeat(5,1fr)!important;
+  gap:0!important;background:rgba(246,240,230,.975)!important;border:0!important;border-top:1px solid rgba(24,64,70,.16)!important;
+  box-shadow:none!important;backdrop-filter:blur(10px)!important;overflow:visible!important;border-radius:0!important;
+}
+body.a562-modernity-r3 .a562-r3-guide:before,
+body.a562-modernity-r3 .a562-r3-guide .a561-frequency-line{display:none!important}
+body.a562-modernity-r3 .a562-r3-guide button{
+  position:relative!important;display:block!important;min-width:0!important;padding:.6rem 1rem .65rem!important;border:0!important;
+  border-right:1px solid rgba(26,63,67,.13)!important;background:none!important;text-align:left!important;color:#182326!important;
+  font:780 .84rem/1.05 var(--f-display)!important;letter-spacing:-.02em!important;white-space:normal!important;
+}
+body.a562-modernity-r3 .a562-r3-guide button:last-child{border-right:0!important}
+body.a562-modernity-r3 .a562-r3-guide button span{display:block!important;margin-bottom:.42rem!important;font:700 .48rem/1 var(--f-mono)!important;letter-spacing:.08em!important;color:#718084!important}
+body.a562-modernity-r3 .a562-r3-guide button:before{display:none!important}
+body.a562-modernity-r3 .a562-r3-guide button.is-active{color:#006b72!important}
+body.a562-modernity-r3 .a562-r3-guide button.is-active:after{
+  content:"";position:absolute;left:1rem;right:1rem;bottom:.15rem;height:2px;background:var(--r3-signal);
+}
+
+/* TRUST — one documentary anchor, one quiet safe zone, one restrained signal seam. */
+body.a562-modernity-r3 .a56-trust{
+  min-height:108vh!important;background:var(--r3-cream)!important;color:var(--r3-ink)!important;overflow:hidden!important;
+}
+body.a562-modernity-r3 .a56-trust-glow,
+body.a562-modernity-r3 .a561-trust-daylight,
+body.a562-modernity-r3 .a56-trust-equipment{display:none!important}
+body.a562-modernity-r3 .a56-trust-lauren{
+  left:0!important;right:auto!important;top:8vh!important;width:66vw!important;height:84vh!important;transform:none!important;
+  box-shadow:none!important;z-index:2!important;
+}
+body.a562-modernity-r3 .a56-trust-lauren img{object-position:33% 52%!important;filter:none!important}
+body.a562-modernity-r3 .a56-trust-copy{
+  left:auto!important;right:5vw!important;top:29vh!important;width:24vw!important;padding:0!important;background:none!important;
+  box-shadow:none!important;border:0!important;overflow:visible!important;z-index:5!important;isolation:auto!important;
+}
+body.a562-modernity-r3 .a56-trust-copy:before{display:none!important}
+body.a562-modernity-r3 .a56-trust-copy:after{
+  content:"";position:absolute;left:0;top:-4.8vh;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--r3-aqua-strong),#fff 56%,rgba(220,231,232,.15));
+}
+body.a562-modernity-r3 .a56-trust-copy span{color:#356476!important;letter-spacing:.08em!important}
+body.a562-modernity-r3 .a56-trust-copy h2{
+  font-size:clamp(3.3rem,5.3vw,6.3rem)!important;line-height:.9!important;letter-spacing:-.048em!important;
+  word-spacing:.12em!important;margin:.72rem 0 1rem!important;max-width:7.6ch!important;
+}
+body.a562-modernity-r3 .a56-trust-copy h2 .a562-r3-word{white-space:nowrap!important;color:inherit!important;font:inherit!important;letter-spacing:inherit!important}
+body.a562-modernity-r3 .a56-trust-copy p{color:#4d5a5d!important;max-width:24ch!important;font-size:1rem!important}
+body.a562-modernity-r3 .a56-trust-bug{
+  left:auto!important;right:5vw!important;top:12vh!important;bottom:auto!important;color:#2d5969!important;background:none!important;padding:0!important;
+}
+
+/* Book keeps the quiet end-state; LBTV becomes the network mark, not another logo treatment. */
+body.a562-modernity-r3 .a561-off-air{letter-spacing:.07em!important}
+
+@media(max-width:760px){
+  body.a562-modernity-r3 .a56-thinking{min-height:156vh!important}
+  body.a562-modernity-r3 .a56-thinking-stage{left:0!important;top:0!important;width:100vw!important;height:78vh!important}
+  body.a562-modernity-r3 .a56-thinking-thesis{left:6vw!important;right:auto!important;top:84vh!important;width:88vw!important}
+  body.a562-modernity-r3 .a56-thinking-thesis h2{font-size:12.8vw!important;line-height:.88!important;max-width:8ch!important}
+  body.a562-modernity-r3 .a56-finance-transmission{left:6vw!important;right:auto!important;bottom:5vh!important;width:88vw!important;height:42vh!important}
+  body.a562-modernity-r3 .a56-finance-face{width:26%!important}
+  body.a562-modernity-r3 .a56-thinking-bug{right:4vw!important;top:1rem!important}
+  body.a562-modernity-r3 .a56-paper-exit{height:1.4vh!important}
+
+  body.a562-modernity-r3 .a56-host-bug{right:5vw!important;top:2.3vh!important}
+
+  body.a562-modernity-r3 .a56-activate{min-height:300vh!important}
+  body.a562-modernity-r3 .a56-assignment-wide{width:100vw!important;height:71vh!important}
+  body.a562-modernity-r3 .a56-assignment-credit{left:6vw!important;right:auto!important;top:76vh!important;width:80vw!important}
+  body.a562-modernity-r3 .a56-gotennis-image{right:5vw!important;width:72vw!important;height:62vh!important}
+  body.a562-modernity-r3 .a56-bentley-wide{left:0!important;width:100vw!important;height:70vh!important}
+  body.a562-modernity-r3 .a56-bentley-detail{right:5vw!important;top:57vh!important;width:60vw!important;height:21vh!important}
+
+  body.a562-modernity-r3 .a56-watch{min-height:105vh!important}
+  body.a562-modernity-r3 .a56-watch-stage{height:100vh!important}
+  body.a562-modernity-r3 .a56-watch-bug{left:4vw!important;top:1rem!important}
+  body.a562-modernity-r3 .a562-r3-signal-deck{
+    height:27vh;min-height:218px;grid-template-columns:1fr 78px 1fr;grid-template-rows:1fr .95fr;
+    background:rgba(247,241,231,.97);
+  }
+  body.a562-modernity-r3 .a562-r3-current{grid-column:1/-1;grid-row:1;padding:1.15rem 5vw .55rem;border-bottom:1px solid rgba(24,64,70,.12)}
+  body.a562-modernity-r3 .a562-r3-current strong{font-size:9.8vw!important;line-height:.86!important;max-width:13ch}
+  body.a562-modernity-r3 .a562-r3-current em{font-size:.5rem!important;margin-top:.48rem}
+  body.a562-modernity-r3 .a562-r3-prev{grid-column:1;grid-row:2;border-right:1px solid rgba(24,64,70,.12);padding:.8rem 4vw 1rem}
+  body.a562-modernity-r3 .a562-r3-sun{grid-column:2;grid-row:2;border-right:1px solid rgba(24,64,70,.12)}
+  body.a562-modernity-r3 .a562-r3-next{grid-column:3;grid-row:2;padding:.8rem 4vw 1rem;border-left:0}
+  body.a562-modernity-r3 .a562-r3-step small{font-size:.43rem!important;margin-bottom:.42rem}
+  body.a562-modernity-r3 .a562-r3-step span{font-size:.74rem!important;max-width:12ch}
+  body.a562-modernity-r3 .a562-r3-sun i{width:46px;height:46px}
+  body.a562-modernity-r3 .a562-r3-guide{
+    bottom:100%!important;grid-template-columns:1fr!important;padding:.55rem 5vw .75rem!important;max-height:55vh!important;overflow:auto!important;
+  }
+  body.a562-modernity-r3 .a562-r3-guide button{min-height:48px!important;padding:.72rem 0!important;border-right:0!important;border-bottom:1px solid rgba(26,63,67,.12)!important;font-size:.88rem!important}
+  body.a562-modernity-r3 .a562-r3-guide button:last-child{border-bottom:0!important}
+  body.a562-modernity-r3 .a562-r3-guide button.is-active:after{left:0;right:0;bottom:0}
+
+  body.a562-modernity-r3 .a56-trust{min-height:118vh!important}
+  body.a562-modernity-r3 .a56-trust-lauren{left:0!important;top:0!important;width:100vw!important;height:70vh!important}
+  body.a562-modernity-r3 .a56-trust-lauren img{object-position:28% 50%!important}
+  body.a562-modernity-r3 .a56-trust-copy{
+    left:6vw!important;right:auto!important;top:79vh!important;width:88vw!important;padding:0!important;
+  }
+  body.a562-modernity-r3 .a56-trust-copy:after{top:-3.4vh;width:72%}
+  body.a562-modernity-r3 .a56-trust-copy h2{font-size:13vw!important;line-height:.92!important;max-width:8.2ch!important;margin:.62rem 0 .8rem!important}
+  body.a562-modernity-r3 .a56-trust-copy p{font-size:.92rem!important}
+  body.a562-modernity-r3 .a56-trust-bug{left:6vw!important;right:auto!important;top:73.5vh!important}
+}
+
+@media(max-width:390px){
+  body.a562-modernity-r3 .a56-thinking{min-height:154vh!important}
+  body.a562-modernity-r3 .a56-trust{min-height:116vh!important}
+  body.a562-modernity-r3 .a562-r3-current strong{font-size:10vw!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.a562-modernity-r3 .a562-r3-sun i{box-shadow:0 0 0 1px rgba(26,73,78,.18)!important}
+}
+
+/* R3 human visual correction: defeat legacy ID-level Trust color, and keep the mobile thesis clear of the finance interruption. */
+body.a562-modernity-r3 #about.a56-trust{
+  background:#f6f0e6!important;background-image:none!important;color:#10171a!important;
+}
+@media(max-width:760px){
+  body.a562-modernity-r3 .a56-thinking{min-height:183vh!important}
+  body.a562-modernity-r3 .a56-finance-transmission{top:132vh!important;bottom:auto!important;height:43vh!important}
+  body.a562-modernity-r3 .a56-thinking-thesis h2{font-size:11.7vw!important;max-width:8.4ch!important}
+}
+@media(max-width:390px){
+  body.a562-modernity-r3 .a56-thinking{min-height:181vh!important}
+  body.a562-modernity-r3 .a56-finance-transmission{top:131vh!important;height:42vh!important}
+}
+
+/* R3 mobile safe-zone correction: image -> receipt -> next assignment, no overlapping KPI/collage inset. */
+@media(max-width:760px){
+  body.a562-modernity-r3 .a56-activate{min-height:334vh!important}
+  body.a562-modernity-r3 .a56-gotennis{height:108vh!important}
+  body.a562-modernity-r3 .a56-gotennis-image{top:0!important}
+  body.a562-modernity-r3 .a56-gotennis-copy{left:6vw!important;top:66vh!important;width:88vw!important}
+  body.a562-modernity-r3 .a56-bentley{top:244vh!important;height:90vh!important}
+  body.a562-modernity-r3 .a56-bentley-detail{display:none!important}
+  body.a562-modernity-r3 .a56-working-credit{left:6vw!important;right:auto!important;bottom:2.6vh!important;width:88vw!important}
+  body.a562-modernity-r3 .a56-trust{min-height:106vh!important}
+}
+@media(max-width:390px){body.a562-modernity-r3 .a56-trust{min-height:104vh!important}}
+
+/* R3 tablet Watch integrity: preserve signal-deck hierarchy without clipping the next signal. */
+@media (min-width:761px) and (max-width:900px){
+  body.a562-modernity-r3 .a562-r3-signal-deck{
+    height:24vh;min-height:196px;
+    grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr);
+    grid-template-rows:1.08fr .92fr;
+  }
+  body.a562-modernity-r3 .a562-r3-current{
+    grid-column:1/-1;grid-row:1;
+    padding:1.05rem 4vw .6rem;
+    border-bottom:1px solid rgba(24,64,70,.12);
+  }
+  body.a562-modernity-r3 .a562-r3-current strong{
+    font-size:clamp(3.2rem,7.1vw,4.25rem)!important;
+    line-height:.84!important;max-width:15ch;
+  }
+  body.a562-modernity-r3 .a562-r3-prev{
+    grid-column:1;grid-row:2;padding:.78rem 3.5vw 1rem;
+    border-right:1px solid rgba(24,64,70,.12);
+  }
+  body.a562-modernity-r3 .a562-r3-sun{
+    grid-column:2;grid-row:2;border-right:1px solid rgba(24,64,70,.12);
+  }
+  body.a562-modernity-r3 .a562-r3-next{
+    grid-column:3;grid-row:2;padding:.78rem 3.5vw 1rem;border-left:0;
+  }
+  body.a562-modernity-r3 .a562-r3-step span{font-size:.82rem!important;max-width:14ch}
+  body.a562-modernity-r3 .a562-r3-guide{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    padding:1rem 2.5vw 1.1rem!important;
+  }
+  body.a562-modernity-r3 .a562-r3-guide button{padding:.58rem .72rem .7rem!important;font-size:.76rem!important}
+}
+
+/* R3 final subtraction: Trust has one state marker only. */
+body.a562-modernity-r3 .a56-trust-copy > span{display:none!important}

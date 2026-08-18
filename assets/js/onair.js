@@ -15,8 +15,11 @@
       lane: "CREATE",
       client: "Rally Off Court × Montis",
       title: "Dear Diary, for Montis",
+      displayTitle: "Dear Diary, for Montis",
+      castShort: "Creator · Producer",
       stamp: "CONCEPT · VOICE · CREATOR · EDITOR · PRODUCT STORYTELLER",
       note: "A footwear confession that turns into a product argument. Written, voiced, shot and cut by Lauren.",
+      cast: "Creator · Producer · Branded storyteller · Format development",
       file: {
         "Project": "Dear Diary, for Montis footwear. Produced under Rally Off Court.",
         "Audience": "Recreational and league pickleball players considering court-specific footwear.",
@@ -31,8 +34,11 @@
       lane: "EXPLAIN",
       client: "Rally Off Court",
       title: "What's in My Pickleball Bag?",
+      displayTitle: "What's in My Pickleball Bag?",
+      castShort: "Explainer host · Educator",
       stamp: "CREATOR · ON-CAMERA EXPLAINER · PRODUCT/CATEGORY STORYTELLER",
       note: "Gear, use case and honest opinion, delivered fast enough that people finish it.",
+      cast: "Explainer host · Educator · Subject-matter communicator",
       file: {
         "Project": "What's in My Pickleball Bag? Lauren-led product and category explanation for Rally Off Court.",
         "Audience": "New and improving players deciding what is actually worth buying.",
@@ -47,8 +53,11 @@
       lane: "HOST",
       client: "Rally Off Court × Honcho × White Claw Zero Proof",
       title: "Life Beyond Play \u2014 Honcho \u00d7 White Claw Zero Proof",
+      displayTitle: "Life Beyond Play",
+      castShort: "Lifestyle host · Field correspondent",
       stamp: "HOST · ON-CAMERA TALENT · CREATOR · EDITOR · PRODUCT STORYTELLER",
       note: "On camera with a handheld mic, carrying a sponsored segment at a live league night.",
+      cast: "Lifestyle host · Field correspondent · Unscripted · Branded integrations",
       file: {
         "Project": "Life Beyond Play with Honcho Pickleball and White Claw Zero Proof.",
         "Audience": "League players and the brands trying to reach them in the room, not in a feed.",
@@ -64,8 +73,11 @@
       lane: "ACTIVATE",
       client: "Honcho Pickleball × Centerline",
       title: "Courtside activation, Honcho × Centerline",
+      displayTitle: "Honcho × Centerline",
+      castShort: "Event host · Brand ambassador",
       stamp: "BRAND ACTIVATION · FIELD STORY · COMMUNITY PRESENCE",
       note: "Product in hand, players behind her, a real room. The sponsor reads as part of the night.",
+      cast: "Event host · Moderator · Brand ambassador · On-site talent",
       file: {
         "Project": "Honcho Pickleball activation with Centerline apparel at a live indoor venue.",
         "Audience": "Players at the venue and the wider community watching the recap.",
@@ -73,7 +85,7 @@
         "Deliverable": "Activation stills and field content, plus cross-tagged host footage from the same environment.",
         "Lauren's role": "Brand activation, field story and community presence. Captain Ambassador with Honcho.",
         "Proof": "Product visibility, sponsor integration and live interaction in one frame.",
-        "Also in this lane": "GoTennis / ARSA Fall Festival promo, 10,000+ organic views with no paid media."
+        "Also in this lane": "GoTennis / ARSA Fall Festival promo, 10,000+ views; selected promotional content later supported by paid amplification."
       },
       evidence: ["activate-centerline.jpg", "activate-centerline-02.jpg", "activate-room.jpg"]
     }
@@ -92,7 +104,7 @@
   var HEX = { create: "#ff1e86", explain: "#6a2be0", host: "#0bbcd0", activate: "#ff6a44" };
 
   var root = document.documentElement;
-  var canViewTransition = "startViewTransition" in document && !reduce.matches;
+  var canViewTransition = false; // RC5: direct state change; no generated-looking transition choreography
 
   function transitionUpdate(kind, update) {
     if (!canViewTransition) { update(); return null; }
@@ -119,6 +131,22 @@
       v.setAttribute("src", v.dataset.src);   // lazy: nothing loads until tuned to
       v.load();
     }
+    /* RC10.2: let the curated Host poster land as the first casting read,
+       then cue the real motion. This is a title-sequence beat, not a new UI. */
+    if (v.id === "v-host" && !reduce.matches && !v.dataset.firstCueDone) {
+      if (v.dataset.firstCueScheduled) return;
+      v.dataset.firstCueScheduled = "true";
+      v.pause();
+      window.setTimeout(function () {
+        v.dataset.firstCueDone = "true";
+        delete v.dataset.firstCueScheduled;
+        var fig = v.closest(".signal");
+        if (!fig || !fig.hasAttribute("data-active")) return;
+        var delayed = v.play();
+        if (delayed && delayed.catch) delayed.catch(function () { /* poster stands in */ });
+      }, 1150);
+      return;
+    }
     var p = v.play();
     if (p && p.catch) p.catch(function () { /* poster stands in, nothing breaks */ });
   }
@@ -128,6 +156,7 @@
   function applyTune(lane, focusTab) {
     current = lane;
     root.style.setProperty("--signal", COLORS[lane]);
+    stage.dataset.activeLane = lane;
 
     document.querySelectorAll(".signal").forEach(function (fig) {
       var on = fig.dataset.lane === lane;
@@ -143,9 +172,11 @@
     });
 
     var s = SIGNALS[lane];
-    set("lt-lane", s.lane); set("lt-client", "· " + s.client); set("lt-title", s.title);
+    set("lt-lane", s.lane.charAt(0) + s.lane.slice(1).toLowerCase()); set("lt-client", "· " + s.client); set("lt-title", s.displayTitle || s.title);
     set("lt-stamp", s.stamp); set("lt-note", s.note);
+    set("cast-lanes", s.castShort || s.cast);
     set("sigbug-label", s.lane);
+    var tr = stage.querySelector(".tuner-readout"); if (tr) tr.textContent = "TUNE 0" + (LANES.indexOf(lane)+1) + " · " + s.lane;
     set("mon-src", SRCLABEL[lane]);
     var field = document.getElementById("field");
     if (field) {
@@ -198,7 +229,7 @@
     });
     ["cue-label", "cue-label-m"].forEach(function (id) {
       var l = document.getElementById(id);
-      if (l) l.textContent = on ? "On air" : "Daylight";
+      if (l) l.textContent = on ? "Return to daylight" : "Go on air";
     });
     var tc = document.getElementById("cuestate");
     if (tc) { tc.textContent = on ? "ON AIR" : "DAYLIGHT"; tc.classList.toggle("live", on); }
@@ -216,10 +247,12 @@
   var tcEl = document.getElementById("tc"), t0 = Date.now();
   function pad(n) { return String(n).padStart(2, "0"); }
   function tick() {
+    if (!tcEl) return;
     var ms = Date.now() - t0;
     tcEl.textContent = "00:" + pad(Math.floor(ms / 60000) % 60) + ":" + pad(Math.floor(ms / 1000) % 60) + ":" + pad(Math.floor((ms % 1000) / 40));
   }
-  if (!reduce.matches) setInterval(tick, 40); else tcEl.textContent = "00:00:00:00";
+  if (tcEl && !reduce.matches && getComputedStyle(tcEl.closest('.fc-timecode')).display !== 'none') setInterval(tick, 250);
+  else if (tcEl) tcEl.textContent = "00:00:00:00";
 
   /* ---------------- OPEN: project file drawer ---------------- */
   var drawer = document.getElementById("drawer");
@@ -447,19 +480,7 @@
   }, { passive: true });
   updatePageProgress();
 
-  /* pointer light: a real-time cue light, only on precise pointers */
-  if (window.matchMedia("(pointer:fine)").matches && !reduce.matches) {
-    var pointerFrame = 0;
-    stage.addEventListener("pointermove", function (e) {
-      if (pointerFrame) return;
-      pointerFrame = requestAnimationFrame(function () {
-        var r = stage.getBoundingClientRect();
-        stage.style.setProperty("--glow-x", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
-        stage.style.setProperty("--glow-y", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
-        pointerFrame = 0;
-      });
-    }, { passive: true });
-  }
+  /* RC5: pointer-following glow removed. The hero uses fixed, authored light. */
 
   /* section world dial and active masthead location */
   var worldSections = Array.prototype.slice.call(document.querySelectorAll("[data-world-index][data-world-label]"));
@@ -523,61 +544,7 @@
     });
   }
 
-  /* reactive signal field: tiny canvas, paused offscreen and under reduced motion */
-  (function initSignalField() {
-    var canvas = document.getElementById("signal-field");
-    if (!canvas || !canvas.getContext || reduce.matches) return;
-    var ctx = canvas.getContext("2d");
-    var nodes = [], width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    var visible = true, frame = 0, pointer = { x: .72, y: .3, active: false };
-
-    function resizeField() {
-      var r = stage.getBoundingClientRect();
-      width = Math.max(1, Math.round(r.width)); height = Math.max(1, Math.round(r.height));
-      canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
-      canvas.style.width = width + "px"; canvas.style.height = height + "px";
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      var count = width < 760 ? 14 : 26;
-      nodes = Array.from({length:count}, function (_,i) {
-        return { x: Math.random()*width, y: Math.random()*height, vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22, r:1.2+(i%4)*.45 };
-      });
-    }
-    function rgb(hex) {
-      var n = parseInt(hex.slice(1),16); return [(n>>16)&255,(n>>8)&255,n&255];
-    }
-    function renderField() {
-      if (!visible) { frame = 0; return; }
-      ctx.clearRect(0,0,width,height);
-      var c = rgb(HEX[current]);
-      nodes.forEach(function (n) {
-        if (pointer.active) {
-          var dx = pointer.x*width-n.x, dy = pointer.y*height-n.y, dist = Math.max(60,Math.hypot(dx,dy));
-          n.vx += dx/dist*.0018; n.vy += dy/dist*.0018;
-        }
-        n.x += n.vx; n.y += n.vy; n.vx *= .997; n.vy *= .997;
-        if (n.x < -20) n.x=width+20; if (n.x>width+20) n.x=-20;
-        if (n.y < -20) n.y=height+20; if (n.y>height+20) n.y=-20;
-      });
-      for (var i=0;i<nodes.length;i++) {
-        for (var j=i+1;j<nodes.length;j++) {
-          var a=nodes[i], b=nodes[j], dist=Math.hypot(a.x-b.x,a.y-b.y);
-          if (dist<150) {
-            ctx.strokeStyle="rgba("+c.join(",")+","+((1-dist/150)*.16).toFixed(3)+")";
-            ctx.lineWidth=.7; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-          }
-        }
-      }
-      nodes.forEach(function (n) {
-        ctx.fillStyle="rgba("+c.join(",")+",.42)"; ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
-      });
-      frame=requestAnimationFrame(renderField);
-    }
-    stage.addEventListener("pointermove",function(e){var r=stage.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width;pointer.y=(e.clientY-r.top)/r.height;pointer.active=true},{passive:true});
-    stage.addEventListener("pointerleave",function(){pointer.active=false});
-    if ("ResizeObserver" in window) new ResizeObserver(resizeField).observe(stage); else window.addEventListener("resize",resizeField);
-    if ("IntersectionObserver" in window) new IntersectionObserver(function(entries){visible=entries[0].isIntersecting;if(visible&&!frame)frame=requestAnimationFrame(renderField);}, {threshold:.02}).observe(stage);
-    resizeField(); frame=requestAnimationFrame(renderField);
-  })();
+  /* RC5: reactive signal-field canvas removed from execution to reduce decorative motion and CPU work. */
 
   /* ---------------- pause offscreen video, save battery ---------------- */
   if ("IntersectionObserver" in window) {

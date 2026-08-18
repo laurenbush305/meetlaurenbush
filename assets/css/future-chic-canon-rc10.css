@@ -1,0 +1,349 @@
+/* ========================================================================
+   SEASON ZERO — RC10 / LUXURY FINISHING PASS
+   Structural donor: RC9 + passed Typography Test C.
+   Scope: finish, not redesign. Beauty first; anti-slop remains quality control.
+   ======================================================================== */
+
+/* 1) EXPENSIVE COLOR DISCIPLINE
+   Bush owns the juicy pink. Booking and On Air are ink-first and reveal pink
+   through interaction instead of shouting it from rest state. */
+.stage.fc-canon-hero{
+  --paper:#fcfbf8;
+  --ink:#111113;
+  --soft:#746f6b;
+  background:linear-gradient(180deg,#fffefa 0%,#fcfbf8 64%,#fffaf7 100%);
+}
+.fc-canon-hero::before{
+  opacity:.62;
+  background:radial-gradient(ellipse at 6% 105%,rgba(255,190,168,.15) 0%,rgba(255,228,217,.10) 31%,rgba(255,255,255,0) 70%);
+}
+.fc-canon-hero .fc-world .reflection{opacity:.095;filter:blur(28px)}
+
+.rig{
+  height:64px;
+  min-height:64px;
+  padding:0 3.1vw;
+  background:rgba(255,254,250,.965);
+  border-bottom:1px solid rgba(17,17,19,.08);
+}
+.rig nav{gap:2.2rem}
+.rig nav a{
+  color:rgba(17,17,19,.78);
+  font-size:.75rem;
+}
+.rig nav a:hover{color:var(--ink)}
+.rig .book{
+  min-height:0;
+  padding:7px 0 6px;
+  background:transparent;
+  color:var(--ink);
+  border-bottom:1px solid rgba(255,45,135,.78);
+  font-weight:720;
+  transition:color .16s ease,border-color .16s ease;
+}
+.rig .book:hover{background:transparent;color:var(--pink);border-bottom-color:var(--pink)}
+
+/* 2) PHOTOGRAPH AS CAMPAIGN ART
+   No face alteration; only restrained tonal finishing. */
+.fc-canon-hero .fc-primary img{
+  filter:saturate(1.015) contrast(1.045) brightness(.992);
+}
+.fc-canon-hero .fc-primary{
+  background:#e7e8e5;
+  box-shadow:0 0 0 1px rgba(17,17,19,.025);
+}
+.fc-canon-hero .fc-primary::before{opacity:.34;filter:blur(1px)}
+.fc-canon-hero .fc-primary::after{opacity:.22;filter:blur(1.35px)}
+.fc-canon-hero .fc-world .chrome-arm{opacity:.39}
+
+/* 3) QUIETER FIRST BEAT
+   Keep canon identity; remove entrance-level explanation. */
+.fc-canon-hero .fc-kicker{
+  color:rgba(17,17,19,.54);
+  font-size:.69rem;
+  letter-spacing:.018em;
+}
+.fc-canon-hero .fc-role{
+  top:2.72rem;
+  font-size:.82rem;
+  font-weight:690;
+}
+.fc-canon-hero .fc-promise{
+  top:4.72rem;
+  max-width:19ch;
+  font-size:clamp(1.1rem,1.38vw,1.29rem);
+  line-height:1.18;
+}
+.fc-canon-hero .fc-reel-link{
+  top:7.82rem;
+  font-size:.79rem;
+  border-bottom-color:rgba(17,17,19,.52);
+}
+.fc-canon-hero .fc-cue{
+  left:10.45vw !important;
+  top:calc(13.5vh + 7.42rem) !important;
+  padding-bottom:5px;
+  border-bottom-color:rgba(17,17,19,.34);
+  color:rgba(17,17,19,.78);
+}
+.fc-canon-hero .fc-cue .state{font-size:.78rem;font-weight:610}
+.fc-canon-hero .fc-cue:hover{color:var(--pink);border-bottom-color:var(--pink)}
+
+/* 4) OPTICAL NAME POLISH
+   Passed Test C remains the face; only spacing/relationship is tuned. */
+@media(min-width:901px){
+  .fc-canon-hero .fc-name{top:41.4vh}
+  .fc-canon-hero .fc-lauren{
+    font-size:clamp(6.72rem,11.02vw,11.25rem) !important;
+    letter-spacing:-.052em !important;
+  }
+  .fc-canon-hero .fc-lauren::before,
+  .fc-canon-hero .fc-lauren::after{letter-spacing:-.052em !important}
+  .fc-canon-hero .fc-bush{
+    left:19.0vw;
+    top:10.0vh;
+    font-size:clamp(2.95rem,4.28vw,4.52rem);
+    letter-spacing:-.068em;
+    font-weight:455;
+    transform:rotate(-.25deg);
+  }
+}
+
+/* 5) PROOF AS FEATURE, NOT MODULE
+   Larger, straighter, more deliberate crop. Full explanation stays in drawer. */
+@media(min-width:901px){
+  .fc-canon-hero .signals{
+    right:2.55vw !important;
+    bottom:4.4vh !important;
+    width:clamp(350px,28.6vw,440px) !important;
+    aspect-ratio:5/3;
+    clip-path:none;
+    transform:none;
+    border:1px solid rgba(255,255,255,.74);
+    box-shadow:0 24px 62px rgba(17,17,19,.12);
+    animation:rc10-proof-in .7s cubic-bezier(.22,.72,.18,1) .22s both;
+  }
+  .fc-canon-hero .signal[data-lane="host"] video{object-position:52% 39%}
+  .fc-canon-hero .signal video,
+  .fc-canon-hero .signal img.plate{filter:saturate(1.035) contrast(1.035)}
+  @keyframes rc10-proof-in{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  .fc-canon-hero .fc-signal-meta{
+    left:auto !important;
+    right:32.2vw !important;
+    bottom:6.3vh !important;
+    width:12.8vw !important;
+    min-width:178px !important;
+    color:#fffdfa !important;
+    text-shadow:0 1px 9px rgba(0,0,0,.24);
+  }
+  .fc-canon-hero .fc-signal-meta .ey{
+    margin:0 0 6px;
+    font-size:.62rem;
+    font-weight:720;
+    color:rgba(255,253,250,.66) !important;
+  }
+  .fc-canon-hero .fc-signal-meta h2{
+    max-width:12ch !important;
+    font-size:clamp(1.18rem,1.42vw,1.46rem) !important;
+    font-weight:690;
+    font-variation-settings:'wght' 690,'wdth' 84;
+    line-height:.98 !important;
+    letter-spacing:-.045em;
+    color:#fffdfa !important;
+  }
+  .fc-canon-hero .fc-castline{
+    margin-top:9px;
+    font-size:.66rem !important;
+    line-height:1.28 !important;
+    color:rgba(255,253,250,.76) !important;
+  }
+  .fc-canon-hero .fc-castline span{display:none !important}
+  .fc-canon-hero .fc-castline strong{font-weight:540}
+  .fc-canon-hero .open-file{
+    margin-top:10px;
+    color:rgba(255,253,250,.88) !important;
+    border-bottom-color:rgba(255,253,250,.40);
+    font-size:.66rem !important;
+    font-weight:560;
+  }
+  .fc-canon-hero .open-file:hover{color:#fff !important;border-bottom-color:#fff}
+}
+
+/* 6) ROUTES READ LIKE AN EDITORIAL SENTENCE, NOT FOUR UI CONTROLS. */
+.fc-canon-hero .tune::before{display:none}
+.fc-canon-hero .tune{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  align-items:baseline;
+}
+.fc-canon-hero .tune button{
+  color:rgba(17,17,19,.48);
+  font-size:.81rem;
+  font-weight:520;
+  letter-spacing:-.015em;
+  padding:0;
+  border:0 !important;
+}
+.fc-canon-hero .tune button:not(:last-child)::after{
+  content:"/" !important;
+  display:inline-block;
+  width:auto;
+  height:auto;
+  margin:0 10px;
+  background:none !important;
+  color:rgba(17,17,19,.22) !important;
+  transform:none !important;
+  font-weight:400;
+}
+.fc-canon-hero .tune button[aria-selected="true"]{
+  color:var(--ink);
+  font-weight:720;
+}
+.fc-canon-hero .tune button[aria-selected="true"]::before{content:none}
+@media(min-width:901px){
+  .fc-canon-hero .deck{
+    left:3.15vw;
+    top:34.5vh;
+    bottom:auto;
+    width:24vw;
+  }
+}
+
+/* BROADCAST stays the same world, but pink remains signal rather than wallpaper. */
+:root[data-cue="broadcast"] .rig{background:rgba(23,19,26,.975);border-bottom-color:rgba(255,255,255,.10)}
+:root[data-cue="broadcast"] .rig .book{color:#fff;border-bottom-color:rgba(255,106,169,.72)}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary img{filter:brightness(.755) contrast(1.07) saturate(1.09)}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-kicker{color:rgba(255,250,246,.54)}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-cue{color:rgba(255,250,246,.78);border-bottom-color:rgba(255,250,246,.32)}
+:root[data-cue="broadcast"] .fc-canon-hero .tune button{color:rgba(255,250,246,.45)}
+:root[data-cue="broadcast"] .fc-canon-hero .tune button:not(:last-child)::after{color:rgba(255,250,246,.18) !important}
+:root[data-cue="broadcast"] .fc-canon-hero .tune button[aria-selected="true"]{color:#fffaf6}
+
+/* MOBILE: authored sequence, not compressed desktop. */
+@media(max-width:900px){
+  .rig{height:58px;min-height:58px;padding:0 18px}
+  .rig nav{gap:16px}
+  .rig nav a{font-size:.70rem}
+  .rig .book{padding:6px 0 5px;background:transparent;color:var(--ink)}
+
+  .fc-canon-hero .fc-primary{top:58px;height:57svh}
+  .fc-canon-hero .fc-copy{left:18px;width:calc(100vw - 36px)}
+  .fc-canon-hero .fc-kicker{top:calc(58px + 15px);font-size:.61rem;color:rgba(17,17,19,.54)}
+  .fc-canon-hero .fc-name{top:43.2svh}
+  .fc-canon-hero .fc-lauren{
+    font-size:clamp(4.9rem,23.2vw,6.35rem) !important;
+    letter-spacing:-.057em !important;
+  }
+  .fc-canon-hero .fc-bush{
+    left:11.4vw;
+    top:8.7svh;
+    font-size:clamp(2.9rem,14.6vw,4.08rem);
+    transform:rotate(-.18deg);
+  }
+
+  .fc-canon-hero .fc-role{top:63.0svh;font-size:.76rem;font-weight:680}
+  .fc-canon-hero .fc-promise{top:66.05svh;font-size:.96rem;max-width:23ch}
+  .fc-canon-hero .fc-reel-link{top:70.95svh;font-size:.73rem}
+  .fc-canon-hero .fc-cue{left:106px !important;top:70.95svh !important;font-size:.73rem}
+  .fc-canon-hero .fc-cue .state{font-size:.73rem}
+
+  .fc-canon-hero .signals{
+    left:18px;
+    bottom:88px;
+    width:46vw;
+    max-width:184px;
+    height:auto;
+    aspect-ratio:5/3;
+    clip-path:none;
+    transform:none;
+    border:1px solid rgba(17,17,19,.08);
+    box-shadow:0 15px 34px rgba(17,17,19,.10);
+  }
+  .fc-canon-hero .signal[data-lane="host"] video{object-position:52% 39%}
+  .fc-canon-hero .fc-signal-meta{
+    left:calc(18px + min(46vw,184px) + 13px);
+    right:14px;
+    bottom:88px;
+    width:auto;
+    min-width:0;
+  }
+  .fc-canon-hero .fc-signal-meta .ey{display:none}
+  .fc-canon-hero .fc-signal-meta h2{
+    max-width:14ch;
+    font-size:.96rem;
+    line-height:1.0;
+    font-weight:690;
+    font-variation-settings:'wght' 690,'wdth' 84;
+    letter-spacing:-.04em;
+  }
+  .fc-canon-hero .fc-castline{display:block;margin-top:7px;font-size:.61rem;line-height:1.25;color:var(--soft)}
+  .fc-canon-hero .fc-castline span{display:none}
+  .fc-canon-hero .fc-castline strong{font-weight:540}
+  .fc-canon-hero .open-file{margin-top:8px;font-size:.62rem;font-weight:560}
+
+  .fc-canon-hero .deck{left:18px;right:18px;bottom:24px;width:auto}
+  .fc-canon-hero .tune{display:flex;flex-wrap:wrap;gap:0}
+  .fc-canon-hero .tune button{font-size:.68rem;color:rgba(17,17,19,.44)}
+  .fc-canon-hero .tune button:not(:last-child)::after{margin:0 8px !important}
+  .fc-canon-hero #tab-host{margin-left:0}
+  .fc-canon-hero .tune button[aria-selected="true"]{color:var(--ink)}
+}
+
+@media(max-width:430px){
+  .fc-canon-hero .fc-primary{height:56svh}
+  .fc-canon-hero .fc-name{top:42.4svh}
+  .fc-canon-hero .fc-role{top:62.15svh}
+  .fc-canon-hero .fc-promise{top:65.2svh}
+  .fc-canon-hero .fc-reel-link{top:69.9svh}
+  .fc-canon-hero .fc-cue{top:69.9svh !important;left:105px !important}
+  .fc-canon-hero .signals{bottom:88px;width:44vw}
+  .fc-canon-hero .fc-signal-meta{left:calc(18px + 44vw + 12px);bottom:88px}
+  .fc-canon-hero .fc-signal-meta h2{font-size:.88rem}
+  .fc-canon-hero .fc-castline{font-size:.58rem}
+  .fc-canon-hero .deck{bottom:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fc-canon-hero .signals{animation:none !important}
+}
+
+/* RC10 browser polish: natural-width route sentence and broadcast light without
+   rectangular color blocks. */
+.fc-canon-hero .tune button{
+  width:auto !important;
+  flex:0 0 auto !important;
+  min-width:0 !important;
+}
+@media(min-width:901px){
+  .fc-canon-hero .deck{width:26.5vw}
+  .fc-canon-hero .tune{flex-wrap:nowrap;white-space:nowrap}
+}
+:root[data-cue="broadcast"] .fc-canon-hero::before{
+  width:48vw;
+  height:30vh;
+  opacity:.72;
+  background:radial-gradient(ellipse at 4% 108%,rgba(102,80,216,.12) 0%,rgba(255,45,135,.055) 34%,rgba(23,19,26,0) 72%);
+}
+:root[data-cue="broadcast"] .fc-canon-hero::after{
+  width:24vw;
+  height:28vh;
+  opacity:.52;
+  background:radial-gradient(ellipse at 100% 100%,color-mix(in srgb,var(--lane) 10%,transparent) 0%,transparent 68%);
+}
+@media(max-width:900px){
+  .fc-canon-hero .tune{flex-wrap:nowrap;white-space:nowrap}
+  :root[data-cue="broadcast"] .fc-canon-hero::before{
+    width:100vw;height:27vh;opacity:.66;
+    background:radial-gradient(ellipse at 4% 108%,rgba(102,80,216,.10) 0%,rgba(255,45,135,.045) 36%,rgba(23,19,26,0) 72%);
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero::after{
+    width:42vw;height:20vh;opacity:.42;
+    background:radial-gradient(ellipse at 100% 100%,color-mix(in srgb,var(--lane) 8%,transparent) 0%,transparent 68%);
+  }
+}
+.fc-canon-hero .tune{flex-direction:row !important}

@@ -1,5 +1,0 @@
-AFTER THE GITHUB.IO PREVIEW IS APPROVED
-
-GitHub: Settings -> Pages -> Custom domain -> meetlaurenbush.com
-Then preserve existing Porkbun email records and add GitHub Pages DNS records.
-Do not replace or delete MX/TXT records used by hello@meetlaurenbush.com.

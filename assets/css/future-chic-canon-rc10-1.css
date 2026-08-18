@@ -1,0 +1,115 @@
+/* ========================================================================
+   SEASON ZERO — RC10.1 / RESPONSIVE + STATE OPTICAL CLEANUP
+   Donor: RC10 Luxury Finishing. Typography Test C remains frozen.
+   Scope: state/breakpoint polish only. No redesign.
+   ======================================================================== */
+
+/* Desktop: allow the longer Create/Explain proof titles enough editorial air
+   without moving the receipt toward Lauren's face. */
+@media (min-width:901px){
+  .fc-canon-hero .fc-signal-meta{
+    right:31.7vw !important;
+    width:14.0vw !important;
+    min-width:188px !important;
+  }
+  .fc-canon-hero .fc-signal-meta h2{
+    max-width:14ch !important;
+  }
+
+  /* The longer broadcast action needs its own optical tuning. */
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-cue{
+    left:10.15vw !important;
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-cue .state{
+    font-size:.74rem;
+    letter-spacing:-.01em;
+  }
+}
+
+/* Mobile is composed independently. The photo ends at ~56svh + masthead;
+   keep identity text off Lauren's face and give the below-photo sequence air. */
+@media (max-width:900px){
+  /* Season Zero moves onto the open wall, not Lauren's forehead/hair. */
+  .fc-canon-hero .fc-kicker{
+    left:auto !important;
+    right:18px !important;
+    top:calc(58px + 15px) !important;
+    width:auto;
+    color:rgba(17,17,19,.56) !important;
+    text-align:right;
+    text-shadow:0 1px 10px rgba(255,255,255,.58);
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-kicker{
+    color:rgba(255,250,246,.68) !important;
+    text-shadow:0 1px 9px rgba(0,0,0,.28);
+  }
+
+  /* Role now clears the photo seam instead of sitting under it. */
+  .fc-canon-hero .fc-role{
+    top:64.15svh !important;
+  }
+  .fc-canon-hero .fc-promise{
+    top:67.35svh !important;
+  }
+  .fc-canon-hero .fc-reel-link{
+    top:72.15svh !important;
+  }
+  .fc-canon-hero .fc-cue{
+    top:72.15svh !important;
+  }
+
+  /* Give the proof interpretation slightly more room than RC10. */
+  .fc-canon-hero .signals{
+    width:42vw !important;
+    max-width:174px !important;
+    bottom:86px !important;
+  }
+  .fc-canon-hero .fc-signal-meta{
+    left:calc(18px + min(42vw,174px) + 14px) !important;
+    right:16px !important;
+    bottom:86px !important;
+  }
+  .fc-canon-hero .fc-signal-meta h2{
+    max-width:none !important;
+    margin-bottom:5px;
+    line-height:1.02 !important;
+  }
+  .fc-canon-hero .fc-castline{
+    margin-top:0 !important;
+    line-height:1.32 !important;
+  }
+  .fc-canon-hero .open-file{
+    margin-top:9px !important;
+  }
+
+  /* Longer ON AIR return label gets a little less visual mass. */
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-cue{
+    left:101px !important;
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-cue .state{
+    font-size:.69rem !important;
+    letter-spacing:-.012em;
+  }
+}
+
+@media (max-width:430px){
+  .fc-canon-hero .fc-role{top:64.15svh !important}
+  .fc-canon-hero .fc-promise{top:67.35svh !important}
+  .fc-canon-hero .fc-reel-link{top:72.15svh !important}
+  .fc-canon-hero .fc-cue{top:72.15svh !important}
+  .fc-canon-hero .signals{width:42vw !important;bottom:86px !important}
+  .fc-canon-hero .fc-signal-meta{
+    left:calc(18px + 42vw + 14px) !important;
+    bottom:86px !important;
+  }
+  /* Explain/Create titles are longest; tune the type, not the composition. */
+  .fc-canon-hero[data-active-lane="create"] .fc-signal-meta h2,
+  .fc-canon-hero[data-active-lane="explain"] .fc-signal-meta h2{
+    font-size:.84rem !important;
+    line-height:1.02 !important;
+  }
+  .fc-canon-hero[data-active-lane="host"] .fc-signal-meta h2,
+  .fc-canon-hero[data-active-lane="activate"] .fc-signal-meta h2{
+    font-size:.88rem !important;
+  }
+}

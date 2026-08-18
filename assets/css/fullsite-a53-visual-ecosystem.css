@@ -1,0 +1,257 @@
+/*
+  SEASON ZERO — A5.3 VISUAL ECOSYSTEM + FINAL BEAUTY LOCK
+  Donor: exact A5.2 private review candidate.
+  Private review only. No deployment / GitHub / live mutation.
+*/
+
+.a53-visual-ecosystem{--a53-ink:#080909;--a53-day:#f5f0e9;--a53-pool:#98efe8;--a53-pink:#ff2f91;--a53-coral:#ff8069}
+
+/* Never expose internal review strings as rendered content. */
+.a53-visual-ecosystem body:before,.a53-visual-ecosystem body:after{content:none!important}
+
+/* PERSON — a different Lauren, not another sports-room repeat. Exact approved lifestyle image,
+   shown uncropped and unretouched. Composition comes from the source's floral palette and pose. */
+.a53-visual-ecosystem #behavior.a3-person{
+  height:100svh!important;min-height:720px!important;overflow:hidden!important;
+  background:linear-gradient(90deg,#e8f8ff 0 46%,#fff7ef 46% 100%)!important;
+}
+.a53-visual-ecosystem #behavior:before{
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.84),rgba(255,255,255,0) 24%,rgba(255,128,105,.09) 100%)!important;
+  clip-path:none!important;opacity:1!important;pointer-events:none!important;
+}
+.a53-visual-ecosystem #behavior .a44-person-room,.a53-visual-ecosystem #behavior .a44-person-seam{display:none!important}
+.a53-visual-ecosystem #behavior .a53-person-lifestyle{
+  position:absolute!important;right:5vw!important;top:8svh!important;left:auto!important;bottom:auto!important;
+  width:auto!important;height:84svh!important;max-height:840px!important;aspect-ratio:3/4!important;
+  overflow:visible!important;clip-path:none!important;border-radius:0!important;background:transparent!important;
+  box-shadow:0 30px 80px rgba(64,48,39,.13)!important;z-index:3!important;
+}
+.a53-visual-ecosystem #behavior .a53-person-photo{
+  display:block!important;width:auto!important;height:100%!important;max-width:none!important;object-fit:contain!important;
+  object-position:center!important;filter:none!important;transform:none!important;border-radius:0!important;
+}
+.a53-visual-ecosystem #behavior .a44-person-stage:after{display:none!important}
+.a53-visual-ecosystem #behavior .a44-person-credit{
+  display:block!important;position:absolute!important;left:-34vw!important;right:auto!important;bottom:2svh!important;
+  width:26vw!important;color:#1f2422!important;background:none!important;padding:0!important;z-index:5!important;
+  font:600 .68rem/1.2 var(--f-sans)!important;letter-spacing:.03em!important;text-transform:none!important;
+}
+.a53-visual-ecosystem #behavior .a44-person-credit span{display:block!important}
+.a53-visual-ecosystem #behavior:after{
+  content:"Oh. I like her."!important;display:block!important;position:absolute!important;left:5vw!important;bottom:12svh!important;
+  max-width:7ch!important;color:#111816!important;font-family:var(--f-display)!important;font-size:clamp(4rem,7.2vw,8.2rem)!important;
+  line-height:.78!important;letter-spacing:-.06em!important;text-transform:none!important;z-index:2!important;
+}
+
+/* THINKING — one thought. Lauren leads; the finance archive crosses the same composition as evidence. */
+.a53-visual-ecosystem #thinking.a3-thinking{background:#ddf6f2!important;overflow:hidden!important}
+.a53-visual-ecosystem #thinking:before{background:linear-gradient(110deg,rgba(255,255,255,.75),transparent 48%)!important;opacity:1!important}
+.a53-visual-ecosystem #thinking .a44-thinking-main{width:59vw!important;left:0!important;top:0!important;height:100svh!important;border-radius:0!important}
+.a53-visual-ecosystem #thinking .a44-thinking-main video{object-position:45% 21%!important}
+.a53-visual-ecosystem #thinking .a44-thinking-copy{left:54vw!important;top:13svh!important;width:40vw!important;z-index:5!important;background:none!important}
+.a53-visual-ecosystem #thinking .a44-thinking-copy p{font-size:clamp(3.8rem,5.9vw,7rem)!important;line-height:.77!important;max-width:7.2ch!important;color:#10211f!important}
+.a53-visual-ecosystem #thinking .a44-authority-transmission{
+  left:34vw!important;right:auto!important;top:auto!important;bottom:5svh!important;width:61vw!important;height:16svh!important;min-height:130px!important;
+  border:0!important;border-radius:0!important;box-shadow:0 20px 70px rgba(4,16,17,.17)!important;z-index:7!important;background:#061414!important;
+}
+.a53-visual-ecosystem #thinking .a44-authority-transmission video{object-fit:cover!important;object-position:center!important;filter:saturate(.88) contrast(1.06)!important}
+.a53-visual-ecosystem #thinking .a44-authority-transmission figcaption{left:14px!important;bottom:10px!important;color:#fff!important;background:rgba(5,15,17,.72)!important;padding:.36rem .5rem!important}
+.a53-visual-ecosystem #thinking .a44-thinking-main figcaption span,.a53-visual-ecosystem #thinking .a3-thinking-play{display:none!important}
+
+/* HOST — second Hero. Real Celsius room becomes atmosphere; live vertical tape becomes foreground command.
+   The still at the far edge carries whole-body gesture and venue scale without fake stage UI. */
+.a53-visual-ecosystem #host-command.a3-host{height:112svh!important;min-height:840px!important;background:#07100e!important;overflow:hidden!important}
+.a53-visual-ecosystem #host-command .a44-host-ambient{display:none!important}
+.a53-visual-ecosystem #host-command:before{
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:1!important;
+  background:linear-gradient(90deg,rgba(3,8,7,.74) 0 20%,rgba(3,8,7,.12) 47%,rgba(3,8,7,.28) 100%)!important;
+}
+.a53-visual-ecosystem #host-command .a53-host-environment{
+  display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;
+  filter:saturate(1.02) contrast(1.05) brightness(.72)!important;z-index:0!important;
+}
+.a53-visual-ecosystem #host-command .a44-host-stage{
+  position:absolute!important;left:27vw!important;right:auto!important;top:4svh!important;bottom:auto!important;
+  width:48vw!important;height:104svh!important;max-height:none!important;overflow:hidden!important;border-radius:0!important;background:transparent!important;z-index:3!important;
+  clip-path:none!important;box-shadow:0 30px 90px rgba(0,0,0,.35)!important;
+}
+.a53-visual-ecosystem #host-command .a44-host-stage video{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 42%!important;filter:saturate(1.02) contrast(1.04)!important;border-radius:0!important}
+.a53-visual-ecosystem #host-command .a53-host-gesture{
+  display:block!important;position:absolute!important;right:-1.8vw!important;bottom:-3svh!important;width:27vw!important;height:73svh!important;object-fit:cover!important;object-position:50% 38%!important;
+  z-index:4!important;box-shadow:-22px 18px 65px rgba(0,0,0,.28)!important;border:0!important;
+}
+.a53-visual-ecosystem #host-command .a44-host-stage figcaption{
+  left:auto!important;right:4vw!important;bottom:7svh!important;top:auto!important;width:26vw!important;padding:0!important;text-align:left!important;z-index:8!important;
+  text-shadow:0 2px 22px rgba(0,0,0,.55)!important;
+}
+.a53-visual-ecosystem #host-command .a44-host-stage figcaption b{font-size:clamp(2.2rem,4.2vw,5.1rem)!important;line-height:.84!important;max-width:7ch!important}
+.a53-visual-ecosystem #host-command .a44-host-stage figcaption span{font-size:.66rem!important;letter-spacing:.06em!important}
+.a53-visual-ecosystem #host-command .a44-host-stage .a3-sound{left:4vw!important;right:auto!important;bottom:4svh!important;z-index:9!important}
+.a53-visual-ecosystem #host-command:after{content:"HOST"!important;display:block!important;position:absolute!important;left:3.4vw!important;bottom:6svh!important;z-index:2!important;color:rgba(255,255,255,.94)!important;font:800 clamp(5rem,9vw,11rem)/.72 var(--f-display)!important;letter-spacing:-.06em!important}
+
+/* ACTIVATE — two assignments physically hand off. The metric belongs to rooftop proof, never Centerline. */
+.a53-visual-ecosystem #activate-field.a3-activate{height:126svh!important;min-height:900px!important;background:#ece8df!important;overflow:hidden!important}
+.a53-visual-ecosystem #activate-field .a44-activate-stage{height:126svh!important;position:relative!important}
+.a53-visual-ecosystem #activate-field .a3-activate-room{position:absolute!important;left:0!important;top:0!important;width:69vw!important;height:94svh!important;overflow:hidden!important;z-index:1!important}
+.a53-visual-ecosystem #activate-field .a3-activate-room img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 42%!important;filter:saturate(1.02) contrast(1.03)!important}
+.a53-visual-ecosystem #activate-field .a3-activate-copy{left:4vw!important;top:6svh!important;z-index:4!important;color:#fff!important;text-shadow:0 2px 24px rgba(0,0,0,.4)!important}
+.a53-visual-ecosystem #activate-field .a44-activate-result{
+  position:absolute!important;right:3.5vw!important;left:auto!important;top:39svh!important;bottom:auto!important;width:38vw!important;height:76svh!important;
+  display:block!important;background:#0b0f0e!important;color:#fff!important;z-index:5!important;box-shadow:-28px 28px 80px rgba(56,48,39,.2)!important;overflow:hidden!important;
+  text-decoration:none!important;
+}
+.a53-visual-ecosystem #activate-field .a52-gotennis-proof{display:block!important;width:100%!important;height:58svh!important;min-height:0!important;object-fit:cover!important;object-position:center 42%!important}
+.a53-visual-ecosystem #activate-field .a52-result-copy{position:absolute!important;left:0!important;right:0!important;bottom:0!important;min-height:18svh!important;padding:1.3rem 1.4rem!important;background:#0b0f0e!important;display:grid!important;grid-template-columns:auto 1fr!important;gap:1rem!important;align-items:end!important}
+.a53-visual-ecosystem #activate-field .a52-result-copy strong{font-size:clamp(3.2rem,5.8vw,6.6rem)!important;line-height:.72!important;color:#fff!important}
+.a53-visual-ecosystem #activate-field .a52-result-copy>span{font-size:.62rem!important;line-height:1.42!important;max-width:28ch!important;color:rgba(255,255,255,.78)!important}
+.a53-visual-ecosystem #activate-field:after{content:"another room →"!important;position:absolute!important;left:8vw!important;bottom:10svh!important;color:#2d3632!important;font:500 .72rem/1 var(--f-mono)!important;letter-spacing:.12em!important;text-transform:uppercase!important}
+
+/* WATCH — same strong stage, materially wider source species. */
+.a53-visual-ecosystem #watch .a4-program-tv img{object-position:center 22%!important}
+.a53-visual-ecosystem #watch .a4-program-explain{background:#07131a!important}
+.a53-visual-ecosystem #watch .a4-program-explain video{object-fit:cover!important;object-position:center!important;filter:saturate(.9) contrast(1.08) brightness(.8)!important}
+.a53-visual-ecosystem #watch .a4-program-explain:before{background:linear-gradient(90deg,rgba(6,17,23,.94),rgba(6,17,23,.12) 60%)!important}
+.a53-visual-ecosystem #watch .a4-program-explain>div{color:#fff!important;text-align:left!important;left:5vw!important;right:auto!important;bottom:6svh!important}
+.a53-visual-ecosystem #watch .a4-program-explain>div b{margin-left:0!important;max-width:7ch!important}
+.a53-visual-ecosystem #watch .a4-program-create video{object-position:center 44%!important;filter:saturate(1.08) contrast(1.05)!important}
+.a53-visual-ecosystem #watch .a4-program-create>div b{max-width:10ch!important}
+
+/* TRUST — documentary insert, not an About-section portrait. */
+.a53-visual-ecosystem #about.a3-trust{height:58svh!important;min-height:500px!important;background:#ded7cd!important;overflow:hidden!important}
+.a53-visual-ecosystem #about:before{content:none!important;display:none!important}
+.a53-visual-ecosystem #about .a44-trust-world{position:absolute!important;left:8vw!important;top:6svh!important;width:42vw!important;height:46svh!important;min-height:0!important;overflow:hidden!important;background:none!important}
+.a53-visual-ecosystem #about .a44-trust-world img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;filter:none!important}
+.a53-visual-ecosystem #about .a44-trust-note{position:absolute!important;left:53vw!important;top:15svh!important;width:31vw!important;padding:0!important;background:none!important;color:#2b2a27!important}
+.a53-visual-ecosystem #about .a44-trust-note:before{content:none!important}
+.a53-visual-ecosystem #about .a44-trust-note h2{font-size:clamp(1.6rem,2.2vw,2.45rem)!important;line-height:.95!important;font-family:var(--f-display)!important;font-weight:700!important}
+.a53-visual-ecosystem #about .a44-trust-note p{font-size:.72rem!important;line-height:1.5!important;max-width:38ch!important;color:#5d5852!important}
+
+/* BOOK — deliberate action close; no card, no fake producer UI. */
+.a53-visual-ecosystem #contact.a44-contact{min-height:100svh!important;background:#060707!important;overflow:hidden!important}
+.a53-visual-ecosystem #contact:before{content:""!important;display:block!important;position:absolute!important;inset:0!important;background:radial-gradient(70% 80% at 18% 16%,rgba(255,47,145,.075),transparent 58%)!important;opacity:1!important}
+.a53-visual-ecosystem #contact .wrap{width:min(1320px,92vw)!important}
+.a53-visual-ecosystem #contact .contact{min-height:100svh!important;display:grid!important;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)!important;gap:8vw!important;align-items:center!important}
+.a53-visual-ecosystem #contact .a4-booking-intro{align-self:start!important;padding-top:17svh!important}
+.a53-visual-ecosystem #contact .a4-booking-intro h2{font-size:clamp(4rem,6.5vw,7.7rem)!important;line-height:.78!important;max-width:7ch!important}
+.a53-visual-ecosystem #contact .a4-booking-form{align-self:center!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+.a53-visual-ecosystem #contact .booking-submit{background:var(--a53-pink)!important;color:#fff!important;border:0!important}
+
+/* MOBILE — independently art-directed, not desktop collapsed. */
+@media(max-width:900px){
+  .a53-visual-ecosystem #behavior.a3-person{height:98svh!important;min-height:680px!important;background:#e9f8ff!important}
+  .a53-visual-ecosystem #behavior:before{background:linear-gradient(180deg,#e9f8ff 0 12%,rgba(255,255,255,0) 40%,rgba(255,128,105,.08) 100%)!important}
+  .a53-visual-ecosystem #behavior .a53-person-lifestyle{top:7svh!important;right:5vw!important;width:90vw!important;height:73svh!important;max-height:none!important;aspect-ratio:auto!important;box-shadow:0 22px 55px rgba(56,46,40,.12)!important}
+  .a53-visual-ecosystem #behavior .a53-person-photo{width:100%!important;height:100%!important;object-fit:contain!important}
+  .a53-visual-ecosystem #behavior:after{left:18px!important;bottom:6svh!important;font-size:clamp(3.4rem,15vw,5.4rem)!important;max-width:6ch!important}
+  .a53-visual-ecosystem #behavior .a44-person-credit{left:18px!important;bottom:2svh!important;width:auto!important;font-size:.6rem!important}
+
+  .a53-visual-ecosystem #thinking.a3-thinking{height:102svh!important;min-height:760px!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-main{left:0!important;top:0!important;width:100vw!important;height:64svh!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-main video{object-position:47% 16%!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-main figcaption{left:18px!important;bottom:7svh!important;width:54vw!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-main figcaption b{font-size:1.55rem!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-copy{left:18px!important;top:57svh!important;width:88vw!important;z-index:6!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-copy p{font-size:clamp(3rem,13.2vw,4.55rem)!important;line-height:.79!important;max-width:7ch!important}
+  .a53-visual-ecosystem #thinking .a44-authority-transmission{left:8vw!important;top:82svh!important;bottom:auto!important;width:84vw!important;height:15svh!important;min-height:110px!important}
+  .a53-visual-ecosystem #thinking .a44-authority-transmission figcaption{font-size:.48rem!important}
+
+  .a53-visual-ecosystem #host-command.a3-host{height:105svh!important;min-height:760px!important}
+  .a53-visual-ecosystem #host-command .a53-host-environment{object-position:58% center!important;filter:saturate(1.02) contrast(1.05) brightness(.5)!important}
+  .a53-visual-ecosystem #host-command:before{background:linear-gradient(180deg,rgba(3,8,7,.08) 0 55%,rgba(3,8,7,.72) 100%)!important}
+  .a53-visual-ecosystem #host-command .a44-host-stage{left:5vw!important;top:5svh!important;width:76vw!important;height:86svh!important;box-shadow:0 26px 70px rgba(0,0,0,.34)!important}
+  .a53-visual-ecosystem #host-command .a44-host-stage video{object-position:50% 42%!important}
+  .a53-visual-ecosystem #host-command .a53-host-gesture{right:-5vw!important;bottom:4svh!important;width:36vw!important;height:48svh!important;object-position:50% 38%!important;box-shadow:-14px 16px 45px rgba(0,0,0,.3)!important}
+  .a53-visual-ecosystem #host-command .a44-host-stage figcaption{left:18px!important;right:auto!important;bottom:5svh!important;width:58vw!important}
+  .a53-visual-ecosystem #host-command .a44-host-stage figcaption b{font-size:2.15rem!important;max-width:7ch!important}
+  .a53-visual-ecosystem #host-command .a44-host-stage .a3-sound{left:18px!important;bottom:1.6svh!important}
+  .a53-visual-ecosystem #host-command:after{left:auto!important;right:12px!important;bottom:5svh!important;font-size:clamp(4rem,18vw,6.4rem)!important;writing-mode:vertical-rl!important;transform:rotate(180deg)!important}
+
+  .a53-visual-ecosystem #activate-field.a3-activate{height:132svh!important;min-height:920px!important}
+  .a53-visual-ecosystem #activate-field .a44-activate-stage{height:132svh!important}
+  .a53-visual-ecosystem #activate-field .a3-activate-room{left:0!important;top:0!important;width:100vw!important;height:72svh!important}
+  .a53-visual-ecosystem #activate-field .a3-activate-copy{left:18px!important;top:54svh!important}
+  .a53-visual-ecosystem #activate-field .a44-activate-result{right:0!important;top:61svh!important;width:84vw!important;height:65svh!important;box-shadow:-18px 20px 60px rgba(56,48,39,.2)!important}
+  .a53-visual-ecosystem #activate-field .a52-gotennis-proof{height:49svh!important;object-position:center 43%!important}
+  .a53-visual-ecosystem #activate-field .a52-result-copy{min-height:16svh!important;padding:.95rem 1rem!important;gap:.7rem!important}
+  .a53-visual-ecosystem #activate-field .a52-result-copy strong{font-size:clamp(3rem,15vw,4.6rem)!important}
+  .a53-visual-ecosystem #activate-field .a52-result-copy>span{font-size:.5rem!important;max-width:22ch!important}
+  .a53-visual-ecosystem #activate-field:after{left:18px!important;bottom:3svh!important;font-size:.56rem!important}
+
+  .a53-visual-ecosystem #watch .a43-watch-entry{min-height:24svh!important;padding:5svh 18px 1svh!important}
+  .a53-visual-ecosystem #watch .a43-watch-entry h2{font-size:clamp(3.2rem,14vw,4.65rem)!important}
+  .a53-visual-ecosystem #watch .a4-program-tv{height:52svh!important;min-height:360px!important}
+  .a53-visual-ecosystem #watch .a4-program-explain{height:42svh!important;min-height:300px!important}
+  .a53-visual-ecosystem #watch .a4-program-create{height:45svh!important;min-height:315px!important}
+  .a53-visual-ecosystem #watch .a4-program-archive{height:34svh!important;min-height:245px!important}
+  .a53-visual-ecosystem #watch .a4-program-explain>div{left:18px!important;bottom:14px!important}
+  .a53-visual-ecosystem #watch .a4-program>div b{font-size:clamp(1.9rem,9vw,3rem)!important;line-height:.84!important}
+
+  .a53-visual-ecosystem #about.a3-trust{height:58svh!important;min-height:480px!important}
+  .a53-visual-ecosystem #about .a44-trust-world{left:7vw!important;top:6svh!important;width:78vw!important;height:39svh!important}
+  .a53-visual-ecosystem #about .a44-trust-note{left:18px!important;top:46svh!important;width:84vw!important}
+  .a53-visual-ecosystem #about .a44-trust-note h2{font-size:1.55rem!important}
+  .a53-visual-ecosystem #about .a44-trust-note p{font-size:.65rem!important;max-width:40ch!important;margin-top:.35rem!important}
+
+  .a53-visual-ecosystem #contact .wrap{width:calc(100% - 40px)!important}
+  .a53-visual-ecosystem #contact .contact{display:block!important;min-height:100svh!important;padding:12svh 0 8svh!important}
+  .a53-visual-ecosystem #contact .a4-booking-intro{padding-top:0!important;margin-bottom:6svh!important}
+  .a53-visual-ecosystem #contact .a4-booking-intro h2{font-size:clamp(3.6rem,15vw,5.3rem)!important;max-width:6ch!important}
+  .a53-visual-ecosystem #contact .a4-booking-form{display:block!important}
+  .a53-visual-ecosystem #contact .a4-booking-form label{display:block!important;margin-bottom:1.2rem!important}
+  .a53-visual-ecosystem #contact .booking-submit{width:100%!important}
+}
+
+@media(max-width:390px){
+ .a53-visual-ecosystem #behavior .a53-person-lifestyle{height:70svh!important;top:8svh!important}
+ .a53-visual-ecosystem #thinking .a44-authority-transmission{top:83svh!important;height:14svh!important}
+ .a53-visual-ecosystem #host-command .a44-host-stage{width:78vw!important;height:84svh!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .a53-visual-ecosystem video{animation:none!important;transition:none!important}
+}
+
+/* FINAL ECOSYSTEM OPTICAL PASS */
+.a53-visual-ecosystem #behavior:after{content:none!important;display:none!important}
+.a53-visual-ecosystem #behavior .a53-person-motion{
+  display:block!important;position:absolute!important;left:-33vw!important;bottom:8svh!important;width:29vw!important;height:31svh!important;object-fit:cover!important;object-position:50% 42%!important;
+  border:0!important;border-radius:0!important;box-shadow:0 18px 60px rgba(30,43,42,.17)!important;filter:saturate(1.03) contrast(1.02)!important;z-index:4!important;
+}
+.a53-visual-ecosystem #thinking .a44-thinking-main figcaption{left:3vw!important;bottom:7svh!important;width:auto!important;max-width:16vw!important}
+.a53-visual-ecosystem #thinking .a44-thinking-main figcaption b{font-size:clamp(1.15rem,1.8vw,1.9rem)!important;line-height:.9!important;max-width:10ch!important}
+.a53-visual-ecosystem #activate-field:after{content:none!important;display:none!important}
+.a53-visual-ecosystem #activate-field .a52-result-copy strong{transform:none!important;translate:none!important;margin:0!important}
+
+@media(max-width:900px){
+  .a53-visual-ecosystem #behavior.a3-person{height:107svh!important;min-height:760px!important}
+  .a53-visual-ecosystem #behavior .a53-person-lifestyle{top:6svh!important;height:70svh!important}
+  .a53-visual-ecosystem #behavior .a53-person-motion{left:5vw!important;bottom:4svh!important;width:52vw!important;height:24svh!important;object-position:48% 40%!important;box-shadow:0 16px 45px rgba(30,43,42,.15)!important}
+  .a53-visual-ecosystem #behavior .a44-person-credit{left:61vw!important;bottom:5svh!important;color:#27312e!important}
+
+  .a53-visual-ecosystem #thinking .a44-thinking-main figcaption{display:none!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-copy{top:55svh!important}
+  .a53-visual-ecosystem #thinking .a44-thinking-copy p{font-size:clamp(2.75rem,12vw,4rem)!important;line-height:.8!important;max-width:7.6ch!important}
+  .a53-visual-ecosystem #thinking .a44-authority-transmission{top:81svh!important}
+
+  .a53-visual-ecosystem #activate-field .a3-activate-copy{top:47svh!important;left:18px!important;right:auto!important;z-index:7!important;max-width:42vw!important}
+  .a53-visual-ecosystem #activate-field .a3-activate-copy p{font-size:clamp(2.25rem,10.5vw,3.35rem)!important;line-height:.82!important;max-width:6.8ch!important;margin:0!important}
+  .a53-visual-ecosystem #activate-field .a3-activate-copy span{font-size:.52rem!important}
+  .a53-visual-ecosystem #activate-field .a44-activate-result{top:62svh!important;width:84vw!important;height:64svh!important}
+  .a53-visual-ecosystem #activate-field .a52-result-copy{grid-template-columns:42% 58%!important;gap:.35rem!important;padding:.9rem .8rem!important;align-items:end!important;overflow:visible!important}
+  .a53-visual-ecosystem #activate-field .a52-result-copy strong{font-size:clamp(2.65rem,13vw,4rem)!important;line-height:.78!important;white-space:nowrap!important;letter-spacing:-.055em!important}
+  .a53-visual-ecosystem #activate-field .a52-result-copy>span{font-size:.47rem!important;line-height:1.36!important;max-width:none!important}
+}
+@media(max-width:900px){
+  .a53-visual-ecosystem #activate-field .a52-result-copy{
+    display:flex!important;flex-direction:row!important;align-items:flex-end!important;justify-content:space-between!important;
+    min-height:15svh!important;height:15svh!important;padding:.8rem .8rem .75rem!important;gap:.55rem!important;overflow:hidden!important;
+  }
+  .a53-visual-ecosystem #activate-field .a52-result-copy strong{
+    position:static!important;display:block!important;flex:0 0 auto!important;font-size:clamp(2.5rem,11.8vw,3.65rem)!important;line-height:.78!important;
+    letter-spacing:-.06em!important;transform:none!important;margin:0!important;padding:0!important;
+  }
+  .a53-visual-ecosystem #activate-field .a52-result-copy>span{
+    position:static!important;display:block!important;flex:1 1 auto!important;font-size:.43rem!important;line-height:1.32!important;max-width:20ch!important;margin:0!important;padding:0!important;
+  }
+}

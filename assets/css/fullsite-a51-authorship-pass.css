@@ -1,0 +1,261 @@
+/*
+  SEASON ZERO — A5.1 VISUAL AUTHORSHIP + ANTI-AI PIXEL PASS
+  Donor: A5 Private Review Candidate, 2026-08-14
+  Private review only. No deployment / GitHub mutation.
+  This layer is selective: preserve A5 wins, repair only pixels that fail authorship.
+*/
+
+body.a51-authorship-pass{
+  --a51-paper:#f5f2eb;
+  --a51-mint:#edf7f2;
+  --a51-ink:#08090b;
+  --a51-room:#13211f;
+}
+
+/* PERSON — same verified event may remain, but the job is now unmistakably portrait,
+   not sponsor tableau. Remove duplicated wallpaper and let face / mic / reaction own it. */
+.a51-authorship-pass #behavior.a3-person{
+  background:linear-gradient(112deg,#10201e 0 26%,#dce9e4 26% 100%)!important;
+}
+.a51-authorship-pass #behavior .a44-person-room{display:none!important}
+.a51-authorship-pass #behavior:before{
+  background:linear-gradient(90deg,rgba(4,12,12,.82) 0%,rgba(4,12,12,.25) 27%,transparent 46%)!important;
+}
+.a51-authorship-pass #behavior .a44-person-stage{
+  right:5vw!important;top:3svh!important;width:min(67vw,1020px)!important;height:94svh!important;
+  clip-path:none!important;box-shadow:none!important;
+}
+.a51-authorship-pass #behavior .a44-person-stage video{
+  object-position:69% 15%!important;transform:scale(1.24)!important;transform-origin:72% 22%;
+}
+.a51-authorship-pass #behavior .a44-person-stage:after{
+  background:linear-gradient(180deg,transparent 66%,rgba(4,10,10,.36) 100%)!important;
+}
+.a51-authorship-pass #behavior .a44-person-credit{left:auto!important;right:28px!important;bottom:24px!important;width:auto!important}
+.a51-authorship-pass #behavior .a44-person-credit .a3-sound{font-size:.56rem!important;opacity:.82}
+
+/* THINKING — stop presenting a clean three-module sequence. Lauren's source occupies the field;
+   the thesis overlaps her direction of travel; finance arrives as a shallow receipt, not a card. */
+.a51-authorship-pass #thinking.a3-thinking{
+  min-height:105svh!important;background:#eaf5f0!important;
+}
+.a51-authorship-pass #thinking:before{
+  background:linear-gradient(104deg,#f3faf7 0 18%,#e6f3ee 18% 100%)!important;
+}
+.a51-authorship-pass #thinking:after{
+  content:"";position:absolute;z-index:2;right:0;top:0;width:46vw;height:100%;pointer-events:none;
+  background:linear-gradient(90deg,rgba(234,245,240,0) 0%,rgba(234,245,240,.73) 32%,#eaf5f0 76%);
+}
+.a51-authorship-pass #thinking .a44-thinking-main{
+  left:0!important;top:0!important;width:82vw!important;height:100svh!important;clip-path:none!important;box-shadow:none!important;
+}
+.a51-authorship-pass #thinking .a44-thinking-main video{object-position:43% 15%!important}
+.a51-authorship-pass #thinking .a44-thinking-main figcaption{
+  left:4vw!important;bottom:5svh!important;width:min(390px,28vw)!important;
+}
+.a51-authorship-pass #thinking .a44-thinking-main figcaption b{font-size:clamp(2.2rem,3.7vw,4.1rem)!important}
+.a51-authorship-pass #thinking .a44-thinking-copy{
+  right:4.3vw!important;top:23svh!important;width:min(420px,31vw)!important;z-index:5!important;
+}
+.a51-authorship-pass #thinking .a44-thinking-copy:before{content:none!important;display:none!important}
+.a51-authorship-pass #thinking .a44-thinking-copy p{
+  font-size:clamp(3.2rem,5.2vw,5.8rem)!important;line-height:.8!important;max-width:6.4ch!important;
+}
+.a51-authorship-pass #thinking .a44-authority-transmission{
+  right:4.3vw!important;bottom:4.5svh!important;width:min(43vw,650px)!important;height:15svh!important;
+  min-height:122px!important;transform:none!important;box-shadow:none!important;border-top:1px solid rgba(18,54,56,.28)!important;background:#091215!important;
+}
+.a51-authorship-pass #thinking .a44-authority-transmission figcaption{
+  left:auto!important;right:12px!important;bottom:10px!important;max-width:22ch;text-align:right;font-size:.49rem!important;
+}
+
+/* HOST — second hero. The new clip is a distinct clean temporal moment from the verified source.
+   No giant section headline; Lauren + mic + room must carry the commercial argument. */
+.a51-authorship-pass #host-command.a3-host{background:#07100f!important}
+.a51-authorship-pass #host-command .a44-host-ambient{display:none!important}
+.a51-authorship-pass #host-command:before{
+  background:linear-gradient(90deg,#07100f 0 18%,rgba(7,16,15,.2) 45%,rgba(7,16,15,0) 100%)!important;
+}
+.a51-authorship-pass #host-command .a44-host-stage{
+  left:20vw!important;right:0!important;top:0!important;width:80vw!important;height:100svh!important;clip-path:none!important;
+}
+.a51-authorship-pass #host-command .a44-host-stage video{
+  object-position:55% 17%!important;transform:scale(1.06)!important;transform-origin:60% 28%;
+}
+.a51-authorship-pass #host-command .a44-host-stage:before{
+  background:linear-gradient(90deg,rgba(7,16,15,.5) 0%,rgba(7,16,15,.04) 28%,transparent 55%),linear-gradient(180deg,transparent 72%,rgba(4,7,7,.38) 100%)!important;
+  box-shadow:none!important;
+}
+.a51-authorship-pass #host-command .a44-host-stage figcaption{
+  left:-14vw!important;bottom:8svh!important;width:min(310px,21vw)!important;text-shadow:none!important;
+}
+.a51-authorship-pass #host-command .a44-host-stage figcaption b{display:none!important}
+.a51-authorship-pass #host-command .a44-host-stage figcaption span{
+  display:block!important;color:rgba(255,255,255,.74)!important;font:500 .62rem/1.55 var(--f-mono)!important;letter-spacing:.04em!important;text-transform:none!important;
+}
+.a51-authorship-pass #host-command .a44-host-stage .a3-sound{right:3vw!important;bottom:2.8svh!important;font-size:.55rem!important}
+
+/* ACTIVATE — preserve lived field scene; turn the GoTennis/ARSA result into an editorial handoff,
+   not a KPI object. The qualification remains physically attached to the number. */
+.a51-authorship-pass #activate-field.a3-activate{min-height:108svh!important;height:108svh!important}
+.a51-authorship-pass #activate-field .a44-activate-stage{height:108svh!important}
+.a51-authorship-pass #activate-field .a3-activate-room{left:0!important;top:7svh!important;width:82vw!important;height:76svh!important;box-shadow:none!important}
+.a51-authorship-pass #activate-field .a3-activate-copy{left:4vw!important;top:61svh!important}
+.a51-authorship-pass #activate-field .a44-activate-result{
+  left:5vw!important;right:5vw!important;top:89svh!important;width:auto!important;padding:1.35rem 0 0!important;
+  grid-template-columns:minmax(180px,.34fr) 1fr!important;gap:clamp(26px,4vw,72px)!important;
+  border-left:0!important;border-top:1px solid rgba(54,42,34,.38)!important;align-items:start!important;
+}
+.a51-authorship-pass #activate-field .a44-activate-result strong{
+  font-size:clamp(4.3rem,5.8vw,6.9rem)!important;line-height:.72!important;
+}
+.a51-authorship-pass #activate-field .a44-activate-result span{
+  max-width:52ch!important;font-size:.65rem!important;line-height:1.55!important;padding-top:.2rem!important;
+}
+
+/* WATCH — A5's programming physics are a real win. A5.1 only edits duration and dead acreage,
+   so range reads as programmed rather than as five design demonstrations. */
+.a51-authorship-pass #watch{padding-bottom:5svh!important}
+.a51-authorship-pass #watch .a43-watch-entry{min-height:46svh!important;padding:11svh 4vw 5svh!important}
+.a51-authorship-pass #watch .a43-watch-entry h2{font-size:clamp(4.2rem,7.2vw,8.2rem)!important}
+.a51-authorship-pass #watch .a43-watch-entry:after{height:64svh!important;bottom:-23svh!important}
+.a51-authorship-pass #watch .a4-program{height:66svh!important;min-height:500px!important}
+.a51-authorship-pass #watch .a4-program-tv{margin-top:-9svh!important}
+.a51-authorship-pass #watch .a4-program-explain{height:61svh!important;margin-top:-3svh!important}
+.a51-authorship-pass #watch .a4-program-create{height:58svh!important;margin-top:-2svh!important}
+.a51-authorship-pass #watch .a4-program-archive{height:44svh!important;min-height:360px!important;margin-top:0!important}
+
+/* TRUST — source upgrade, not faux-documentary styling. The actual holding-room snapshot is the scene;
+   annotation stays small and the website stops manufacturing a ghosted editorial portrait. */
+.a51-authorship-pass #about.a3-trust{
+  height:88svh!important;min-height:88svh!important;background:#d8d1c8!important;overflow:hidden!important;
+}
+.a51-authorship-pass #about:before{display:none!important;content:none!important}
+.a51-authorship-pass #about .a44-trust-world{
+  inset:auto!important;right:4vw!important;top:5svh!important;width:64vw!important;height:78svh!important;background:#cfc8bf!important;
+}
+.a51-authorship-pass #about .a44-trust-world img{
+  object-position:54% 47%!important;filter:saturate(.9) contrast(.99) brightness(.96)!important;
+}
+.a51-authorship-pass #about .a44-trust-note{
+  left:5vw!important;right:auto!important;top:auto!important;bottom:8svh!important;transform:none!important;width:min(330px,25vw)!important;
+}
+.a51-authorship-pass #about .a44-trust-note h2{
+  font-size:clamp(2.7rem,4.2vw,4.6rem)!important;line-height:.82!important;max-width:6ch!important;
+}
+.a51-authorship-pass #about .a44-trust-note p{font-size:.92rem!important;max-width:27ch!important;color:#5b554f!important}
+
+/* CASTING — A5 already earned this. Small desktop optical nudge only: the painting owns more territory,
+   the copy stops behaving like a separate website column. */
+@media (min-width:901px){
+  .a51-authorship-pass #picture-lauren .a44-casting-art{width:78vw!important;left:0!important}
+  .a51-authorship-pass #picture-lauren .a44-casting-copy{right:3.8vw!important;width:min(360px,25vw)!important;bottom:9svh!important}
+  .a51-authorship-pass #picture-lauren .a44-casting-copy h2{font-size:clamp(3.7rem,5.6vw,6.3rem)!important;max-width:5.2ch!important}
+}
+
+/* BOOK — remove the standard two-column contact-page skeleton. Intro opens the action;
+   real accessible fields spread below it as the producer's working surface. */
+.a51-authorship-pass #contact.a44-contact{min-height:96svh!important;padding:12svh 0 8svh!important;background:#08090b!important}
+.a51-authorship-pass #contact:before{
+  background:linear-gradient(112deg,#08090b 0 58%,#0d1011 58% 100%)!important;
+}
+.a51-authorship-pass #contact .contact{display:block!important}
+.a51-authorship-pass #contact .a4-booking-intro{padding:0!important;max-width:680px!important}
+.a51-authorship-pass #contact .a4-booking-intro .eyebrow{display:none!important}
+.a51-authorship-pass #contact .a4-booking-intro h2{font-size:clamp(3rem,4.7vw,5.4rem)!important;max-width:8ch!important}
+.a51-authorship-pass #contact .a4-booking-intro .lede{font-size:1.05rem!important;max-width:36ch!important}
+.a51-authorship-pass #contact .a4-booking-intro .muted{font-size:.82rem!important;max-width:58ch!important}
+.a51-authorship-pass #contact .a4-booking-form{
+  margin-top:8svh!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;column-gap:clamp(22px,3vw,52px)!important;row-gap:0!important;
+}
+.a51-authorship-pass #contact .a4-booking-form label{padding-top:1rem!important}
+.a51-authorship-pass #contact .a4-booking-form label.full{grid-column:1/4!important}
+.a51-authorship-pass #contact .booking-submit{grid-column:4!important;align-self:end!important;justify-self:stretch!important;text-align:center!important;margin:0 0 .85rem!important}
+.a51-authorship-pass #contact .booking-note,.a51-authorship-pass #contact .a4-booking-status{grid-column:1/-1!important}
+
+/* MOBILE — independent optical edit, not desktop restacked. */
+@media (max-width:900px){
+  .a51-authorship-pass #behavior.a3-person{background:#0c1716!important;height:90svh!important;min-height:90svh!important}
+  .a51-authorship-pass #behavior:before{background:linear-gradient(180deg,transparent 60%,rgba(3,9,9,.45) 100%)!important}
+  .a51-authorship-pass #behavior .a44-person-stage{left:0!important;right:0!important;top:0!important;width:100%!important;height:90svh!important}
+  .a51-authorship-pass #behavior .a44-person-stage video{object-position:72% 14%!important;transform:scale(1.18)!important;transform-origin:73% 20%}
+
+  .a51-authorship-pass #thinking.a3-thinking{min-height:133svh!important;background:#eaf5f0!important}
+  .a51-authorship-pass #thinking:after{width:100%!important;height:66svh!important;top:51svh!important;background:linear-gradient(180deg,rgba(234,245,240,0),#eaf5f0 28%,#eaf5f0 100%)!important}
+  .a51-authorship-pass #thinking .a44-thinking-main{left:0!important;top:0!important;width:100%!important;height:79svh!important}
+  .a51-authorship-pass #thinking .a44-thinking-main video{object-position:46% 14%!important}
+  .a51-authorship-pass #thinking .a44-thinking-main figcaption{left:18px!important;bottom:19svh!important;width:62vw!important}
+  .a51-authorship-pass #thinking .a44-thinking-main figcaption b{font-size:2.35rem!important}
+  .a51-authorship-pass #thinking .a44-thinking-copy{left:18px!important;right:18px!important;top:75svh!important;width:auto!important;padding:0!important}
+  .a51-authorship-pass #thinking .a44-thinking-copy p{font-size:clamp(3rem,13.5vw,4.4rem)!important;max-width:6ch!important}
+  .a51-authorship-pass #thinking .a44-authority-transmission{left:18px!important;right:18px!important;bottom:5svh!important;width:auto!important;height:19svh!important;min-height:130px!important}
+
+  .a51-authorship-pass #host-command.a3-host{height:92svh!important;min-height:92svh!important;background:#07100f!important}
+  .a51-authorship-pass #host-command:before{background:linear-gradient(180deg,transparent 58%,rgba(3,8,8,.5) 100%)!important}
+  .a51-authorship-pass #host-command .a44-host-stage{left:0!important;right:0!important;top:0!important;width:100%!important;height:92svh!important}
+  .a51-authorship-pass #host-command .a44-host-stage video{object-position:57% 16%!important;transform:scale(1.04)!important}
+  .a51-authorship-pass #host-command .a44-host-stage figcaption{left:18px!important;right:80px!important;bottom:30px!important;width:auto!important}
+  .a51-authorship-pass #host-command .a44-host-stage .a3-sound{right:18px!important;bottom:22px!important}
+
+  .a51-authorship-pass #activate-field.a3-activate{height:102svh!important;min-height:102svh!important}
+  .a51-authorship-pass #activate-field .a44-activate-stage{height:102svh!important}
+  .a51-authorship-pass #activate-field .a3-activate-room{left:0!important;top:4svh!important;width:100%!important;height:65svh!important}
+  .a51-authorship-pass #activate-field .a3-activate-copy{left:18px!important;top:48svh!important;width:70vw!important}
+  .a51-authorship-pass #activate-field .a44-activate-result{left:18px!important;right:18px!important;top:75svh!important;width:auto!important;padding-top:1rem!important;grid-template-columns:1fr!important;gap:.55rem!important}
+  .a51-authorship-pass #activate-field .a44-activate-result strong{font-size:clamp(4.3rem,18vw,6rem)!important}
+  .a51-authorship-pass #activate-field .a44-activate-result span{font-size:.56rem!important;max-width:34ch!important}
+
+  .a51-authorship-pass #watch .a43-watch-entry{min-height:42svh!important;padding:10svh 18px 4svh!important}
+  .a51-authorship-pass #watch .a43-watch-entry h2{font-size:clamp(4rem,17vw,5.8rem)!important}
+  .a51-authorship-pass #watch .a4-program{height:57svh!important;min-height:410px!important}
+  .a51-authorship-pass #watch .a4-program-tv{height:60svh!important;margin-top:-4svh!important}
+  .a51-authorship-pass #watch .a4-program-explain{height:59svh!important}
+  .a51-authorship-pass #watch .a4-program-create{height:53svh!important}
+  .a51-authorship-pass #watch .a4-program-archive{height:47svh!important;min-height:360px!important}
+
+  .a51-authorship-pass #about.a3-trust{height:88svh!important;min-height:88svh!important;background:#d8d1c8!important}
+  .a51-authorship-pass #about .a44-trust-world{left:0!important;right:0!important;top:0!important;width:100%!important;height:64svh!important}
+  .a51-authorship-pass #about .a44-trust-world img{object-position:45% 43%!important}
+  .a51-authorship-pass #about .a44-trust-note{left:18px!important;right:18px!important;bottom:26px!important;width:auto!important}
+  .a51-authorship-pass #about .a44-trust-note h2{font-size:clamp(2.8rem,12.5vw,4rem)!important}
+  .a51-authorship-pass #about .a44-trust-note p{font-size:.82rem!important}
+
+  .a51-authorship-pass #contact.a44-contact{min-height:auto!important;padding:10svh 0 7svh!important}
+  .a51-authorship-pass #contact .a4-booking-intro h2{font-size:clamp(3rem,13.5vw,4.7rem)!important}
+  .a51-authorship-pass #contact .a4-booking-form{margin-top:6svh!important;grid-template-columns:1fr!important}
+  .a51-authorship-pass #contact .a4-booking-form label.full,.a51-authorship-pass #contact .booking-submit,.a51-authorship-pass #contact .booking-note,.a51-authorship-pass #contact .a4-booking-status{grid-column:auto!important}
+  .a51-authorship-pass #contact .booking-submit{justify-self:start!important;min-width:170px!important;margin-top:1.8rem!important}
+}
+
+@media (max-width:390px){
+  .a51-authorship-pass #thinking.a3-thinking{min-height:138svh!important}
+  .a51-authorship-pass #behavior .a44-person-stage video{transform:scale(1.22)!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .a51-authorship-pass #behavior .a44-person-stage video,
+  .a51-authorship-pass #host-command .a44-host-stage video{transform:none!important}
+}
+
+/* Render QA repair — whole-head requirement + mobile Thinking cascade cleanup. */
+.a51-authorship-pass #host-command .a44-host-stage video{transform:none!important;transform-origin:center!important}
+@media (max-width:900px){
+  .a51-authorship-pass #host-command .a44-host-stage video{object-position:100% 16%!important;transform:none!important}
+  .a51-authorship-pass #thinking .a44-thinking-copy{
+    position:absolute!important;left:18px!important;right:18px!important;top:77svh!important;width:auto!important;
+    margin:0!important;padding:0!important;display:block!important;
+  }
+}
+/* Render QA repair — keep the mobile thought legible as one edited sequence, with proof arriving after the thesis. */
+@media (max-width:900px){
+  .a51-authorship-pass #thinking .a44-thinking-copy{top:82svh!important;z-index:5!important}
+  .a51-authorship-pass #thinking .a44-thinking-copy p{font-size:clamp(2.8rem,12vw,4rem)!important;line-height:.82!important;max-width:6.6ch!important}
+  .a51-authorship-pass #thinking .a44-authority-transmission{
+    top:112svh!important;bottom:auto!important;height:16svh!important;min-height:118px!important;z-index:6!important;
+  }
+}
+@media (max-width:900px){
+  .a51-authorship-pass #thinking .a44-authority-transmission{
+    position:absolute!important;left:18px!important;right:18px!important;width:auto!important;margin:0!important;
+  }
+}

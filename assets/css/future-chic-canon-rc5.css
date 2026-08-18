@@ -1,0 +1,650 @@
+/* ========================================================================
+   SEASON ZERO — CANON RC5 / ANTI-VIBE-CODE FIRST VIEWPORT
+   Review-only visual-authorship pass. Built over the protected RC4 package.
+
+   Design intent:
+   - Lauren leads before interface language.
+   - One real proof moment, one cue, four capability routes.
+   - No dashboard furniture, floating status pills, reactive glow field,
+     tuner rail, timecode, or decorative “system” density.
+   - Daylight and On Air are two states of the same editorial set.
+   ======================================================================== */
+
+/* ---------- hero-local tokens ---------- */
+.stage.fc-canon-hero{
+  --hero-paper:#fbfbf8;
+  --hero-ink:#101113;
+  --hero-soft:#66645f;
+  --hero-aqua:#0bbcd0;
+  --hero-pink:#ff1e86;
+  --hero-violet:#6a2be0;
+  --hero-coral:#ff6a44;
+  --hero-rule:rgba(16,17,19,.18);
+  --hero-pad:clamp(28px,4.5vw,72px);
+  --hero-deck:70px;
+  min-height:100svh;
+  min-height:100vh;
+  overflow:hidden;
+  isolation:isolate;
+  background:var(--hero-paper);
+  color:var(--hero-ink);
+  padding:58px var(--hero-pad) var(--hero-deck);
+  transition:background-color .32s ease,color .32s ease;
+}
+
+/* Strip inherited machine-world furniture. */
+.fc-canon-hero .wake-flash,
+.fc-canon-hero .signal-field,
+.fc-canon-hero .field,
+.fc-canon-hero .rings,
+.fc-canon-hero .sigbug,
+.fc-canon-hero .monitor-foot,
+.fc-canon-hero .fc-timecode,
+.fc-canon-hero .fc-lore,
+.fc-canon-hero .fc-onair,
+.fc-canon-hero .fc-world .glass-veil,
+.fc-canon-hero .fc-world .horizon,
+.fc-canon-hero .fc-world .prism,
+.fc-canon-hero .fc-world .stage-plinth,
+.fc-canon-hero .fc-world .camera-rig,
+.fc-canon-hero .fc-world .cue-lamp,
+.fc-canon-hero .fc-world .chrome-arm,
+.fc-canon-hero .fc-world .tuner-readout,
+.fc-canon-hero .fc-world .reflection{
+  display:none !important;
+}
+
+.fc-canon-hero::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:58px 0 var(--hero-deck) auto;
+  width:23vw;
+  background:var(--hero-aqua);
+  opacity:.075;
+  pointer-events:none;
+  transition:background-color .32s ease,opacity .32s ease;
+}
+.fc-canon-hero::after{
+  content:"";
+  position:absolute;
+  z-index:4;
+  right:23vw;
+  top:58px;
+  bottom:var(--hero-deck);
+  width:1px;
+  background:rgba(11,188,208,.38);
+  pointer-events:none;
+  transition:background-color .32s ease,width .32s ease;
+}
+
+
+
+/* One restrained piece of “production architecture.” */
+.fc-canon-hero .fc-world{
+  position:absolute;
+  inset:58px 0 var(--hero-deck);
+  z-index:1;
+  pointer-events:none;
+}
+.fc-canon-hero .fc-world .glass-arc{display:none !important;}
+
+.fc-canon-hero .fc-world .cable{display:none !important;}
+
+.fc-canon-hero .fc-world .cable::after{content:none;}
+
+
+/* ---------- Lauren: dominant, unframed editorial image ---------- */
+.fc-canon-hero .fc-primary{
+  position:absolute;
+  z-index:2;
+  margin:0;
+  left:38vw;
+  right:auto;
+  top:58px;
+  bottom:var(--hero-deck);
+  width:55vw;
+  overflow:hidden;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  transform:none;
+}
+.fc-canon-hero .fc-primary::before,
+.fc-canon-hero .fc-primary::after{content:none}
+.fc-canon-hero .fc-primary img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:0% 100%;
+  transform:none;
+  filter:none;
+  border:0;
+  box-shadow:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);
+}
+
+/* ---------- identity: one type family, visible hierarchy ---------- */
+.fc-canon-hero .fc-copy{
+  position:absolute;
+  z-index:5;
+  left:var(--hero-pad);
+  top:clamp(132px,16vh,170px);
+  width:min(49vw,650px);
+  color:var(--hero-ink);
+  transform:none;
+}
+.fc-canon-hero .fc-kicker{
+  margin:0 0 18px;
+  font-family:var(--f-display);
+  font-size:.78rem;
+  line-height:1;
+  font-variation-settings:'wght' 560,'wdth' 92;
+  letter-spacing:.015em;
+  text-transform:none;
+  color:var(--hero-soft);
+}
+.fc-canon-hero .fc-kicker::before{content:none}
+.fc-canon-hero .fc-name{
+  margin:0;
+  width:max-content;
+  max-width:100%;
+  font-family:var(--f-display);
+  font-size:clamp(4.45rem,6vw,6.35rem);
+  line-height:.79;
+  letter-spacing:-.065em;
+  color:var(--hero-ink);
+  text-transform:none;
+  text-shadow:none;
+}
+.fc-canon-hero .fc-name span{display:block}
+.fc-canon-hero .fc-name span:first-child{
+  font-variation-settings:'wght' 850,'wdth' 76;
+  text-transform:uppercase;
+}
+.fc-canon-hero .fc-name span:last-child{
+  margin-left:clamp(28px,3vw,48px);
+  font-size:.84em;
+  font-variation-settings:'wght' 430,'wdth' 94;
+  letter-spacing:-.05em;
+}
+.fc-canon-hero .fc-role{
+  margin:22px 0 0;
+  font-family:var(--f-display);
+  font-size:.9rem;
+  font-variation-settings:'wght' 720,'wdth' 90;
+  letter-spacing:.015em;
+  text-transform:none;
+  color:var(--hero-ink);
+}
+.fc-canon-hero .fc-promise{
+  margin:10px 0 0;
+  max-width:24ch;
+  font-family:var(--f-body);
+  font-size:clamp(1.05rem,1.45vw,1.28rem);
+  line-height:1.25;
+  letter-spacing:-.02em;
+  color:var(--hero-ink);
+}
+.fc-canon-hero .fc-promise b{font-weight:700;color:inherit}
+.fc-canon-hero .fc-reel-link{
+  display:inline-block;
+  margin-top:20px;
+  color:var(--hero-ink);
+  font-family:var(--f-body);
+  font-size:.88rem;
+  line-height:1;
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+  padding-bottom:4px;
+  background:none;
+  box-shadow:none;
+  clip-path:none;
+}
+.fc-canon-hero .fc-reel-link:hover{color:var(--hero-pink)}
+
+/* ---------- one real proof moment, treated like editorial evidence ---------- */
+.fc-canon-hero .signals{
+  position:absolute;
+  z-index:6;
+  left:var(--hero-pad);
+  top:auto;
+  right:auto;
+  bottom:calc(var(--hero-deck) + 32px);
+  width:clamp(245px,20vw,295px);
+  height:auto;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#111;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  transform:none;
+}
+.fc-canon-hero .signal{
+  position:absolute;
+  inset:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  transition:opacity .22s ease;
+}
+.fc-canon-hero .signal::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:18%;
+  background:rgba(0,0,0,.12);
+  pointer-events:none;
+}
+.fc-canon-hero .signal video,
+.fc-canon-hero .signal img.plate{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:none;
+  transform:none;
+}
+.fc-canon-hero .signal[data-lane="host"] video{object-position:50% 42%}
+.fc-canon-hero .signal[data-lane="create"] video{object-position:50% 50%}
+.fc-canon-hero .signal[data-lane="explain"] img.plate{object-position:50% 24%}
+.fc-canon-hero .signal[data-lane="activate"] img.plate{object-position:50% 42%}
+.fc-canon-hero .srcmon{display:none !important}
+
+.fc-canon-hero .fc-signal-meta{
+  position:absolute;
+  z-index:7;
+  left:calc(var(--hero-pad) + clamp(245px,20vw,295px) + 20px);
+  bottom:calc(var(--hero-deck) + 30px);
+  width:min(245px,19vw);
+  min-width:205px;
+  padding:0;
+  color:var(--hero-ink);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  backdrop-filter:none;
+  transform:none;
+}
+.fc-canon-hero .fc-signal-meta .ey{
+  margin:0 0 7px;
+  font-family:var(--f-display);
+  font-size:.66rem;
+  line-height:1;
+  font-variation-settings:'wght' 760,'wdth' 88;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--signal);
+}
+.fc-canon-hero .fc-signal-meta .ey::before,
+.fc-canon-hero .fc-signal-meta .ey::after{content:none}
+.fc-canon-hero .fc-signal-meta h2{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:clamp(.98rem,1.25vw,1.16rem);
+  line-height:1.04;
+  font-variation-settings:'wght' 750,'wdth' 86;
+  letter-spacing:-.03em;
+  color:var(--hero-ink);
+  text-transform:none;
+}
+.fc-canon-hero .fc-signal-meta > #lt-note{display:none}
+.fc-canon-hero .fc-castline{
+  margin:10px 0 0;
+  padding:0;
+  border:0;
+  display:block;
+  color:var(--hero-soft);
+  background:none;
+}
+.fc-canon-hero .fc-castline span{
+  display:block;
+  margin:0 0 3px;
+  font-family:var(--f-body);
+  font-size:.7rem;
+  line-height:1.2;
+}
+.fc-canon-hero .fc-castline strong{
+  display:block;
+  font-family:var(--f-display);
+  font-size:.66rem;
+  line-height:1.35;
+  font-variation-settings:'wght' 640,'wdth' 92;
+  letter-spacing:.025em;
+  color:var(--hero-ink);
+}
+.fc-canon-hero .open-file{
+  margin:10px 0 0;
+  padding:0 0 3px;
+  width:auto;
+  min-height:0;
+  border:0;
+  border-bottom:1px solid currentColor;
+  border-radius:0;
+  background:transparent;
+  color:var(--hero-ink);
+  font-family:var(--f-body);
+  font-size:.72rem;
+  font-weight:500;
+  letter-spacing:0;
+  text-transform:none;
+  box-shadow:none;
+  cursor:pointer;
+}
+.fc-canon-hero .open-file:hover{color:var(--hero-pink);background:transparent}
+
+/* ---------- cue: one action, no fake switch or status furniture ---------- */
+.fc-canon-hero .fc-cue{
+  position:absolute;
+  z-index:10;
+  top:86px;
+  right:var(--hero-pad);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  width:auto;
+  min-width:0;
+  margin:0;
+  padding:0 0 4px;
+  border:0;
+  border-bottom:1px solid rgba(16,17,19,.4);
+  border-radius:0;
+  background:transparent;
+  color:var(--hero-ink);
+  font-family:var(--f-display);
+  font-size:.67rem;
+  line-height:1;
+  font-variation-settings:'wght' 700,'wdth' 88;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  box-shadow:none;
+  clip-path:none;
+  cursor:pointer;
+}
+.fc-canon-hero .fc-cue::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  border:1px solid currentColor;
+  background:transparent;
+}
+.fc-canon-hero .fc-cue .cue-switch{display:none}
+.fc-canon-hero .fc-cue:hover{color:var(--hero-pink);border-color:currentColor}
+
+/* ---------- four capabilities: typography, not four components ---------- */
+.fc-canon-hero .deck{
+  position:absolute;
+  z-index:12;
+  left:0;
+  right:0;
+  top:auto;
+  bottom:0;
+  width:auto;
+  height:var(--hero-deck);
+  background:rgba(251,251,248,.97);
+  border:0;
+  border-top:1px solid var(--hero-rule);
+  opacity:1;
+  transform:none;
+}
+.fc-canon-hero .deck-inner{
+  height:100%;
+  padding:0 var(--hero-pad);
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  gap:0;
+}
+.fc-canon-hero .tune{
+  width:min(660px,60vw);
+  display:grid;
+  grid-template-columns:repeat(4,max-content);
+  align-items:center;
+  gap:clamp(26px,4.2vw,58px);
+}
+.fc-canon-hero .tune button{
+  position:relative;
+  padding:0 0 7px;
+  border:0;
+  background:transparent;
+  color:var(--hero-soft);
+  font-family:var(--f-display);
+  font-size:.76rem;
+  line-height:1;
+  font-variation-settings:'wght' 620,'wdth' 90;
+  letter-spacing:.035em;
+  text-transform:none;
+  text-align:left;
+  cursor:pointer;
+  transition:color .18s ease;
+}
+.fc-canon-hero .tune button .n{display:none}
+.fc-canon-hero .tune button::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:var(--c);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .18s ease;
+}
+.fc-canon-hero .tune button:hover{color:var(--hero-ink);background:transparent}
+.fc-canon-hero .tune button[aria-selected="true"]{
+  color:var(--hero-ink);
+  font-weight:inherit;
+  border:0;
+  background:transparent;
+}
+.fc-canon-hero .tune button[aria-selected="true"]::after{transform:scaleX(1)}
+
+/* ---------- first-viewport masthead: editorial, not glass UI ---------- */
+html[data-world="on-air"] .rig{
+  background:rgba(251,251,248,.96);
+  backdrop-filter:none;
+  border-bottom:1px solid rgba(16,17,19,.14);
+}
+html[data-world="on-air"] .rig::after{display:none}
+html[data-world="on-air"] .world-dial{opacity:0;visibility:hidden}
+html[data-world="on-air"] .rig .tally{display:none}
+html[data-world="on-air"] .rig nav a{font-family:var(--f-display);font-size:.75rem;letter-spacing:.015em;text-transform:none}
+html[data-world="on-air"] .rig .book{border-radius:0;box-shadow:none}
+
+/* ---------- ON AIR: same set, different condition ---------- */
+:root[data-cue="broadcast"] .stage.fc-canon-hero{
+  --hero-paper:#111317;
+  --hero-ink:#f8f5ef;
+  --hero-soft:#b7b3ad;
+  --hero-rule:rgba(248,245,239,.2);
+  background:#111317;
+  color:var(--hero-ink);
+}
+:root[data-cue="broadcast"] .fc-canon-hero::before{
+  background:var(--hero-violet);
+  opacity:.22;
+}
+:root[data-cue="broadcast"] .fc-canon-hero::after{
+  background:var(--hero-pink);
+  width:2px;
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-primary img{
+  filter:saturate(.86) brightness(.76) contrast(1.04);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-cue{
+  color:var(--hero-pink);
+  border-color:currentColor;
+}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-cue::before{
+  background:var(--hero-pink);
+  border-color:var(--hero-pink);
+}
+:root[data-cue="broadcast"] .fc-canon-hero .deck{background:rgba(17,19,23,.97)}
+:root[data-cue="broadcast"] .fc-canon-hero .fc-reel-link,
+:root[data-cue="broadcast"] .fc-canon-hero .open-file{color:var(--hero-ink)}
+:root[data-cue="broadcast"] html[data-world="on-air"] .rig,
+:root[data-cue="broadcast"][data-world="on-air"] .rig{
+  background:rgba(17,19,23,.96);
+  border-bottom-color:rgba(248,245,239,.18);
+  color:#f8f5ef;
+}
+:root[data-cue="broadcast"][data-world="on-air"] .rig nav a{color:#c5c1ba}
+:root[data-cue="broadcast"][data-world="on-air"] .rig nav a:hover{color:#fff}
+
+/* ---------- motion discipline ---------- */
+.fc-canon-hero.woke .deck,
+.fc-canon-hero.woke .signal,
+.fc-canon-hero.woke .fc-primary,
+.fc-canon-hero.woke .fc-copy{
+  animation:none !important;
+}
+::view-transition-group(active-signal),
+::view-transition-group(active-title),
+::view-transition-group(active-stamp),
+::view-transition-group(evidence-field),
+::view-transition-old(active-signal),
+::view-transition-new(active-signal),
+::view-transition-old(active-title),
+::view-transition-new(active-title),
+::view-transition-old(active-stamp),
+::view-transition-new(active-stamp),
+::view-transition-old(evidence-field),
+::view-transition-new(evidence-field){animation:none !important}
+
+/* ---------- mobile: authored entrance, not shrunken desktop ---------- */
+@media (max-width:760px){
+  .stage.fc-canon-hero{
+    --hero-pad:20px;
+    --hero-deck:62px;
+    min-height:100svh;
+    padding:54px var(--hero-pad) var(--hero-deck);
+  }
+  .fc-canon-hero::before{
+    inset:54px 0 auto auto;
+    width:24vw;
+    height:48svh;
+  }
+  .fc-canon-hero::after{
+    left:auto;
+    right:0;
+    top:54px;
+    bottom:auto;
+    width:2px;
+    height:46svh;
+    min-height:330px;
+    max-height:410px;
+  }
+  .fc-canon-hero .fc-world{inset:54px 0 var(--hero-deck)}
+
+  .fc-canon-hero .fc-primary{
+    top:54px;
+    left:0;
+    right:0;
+    bottom:auto;
+    width:100%;
+    height:46svh;
+    min-height:330px;
+    max-height:410px;
+  }
+  .fc-canon-hero .fc-primary img{
+    object-fit:cover;
+    object-position:50% 24%;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 86%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 86%,transparent 100%);
+  }
+  .fc-canon-hero .fc-copy{
+    left:var(--hero-pad);
+    top:calc(54px + min(43svh,382px));
+    width:calc(100% - 40px);
+  }
+  .fc-canon-hero .fc-kicker{font-size:.66rem;margin-bottom:9px;letter-spacing:.01em}
+  .fc-canon-hero .fc-name{
+    font-size:clamp(3.15rem,15vw,3.85rem);
+    line-height:.8;
+    letter-spacing:-.065em;
+  }
+  .fc-canon-hero .fc-name span:last-child{margin-left:22px;font-size:.82em}
+  .fc-canon-hero .fc-role{margin-top:12px;font-size:.72rem;letter-spacing:.01em}
+  .fc-canon-hero .fc-promise{margin-top:6px;font-size:.98rem;line-height:1.2}
+  .fc-canon-hero .fc-reel-link{display:none}
+
+  .fc-canon-hero .fc-cue{
+    top:69px;
+    right:16px;
+    font-size:.59rem;
+    color:#151617;
+    border-color:rgba(16,17,19,.35);
+    text-shadow:0 1px 6px rgba(251,251,248,.75);
+  }
+  :root[data-cue="broadcast"] .fc-canon-hero .fc-cue{color:var(--hero-pink);text-shadow:none}
+
+  .fc-canon-hero .signals{
+    left:var(--hero-pad);
+    bottom:calc(var(--hero-deck) + 15px);
+    width:112px;
+    height:67px;
+    aspect-ratio:auto;
+  }
+  .fc-canon-hero .fc-signal-meta{
+    left:148px;
+    bottom:calc(var(--hero-deck) + 13px);
+    width:calc(100% - 168px);
+    min-width:0;
+  }
+  .fc-canon-hero .fc-signal-meta .ey{font-size:.56rem;margin-bottom:4px}
+  .fc-canon-hero .fc-signal-meta h2{font-size:.78rem;line-height:1.04}
+  .fc-canon-hero .fc-castline{margin-top:5px}
+  .fc-canon-hero .fc-castline span{display:none}
+  .fc-canon-hero .fc-castline strong{
+    font-size:.52rem;
+    line-height:1.22;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .fc-canon-hero .open-file{display:none}
+
+  .fc-canon-hero .deck-inner{padding:0 var(--hero-pad)}
+  .fc-canon-hero .tune{
+    width:100%;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  .fc-canon-hero .tune button{
+    font-size:.65rem;
+    padding-bottom:6px;
+    white-space:nowrap;
+  }
+
+  html[data-world="on-air"] .rig{padding:.6rem var(--hero-pad)}
+  html[data-world="on-air"] .rig nav{gap:.75rem}
+  html[data-world="on-air"] .rig nav > a:not(.book){display:none}
+  html[data-world="on-air"] .rig .book{padding:.55rem .78rem;font-size:.62rem}
+}
+
+@media (max-width:380px){
+  .fc-canon-hero .fc-copy{top:calc(54px + min(41svh,350px))}
+  .fc-canon-hero .fc-name{font-size:3.05rem}
+  .fc-canon-hero .fc-promise{font-size:.9rem}
+  .fc-canon-hero .signals{width:100px;height:60px}
+  .fc-canon-hero .fc-signal-meta{left:132px;width:calc(100% - 150px)}
+  .fc-canon-hero .tune{gap:9px}
+  .fc-canon-hero .tune button{font-size:.61rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fc-canon-hero *,
+  .fc-canon-hero *::before,
+  .fc-canon-hero *::after{animation:none !important;transition:none !important}
+}

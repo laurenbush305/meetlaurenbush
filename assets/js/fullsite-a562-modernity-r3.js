@@ -1,0 +1,36 @@
+(()=>{
+  const watch=document.getElementById('watch');
+  if(!watch) return;
+  const names={scrambled:'SCRAMBLED UP',wimpb:"WHAT'S IN MY PICKLEBALL BAG",finance:'FINANCE',apq:'PICKLEBALL AUNTIE',archive:'ARCHIVE'};
+  const modes={scrambled:'TELEVISION',wimpb:'EXPLAIN',finance:'INTELLIGENCE',apq:'COMMERCIAL',archive:'ARCHIVE'};
+  const order=['scrambled','wimpb','finance','apq','archive'];
+  const deck=watch.querySelector('.a562-r3-signal-deck');
+  const guide=watch.querySelector('#a562-r3-guide');
+  const sun=watch.querySelector('#a562-r3-sun');
+  const currentName=watch.querySelector('#a562-r3-current-name');
+  const currentMode=watch.querySelector('#a562-r3-current-mode');
+  const prevName=watch.querySelector('#a562-r3-prev-name');
+  const nextName=watch.querySelector('#a562-r3-next-name');
+  const state=watch.querySelector('#a562-r3-watch-state');
+  const guideButtons=[...watch.querySelectorAll('.a562-r3-guide [data-a56-tune]')];
+  const stepButtons=[...watch.querySelectorAll('[data-r3-step]')];
+  const sync=()=>{
+    const key=watch.dataset.a56Program||'scrambled';
+    const i=Math.max(0,order.indexOf(key));
+    const prev=order[(i-1+order.length)%order.length], next=order[(i+1)%order.length];
+    if(currentName) currentName.textContent=names[key];
+    if(currentMode) currentMode.textContent=modes[key];
+    if(prevName) prevName.textContent=names[prev];
+    if(nextName) nextName.textContent=names[next];
+    if(state) state.textContent=modes[key];
+    stepButtons.forEach(btn=>{const delta=Number(btn.dataset.r3Step);const target=order[(i+delta+order.length)%order.length];btn.dataset.r3Target=target;btn.setAttribute('aria-label',`${delta<0?'Previous':'Next'} signal: ${names[target]}`)});
+    guideButtons.forEach(b=>b.setAttribute('aria-current',b.dataset.a56Tune===key?'true':'false'));
+  };
+  const closeGuide=()=>{if(!guide||!sun)return;guide.hidden=true;sun.setAttribute('aria-expanded','false')};
+  sun?.addEventListener('click',e=>{e.preventDefault();const open=guide.hidden;guide.hidden=!open;sun.setAttribute('aria-expanded',open?'true':'false');if(open){const active=guideButtons.find(b=>b.dataset.a56Tune===watch.dataset.a56Program);active?.focus({preventScroll:true})}});
+  stepButtons.forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();const target=btn.dataset.r3Target;guideButtons.find(b=>b.dataset.a56Tune===target)?.click();closeGuide()}));
+  guideButtons.forEach(btn=>btn.addEventListener('click',()=>{setTimeout(()=>{sync();closeGuide()},40)}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!guide?.hidden){closeGuide();sun?.focus()}});
+  new MutationObserver(()=>{const wasOpen=!!guide&&!guide.hidden;sync();if(wasOpen){closeGuide();sun?.focus({preventScroll:true})}}).observe(watch,{attributes:true,attributeFilter:['data-a56-program']});
+  sync();
+})();

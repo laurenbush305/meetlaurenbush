@@ -1,0 +1,259 @@
+/* A5.6.2 — Lauren Bush Television / surgical network correction
+   Opens only Watch, the two named signal breaks, production-material surfaces, and Trust daylight. */
+body.a562-surgical-correction{
+  --a562-cream:#f7f0e5;--a562-aqua:#9ce9e5;--a562-powder:#b9dff0;--a562-pink:#ff2d86;
+  --a562-lime:#b9ef27;--a562-ink:#10181b;--a562-green:#5caa74;--a562-violet:#6f3b92;
+}
+
+/* Protected page-load ident: intentionally no A5.6.2 selectors target .a56-ident. */
+
+/* Scrambled -> Host: source-derived after-hours broadcast break. */
+body.a562-surgical-correction .a56-host.a56-signal-in:before{
+  background:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp') center/cover no-repeat!important;
+  mix-blend-mode:normal!important;filter:none!important;opacity:0;
+  animation:a562HostBreak .22s steps(4,end) both!important;
+}
+body.a562-surgical-correction .a56-host.a56-signal-in:after{
+  height:2px!important;background:#f5f8f7!important;
+  box-shadow:0 0 14px #fff,0 0 28px rgba(156,233,229,.62)!important;
+  animation:a562HostSilver .22s linear both!important;
+}
+@keyframes a562HostBreak{
+  0%{opacity:0;clip-path:inset(0 0 100% 0);transform:none}
+  14%{opacity:.7;clip-path:inset(3% 0 73% 0);transform:translateX(.5%)}
+  32%{opacity:.96;clip-path:inset(18% 0 45% 0);transform:translateX(-1.2%)}
+  53%{opacity:1;clip-path:inset(0 0 12% 0);transform:translateX(.7%)}
+  71%{opacity:.98;clip-path:inset(8% 0 0 0);transform:translateX(-.4%)}
+  86%{opacity:.58;clip-path:inset(64% 0 0 0);transform:none}
+  100%{opacity:0;clip-path:inset(100% 0 0 0);transform:none}
+}
+@keyframes a562HostSilver{0%{opacity:0;top:19%}24%{opacity:1;top:37%}56%{opacity:.96;top:60%}82%{opacity:.7;top:78%}100%{opacity:0;top:88%}}
+
+/* WATCH: same large media stage; local network temperature actually changes by program. */
+body.a562-surgical-correction .a56-watch{
+  --a562-rail-bg:rgba(248,243,232,.97);--a562-rail-line:rgba(21,55,61,.34);--a562-rail-active:var(--a562-pink);
+  --a562-stage-overlay:none;--a562-stage-opacity:0;
+  transition:background-color .14s linear,color .14s linear;
+}
+body.a562-surgical-correction .a56-watch[data-a56-program="scrambled"]{
+  background:#21112c;--a562-rail-bg:rgba(248,240,233,.97);--a562-rail-active:#ff5a9f;
+  --a562-stage-overlay:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp');--a562-stage-opacity:.075;
+}
+body.a562-surgical-correction .a56-watch[data-a56-program="wimpb"]{
+  background:#b9e0e9;--a562-rail-bg:rgba(247,245,232,.97);--a562-rail-active:var(--a562-lime);
+  --a562-stage-overlay:url('../network/a5.6.2/LBTV_SpelmanDaytimeSignal.webp');--a562-stage-opacity:.13;
+}
+body.a562-surgical-correction .a56-watch[data-a56-program="finance"]{
+  background:#101721;--a562-rail-bg:rgba(230,239,242,.96);--a562-rail-active:#66bce8;
+  --a562-stage-overlay:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp');--a562-stage-opacity:.045;
+}
+body.a562-surgical-correction .a56-watch[data-a56-program="apq"]{
+  background:#10243a;--a562-rail-bg:rgba(241,246,244,.97);--a562-rail-active:#22d6e4;
+  --a562-stage-overlay:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp');--a562-stage-opacity:.06;
+}
+body.a562-surgical-correction .a56-watch[data-a56-program="archive"]{
+  background:#766962;--a562-rail-bg:rgba(238,232,220,.97);--a562-rail-active:#9b8f7f;
+  --a562-stage-overlay:url('../network/a5.6.2/LBTV_ArchiveSignal.webp');--a562-stage-opacity:.12;
+}
+body.a562-surgical-correction .a56-watch-stage:after{
+  content:"";position:absolute;inset:0;z-index:7;pointer-events:none;background-image:var(--a562-stage-overlay);
+  background-size:cover;background-position:center;opacity:var(--a562-stage-opacity);mix-blend-mode:screen;
+  transition:opacity .14s linear;
+}
+body.a562-surgical-correction .a56-watch[data-a56-program="archive"] .a56-watch-stage:after{mix-blend-mode:multiply}
+body.a562-surgical-correction .a56-watch[data-a56-program="apq"] .a56-watch-stage:after{filter:hue-rotate(22deg) saturate(1.35)}
+body.a562-surgical-correction .a56-watch[data-a56-program="finance"] .a56-watch-stage:after{filter:saturate(.62) contrast(1.1)}
+
+/* One tactile LBTV tuning object, with a real production seam instead of generic UI chrome. */
+body.a562-surgical-correction .a56-tuner{
+  background:var(--a562-rail-bg)!important;color:var(--a562-ink)!important;
+  border:1px solid rgba(255,255,255,.66)!important;overflow-x:auto!important;overflow-y:hidden!important;
+  box-shadow:0 18px 50px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.9)!important;
+  isolation:isolate;scrollbar-width:none;
+}
+body.a562-surgical-correction .a56-tuner::-webkit-scrollbar{display:none}
+body.a562-surgical-correction .a56-tuner:after{
+  content:"";position:absolute;left:2.5%;right:2.5%;top:calc(46% - 14px);height:28px;z-index:1;
+  background:url('../network/a5.6.2/LBTV_NetworkSignalSeam.svg') center/100% 100% no-repeat;opacity:.82;pointer-events:none;
+}
+body.a562-surgical-correction .a56-tuner:before{z-index:1;background:var(--a562-rail-line)!important}
+body.a562-surgical-correction .a561-frequency-line{z-index:2;pointer-events:none}
+body.a562-surgical-correction .a56-tuner button{
+  z-index:4!important;min-width:0;min-height:96px!important;cursor:pointer!important;touch-action:manipulation;
+  border-radius:3px!important;outline:none!important;
+}
+body.a562-surgical-correction .a56-tuner button:before{background:#f2f6f4!important}
+body.a562-surgical-correction .a56-tuner button.is-active:before{
+  background:var(--a562-rail-active)!important;
+  box-shadow:0 0 0 6px color-mix(in srgb,var(--a562-rail-active) 18%,transparent),0 0 26px color-mix(in srgb,var(--a562-rail-active) 42%,transparent)!important;
+}
+body.a562-surgical-correction .a56-tuner button:focus-visible{
+  box-shadow:inset 0 0 0 2px var(--a562-ink),inset 0 0 0 5px rgba(255,255,255,.92)!important;
+}
+body.a562-surgical-correction .a56-tuner[aria-busy="true"]{cursor:wait}
+body.a562-surgical-correction .a56-tuner[aria-busy="true"] button{cursor:wait}
+
+/* Transition covers the old program; media swaps underneath only after target is ready. */
+body.a562-surgical-correction .a56-tune-disturbance{z-index:20!important;overflow:hidden;background:transparent!important;opacity:0}
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance{display:block!important;animation:a562SignalCover .24s linear both!important}
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance i{
+  position:absolute;inset:-2%;background:center/cover no-repeat!important;filter:none!important;mix-blend-mode:normal!important;opacity:1!important;
+  animation:a562SignalDisplace .24s steps(4,end) both!important;
+}
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance i:before,
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance i:after{
+  content:"";position:absolute;left:0;right:0;height:22%;background:inherit;background-size:cover;opacity:.82
+}
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance i:before{top:22%;transform:translateX(-1.4%)}
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance i:after{top:61%;transform:translateX(1.1%)}
+body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance b{
+  display:block!important;position:absolute;left:0;right:0;height:2px!important;z-index:3;background:#f7fbfb!important;
+  box-shadow:0 0 14px #fff,0 0 26px rgba(156,233,229,.6)!important;animation:a562SilverSweep .24s linear both!important
+}
+body.a562-surgical-correction .a56-watch[data-a562-target="wimpb"].a562-transitioning .a56-tune-disturbance i{background-image:url('../network/a5.6.2/LBTV_DaylightSignal.webp')!important}
+body.a562-surgical-correction .a56-watch[data-a562-target="wimpb"].a562-transitioning .a56-tune-disturbance{background:rgba(245,255,255,.34)!important}
+body.a562-surgical-correction .a56-watch[data-a562-target="archive"].a562-transitioning .a56-tune-disturbance i{background-image:url('../network/a5.6.2/LBTV_ArchiveSignal.webp')!important}
+body.a562-surgical-correction .a56-watch[data-a562-target="archive"].a562-transitioning .a56-tune-disturbance{background:rgba(116,106,99,.16)!important}
+body.a562-surgical-correction .a56-watch[data-a562-target="scrambled"].a562-transitioning .a56-tune-disturbance i,
+body.a562-surgical-correction .a56-watch[data-a562-target="finance"].a562-transitioning .a56-tune-disturbance i{background-image:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp')!important}
+body.a562-surgical-correction .a56-watch[data-a562-target="apq"].a562-transitioning .a56-tune-disturbance i{background-image:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp')!important;filter:hue-rotate(26deg) saturate(1.28)!important}
+@keyframes a562SignalCover{
+  0%{opacity:0}12%{opacity:.62}30%{opacity:.93}48%{opacity:1}66%{opacity:.97}82%{opacity:.52}100%{opacity:0}
+}
+@keyframes a562SignalDisplace{
+  0%{transform:none;clip-path:inset(0 0 100% 0)}
+  18%{transform:translateX(.8%);clip-path:inset(0 0 64% 0)}
+  37%{transform:translateX(-1.1%);clip-path:inset(16% 0 24% 0)}
+  54%{transform:translateX(.5%);clip-path:inset(0 0 6% 0)}
+  72%{transform:translateX(-.3%);clip-path:inset(8% 0 0 0)}
+  100%{transform:none;clip-path:inset(100% 0 0 0)}
+}
+@keyframes a562SilverSweep{0%{opacity:0;top:16%}20%{opacity:1;top:33%}51%{opacity:.95;top:58%}78%{opacity:.72;top:78%}100%{opacity:0;top:88%}}
+
+/* Keep the program identifier brief and informational. */
+body.a562-surgical-correction .a56-watch.a562-open .a56-program-open{display:flex!important;animation:a562ProgramID .5s cubic-bezier(.2,.8,.2,1) both!important}
+@keyframes a562ProgramID{0%{opacity:0;transform:translateY(8px)}16%,58%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-3px)}}
+
+/* Trust: same evidence/crops, brighter operator field using the transformed backstage signal. */
+body.a562-surgical-correction .a561-trust-daylight{
+  background-image:url('../network/a5.6.2/LBTV_BackOfRoomSignal.webp')!important;
+  background-position:center 62%!important;background-size:cover!important;opacity:.115!important;mix-blend-mode:multiply!important
+}
+body.a562-surgical-correction .a56-trust-glow{
+  background:radial-gradient(circle at 74% 13%,rgba(73,174,229,.22),transparent 30%),
+             radial-gradient(circle at 14% 66%,rgba(156,233,229,.22),transparent 34%),
+             linear-gradient(112deg,#f7f0e5 0 46%,#d8eef0 46% 72%,rgba(255,255,255,.72) 72%)!important;
+}
+body.a562-surgical-correction .a56-trust:after{
+  content:"";position:absolute;left:0;right:0;top:0;height:12px;z-index:8;pointer-events:none;
+  background:url('../network/a5.6.2/LBTV_DaylightSignal.webp') center 48%/cover no-repeat;opacity:.58
+}
+
+@media(max-width:760px){
+  body.a562-surgical-correction .a56-tuner{height:26vh!important;padding:.9rem 5vw 1.15rem!important;gap:1.7rem!important;scroll-snap-type:x mandatory!important}
+  body.a562-surgical-correction .a56-tuner:after{left:4vw;right:4vw;top:32px;height:32px}
+  body.a562-surgical-correction .a56-tuner button{flex:0 0 54vw!important;min-height:108px!important;padding:3.65rem .3rem .8rem!important;scroll-snap-align:center!important}
+  body.a562-surgical-correction .a56-tuner button:before{top:42px!important;width:17px!important;height:17px!important}
+  body.a562-surgical-correction .a56-tuner:before,body.a562-surgical-correction .a561-frequency-line{top:50px!important}
+  body.a562-surgical-correction .a56-watch-stage{height:80vh!important}
+}
+@media(max-width:390px){body.a562-surgical-correction .a56-tuner button{flex-basis:58vw!important}}
+
+/* Reduced motion keeps the concept, removes rapid chromatic displacement. */
+@media(prefers-reduced-motion:reduce){
+  body.a562-surgical-correction .a56-watch.a562-transitioning .a56-tune-disturbance,
+  body.a562-surgical-correction .a56-watch.a562-open .a56-program-open,
+  body.a562-surgical-correction .a56-host.a56-signal-in:before,
+  body.a562-surgical-correction .a56-host.a56-signal-in:after{display:none!important;animation:none!important}
+  body.a562-surgical-correction .a56-program{transition:none!important}
+  body.a562-surgical-correction .a56-watch-stage:after{transition:none!important}
+}
+
+/* Trust finishing correction: keep the same truthful images, move the annotation onto the bright work field. */
+@media(min-width:761px){
+  body.a562-surgical-correction .a56-trust{min-height:112vh!important}
+  body.a562-surgical-correction .a56-trust-equipment{left:0!important;top:5vh!important;width:49vw!important;height:78vh!important}
+  body.a562-surgical-correction .a56-trust-lauren{right:5vw!important;top:7vh!important;width:49vw!important;height:70vh!important}
+  body.a562-surgical-correction .a56-trust-copy{
+    left:56vw!important;top:auto!important;bottom:5vh!important;width:36vw!important;z-index:10!important;
+    background:rgba(247,240,229,.93);padding:1rem 1.15rem 1.08rem;color:#101416!important;
+    box-shadow:0 13px 32px rgba(50,64,64,.11);border-top:2px solid rgba(91,185,191,.48)
+  }
+  body.a562-surgical-correction .a56-trust-copy h2{font-size:clamp(2.3rem,3.6vw,4.2rem)!important;line-height:.88!important;margin:.18rem 0 .35rem!important}
+  body.a562-surgical-correction .a56-trust-copy p{margin:0!important;color:#435053!important}
+}
+@media(max-width:760px){
+  body.a562-surgical-correction .a56-trust-copy{background:rgba(247,240,229,.94);padding:1rem 1rem 1.05rem;box-shadow:0 10px 28px rgba(50,64,64,.1);border-top:2px solid rgba(91,185,191,.46)}
+  body.a562-surgical-correction .a56-trust-copy h2{font-size:11vw!important;margin:.1rem 0 .35rem!important}
+}
+
+/* ID-specific override is required because the long-lived donor uses #host-command pseudo-elements for scene shading/title. */
+body.a562-surgical-correction #host-command.a56-signal-in::before{
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:30!important;pointer-events:none!important;
+  background:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp') center/cover no-repeat!important;
+  mix-blend-mode:normal!important;filter:none!important;opacity:0;
+  animation:a562HostBreak .22s steps(4,end) both!important
+}
+body.a562-surgical-correction #host-command.a56-signal-in::after{
+  content:""!important;display:block!important;position:absolute!important;left:0!important;right:0!important;top:19%;width:auto!important;height:2px!important;z-index:31!important;
+  background:#f5f8f7!important;box-shadow:0 0 14px #fff,0 0 28px rgba(156,233,229,.62)!important;
+  animation:a562HostSilver .22s linear both!important;writing-mode:horizontal-tb!important;transform:none!important
+}
+
+/* A5.6.2 final sequence correction: the Scrambled→Host break owns the viewport briefly,
+   so program loss precedes Host acquisition instead of decorating Host after it appears. */
+body.a562-surgical-correction #host-command.a56-signal-in::before,
+body.a562-surgical-correction #host-command.a56-signal-in::after{display:none!important;animation:none!important}
+#a562-program-break{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;visibility:hidden;opacity:0;overflow:hidden;
+  background:rgba(3,5,7,.96);isolation:isolate
+}
+#a562-program-break::before{
+  content:"";position:absolute;inset:-3%;z-index:1;background:url('../network/a5.6.2/LBTV_LiveBroadcastBreak.webp') center/cover no-repeat;
+  opacity:0;transform:translateX(0);filter:none
+}
+#a562-program-break::after{
+  content:"";position:absolute;left:-3%;right:-3%;height:2px;top:18%;z-index:4;background:#f7fbfb;
+  box-shadow:0 0 14px #fff,0 0 30px rgba(156,233,229,.72);opacity:0
+}
+#a562-program-break i,#a562-program-break b{position:absolute;left:-3%;right:-3%;z-index:3;display:block;height:18%;opacity:0;background:inherit}
+#a562-program-break i{top:25%;background:linear-gradient(90deg,rgba(111,59,146,.95),rgba(255,45,134,.9) 56%,rgba(24,26,29,.96) 56%)}
+#a562-program-break b{top:62%;background:linear-gradient(90deg,rgba(15,18,20,.98) 0 28%,rgba(255,45,134,.82) 28% 74%,rgba(92,170,116,.72) 74%)}
+#a562-program-break.is-live{visibility:visible;animation:a562GlobalBreak .29s steps(1,end) both}
+#a562-program-break.is-live::before{animation:a562GlobalMaterial .29s steps(5,end) both}
+#a562-program-break.is-live::after{animation:a562GlobalSilver .29s linear both}
+#a562-program-break.is-live i{animation:a562GlobalBandA .29s steps(4,end) both}
+#a562-program-break.is-live b{animation:a562GlobalBandB .29s steps(4,end) both}
+@keyframes a562GlobalBreak{
+  0%{opacity:0;background:rgba(3,5,7,0)}
+  10%{opacity:.62;background:rgba(3,5,7,.26)}
+  24%{opacity:.9;background:rgba(3,5,7,.72)}
+  42%{opacity:1;background:#030507}
+  66%{opacity:1;background:#030507}
+  82%{opacity:.72;background:rgba(3,5,7,.7)}
+  100%{opacity:0;background:rgba(3,5,7,0);visibility:hidden}
+}
+@keyframes a562GlobalMaterial{
+  0%,9%{opacity:0;transform:translateX(0);clip-path:inset(0 0 100% 0)}
+  18%{opacity:.64;transform:translateX(1.2%);clip-path:inset(4% 0 72% 0)}
+  34%{opacity:1;transform:translateX(-1.5%);clip-path:inset(8% 0 32% 0)}
+  52%{opacity:1;transform:translateX(.8%);clip-path:inset(0 0 5% 0)}
+  70%{opacity:.92;transform:translateX(-.6%);clip-path:inset(18% 0 0 0)}
+  88%{opacity:.45;transform:none;clip-path:inset(62% 0 0 0)}
+  100%{opacity:0;clip-path:inset(100% 0 0 0)}
+}
+@keyframes a562GlobalSilver{0%,13%{opacity:0;top:18%}25%{opacity:1;top:34%}48%{opacity:1;top:54%}67%{opacity:.9;top:70%}88%{opacity:.45;top:84%}100%{opacity:0;top:91%}}
+@keyframes a562GlobalBandA{0%,18%{opacity:0;transform:translateX(0)}28%{opacity:.82;transform:translateX(-2%)}50%{opacity:1;transform:translateX(1.5%)}72%{opacity:.62;transform:translateX(-.7%)}100%{opacity:0;transform:none}}
+@keyframes a562GlobalBandB{0%,28%{opacity:0;transform:translateX(0)}38%{opacity:.72;transform:translateX(2.2%)}58%{opacity:.94;transform:translateX(-1.3%)}78%{opacity:.52;transform:translateX(.6%)}100%{opacity:0;transform:none}}
+@media(prefers-reduced-motion:reduce){#a562-program-break{display:none!important}}
+
+/* Final human-pass correction: the seventh production asset must do real work without touching protected Dear Diary.
+   Trust is already an authorized correction surface, so the authored-paper signal appears only as a faint human annotation texture behind the bright copy field. */
+body.a562-surgical-correction .a56-trust-copy{position:absolute;overflow:hidden;isolation:isolate}
+body.a562-surgical-correction .a56-trust-copy::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url('../network/a5.6.2/LBTV_AuthoredPaper.webp') 50% 50%/cover no-repeat;
+  opacity:.11;mix-blend-mode:multiply
+}
+body.a562-surgical-correction .a56-trust-copy>*{position:relative;z-index:1}
+@media(max-width:760px){body.a562-surgical-correction .a56-trust-copy::before{opacity:.085;background-position:62% 50%}}
