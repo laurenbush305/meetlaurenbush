@@ -79,7 +79,7 @@ jobs:
             if (failed) process.exit(1);
           })();
           NODE
-          node /tmp/a58-qa.cjs
+          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a58-qa.cjs
       - name: Upload QA screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
