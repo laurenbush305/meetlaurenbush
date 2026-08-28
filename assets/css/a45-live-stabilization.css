@@ -3,7 +3,6 @@ body.a562-r41-public-release{overflow-x:clip}
 body.a562-r41-public-release :where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--r41-pink);outline-offset:4px}
 body.a562-r41-public-release :where(.rig a,.fc-cue,.tune button,.a562-r3-step,.a562-r3-sun,.open-file,.a56-play,.a56-host-play,.gallery-trigger,.booking-submit,.btn){min-height:44px}
 body.a562-r41-public-release :where(img,video){max-width:100%}
-body.a562-r41-public-release .a56-host-room img{filter:brightness(.54) saturate(.9) contrast(1.1)!important}
 body.a562-r41-public-release #contact .a4-booking-form :where(input,select,textarea){font-size:16px}
 @media (min-width:761px) and (max-width:1100px){
  body.a562-r41-public-release #onair .fc-primary{width:60vw!important}
@@ -16,6 +15,20 @@ body.a562-r41-public-release #contact .a4-booking-form :where(input,select,texta
  body.a562-r41-public-release .rig nav{gap:.55rem!important}
  body.a562-r41-public-release .rig .book{min-height:44px!important;display:inline-flex!important;align-items:center!important}
  body.a562-r41-public-release #onair .fc-primary img{object-position:center 34%!important}
+ /* A5.6 moved the mobile copy wrapper to 61vh while its children retained
+    viewport-relative absolute offsets. Reset the wrapper and intentionally
+    compose the identity inside the cream title-card band. */
+ body.a562-r41-public-release #onair .fc-copy{top:0!important;height:100%!important;left:5vw!important;width:90vw!important}
+ body.a562-r41-public-release #onair .fc-kicker{left:auto!important;right:0!important;top:70vh!important;font-size:.61rem!important}
+ body.a562-r41-public-release #onair .fc-name{top:74.5vh!important;height:auto!important;width:90vw!important;display:flex!important;align-items:baseline!important;gap:.35rem!important;margin:0!important}
+ body.a562-r41-public-release #onair .fc-lauren{position:relative!important;left:auto!important;top:auto!important;font-size:12vw!important;transform:scaleX(1.06)!important;width:3.75em!important;height:.85em!important}
+ body.a562-r41-public-release #onair .fc-lauren::before{color:#10171a!important}
+ body.a562-r41-public-release #onair .fc-lauren::after{display:none!important}
+ body.a562-r41-public-release #onair .fc-bush{position:static!important;left:auto!important;top:auto!important;font-size:6.7vw!important;transform:rotate(-2deg)!important;margin-left:.35rem!important}
+ body.a562-r41-public-release #onair .fc-role{top:81.7vh!important;font-size:.76rem!important}
+ body.a562-r41-public-release #onair .fc-promise{top:85.1vh!important;font-size:.94rem!important}
+ body.a562-r41-public-release #onair .fc-reel-link{top:90.4vh!important}
+ body.a562-r41-public-release #onair .a56-hero-mark{display:none!important}
  body.a562-r41-public-release .a56-thinking-stage video{object-position:center 40%!important}
  body.a562-r41-public-release .a56-host-talent video{object-position:center 24%!important}
  body.a562-r41-public-release #contact .a4-booking-form :where(input,select,textarea){min-height:44px}
