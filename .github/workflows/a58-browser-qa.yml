@@ -1,6 +1,8 @@
 name: A5.8 Browser QA
 
 on:
+  push:
+    branches: [build/a58-flagship-candidate]
   pull_request:
     branches: [main]
   workflow_dispatch:
