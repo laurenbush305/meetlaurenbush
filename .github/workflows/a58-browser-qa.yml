@@ -1,0 +1,86 @@
+name: A5.8 Browser QA
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install browser tooling
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 4173 >/tmp/seasonzero-server.log 2>&1 &
+          sleep 2
+      - name: Run responsive QA
+        run: |
+          mkdir -p qa-artifacts
+          cat > /tmp/a58-qa.cjs <<'NODE'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          const widths = [1440, 1024, 768, 430, 390, 360];
+          const heights = {1440:900,1024:900,768:900,430:932,390:844,360:800};
+          (async()=>{
+            const browser = await chromium.launch({headless:true});
+            const results = {};
+            let failed = false;
+            for (const width of widths) {
+              const page = await browser.newPage({viewport:{width,height:heights[width]}});
+              const pageErrors = [];
+              const consoleErrors = [];
+              page.on('pageerror', e => pageErrors.push(String(e)));
+              page.on('console', m => { if (m.type()==='error') consoleErrors.push(m.text()); });
+              await page.goto('http://127.0.0.1:4173/index.html',{waitUntil:'networkidle'});
+              const data = await page.evaluate(()=>{
+                const de = document.documentElement;
+                const ids = [...document.querySelectorAll('[id]')].map(e=>e.id);
+                return {
+                  sw: de.scrollWidth,
+                  cw: de.clientWidth,
+                  broken: [...document.images].filter(i=>!i.complete || i.naturalWidth===0).map(i=>i.getAttribute('src')),
+                  missingAlt: [...document.images].filter(i=>!i.hasAttribute('alt')).map(i=>i.getAttribute('src')),
+                  duplicateIds: [...new Set(ids.filter((x,i)=>ids.indexOf(x)!==i))],
+                  h1: document.querySelectorAll('h1').length,
+                  unnamedButtons: [...document.querySelectorAll('button')].filter(b=>!(b.innerText.trim()||b.getAttribute('aria-label'))).length,
+                  emptyLinks: [...document.querySelectorAll('a')].filter(a=>!(a.innerText.trim()||a.getAttribute('aria-label'))).length
+                };
+              });
+              data.overflow = data.sw > data.cw;
+              data.pageErrors = pageErrors;
+              data.consoleErrors = consoleErrors;
+              results[width] = data;
+              if (data.overflow || data.broken.length || data.missingAlt.length || data.duplicateIds.length || data.h1!==1 || data.unnamedButtons || data.emptyLinks || pageErrors.length || consoleErrors.length) failed = true;
+              await page.screenshot({path:`qa-artifacts/home-${width}.png`,fullPage:true});
+              if (width===1440 || width===390) {
+                const trust = page.locator('#about, #trust').first();
+                if (await trust.count()) {
+                  await trust.scrollIntoViewIfNeeded();
+                  await trust.screenshot({path:`qa-artifacts/trust-${width}.png`});
+                }
+              }
+              await page.close();
+            }
+            fs.writeFileSync('qa-artifacts/results.json', JSON.stringify(results,null,2));
+            await browser.close();
+            console.log(JSON.stringify(results,null,2));
+            if (failed) process.exit(1);
+          })();
+          NODE
+          node /tmp/a58-qa.cjs
+      - name: Upload QA screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a58-browser-qa
+          path: qa-artifacts/
