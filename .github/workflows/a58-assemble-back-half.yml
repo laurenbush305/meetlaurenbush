@@ -18,7 +18,7 @@ jobs:
         with:
           ref: build/a58-production
           fetch-depth: 0
-      - name: Assemble public back half and stylesheet link
+      - name: Assemble public back half and production assets
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -38,7 +38,14 @@ jobs:
               start = text.find(marker)
           if start < 0:
               raise SystemExit('Could not find Gate 01 ending or existing Host section')
-          index.write_text(text[:start] + fragment)
+          assembled = text[:start] + fragment
+          js_link = '<script src="assets/js/lbtv-back-half.js"></script>'
+          main_js = '<script src="assets/js/lbtv-main.js"></script>'
+          if js_link not in assembled:
+              if main_js not in assembled:
+                  raise SystemExit('Could not find primary script anchor')
+              assembled = assembled.replace(main_js, js_link + '\n' + main_js, 1)
+          index.write_text(assembled)
           print('assembled index.html from', marker)
           PY
       - name: Commit assembled page
