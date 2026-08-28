@@ -17,16 +17,15 @@ jobs:
         with:
           ref: build/a58-production
           fetch-depth: 0
+      - name: Install media tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
       - name: Extract verified native frame from source video
         run: |
           ffmpeg -y -ss 76 -i assets/video/explain-pickleball-bag-web.mp4 -frames:v 1 -q:v 4 assets/img/a55/wimpb-campaign-main.jpg
-          python3 - <<'PY'
-          from PIL import Image
-          p='assets/img/a55/wimpb-campaign-main.jpg'
-          with Image.open(p) as im:
-              assert im.size == (480, 854), im.size
-              print('verified dimensions:', im.size)
-          PY
+          test "$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 assets/img/a55/wimpb-campaign-main.jpg)" = "480x854"
+          echo "verified dimensions: 480x854"
       - name: Commit verified poster
         run: |
           git config user.name "github-actions[bot]"
