@@ -61,12 +61,19 @@ jobs:
           }
 
           async function inspect(page) {
-            return page.evaluate(() => {
+            return page.evaluate(async () => {
               const de = document.documentElement;
               const ids = [...document.querySelectorAll('[id]')].map(e=>e.id);
-              const wimpb = [...document.images]
-                .filter(i => (i.getAttribute('src') || '').includes('wimpb-campaign-main.jpg'))
-                .map(i => ({src:i.getAttribute('src'), complete:i.complete, naturalWidth:i.naturalWidth, naturalHeight:i.naturalHeight}));
+              const wimpbPath = 'assets/img/a55/wimpb-campaign-main.jpg';
+              const wimpbReferences = [...document.querySelectorAll('img,video,[data-poster]')]
+                .filter(el => [el.getAttribute('src'), el.getAttribute('poster'), el.getAttribute('data-poster')].some(v => (v || '').includes('wimpb-campaign-main.jpg')))
+                .map(el => ({tag:el.tagName.toLowerCase(), src:el.getAttribute('src'), poster:el.getAttribute('poster'), dataPoster:el.getAttribute('data-poster')}));
+              const wimpbAsset = await new Promise(resolve => {
+                const probe = new Image();
+                probe.onload = () => resolve({ok:true,naturalWidth:probe.naturalWidth,naturalHeight:probe.naturalHeight});
+                probe.onerror = () => resolve({ok:false,naturalWidth:0,naturalHeight:0});
+                probe.src = wimpbPath + '?qa=' + Date.now();
+              });
               return {
                 sw: de.scrollWidth,
                 cw: de.clientWidth,
@@ -76,9 +83,14 @@ jobs:
                 h1: document.querySelectorAll('h1').length,
                 unnamedButtons: [...document.querySelectorAll('button')].filter(b=>!(b.innerText.trim()||b.getAttribute('aria-label'))).length,
                 emptyLinks: [...document.querySelectorAll('a')].filter(a=>!(a.innerText.trim()||a.getAttribute('aria-label'))).length,
-                wimpb
+                wimpbReferences,
+                wimpbAsset
               };
             });
+          }
+
+          function hasFailure(data, pageErrors, consoleErrors) {
+            return data.sw > data.cw || data.broken.length || data.missingAlt.length || data.duplicateIds.length || data.h1 !== 1 || data.unnamedButtons || data.emptyLinks || pageErrors.length || consoleErrors.length || !data.wimpbReferences.length || !data.wimpbAsset.ok;
           }
 
           (async()=>{
@@ -98,7 +110,7 @@ jobs:
               data.pageErrors = pageErrors;
               data.consoleErrors = consoleErrors;
               results.home[width] = data;
-              if (data.overflow || data.broken.length || data.missingAlt.length || data.duplicateIds.length || data.h1!==1 || data.unnamedButtons || data.emptyLinks || pageErrors.length || consoleErrors.length || !data.wimpb.length || data.wimpb.some(i=>!i.naturalWidth)) failed = true;
+              if (hasFailure(data,pageErrors,consoleErrors)) failed = true;
               await page.screenshot({path:`qa-artifacts/home-${width}.png`,fullPage:true});
               if (width===1440 || width===390) {
                 const thinking = page.locator('#thinking').first();
@@ -122,7 +134,7 @@ jobs:
               cdata.pageErrors = castingPageErrors;
               cdata.consoleErrors = castingConsoleErrors;
               results.casting[width] = cdata;
-              if (cdata.overflow || cdata.broken.length || cdata.missingAlt.length || cdata.duplicateIds.length || cdata.h1!==1 || cdata.unnamedButtons || cdata.emptyLinks || castingPageErrors.length || castingConsoleErrors.length || !cdata.wimpb.length || cdata.wimpb.some(i=>!i.naturalWidth)) failed = true;
+              if (hasFailure(cdata,castingPageErrors,castingConsoleErrors)) failed = true;
               if (width===1440 || width===390) {
                 const range = casting.locator('.range, #range').first();
                 if (await range.count()) {
