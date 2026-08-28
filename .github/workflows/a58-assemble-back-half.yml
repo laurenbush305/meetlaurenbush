@@ -18,17 +18,22 @@ jobs:
         with:
           ref: build/a58-production
           fetch-depth: 0
-      - name: Replace temporary gate ending with public back half
+      - name: Assemble public back half and stylesheet link
         run: |
           python3 - <<'PY'
           from pathlib import Path
           index = Path('index.html')
           fragment = Path('a58-back-half.fragment.html').read_text()
           text = index.read_text()
+          css_link = '<link rel="stylesheet" href="assets/css/lbtv-back-half.css">'
+          if css_link not in text:
+              anchor = '<link rel="stylesheet" href="assets/css/lbtv-main.css">'
+              if anchor not in text:
+                  raise SystemExit('Could not find primary stylesheet anchor')
+              text = text.replace(anchor, anchor + '\n' + css_link, 1)
           marker = '<section class="gate-end"'
           start = text.find(marker)
           if start < 0:
-              # Idempotent path: replace the existing back half if already assembled.
               marker = '<section class="host on-air"'
               start = text.find(marker)
           if start < 0:
