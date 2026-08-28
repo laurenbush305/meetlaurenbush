@@ -1,0 +1,26 @@
+/* A4.5 live stabilization — bounded maintenance, 2026-08-28 */
+body.a562-r41-public-release{overflow-x:clip}
+body.a562-r41-public-release :where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--r41-pink);outline-offset:4px}
+body.a562-r41-public-release :where(.rig a,.fc-cue,.tune button,.a562-r3-step,.a562-r3-sun,.open-file,.a56-play,.a56-host-play,.gallery-trigger,.booking-submit,.btn){min-height:44px}
+body.a562-r41-public-release :where(img,video){max-width:100%}
+body.a562-r41-public-release .a56-host-room img{filter:brightness(.54) saturate(.9) contrast(1.1)!important}
+body.a562-r41-public-release #contact .a4-booking-form :where(input,select,textarea){font-size:16px}
+@media (min-width:761px) and (max-width:1100px){
+ body.a562-r41-public-release #onair .fc-primary{width:60vw!important}
+ body.a562-r41-public-release #onair .fc-copy{max-width:43vw!important}
+ body.a562-r41-public-release #onair .fc-name .fc-lauren{font-size:clamp(4.6rem,8.1vw,7.7rem)!important}
+ body.a562-r41-public-release #onair .fc-name .fc-bush{font-size:clamp(2.2rem,3.9vw,3.8rem)!important}
+}
+@media(max-width:760px){
+ body.a562-r41-public-release .rig{padding-left:14px!important;padding-right:14px!important}
+ body.a562-r41-public-release .rig nav{gap:.55rem!important}
+ body.a562-r41-public-release .rig .book{min-height:44px!important;display:inline-flex!important;align-items:center!important}
+ body.a562-r41-public-release #onair .fc-primary img{object-position:center 34%!important}
+ body.a562-r41-public-release .a56-thinking-stage video{object-position:center 40%!important}
+ body.a562-r41-public-release .a56-host-talent video{object-position:center 24%!important}
+ body.a562-r41-public-release #contact .a4-booking-form :where(input,select,textarea){min-height:44px}
+ body.a562-r41-public-release #contact .booking-submit{min-height:48px;width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.a562-r41-public-release *,body.a562-r41-public-release *::before,body.a562-r41-public-release *::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
