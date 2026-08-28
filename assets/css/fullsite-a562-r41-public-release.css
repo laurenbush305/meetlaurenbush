@@ -1,4 +1,5 @@
 /* A5.6.2 R4.1 — LBTV Public Release Patch */
+@import url("./a45-live-stabilization.css");
 body.a562-r41-public-release{--r41-cream:#f6f0e6;--r41-ink:#10171a;--r41-aqua:#cdeeee;--r41-pink:#ff2d86}
 body.a562-r41-public-release .a56-watch-bug b{display:none!important}
 body.a562-r41-public-release .a56-watch-bug span{margin:0!important}
