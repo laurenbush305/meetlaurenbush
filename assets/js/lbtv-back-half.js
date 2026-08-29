@@ -27,6 +27,32 @@
     }
   }
 
+  const deferredImages = [...document.querySelectorAll('img[data-src], img[data-srcset]')];
+
+  const loadImage = img => {
+    if (!img || img.dataset.loaded === 'true') return;
+    img.fetchPriority = 'low';
+    if (img.dataset.sizes) img.sizes = img.dataset.sizes;
+    if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+    if (img.dataset.src) img.src = img.dataset.src;
+    img.dataset.loaded = 'true';
+  };
+
+  if (deferredImages.length) {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          loadImage(entry.target);
+          imageObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '1000px 0px' });
+      deferredImages.forEach(img => imageObserver.observe(img));
+    } else {
+      deferredImages.forEach(loadImage);
+    }
+  }
+
   const watch = document.querySelector('#watch');
   if (!watch) return;
 
