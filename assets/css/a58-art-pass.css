@@ -3,9 +3,11 @@
 @import url('a59-polish-fix.css');
 @import url('a5101-360-polish.css');
 @import url('a5106-bright-palette.css');
+@import url('a5107-accessible-signal-palette.css');
 
-/* A5.10.6 FIRST-PAINT WRAPPER
-   Preserve the authored layout and responsive work, then apply the bright Season Zero palette reset synchronously. */
+/* A5.10.7 FIRST-PAINT WRAPPER
+   Preserve the authored layout, responsive work and performance system, then apply the
+   documented Season Zero signal palette and accessibility roles synchronously. */
 
 /* The full print treatment is inherited from a58-art-pass-base.css. Keep this marker here because the production guard validates the public stylesheet entrypoint. */
 @media print{}
