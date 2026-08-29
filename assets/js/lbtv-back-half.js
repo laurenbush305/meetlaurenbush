@@ -53,7 +53,18 @@
           imageObserver.unobserve(entry.target);
         });
       }, { rootMargin: '1000px 0px' });
+
+      const deferredSections = [...new Set(deferredImages.map(img => img.closest('section')).filter(Boolean))];
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          loadDeferredWithin(entry.target);
+          sectionObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '1000px 0px' });
+
       deferredImages.forEach(img => imageObserver.observe(img));
+      deferredSections.forEach(section => sectionObserver.observe(section));
     } else {
       deferredImages.forEach(loadImage);
     }
