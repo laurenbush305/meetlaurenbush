@@ -2,7 +2,7 @@ name: A5.10.3 Mobile Network Audit
 
 on:
   push:
-    branches: [build/a5103-mobile-network]
+    branches: [build/a5103-mobile-network, build/a5104-static-lazy]
   pull_request:
     branches: [main]
   workflow_dispatch:
