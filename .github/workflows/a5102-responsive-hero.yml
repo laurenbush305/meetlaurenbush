@@ -1,0 +1,112 @@
+name: A5.10.2 Responsive Hero Builder
+
+on:
+  push:
+    branches:
+      - build/a5102-mobile-performance
+    paths:
+      - .github/workflows/a5102-responsive-hero.yml
+      - index.html
+      - assets/img/a55/blue-skirt-approved.png
+      - assets/img/a55/host-talent.jpg
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-responsive-assets:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out performance branch
+        uses: actions/checkout@v4
+        with:
+          ref: build/a5102-mobile-performance
+          fetch-depth: 0
+
+      - name: Install WebP tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y webp
+
+      - name: Generate responsive approved hero assets
+        run: |
+          set -euo pipefail
+          mkdir -p assets/img/a5102
+
+          # Preserve the approved canonical source. Only derived delivery assets are created.
+          for width in 480 720 960 1122; do
+            cwebp -quiet -mt -m 6 -q 90 -alpha_q 100 \
+              -resize "$width" 0 \
+              assets/img/a55/blue-skirt-approved.png \
+              -o "assets/img/a5102/blue-skirt-${width}.webp"
+          done
+
+          for width in 160 320 540; do
+            cwebp -quiet -mt -m 6 -q 84 \
+              -resize "$width" 0 \
+              assets/img/a55/host-talent.jpg \
+              -o "assets/img/a5102/host-talent-${width}.webp"
+          done
+
+      - name: Patch homepage responsive delivery
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text()
+
+          old_preload = '<link rel="preload" as="image" href="assets/img/a55/blue-skirt-approved.png" fetchpriority="high">\n'
+          html = html.replace(old_preload, '')
+
+          old_hero = '<figure class="hero-photo"><img src="assets/img/a55/blue-skirt-approved.png" alt="Lauren Bush in the approved full-length blue-skirt portrait." width="1122" height="1402" fetchpriority="high" decoding="sync"></figure>'
+          new_hero = '''<figure class="hero-photo"><picture style="display:block;width:100%;height:100%"><source type="image/webp" srcset="assets/img/a5102/blue-skirt-480.webp 480w, assets/img/a5102/blue-skirt-720.webp 720w, assets/img/a5102/blue-skirt-960.webp 960w, assets/img/a5102/blue-skirt-1122.webp 1122w" sizes="(max-width: 760px) 72vw, (max-width: 1476px) 42vw, 620px"><img src="assets/img/a55/blue-skirt-approved.png" alt="Lauren Bush in the approved full-length blue-skirt portrait." width="1122" height="1402" fetchpriority="high" decoding="async"></picture></figure>'''
+          if old_hero not in html:
+              raise SystemExit('Hero source pattern not found; refusing an ambiguous patch.')
+          html = html.replace(old_hero, new_hero, 1)
+
+          old_transmission = '<figure class="hero-transmission"><img src="assets/img/a55/host-talent.jpg" alt="Lauren Bush holding a microphone during a live league night." width="540" height="960" decoding="async"><figcaption><b>HOST</b><span>Live room proof</span></figcaption></figure>'
+          new_transmission = '''<figure class="hero-transmission"><picture style="display:block;width:100%"><source type="image/webp" srcset="assets/img/a5102/host-talent-160.webp 160w, assets/img/a5102/host-talent-320.webp 320w, assets/img/a5102/host-talent-540.webp 540w" sizes="(max-width: 760px) 22vw, (max-width: 1366px) 15vw, 205px"><img src="assets/img/a55/host-talent.jpg" alt="Lauren Bush holding a microphone during a live league night." width="540" height="960" decoding="async"></picture><figcaption><b>HOST</b><span>Live room proof</span></figcaption></figure>'''
+          if old_transmission not in html:
+              raise SystemExit('Hero transmission pattern not found; refusing an ambiguous patch.')
+          html = html.replace(old_transmission, new_transmission, 1)
+
+          path.write_text(html)
+          PY
+
+      - name: Record delivery metrics
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          files = [
+              Path('assets/img/a55/blue-skirt-approved.png'),
+              *[Path(f'assets/img/a5102/blue-skirt-{w}.webp') for w in (480,720,960,1122)],
+              Path('assets/img/a55/host-talent.jpg'),
+              *[Path(f'assets/img/a5102/host-talent-{w}.webp') for w in (160,320,540)],
+          ]
+          rows = ['# A5.10.2 Mobile Performance Metrics', '', '| Asset | Bytes | KiB |', '|---|---:|---:|']
+          for f in files:
+              size = f.stat().st_size
+              rows.append(f'| `{f}` | {size:,} | {size/1024:.1f} |')
+          rows += [
+              '',
+              'The approved source images remain unchanged. The homepage now selects responsive WebP derivatives through `srcset`, with the original files retained as fallbacks.',
+          ]
+          Path('A5.10.2_PERFORMANCE_METRICS.md').write_text('\n'.join(rows) + '\n')
+          PY
+
+      - name: Commit generated delivery assets
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/img/a5102 A5.10.2_PERFORMANCE_METRICS.md
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Generate A5.10.2 responsive mobile assets"
+          git push origin HEAD:build/a5102-mobile-performance
