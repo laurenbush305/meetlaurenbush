@@ -1,0 +1,22 @@
+name: A5.10.6 Bright Palette Guard
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  palette-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate bright palette reset
+        run: |
+          set -e
+          test -f assets/css/a5106-bright-palette.css
+          grep -q -- '--bright-white:#ffffff' assets/css/a5106-bright-palette.css
+          grep -q -- '--bright-aqua:#67e8ee' assets/css/a5106-bright-palette.css
+          grep -q -- '--bright-pink:#ff2c88' assets/css/a5106-bright-palette.css
+          grep -q "a5106-bright-palette.css" assets/css/a58-art-pass.css
+          # The public override must not reintroduce the warm-paper colors that triggered this correction.
+          ! grep -Eiq '#f8f2e8|#fffaf3|#f3eadf|#f3e9df|#f7f1ea|#f7f0e7|#f8f2ea' assets/css/a5106-bright-palette.css
