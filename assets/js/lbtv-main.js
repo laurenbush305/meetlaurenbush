@@ -1,6 +1,12 @@
 (() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Keep anchor destinations below the fixed navigation, including proof-index
+  // jumps to the back half of the page.
+  document.querySelectorAll('main > section').forEach(section => {
+    section.style.scrollMarginTop = '76px';
+  });
+
   const explainFrame = document.querySelector('.explain-video');
   const explainVideo = explainFrame?.querySelector('video');
   if (explainFrame && explainVideo) {
