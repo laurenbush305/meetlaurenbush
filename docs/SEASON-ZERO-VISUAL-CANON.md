@@ -63,6 +63,21 @@ Razor-thin functional detail with a precise highlight. Jewelry-scale. No HUDs, d
 
 Frosted/pearl media-carrying plane with subtle spectral edge behavior. It may clarify hierarchy for Finance, Create, Watch or proof. It must not become a SaaS glass-card component system.
 
+## Custom-asset authority
+
+The Google Drive Stardust Production Asset Manifest states that **CSS and real media are the default foundation**. The current `03 — Approved Web Optimized` Stardust Camera Kit folder is empty as of the A5.10.8 restoration. Therefore no implementation agent may invent or synthesize a crystal/lucite object to make the site look “more Stardust.”
+
+Until Lauren/LC1 explicitly approves an optimized custom asset, the browser implementation must achieve the material world through:
+
+- real approved Lauren media,
+- CSS-native camera-plane refraction,
+- chrome/glass signal hardware,
+- pearl transmission surfaces,
+- restrained source-derived light,
+- editorial typography and composition.
+
+A future approved custom asset may be integrated only after it appears in the approved Drive lane and has a documented site role.
+
 ## Human/media hierarchy
 
 **Real Lauren is the human center.** Stardust frames, reflects, refracts or transmits her real photography/video and verified proof.
@@ -134,6 +149,11 @@ Every visual release must:
 
 ## Implementation authority
 
-`assets/css/a5108-stardust-restoration.css` is the current final visual-authority layer. Earlier A5.10.6/A5.10.7 palette files remain historical/accessibility layers only and may not be treated as the visual brief.
+The current A5.10.8 visual implementation is a paired authority:
+
+1. `assets/css/a5108-stardust-restoration.css` establishes the pearl / icy-silver / black-depth material world and deterministic light/dark base surfaces.
+2. `assets/css/a5108-stardust-optics.css` is the final finishing layer and implements the approved CSS-native camera kit: partial refraction, chrome/glass rail behavior, pearl transmission, spectral edges and source-derived On Air light.
+
+`a5108-stardust-optics.css` must remain the final imported visual layer until an intentionally reviewed successor replaces it. Earlier A5.10.6/A5.10.7 palette files remain historical/accessibility layers only and may not be treated as the visual brief.
 
 Any future replacement must explicitly update this document and identify which locked source decision changed. Silent drift is forbidden.
