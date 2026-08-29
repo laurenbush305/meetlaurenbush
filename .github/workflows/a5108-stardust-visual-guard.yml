@@ -42,7 +42,7 @@ jobs:
           for token in required_visual_tokens:
             assert token in restoration, f'Missing Stardust token: {token}'
 
-          for phrase in ['partial refraction','chrome/glass','pearl transmission']:
+          for phrase in ['partial refraction','silver/glass','pearl transmission']:
             assert phrase in optics, f'Missing approved camera-kit behavior: {phrase}'
 
           banned_final_layer = ['#d9f1f8','#eff9fc','#17101d','#25142c','#f8f2e8','#f3eadf','#f3e9df']
@@ -111,7 +111,6 @@ jobs:
             const page = await context.newPage();
             await page.goto('http://127.0.0.1:4173/index.html', {waitUntil:'networkidle'});
 
-            // First paint, before section-scrolling wakes deferred media.
             await page.screenshot({path:`a5108-visual-qa/home-${label}-390-first-paint.png`, fullPage:true});
 
             const data = await page.evaluate(() => {
@@ -148,7 +147,6 @@ jobs:
               if (L === null || L < .75) throw new Error(`${label}: ${key} is not light readable foreground (${data[key]}, L=${L})`);
             }
 
-            // Chapter screenshots intentionally scroll to the component so deferred real media is awake.
             for (const [name, selector] of Object.entries(chapters)) {
               const locator=page.locator(selector);
               await locator.scrollIntoViewIfNeeded();
@@ -156,7 +154,6 @@ jobs:
               await locator.screenshot({path:`a5108-visual-qa/${name}-${label}-390.png`});
             }
 
-            // Capture the hydrated page after a real scroll-through for human review.
             await page.screenshot({path:`a5108-visual-qa/home-${label}-390-hydrated.png`, fullPage:true});
             await context.close();
           }
