@@ -72,8 +72,8 @@ jobs:
                   naturalHeight:img.naturalHeight,
                   top:img.getBoundingClientRect().top,
                   bottom:img.getBoundingClientRect().bottom,
-                  deferred:img.hasAttribute('data-static-src'),
-                  deferredSource:img.getAttribute('data-static-src') || ''
+                  deferred:img.hasAttribute('data-deferred-proof'),
+                  deferredSource:img.getAttribute('data-src') || ''
                 }));
                 const videos = [...document.querySelectorAll('video')].map(v=>({
                   poster:v.getAttribute('poster'),
@@ -143,6 +143,8 @@ jobs:
               if (hero !== expectedHero[dpr]) failures.push(`DPR${dpr} selected hero ${hero || '(none)'}; expected ${expectedHero[dpr]}`);
               if (videoTransfers.length) failures.push(`DPR${dpr} made ${videoTransfers.length} initial video transfer(s)`);
               if (largestImageKiB > 400) failures.push(`DPR${dpr} has an initial image transfer of ${largestImageKiB} KiB (>400 KiB)`);
+              if (deferredImages.length !== 15) failures.push(`DPR${dpr} found ${deferredImages.length} deferred proof image tag(s); expected 15`);
+              if (deferredImages.length && placeholderCount !== deferredImages.length) failures.push(`DPR${dpr} kept only ${placeholderCount}/${deferredImages.length} deferred proof image(s) on placeholders before scroll`);
               if (deferredImages.length && deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred static proof image(s) before scroll`);
 
               await page.screenshot({path:`qa-artifacts/a5103/initial-360-dpr${dpr}.png`,fullPage:false});
