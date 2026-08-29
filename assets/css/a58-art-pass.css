@@ -5,11 +5,12 @@
 @import url('a5106-bright-palette.css');
 @import url('a5107-accessible-signal-palette.css');
 @import url('a5108-stardust-restoration.css');
+@import url('a5108-stardust-optics.css');
 
 /* A5.10.8 FIRST-PAINT WRAPPER
    Layout, responsive behavior, accessibility roles and performance mechanics remain inherited.
-   A5.10.8 is the final visual-authority layer and restores the locked Stardust cinematic material world:
-   pearl / icy silver / optical glass / chrome first, with color appearing as light events rather than flat fields. */
+   The A5.10.8 Stardust pair is the final visual authority: restoration establishes the pearl/silver material world;
+   optics adds the approved camera-plane refraction, chrome signal hardware and pearl transmission finish. */
 
 /* The full print treatment is inherited from a58-art-pass-base.css. Keep this marker here because the production guard validates the public stylesheet entrypoint. */
 @media print{}
