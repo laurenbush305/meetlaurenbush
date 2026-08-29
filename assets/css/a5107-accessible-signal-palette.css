@@ -77,6 +77,8 @@ html,body{background:var(--sz-white)!important;color:var(--sz-ink)!important}
 .tv-bg{background:radial-gradient(circle at 78% 24%,rgba(255,30,134,.32),transparent 28%),radial-gradient(circle at 28% 82%,rgba(11,188,208,.15),transparent 30%),linear-gradient(125deg,var(--sz-night) 0 38%,var(--sz-night-3) 64%,#16091e 100%)!important}
 .host{background:var(--sz-night)!important;color:#fff!important}
 .host-environment:after{background:linear-gradient(90deg,rgba(5,8,12,.05),rgba(5,8,12,.18) 68%,var(--sz-night) 100%),linear-gradient(0deg,rgba(5,8,12,.32),transparent 54%)!important}
+/* The giant HOST word is visible display typography, so it gets a deliberate cool-slate 3:1+ treatment instead of black-on-black ghosting. */
+.host-word{color:#536872!important;opacity:1!important}
 .watch{background:var(--sz-night)!important;color:#fff!important}
 .watch-weather{background:radial-gradient(circle at 18% 25%,rgba(11,188,208,.2),transparent 26%),radial-gradient(circle at 80% 76%,rgba(255,30,134,.28),transparent 29%),linear-gradient(125deg,var(--sz-night),var(--sz-night-3) 56%,#31103b)!important}
 .book{background:var(--sz-night)!important;color:#fff!important}
@@ -93,6 +95,7 @@ html,body{background:var(--sz-white)!important;color:var(--sz-ink)!important}
 .imagination{background:linear-gradient(90deg,#fff 0 78%,var(--sz-powder) 78% 100%)!important;box-shadow:inset 0 8px 0 var(--sz-aqua)!important}
 .imagination-grid{opacity:.32!important;background-image:linear-gradient(rgba(13,15,19,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(13,15,19,.08) 1px,transparent 1px)!important}
 .casting-doors article{background:#fff!important;border:1px solid rgba(13,15,19,.18)!important;box-shadow:0 12px 34px rgba(13,15,19,.07)!important}
+.casting-doors span,.casting-doors .mono{color:var(--sz-ink-soft)!important;opacity:1!important}
 
 /* LIGHT-SURFACE TEXT: solid colors only. */
 .section-code,
@@ -119,6 +122,8 @@ html,body{background:var(--sz-white)!important;color:var(--sz-ink)!important}
 .cast58 .operator-copy>p:not(.section-code),
 .cast58 .proof-card-copy p,
 .cast58 .credit p,
+.cast58 .operator-proof p,
+.a510-cast .operator-proof p,
 .project-file .project-intro,
 .project-file .evidence-copy p,
 .project-file .evidence-copy .proof-note,
@@ -156,6 +161,8 @@ body.cast58{background:#fff!important;color:var(--sz-ink)!important}
 .cast58 .proof-section,.a510-cast .proof-section{background:#fff!important}
 .cast58 .proof-card,.cast58 .proof-card-copy{background:#fff!important}
 .cast58 .proof-card{border-color:rgba(13,15,19,.16)!important}
+/* File numbers are intentionally chrome, but must remain legible as large display type. */
+.cast58 .file-number,.a510-cast .file-number{color:var(--sz-chrome-dark)!important;opacity:1!important}
 .cast58 .operator-section{background:#fff!important;box-shadow:inset 0 8px 0 var(--sz-aqua)!important}
 .a510-cast .credit-strip{background:#fff!important;border-color:rgba(13,15,19,.16)!important}
 .cast58 .booking-section{background:var(--sz-night-2)!important;color:#fff!important}
