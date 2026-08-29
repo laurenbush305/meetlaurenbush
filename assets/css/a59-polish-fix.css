@@ -1,9 +1,9 @@
 /* A5.9 REVIEW POLISH
-   Fixes found in first rendered QA: preserve full LAUREN wordmark on desktop,
+   Fixes found in rendered QA: preserve full LAUREN wordmark on desktop,
    keep Lauren's face unobstructed on mobile, and retain all four casting doors. */
 
 @media(min-width:761px){
-  .hero-lauren{left:3.2vw;top:30vh;font-size:clamp(98px,10.4vw,160px)}
+  .hero-lauren{left:3.2vw;top:30vh;font-size:clamp(98px,10.4vw,160px);z-index:7}
   .hero-photo{left:43.5%;width:min(38vw,555px)}
 }
 
