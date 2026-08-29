@@ -1,0 +1,174 @@
+/* A5.9 DESIGN ELEVATION
+   Art-direction objective: reduce proof-board density, create stronger camera-distance hierarchy,
+   improve editorial pacing, and give mobile a composed path instead of a compressed desktop stack.
+   Public claims and source governance remain unchanged. */
+
+:root{
+  --a59-paper:#fbf6ee;
+  --a59-ink:#090d12;
+  --a59-night:#0a0d12;
+  --a59-rule:rgba(9,13,18,.14);
+  --a59-shadow:0 34px 90px rgba(18,34,40,.12);
+}
+
+/* Global rhythm */
+body{background:var(--a59-paper)}
+.topbar{height:68px;background:rgba(251,246,238,.9);border-bottom:1px solid rgba(9,13,18,.08);box-shadow:0 1px 0 rgba(255,255,255,.55) inset}
+.brand{font-size:15px}
+.topbar nav{gap:clamp(12px,2vw,30px)}
+.topbar nav .nav-book{padding:12px 15px}
+.signal-seam{height:1px;opacity:.82;box-shadow:none}
+.source-tab{padding:6px 8px;background:rgba(255,252,247,.94);box-shadow:0 8px 30px rgba(10,20,24,.08)}
+.media-frame{box-shadow:var(--a59-shadow)}
+
+/* HERO: fewer competing objects, more cover-story confidence. */
+.hero{min-height:clamp(780px,100svh,960px);background:radial-gradient(ellipse at 68% 25%,rgba(131,223,225,.26),transparent 34%),radial-gradient(ellipse at 23% 82%,rgba(255,44,136,.055),transparent 31%),linear-gradient(112deg,#fffaf3 0 62%,#edf9f7 62%)}
+.hero-meta{top:116px;width:285px}
+.hero-meta p:nth-child(2){font-size:15px}
+.hero-promise{font-size:17px!important;max-width:17ch}
+.hero-lauren{left:3.2vw;top:30vh;font-size:clamp(102px,11.6vw,176px);letter-spacing:-.09em}
+.hero-bush{left:3.2vw;bottom:13.5vh;font-size:clamp(138px,18vw,270px);letter-spacing:-.09em;mix-blend-mode:normal}
+.hero-photo{left:42%;top:9vh;width:min(39vw,570px);height:min(81vh,800px);filter:drop-shadow(0 38px 60px rgba(31,66,72,.11))}
+.hero-photo:before{inset:9% -3% 3% -3%;filter:blur(24px)}
+.hero-transmission{right:4.5vw;bottom:11vh;width:min(12.5vw,176px);padding:5px;box-shadow:0 20px 48px rgba(14,24,30,.13)}
+.hero-transmission img{height:clamp(240px,43vh,390px)}
+.hero-actions{bottom:22vh}
+.hero-glass{right:18vw;width:84px;opacity:.52}
+.hero-rail{height:44px;background:#090d12}
+.hero-scroll{bottom:58px}
+
+/* PERSON: turn the selfie into one human note, not the entire chapter. */
+.person{min-height:900px;background:radial-gradient(ellipse at 78% 25%,rgba(131,223,225,.15),transparent 35%),linear-gradient(125deg,#fffaf3 0 55%,#f7f1ea 55%)}
+.person-type{font-size:clamp(88px,11vw,160px);left:2vw;top:10vh;color:rgba(9,13,18,.025)}
+.person-copy{left:6%;top:17%;max-width:360px}
+.person-copy h2{font-size:clamp(70px,7vw,104px)}
+.person-copy>p:last-child{font-size:17px;max-width:26ch}
+.person-studio{left:39%;top:12%;width:25%;height:58%;box-shadow:var(--a59-shadow)}
+.person-studio img{object-position:center 28%}
+.person-wide{left:auto;right:6%;bottom:8%;width:min(34vw,450px);height:43%;padding:6px;transform:none;box-shadow:var(--a59-shadow)}
+.person-floral{right:auto;left:28%;bottom:8%;width:min(17vw,220px);height:28%;transform:none;box-shadow:0 22px 58px rgba(27,40,47,.11)}
+.person-acrylic{left:61%;top:18%;width:9%;height:35%;opacity:.42}
+
+/* EXPLAIN: one hero proof, one knowledge receipt. */
+.explain{min-height:850px;background:linear-gradient(112deg,#f8f2ea 0 42%,#edf8f6 42%)}
+.explain-word{font-size:clamp(88px,11vw,160px);right:1vw;bottom:6vh;color:rgba(14,71,73,.035)}
+.explain-copy{right:6%;top:15%;width:min(35vw,470px)}
+.explain-copy h2{font-size:clamp(54px,5.7vw,84px)}
+.explain-stage{left:6%;top:13%;bottom:10%;width:64%}
+.explain-video{width:min(52%,470px)}
+.finance-transmission{left:47%;bottom:9%;width:min(43%,380px);height:23%;padding:4px}
+.explain-detail-bag{display:none!important}
+
+/* CREATE: make the film feel like the work, not a monitor inside a monitor. */
+.create{min-height:800px;padding-top:80px;padding-bottom:84px;background:radial-gradient(ellipse at 76% 15%,rgba(255,127,115,.075),transparent 31%),#f3e9df}
+.create-header{margin-bottom:30px}
+.create-header h2{font-size:clamp(64px,7.7vw,108px)}
+.create-film{height:min(50vw,600px);background:linear-gradient(118deg,#101114 0 58%,#171418 58%)}
+.create-video-lead{left:8%;top:6%;bottom:8%;width:min(34vw,430px)}
+.create-cut-a{right:8%;top:14%;width:min(29vw,370px);height:44%;border-width:4px;transform:none}
+.film-lower-third{left:8%;right:8%;bottom:4%}
+
+/* TELEVISION: one dominant frame + one archive receipt. */
+.television{min-height:860px;background:#15121b}
+.tv-bg{background:radial-gradient(circle at 76% 28%,rgba(255,44,136,.23),transparent 28%),radial-gradient(circle at 30% 80%,rgba(131,223,225,.1),transparent 30%),linear-gradient(125deg,#121019,#382548 58%,#17131d)}
+.tv-copy{left:6%;top:15%;width:min(33vw,430px)}
+.tv-copy h2{font-size:clamp(68px,7.2vw,108px)}
+.tv-type{font-size:clamp(90px,12vw,180px);opacity:.75}
+.tv-portrait{right:7%;top:10%;width:min(38vw,500px);height:78%;padding:6px;background:rgba(255,255,255,.04);box-shadow:0 36px 94px rgba(0,0,0,.34)}
+.tv-portrait img{object-fit:cover;object-position:center 44%}
+.tv-detail,.tv-set-detail{display:none!important}
+.tv-archive-flash{left:6%;right:auto;bottom:9%;width:min(26vw,330px);height:24%;transform:none}
+
+/* HOST is already the strongest chapter. Give it room rather than more objects. */
+.host{min-height:900px}
+.host-copy{right:6%;top:13%}
+.host-video{right:6%;top:34%;width:min(23vw,320px);height:47%}
+.host-room-support{left:43%;bottom:8%;width:min(15vw,205px);height:19%;box-shadow:0 22px 56px rgba(0,0,0,.24)}
+.host-word{opacity:.7}
+
+/* ACTIVATE: simplify sponsor proof and let the room read first. */
+.activate{min-height:900px}
+.activate-copy{max-width:610px}
+.activate-centerline{left:6%;top:30%;width:66%;height:53%}
+.activate-gotennis{right:5%;top:20%;width:min(22vw,300px);height:58%}
+.activate-material{display:none!important}
+.activate-result strong{font-size:clamp(40px,4vw,58px)}
+
+/* WATCH: larger screen, quieter tuner. */
+.watch{min-height:900px}
+.watch-stage{left:5%;top:27%;width:69%;height:61%;border-color:rgba(255,255,255,.1)}
+.watch-tuner{right:4%;top:32%;width:20%}
+.watch-tuner button{min-height:64px}
+.watch-tuner button.active{background:rgba(255,255,255,.065)}
+
+/* BACKSTAGE: credentials become a footer ledger, not three equal cards competing with the room. */
+.trust{min-height:850px}
+.trust-copy{width:min(37vw,500px)}
+.trust-photo{right:5%;top:11%;width:54%;height:58%;box-shadow:var(--a59-shadow)}
+.trust-proof{left:6%;right:6%;bottom:6%;grid-template-columns:1fr 1fr 1.25fr;background:rgba(255,250,243,.92);box-shadow:0 18px 48px rgba(24,45,50,.07)}
+.trust-proof article{min-height:145px;padding:18px 20px}
+.trust-proof strong{font-size:clamp(24px,2.7vw,39px)}
+
+/* CASTING IMAGINATION: finish on aspiration instead of another contact sheet. */
+.imagination{min-height:860px;background:radial-gradient(circle at 75% 21%,rgba(255,255,255,.7),transparent 27%),linear-gradient(126deg,#e1f7f4 0 62%,#f4e5ed 62%)}
+.imagination-grid{opacity:.52;background-size:80px 80px}
+.imagination-copy{width:min(48vw,650px)}
+.imagination-copy h2{font-size:clamp(78px,9.2vw,136px)}
+.imagination-talent{right:7%;top:5%;width:min(34vw,450px);height:82%}
+.casting-doors{left:6%;right:48%;bottom:7%;gap:7px}
+.casting-doors article{min-height:105px;background:rgba(255,253,248,.82);border-color:rgba(9,13,18,.1);box-shadow:0 12px 34px rgba(20,39,44,.045)}
+.casting-doors strong{font-size:20px}
+
+/* BOOK: full-screen closing title card, fewer boxes. */
+.book{min-height:610px;background:#090d12}
+.book-card{width:min(1180px,100%);grid-template-columns:1.55fr .45fr;gap:54px;padding:42px 0;border:0;border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.12);background:transparent;backdrop-filter:none}
+.book-copy h2{font-size:clamp(70px,8.4vw,122px)}
+.book-direct a{font-size:clamp(20px,2.4vw,34px)}
+
+@media(max-width:1024px){
+  .hero-photo{left:39%;width:44vw}.hero-transmission{right:3%;width:14vw}
+  .person-copy{left:5%}.person-studio{left:37%;width:28%}.person-wide{right:4%;width:35vw}.person-floral{left:24%;width:20vw}
+  .tv-portrait{right:4%;width:41vw}.tv-archive-flash{width:30vw}
+  .host-video{width:28vw}.host-room-support{left:39%;width:18vw}
+  .activate-gotennis{width:25vw}.watch-tuner{width:22%}
+  .imagination-talent{right:3%;width:39vw}.casting-doors{right:44%}
+}
+
+@media(max-width:760px){
+  .topbar{height:60px;padding-left:16px;padding-right:16px}.brand{font-size:13px}.topbar nav{gap:10px}.topbar nav a:not(.nav-book),.topbar nav button.proof-index-trigger{font-size:6.5px}.topbar nav .nav-book{padding:10px 11px}
+
+  .hero{min-height:820px;background:radial-gradient(ellipse at 73% 34%,rgba(131,223,225,.25),transparent 33%),linear-gradient(164deg,#fffaf3 0 74%,#edf8f6 74%)}
+  .hero-meta{top:82px;left:18px;width:200px}.hero-meta p:nth-child(2){font-size:12px}.hero-promise{font-size:13px!important}
+  .hero-lauren{left:4vw;top:30%;font-size:20vw;z-index:9}.hero-bush{left:4vw;bottom:22%;font-size:26vw;z-index:9}
+  .hero-photo{left:28%;top:18%;width:68vw;height:55%;z-index:6}.hero-transmission{right:4vw;bottom:20%;width:20vw;z-index:10}.hero-transmission img{height:24vh;min-height:170px}
+  .hero-actions{left:18px;bottom:29%}.hero-actions .button{min-height:38px;padding:0 12px;font-size:7px}.hero-glass{display:none}.hero-rail{height:40px}.hero-scroll{display:none}
+
+  .person{min-height:1010px;padding:70px 18px;background:linear-gradient(162deg,#fffaf3 0 63%,#f7f0e7 63%)}
+  .person-type{font-size:25vw;left:2vw;top:7%}.person-copy{position:relative;left:auto;top:auto;width:88%;margin:0}.person-copy h2{font-size:56px}.person-copy>p:last-child{font-size:14px;max-width:28ch}
+  .person-studio{left:18px;top:27%;width:47%;height:38%}.person-wide{right:18px;left:auto;top:32%;width:47%;height:48%}.person-floral{left:18px;top:68%;bottom:auto;width:34%;height:21%}.person-acrylic{display:none}
+
+  .explain{min-height:820px;padding:70px 18px;background:linear-gradient(162deg,#f8f2ea 0 38%,#edf8f6 38%)}
+  .explain-copy{position:relative;right:auto;top:auto;width:100%;text-align:left}.explain-copy h2{font-size:47px;max-width:9ch}
+  .explain-stage{left:18px;right:18px;top:31%;bottom:7%;width:auto}.explain-video{left:0;top:0;bottom:0;width:65%}.finance-transmission{left:auto;right:0;bottom:5%;width:40%;height:25%}
+  .explain-word{font-size:23vw;bottom:2%}
+
+  .create{min-height:720px;padding:66px 18px}.create-header h2{font-size:48px}.create-film{height:520px}.create-video-lead{left:5%;top:5%;bottom:10%;width:66%}.create-cut-a{right:4%;top:18%;width:31%;height:31%}.film-lower-third{left:5%;right:5%;font-size:6.5px;gap:8px}
+
+  .television{min-height:830px;padding:70px 18px}.tv-copy{left:18px;right:18px;top:8%;width:auto}.tv-copy h2{font-size:58px}.tv-portrait{left:18px;right:18px;top:27%;width:auto;height:54%}.tv-archive-flash{left:18px;bottom:5%;width:40%;height:18%}.tv-type{font-size:24vw;bottom:2%}
+
+  .host{min-height:930px}.host-environment{inset:18% 0 35% 0}.host-copy{left:18px;right:18px;top:7%}.host-copy h2{font-size:62px}.host-video{left:18px;bottom:6%;top:auto;width:55%;height:29%}.host-room-support{right:14px;left:auto;bottom:8%;width:32%;height:17%}.host-word{font-size:28vw}
+
+  .activate{min-height:1040px;padding:70px 18px}.activate-copy h2{font-size:64px}.activate-centerline{left:18px;right:18px;top:24%;width:auto;height:37%}.activate-gotennis{left:18px;right:18px;top:65%;width:auto;height:27%}.activate-result{left:16px;right:16px;bottom:14px}.activate-result strong{font-size:40px}
+
+  .watch{min-height:900px;padding:70px 18px}.watch-heading h2{font-size:64px}.watch-stage{left:18px;right:18px;top:20%;width:auto;height:56%}.watch-tuner{left:18px;right:18px;bottom:6%;top:auto;width:auto}.watch-tuner button{flex-basis:108px;min-height:58px}
+
+  .trust{min-height:940px;padding:70px 18px;background:linear-gradient(162deg,#f3eadf 0 44%,#fffaf3 44%)}.trust-copy{width:100%}.trust-copy h2{font-size:54px}.trust-photo{left:18px;right:18px;top:30%;width:auto;height:33%}.trust-proof{left:18px;right:18px;bottom:5%;grid-template-columns:1fr}.trust-proof article{min-height:auto;padding:13px 15px;border-right:0;border-bottom:1px solid rgba(9,13,18,.08)}.trust-proof article:last-child{border-bottom:0}.trust-proof strong{font-size:25px;margin:7px 0 4px}.trust-proof p{font-size:9px}
+
+  .imagination{min-height:820px;padding:70px 18px;background:linear-gradient(160deg,#e1f7f4 0 64%,#f4e5ed 64%)}.imagination-copy{width:100%}.imagination-copy h2{font-size:58px;max-width:7ch}.imagination-copy>p:last-child{font-size:13px;max-width:26ch}.imagination-talent{right:-3%;top:25%;width:61vw;height:55%}.casting-doors{left:18px;right:42%;bottom:5%;grid-template-columns:1fr;gap:5px}.casting-doors article{min-height:auto;padding:10px 11px}.casting-doors article:nth-child(n+3){display:none}.casting-doors strong{font-size:17px;margin:5px 0 2px}.casting-doors p{font-size:8px}
+
+  .book{min-height:540px;padding:70px 18px}.book-card{display:block;padding:30px 0}.book-copy h2{font-size:58px}.book-copy>p:not(.section-code):not(.book-direct){font-size:12px}.book-direct{margin-top:22px}.book-direct a{font-size:20px}.book-actions{margin-top:28px;grid-template-columns:1fr 1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-photo,.hero-transmission,.person-wide,.person-floral,.tv-archive-flash,.host-room-support{transform:none!important}
+}
