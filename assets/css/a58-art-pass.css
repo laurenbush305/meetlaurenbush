@@ -1,9 +1,10 @@
 @import url('a58-art-pass-base.css');
 @import url('a59-design-elevation.css');
 @import url('a59-polish-fix.css');
+@import url('a5101-360-polish.css');
 
-/* A5.9.1 FIRST-PAINT WRAPPER
-   Preserve the A5.8 authored base, then apply the A5.9 elevation and QA polish synchronously. */
+/* A5.10.1 FIRST-PAINT WRAPPER
+   Preserve the A5.8 authored base, then apply A5.9 elevation, QA polish and the 360px mobile audit corrections synchronously. */
 
 /* The full print treatment is inherited from a58-art-pass-base.css. Keep this marker here because the production guard validates the public stylesheet entrypoint. */
 @media print{}
