@@ -117,7 +117,7 @@ jobs:
 
       - name: Audit rendered color contrast at mobile and desktop
         run: |
-          cat > /tmp/a5107-contrast.mjs <<'JS'
+          cat > a5107-contrast.mjs <<'JS'
           import { chromium } from 'playwright';
           import AxeBuilder from '@axe-core/playwright';
 
@@ -154,4 +154,5 @@ jobs:
           await browser.close();
           if (failed) process.exit(1);
           JS
-          node /tmp/a5107-contrast.mjs
+          node a5107-contrast.mjs
+          rm a5107-contrast.mjs
