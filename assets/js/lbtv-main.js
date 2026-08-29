@@ -21,6 +21,31 @@
       if (play && typeof play.catch === 'function') play.catch(() => {});
     });
     explainFrame.appendChild(cover);
+
+    // This cover is created after lbtv-back-half.js has registered its static
+    // deferred-media set, so hydrate it independently as Explain approaches.
+    const coverImage = cover.querySelector('img[data-src]');
+    const loadCover = () => {
+      if (!coverImage || coverImage.dataset.loaded === 'true') return;
+      coverImage.loading = 'eager';
+      coverImage.fetchPriority = 'low';
+      if (coverImage.dataset.sizes) coverImage.sizes = coverImage.dataset.sizes;
+      if (coverImage.dataset.srcset) coverImage.srcset = coverImage.dataset.srcset;
+      if (coverImage.dataset.src) coverImage.src = coverImage.dataset.src;
+      coverImage.dataset.loaded = 'true';
+    };
+    if (coverImage) {
+      if ('IntersectionObserver' in window) {
+        const coverObserver = new IntersectionObserver(entries => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          loadCover();
+          coverObserver.disconnect();
+        }, { rootMargin: '1000px 0px' });
+        coverObserver.observe(explainFrame);
+      } else {
+        loadCover();
+      }
+    }
   }
 
   const proofIndex = document.querySelector('#proof-index');
