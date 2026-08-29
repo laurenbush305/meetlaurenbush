@@ -366,6 +366,14 @@ body.cast58{
   .source-tab{font-weight:600!important}
 }
 
+
+/* ---------- EXPLICIT AUTHORED SURFACE FALLBACKS ---------- */
+/* Keep real base colors present underneath optical gradients. This gives auto-dark-resistant browsers and QA a deterministic authored surface without flattening the material layers above. */
+.hero,.person,.explain,.create,.activate,.trust,.imagination{background-color:var(--sd-pearl)!important}
+.television,.host,.watch,.book{background-color:var(--sd-night)!important}
+body.cast58,.cast58 .casting-hero,.cast58 .proof-section,.a510-cast .proof-section,.cast58 .operator-section,.project-file,.project-file .project-hero,.project-file .project-evidence,.project-file .project-notes{background-color:var(--sd-pearl)!important}
+.cast58 .door-section,.cast58 .booking-section,.project-file .project-close,.project-file .project-foot{background-color:var(--sd-night)!important}
+
 @media(prefers-reduced-motion:reduce){
   .hero-atmosphere,.person-acrylic,.tv-bg,.watch-weather{animation:none!important;transform:none!important}
 }
