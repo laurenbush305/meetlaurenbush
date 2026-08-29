@@ -164,6 +164,17 @@ jobs:
                   }
                 }
 
+                const proofTrigger = page.locator('.proof-index-trigger');
+                if (await proofTrigger.count()) {
+                  await proofTrigger.click();
+                  await page.waitForTimeout(300);
+                  const proofClose = page.locator('.proof-index-close');
+                  if (await proofClose.count()) {
+                    await proofClose.click();
+                    await page.waitForTimeout(100);
+                  }
+                }
+
                 const wake = await page.evaluate(() => {
                   const imgs = [...document.querySelectorAll('img[data-deferred-proof]')];
                   const real = img => img.currentSrc && !img.currentSrc.startsWith('data:image/');
@@ -176,7 +187,7 @@ jobs:
                 console.log('Deferred wake-up:', `${wake.loaded}/${wake.total}`);
                 console.log('Scroll-height delta:', wake.finalScrollHeight - initialHeight);
                 all.dpr1.deferredWake = wake;
-                if (wake.loaded !== 15) failures.push(`DPR1 loaded only ${wake.loaded}/15 deferred proof image tag(s) during scroll-through`);
+                if (wake.loaded !== 15) failures.push(`DPR1 loaded only ${wake.loaded}/15 deferred proof image tag(s) during scroll / Watch / Proof interaction`);
                 if (Math.abs(wake.finalScrollHeight - initialHeight) > 2) failures.push(`DPR1 document height shifted by ${wake.finalScrollHeight - initialHeight}px after deferred images loaded`);
               }
 
