@@ -1,0 +1,91 @@
+name: A5.10.4 Deep Static Media Patcher
+
+on:
+  push:
+    branches: [build/a5104-static-lazy]
+    paths:
+      - .github/workflows/a5104-static-lazy-patcher.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-deep-static-media:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: build/a5104-static-lazy
+          fetch-depth: 0
+
+      - name: Move distant static proof images behind the near-viewport loader
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text()
+          placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+          targets = [
+              'assets/img/scrambled-host-new.webp',
+              'assets/img/scrambled-podium-smile.webp',
+              'assets/img/ti-tiny-trap-pilates.jpg',
+              'assets/img/host-celsius-main-a52.jpg',
+              'assets/img/activate-centerline-wide.jpg',
+              'assets/img/gotennis-rooftop-atl-a52.jpg',
+          ]
+
+          report = ['# A5.10.4 Deferred Static Proof Images', '']
+          total = 0
+
+          for source in targets:
+              tag_pattern = re.compile(r'<img\b[^>]*\bsrc="' + re.escape(source) + r'"[^>]*>', re.I)
+              matches = list(tag_pattern.finditer(html))
+              if not matches:
+                  raise SystemExit(f'No image tag found for {source}; refusing ambiguous patch.')
+
+              def convert(match):
+                  tag = match.group(0)
+                  if 'data-deferred-proof=' in tag:
+                      return tag
+                  src_match = re.search(r'\bsrc="([^"]+)"', tag)
+                  srcset_match = re.search(r'\bsrcset="([^"]+)"', tag)
+                  sizes_match = re.search(r'\bsizes="([^"]+)"', tag)
+                  if not src_match:
+                      raise SystemExit(f'Missing src in target tag: {source}')
+
+                  tag = re.sub(r'\bsrc="[^"]+"', f'src="{placeholder}" data-src="{src_match.group(1)}"', tag, count=1)
+                  if srcset_match:
+                      tag = re.sub(r'\bsrcset="[^"]+"', f'data-srcset="{srcset_match.group(1)}"', tag, count=1)
+                  if sizes_match:
+                      tag = re.sub(r'\bsizes="[^"]+"', f'data-sizes="{sizes_match.group(1)}"', tag, count=1)
+                  tag = tag[:-1] + ' data-deferred-proof="true">'
+                  return tag
+
+              html, changed = tag_pattern.subn(convert, html)
+              total += changed
+              report.append(f'- `{source}`: {changed} image tag(s) deferred')
+
+          if total < 7:
+              raise SystemExit(f'Expected at least 7 distant image tags, changed {total}.')
+
+          path.write_text(html)
+          report += ['', f'Total deferred image tags: {total}.', 'The approved source and responsive srcset values are preserved in data attributes until the image is within 1000px of the viewport.']
+          Path('A5.10.4_DEFERRED_STATIC_MEDIA.md').write_text('\n'.join(report) + '\n')
+          print(f'Deferred {total} distant static proof images.')
+          PY
+
+      - name: Commit A5.10.4 markup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html A5.10.4_DEFERRED_STATIC_MEDIA.md
+          if git diff --cached --quiet; then
+            echo "No markup changes."
+            exit 0
+          fi
+          git commit -m "Defer A5.10.4 distant static proof images"
+          git push origin HEAD:build/a5104-static-lazy

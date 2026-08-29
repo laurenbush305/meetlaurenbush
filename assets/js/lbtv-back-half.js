@@ -27,13 +27,62 @@
     }
   }
 
+  const deferredImages = [...document.querySelectorAll('img[data-src], img[data-srcset]')];
+
+  const loadImage = img => {
+    if (!img || img.dataset.loaded === 'true') return;
+    img.loading = 'eager';
+    img.fetchPriority = 'low';
+    if (img.dataset.sizes) img.sizes = img.dataset.sizes;
+    if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+    if (img.dataset.src) img.src = img.dataset.src;
+    img.dataset.loaded = 'true';
+  };
+
+  const loadDeferredWithin = root => {
+    if (!root) return;
+    root.querySelectorAll('img[data-src], img[data-srcset]').forEach(loadImage);
+  };
+
+  if (deferredImages.length) {
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          loadImage(entry.target);
+          imageObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '1000px 0px' });
+
+      const deferredSections = [...new Set(deferredImages.map(img => img.closest('section')).filter(Boolean))];
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          loadDeferredWithin(entry.target);
+          sectionObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '1000px 0px' });
+
+      deferredImages.forEach(img => imageObserver.observe(img));
+      deferredSections.forEach(section => sectionObserver.observe(section));
+    } else {
+      deferredImages.forEach(loadImage);
+    }
+  }
+
+  const proofTrigger = document.querySelector('.proof-index-trigger');
+  const proofIndex = document.querySelector('#proof-index');
+  if (proofTrigger && proofIndex) {
+    proofTrigger.addEventListener('click', () => loadDeferredWithin(proofIndex));
+  }
+
   const watch = document.querySelector('#watch');
   if (!watch) return;
 
   const tabs = [...watch.querySelectorAll('[data-watch]')];
   const panels = [...watch.querySelectorAll('[data-watch-panel]')];
 
-  const activate = (name, focus = false) => {
+  const activate = (name, focus = false, hydrate = false) => {
     tabs.forEach(tab => {
       const active = tab.dataset.watch === name;
       tab.classList.toggle('active', active);
@@ -46,6 +95,7 @@
       const active = panel.dataset.watchPanel === name;
       panel.hidden = !active;
       panel.classList.toggle('active', active);
+      if (active && hydrate) loadDeferredWithin(panel);
       if (!active) panel.querySelectorAll('video').forEach(video => video.pause());
     });
 
@@ -53,7 +103,7 @@
   };
 
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activate(tab.dataset.watch));
+    tab.addEventListener('click', () => activate(tab.dataset.watch, false, true));
     tab.addEventListener('keydown', event => {
       let next = null;
       if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % tabs.length;
@@ -62,7 +112,7 @@
       if (event.key === 'End') next = tabs.length - 1;
       if (next !== null) {
         event.preventDefault();
-        activate(tabs[next].dataset.watch, true);
+        activate(tabs[next].dataset.watch, true, true);
       }
     });
   });
