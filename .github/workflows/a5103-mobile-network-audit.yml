@@ -34,119 +34,100 @@ jobs:
 
           const toKiB = n => Math.round((n / 1024) * 10) / 10;
           const cleanPath = url => {
-            try { const u = new URL(url); return u.pathname.replace(/^\//,''); }
+            try { return new URL(url).pathname.replace(/^\//, ''); }
             catch { return url; }
           };
-
-          const budgetsKiB = { 1: 750, 2: 1250, 3: 1600 };
+          const budgetsKiB = { 1: 425, 2: 750, 3: 1050 };
           const expectedHero = {
             1: 'assets/img/a5102/blue-skirt-480.webp',
             2: 'assets/img/a5102/blue-skirt-720.webp',
             3: 'assets/img/a5102/blue-skirt-960.webp'
           };
+          const expectedDeferred = 22;
 
-          (async()=>{
-            const browser = await chromium.launch({headless:true});
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
             const all = {};
             const failures = [];
 
-            for (const dpr of [1,2,3]) {
-              const page = await browser.newPage({viewport:{width:360,height:800}, deviceScaleFactor:dpr});
-              await page.goto('http://127.0.0.1:4173/index.html', {waitUntil:'networkidle'});
+            for (const dpr of [1, 2, 3]) {
+              const page = await browser.newPage({ viewport: { width: 360, height: 800 }, deviceScaleFactor: dpr });
+              await page.goto('http://127.0.0.1:4173/index.html', { waitUntil: 'networkidle' });
               await page.waitForTimeout(250);
-              const data = await page.evaluate(()=>{
-                const resources = performance.getEntriesByType('resource').map(r=>({
-                  name:r.name,
-                  initiatorType:r.initiatorType,
-                  transferSize:r.transferSize || 0,
-                  encodedBodySize:r.encodedBodySize || 0,
-                  decodedBodySize:r.decodedBodySize || 0,
-                  duration:r.duration
-                }));
-                const images = [...document.images].map(img=>({
-                  src:img.getAttribute('src'),
-                  currentSrc:img.currentSrc,
-                  loading:img.loading || '',
-                  complete:img.complete,
-                  naturalWidth:img.naturalWidth,
-                  naturalHeight:img.naturalHeight,
-                  top:img.getBoundingClientRect().top,
-                  bottom:img.getBoundingClientRect().bottom,
-                  deferred:img.hasAttribute('data-deferred-proof'),
-                  deferredSource:img.getAttribute('data-src') || ''
-                }));
-                const videos = [...document.querySelectorAll('video')].map(v=>({
-                  poster:v.getAttribute('poster'),
-                  dataPoster:v.getAttribute('data-poster'),
-                  preload:v.preload,
-                  top:v.getBoundingClientRect().top,
-                  bottom:v.getBoundingClientRect().bottom,
-                  currentSrc:v.currentSrc || ''
-                }));
-                return {
-                  viewport:{w:innerWidth,h:innerHeight,dpr:devicePixelRatio},
-                  scrollHeight:document.documentElement.scrollHeight,
-                  resources,
-                  images,
-                  videos
-                };
-              });
 
-              const resources = data.resources.map(r=>({...r,path:cleanPath(r.name)}));
-              const total = resources.reduce((s,r)=>s+(r.transferSize||r.encodedBodySize||0),0);
-              const totalKiB = toKiB(total);
-              const byType = {};
-              for (const r of resources) {
-                const t = r.initiatorType || 'other';
-                byType[t] = (byType[t] || 0) + (r.transferSize||r.encodedBodySize||0);
-              }
+              const data = await page.evaluate(() => ({
+                viewport: { w: innerWidth, h: innerHeight, dpr: devicePixelRatio },
+                scrollHeight: document.documentElement.scrollHeight,
+                resources: performance.getEntriesByType('resource').map(r => ({
+                  name: r.name,
+                  initiatorType: r.initiatorType,
+                  transferSize: r.transferSize || 0,
+                  encodedBodySize: r.encodedBodySize || 0
+                })),
+                images: [...document.images].map(img => ({
+                  src: img.getAttribute('src'),
+                  currentSrc: img.currentSrc,
+                  complete: img.complete,
+                  naturalWidth: img.naturalWidth,
+                  top: img.getBoundingClientRect().top,
+                  deferred: img.hasAttribute('data-deferred-proof'),
+                  deferredSource: img.getAttribute('data-src') || ''
+                }))
+              }));
 
+              const resources = data.resources.map(r => ({ ...r, path: cleanPath(r.name) }));
+              const totalBytes = resources.reduce((sum, r) => sum + (r.transferSize || r.encodedBodySize || 0), 0);
+              const totalKiB = toKiB(totalBytes);
               const isRealImage = i => i.currentSrc && !i.currentSrc.startsWith('data:image/');
-              const loadedImages = data.images.filter(isRealImage).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
-              const belowFoldLoaded = loadedImages.filter(i=>i.top > data.viewport.h + 100 && i.complete && i.naturalWidth > 1);
-              const imageTransfers = resources.filter(r=>r.initiatorType === 'img').map(r=>({path:r.path,kiB:toKiB(r.transferSize||r.encodedBodySize||0)})).sort((a,b)=>b.kiB-a.kiB);
-              const deferredImages = data.images.filter(i=>i.deferred);
-              const deferredRealLoaded = deferredImages.filter(isRealImage).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
-              const placeholderCount = deferredImages.filter(i=>i.currentSrc && i.currentSrc.startsWith('data:image/')).length;
-              const hero = loadedImages.find(i=>(i.src||'').includes('blue-skirt-approved'))?.currentPath || '';
-              const videoTransfers = resources.filter(r=>r.initiatorType === 'video');
-              const largestImageKiB = Math.max(0, ...imageTransfers.map(r=>r.kiB));
+              const loadedImages = data.images.filter(isRealImage).map(i => ({ ...i, currentPath: cleanPath(i.currentSrc) }));
+              const belowFoldLoaded = loadedImages.filter(i => i.top > data.viewport.h + 100 && i.complete && i.naturalWidth > 1);
+              const imageTransfers = resources
+                .filter(r => r.initiatorType === 'img')
+                .map(r => ({ path: r.path, kiB: toKiB(r.transferSize || r.encodedBodySize || 0) }))
+                .sort((a, b) => b.kiB - a.kiB);
+              const deferredImages = data.images.filter(i => i.deferred);
+              const deferredRealLoaded = deferredImages.filter(isRealImage);
+              const placeholderCount = deferredImages.filter(i => i.currentSrc && i.currentSrc.startsWith('data:image/')).length;
+              const hero = loadedImages.find(i => (i.src || '').includes('blue-skirt-approved'))?.currentPath || '';
+              const videoTransfers = resources.filter(r => r.initiatorType === 'video');
+              const initialWimpbTransfers = imageTransfers.filter(r => r.path.includes('wimpb-campaign-main'));
+              const largestImageKiB = Math.max(0, ...imageTransfers.map(r => r.kiB));
 
               all[`dpr${dpr}`] = {
-                ...data,
-                resources,
-                totalBytes:total,
+                viewport: data.viewport,
+                scrollHeight: data.scrollHeight,
+                totalBytes,
                 totalKiB,
-                byTypeBytes:byType,
                 belowFoldLoaded,
                 imageTransfers,
-                deferredImageCount:deferredImages.length,
-                deferredPlaceholderCount:placeholderCount,
-                deferredRealLoaded,
-                selectedHero:hero,
-                videoTransferCount:videoTransfers.length,
+                deferredImageCount: deferredImages.length,
+                deferredPlaceholderCount: placeholderCount,
+                deferredRealLoaded: deferredRealLoaded.map(i => i.deferredSource),
+                selectedHero: hero,
+                videoTransferCount: videoTransfers.length,
+                initialWimpbTransfers,
                 largestImageKiB
               };
 
               console.log(`\nDPR ${dpr}: ${totalKiB} KiB initial resource transfer (budget ${budgetsKiB[dpr]} KiB)`);
               console.log('Selected hero:', hero);
-              console.log('Real below-fold loaded image count:', belowFoldLoaded.length);
-              console.log('Real below-fold loaded images:', JSON.stringify(belowFoldLoaded.map(i=>({path:i.currentPath,top:Math.round(i.top),src:i.src}))));
+              console.log('Real below-fold loaded images:', JSON.stringify(belowFoldLoaded.map(i => ({ path: i.currentPath, top: Math.round(i.top) }))));
               console.log('Initial image transfers:', JSON.stringify(imageTransfers));
               console.log('Deferred placeholders:', `${placeholderCount}/${deferredImages.length}`);
               console.log('Deferred real images loaded early:', deferredRealLoaded.length);
+              console.log('Initial WIMPB campaign transfers:', initialWimpbTransfers.length);
               console.log('Initial video transfer count:', videoTransfers.length);
-              console.log('Largest image transfer:', largestImageKiB, 'KiB');
 
               if (totalKiB > budgetsKiB[dpr]) failures.push(`DPR${dpr} total ${totalKiB} KiB exceeds ${budgetsKiB[dpr]} KiB`);
               if (hero !== expectedHero[dpr]) failures.push(`DPR${dpr} selected hero ${hero || '(none)'}; expected ${expectedHero[dpr]}`);
               if (videoTransfers.length) failures.push(`DPR${dpr} made ${videoTransfers.length} initial video transfer(s)`);
               if (largestImageKiB > 400) failures.push(`DPR${dpr} has an initial image transfer of ${largestImageKiB} KiB (>400 KiB)`);
-              if (deferredImages.length !== 21) failures.push(`DPR${dpr} found ${deferredImages.length} deferred proof image tag(s); expected 21`);
-              if (deferredImages.length && placeholderCount !== deferredImages.length) failures.push(`DPR${dpr} kept only ${placeholderCount}/${deferredImages.length} deferred proof image(s) on placeholders before scroll`);
-              if (deferredImages.length && deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred static proof image(s) before scroll`);
+              if (initialWimpbTransfers.length) failures.push(`DPR${dpr} made ${initialWimpbTransfers.length} eager WIMPB campaign image transfer(s)`);
+              if (deferredImages.length !== expectedDeferred) failures.push(`DPR${dpr} found ${deferredImages.length} deferred proof image tag(s); expected ${expectedDeferred}`);
+              if (placeholderCount !== deferredImages.length) failures.push(`DPR${dpr} kept only ${placeholderCount}/${deferredImages.length} deferred image(s) on placeholders before scroll`);
+              if (deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred image(s) before scroll`);
 
-              await page.screenshot({path:`qa-artifacts/a5105/initial-360-dpr${dpr}.png`,fullPage:false});
+              await page.screenshot({ path: `qa-artifacts/a5105/initial-360-dpr${dpr}.png`, fullPage: false });
 
               if (dpr === 1) {
                 const initialHeight = data.scrollHeight;
@@ -183,21 +164,17 @@ jobs:
                   const imgs = [...document.querySelectorAll('img[data-deferred-proof]')];
                   const real = img => img.currentSrc && !img.currentSrc.startsWith('data:image/');
                   const ready = img => img.dataset.loaded === 'true' && real(img) && img.complete && img.naturalWidth > 1;
-                  const pending = imgs.filter(img => !ready(img)).map(img => ({
-                    source: img.dataset.src || '',
-                    currentSrc: img.currentSrc || '',
-                    loadedFlag: img.dataset.loaded || '',
-                    complete: img.complete,
-                    naturalWidth: img.naturalWidth,
-                    className: img.className || '',
-                    watchPanel: img.closest('[data-watch-panel]')?.getAttribute('data-watch-panel') || '',
-                    inProofIndex: !!img.closest('#proof-index'),
-                    parentClass: img.parentElement?.className || ''
-                  }));
                   return {
                     total: imgs.length,
                     loaded: imgs.filter(ready).length,
-                    pending,
+                    pending: imgs.filter(img => !ready(img)).map(img => ({
+                      source: img.dataset.src || '',
+                      currentSrc: img.currentSrc || '',
+                      loadedFlag: img.dataset.loaded || '',
+                      naturalWidth: img.naturalWidth,
+                      watchPanel: img.closest('[data-watch-panel]')?.getAttribute('data-watch-panel') || '',
+                      inProofIndex: !!img.closest('#proof-index')
+                    })),
                     finalScrollHeight: document.documentElement.scrollHeight
                   };
                 });
@@ -205,22 +182,21 @@ jobs:
                 console.log('Pending deferred proof:', JSON.stringify(wake.pending));
                 console.log('Scroll-height delta:', wake.finalScrollHeight - initialHeight);
                 all.dpr1.deferredWake = wake;
-                if (wake.loaded !== 21) failures.push(`DPR1 loaded only ${wake.loaded}/21 deferred proof image tag(s) during scroll / Watch / Proof interaction`);
+                if (wake.loaded !== expectedDeferred) failures.push(`DPR1 loaded only ${wake.loaded}/${expectedDeferred} deferred image tag(s) during scroll / Watch / Proof interaction`);
                 if (Math.abs(wake.finalScrollHeight - initialHeight) > 2) failures.push(`DPR1 document height shifted by ${wake.finalScrollHeight - initialHeight}px after deferred images loaded`);
               }
 
               await page.close();
             }
 
-            fs.writeFileSync('qa-artifacts/a5105/network-audit.json', JSON.stringify(all,null,2));
+            fs.writeFileSync('qa-artifacts/a5105/network-audit.json', JSON.stringify(all, null, 2));
             await browser.close();
-
             if (failures.length) {
               console.error('\nA5.10 mobile network failures:');
-              failures.forEach(f=>console.error(`- ${f}`));
+              failures.forEach(f => console.error(`- ${f}`));
               process.exit(1);
             }
-          })().catch(err=>{console.error(err);process.exit(1)});
+          })().catch(err => { console.error(err); process.exit(1); });
           NODE
           NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a5105-network.cjs
       - name: Upload A5.10.5 audit
