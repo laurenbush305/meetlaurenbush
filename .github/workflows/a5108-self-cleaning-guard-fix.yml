@@ -1,0 +1,35 @@
+name: A5.10.8 One-Time Guard Wording Fix
+
+on:
+  push:
+    branches:
+      - 'fix/a5108-force-light-rendering'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-remove-self:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Align guard wording to Stardust Camera Kit source language
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/a5108-stardust-visual-guard.yml')
+          text=p.read_text()
+          old="for phrase in ['partial refraction','chrome/glass','pearl transmission']:"
+          new="for phrase in ['partial refraction','silver/glass','pearl transmission']:"
+          assert old in text or new in text
+          if old in text:
+              p.write_text(text.replace(old,new,1))
+          PY
+          rm .github/workflows/a5108-self-cleaning-guard-fix.yml
+      - name: Commit fix and remove one-time workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/a5108-stardust-visual-guard.yml .github/workflows/a5108-self-cleaning-guard-fix.yml
+          git commit -m 'Align Stardust guard to Camera Kit wording'
+          git push
