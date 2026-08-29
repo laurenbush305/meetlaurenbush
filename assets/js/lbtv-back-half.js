@@ -1,4 +1,12 @@
 (() => {
+  if (!document.querySelector('link[data-a59-design]')) {
+    const design = document.createElement('link');
+    design.rel = 'stylesheet';
+    design.href = 'assets/css/a59-design-elevation.css';
+    design.dataset.a59Design = 'true';
+    document.head.appendChild(design);
+  }
+
   const watch = document.querySelector('#watch');
   if (!watch) return;
 
