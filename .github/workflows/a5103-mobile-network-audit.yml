@@ -142,7 +142,7 @@ jobs:
               if (hero !== expectedHero[dpr]) failures.push(`DPR${dpr} selected hero ${hero || '(none)'}; expected ${expectedHero[dpr]}`);
               if (videoTransfers.length) failures.push(`DPR${dpr} made ${videoTransfers.length} initial video transfer(s)`);
               if (largestImageKiB > 400) failures.push(`DPR${dpr} has an initial image transfer of ${largestImageKiB} KiB (>400 KiB)`);
-              if (deferredImages.length !== 15) failures.push(`DPR${dpr} found ${deferredImages.length} deferred proof image tag(s); expected 15`);
+              if (deferredImages.length !== 21) failures.push(`DPR${dpr} found ${deferredImages.length} deferred proof image tag(s); expected 21`);
               if (deferredImages.length && placeholderCount !== deferredImages.length) failures.push(`DPR${dpr} kept only ${placeholderCount}/${deferredImages.length} deferred proof image(s) on placeholders before scroll`);
               if (deferredImages.length && deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred static proof image(s) before scroll`);
 
@@ -205,7 +205,7 @@ jobs:
                 console.log('Pending deferred proof:', JSON.stringify(wake.pending));
                 console.log('Scroll-height delta:', wake.finalScrollHeight - initialHeight);
                 all.dpr1.deferredWake = wake;
-                if (wake.loaded !== 15) failures.push(`DPR1 loaded only ${wake.loaded}/15 deferred proof image tag(s) during scroll / Watch / Proof interaction`);
+                if (wake.loaded !== 21) failures.push(`DPR1 loaded only ${wake.loaded}/21 deferred proof image tag(s) during scroll / Watch / Proof interaction`);
                 if (Math.abs(wake.finalScrollHeight - initialHeight) > 2) failures.push(`DPR1 document height shifted by ${wake.finalScrollHeight - initialHeight}px after deferred images loaded`);
               }
 
