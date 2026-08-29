@@ -1,0 +1,171 @@
+name: A5.10.8 Stardust Visual Guard
+
+on:
+  push:
+    branches:
+      - 'fix/a5108-force-light-rendering'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  stardust-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate visual authority and browser color locks
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          wrapper = Path('assets/css/a58-art-pass.css').read_text()
+          visual = Path('assets/css/a5108-stardust-restoration.css').read_text().lower()
+          canon = Path('docs/SEASON-ZERO-VISUAL-CANON.md').read_text()
+          color_note = Path('docs/SEASON-ZERO-COLOR-SYSTEM.md').read_text()
+
+          imports = re.findall(r"@import url\('([^']+)'\);", wrapper)
+          assert imports[-1] == 'a5108-stardust-restoration.css', imports
+          assert 'locked visual authority' in canon.lower()
+          assert 'flat section colors are a regression' in canon.lower() or 'flat section colors' in canon.lower()
+          assert 'implementation support only. not visual authority' in color_note.lower()
+          assert 'color-scheme:only light' in visual
+
+          required_visual_tokens = [
+            '--sd-pearl:#fbfcfd', '--sd-ice:#e9eef1', '--sd-silver:#c7d0d6',
+            '--sd-aqua:#7be7ec', '--sd-blush:#ffc0d6', '--sd-lilac:#c8c0ff',
+            '--sd-green:#c9f1df', '--sd-hot:#ff2b88'
+          ]
+          for token in required_visual_tokens:
+            assert token in visual, f'Missing Stardust token: {token}'
+
+          # The final authority layer must not reintroduce the flat-palette families that caused drift.
+          banned_final_layer = ['#d9f1f8','#eff9fc','#17101d','#25142c','#f8f2e8','#f3eadf','#f3e9df']
+          hits = [x for x in banned_final_layer if x in visual]
+          assert not hits, f'Flat/legacy palette colors found in final Stardust layer: {hits}'
+
+          pages = sorted(Path('.').glob('*.html'))
+          assert pages
+          for page in pages:
+            text = page.read_text().lower()
+            for required in [
+              '<meta name="color-scheme" content="only light">',
+              '<meta name="supported-color-schemes" content="light">',
+              '<meta name="darkreader-lock">'
+            ]:
+              assert required in text, f'{page}: missing {required}'
+
+          print(f'Stardust source lock + browser color protection: PASS across {len(pages)} HTML pages')
+          PY
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install browser tooling
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 @axe-core/playwright@4.10.2 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4173 >/tmp/a5108-server.log 2>&1 &
+          sleep 2
+
+      - name: Render light and forced-dark contexts
+        run: |
+          cat > a5108-visual.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+
+          fs.mkdirSync('a5108-visual-qa', {recursive:true});
+
+          function parseRgb(s) {
+            const m = s.match(/rgba?\(([^)]+)\)/);
+            if (!m) return null;
+            return m[1].split(',').slice(0,3).map(v => Number.parseFloat(v.trim()));
+          }
+          function lum(rgb) {
+            if (!rgb) return null;
+            const lin = rgb.map(v => {
+              const c=v/255;
+              return c <= .04045 ? c/12.92 : Math.pow((c+.055)/1.055,2.4);
+            });
+            return .2126*lin[0]+.7152*lin[1]+.0722*lin[2];
+          }
+
+          async function inspect(browser, label) {
+            const context = await browser.newContext({viewport:{width:390,height:844}, colorScheme:'dark'});
+            const page = await context.newPage();
+            await page.goto('http://127.0.0.1:4173/index.html', {waitUntil:'networkidle'});
+            await page.screenshot({path:`a5108-visual-qa/home-${label}-390.png`, fullPage:true});
+
+            const data = await page.evaluate(() => {
+              const bg = sel => getComputedStyle(document.querySelector(sel)).backgroundColor;
+              const color = sel => getComputedStyle(document.querySelector(sel)).color;
+              return {
+                htmlScheme:getComputedStyle(document.documentElement).colorScheme,
+                heroBg:bg('.hero'), personBg:bg('.person'), explainBg:bg('.explain'),
+                activateBg:bg('.activate'), trustBg:bg('.trust'), imaginationBg:bg('.imagination'),
+                televisionBg:bg('.television'), watchBg:bg('.watch'), bookBg:bg('.book'),
+                heroText:color('.hero-title'), personText:color('.person-copy h2'), trustText:color('.trust-copy h2'),
+                televisionText:color('.tv-copy h2'), bookText:color('.book-copy h2')
+              };
+            });
+            console.log(label, data);
+            if (!data.htmlScheme.includes('only light')) throw new Error(`${label}: document is not locked to only light`);
+            for (const key of ['heroBg','personBg','explainBg','activateBg','trustBg','imaginationBg']) {
+              const L=lum(parseRgb(data[key]));
+              if (L === null || L < .72) throw new Error(`${label}: ${key} became too dark (${data[key]}, L=${L})`);
+            }
+            for (const key of ['televisionBg','watchBg','bookBg']) {
+              const L=lum(parseRgb(data[key]));
+              if (L === null || L > .12) throw new Error(`${label}: ${key} lost On Air depth (${data[key]}, L=${L})`);
+            }
+            for (const key of ['heroText','personText','trustText']) {
+              const L=lum(parseRgb(data[key]));
+              if (L === null || L > .22) throw new Error(`${label}: ${key} is not dark readable foreground (${data[key]}, L=${L})`);
+            }
+            for (const key of ['televisionText','bookText']) {
+              const L=lum(parseRgb(data[key]));
+              if (L === null || L < .75) throw new Error(`${label}: ${key} is not light readable foreground (${data[key]}, L=${L})`);
+            }
+            await context.close();
+          }
+
+          const normal = await chromium.launch({headless:true});
+          await inspect(normal,'normal-dark-preference');
+          await normal.close();
+
+          const forced = await chromium.launch({headless:true,args:['--force-dark-mode','--enable-features=WebContentsForceDark']});
+          await inspect(forced,'forced-dark');
+          await forced.close();
+          JS
+          node a5108-visual.mjs
+          rm a5108-visual.mjs
+
+      - name: Audit rendered contrast
+        run: |
+          cat > a5108-contrast.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import AxeBuilder from '@axe-core/playwright';
+          const browser=await chromium.launch({headless:true});
+          const context=await browser.newContext({viewport:{width:390,height:844}});
+          const page=await context.newPage();
+          await page.goto('http://127.0.0.1:4173/index.html',{waitUntil:'networkidle'});
+          const r=await new AxeBuilder({page}).withRules(['color-contrast']).analyze();
+          for(const v of r.violations){console.error(v.id,v.nodes.map(n=>`${n.target}: ${n.failureSummary}`).join('\n'))}
+          await browser.close();
+          if(r.violations.length) process.exit(1);
+          JS
+          node a5108-contrast.mjs
+          rm a5108-contrast.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a5108-stardust-visual-qa
+          path: a5108-visual-qa
+          if-no-files-found: ignore
