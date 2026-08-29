@@ -28,7 +28,7 @@ jobs:
           imports = re.findall(r"@import url\('([^']+)'\);", wrapper)
           assert imports[-1] == 'a5108-stardust-restoration.css', imports
           assert 'locked visual authority' in canon.lower()
-          assert 'flat section colors are a regression' in canon.lower() or 'flat section colors' in canon.lower()
+          assert 'do not translate this brief into a flat palette system' in canon.lower()
           assert 'implementation support only. not visual authority' in color_note.lower()
           assert 'color-scheme:only light' in visual
 
@@ -40,7 +40,6 @@ jobs:
           for token in required_visual_tokens:
             assert token in visual, f'Missing Stardust token: {token}'
 
-          # The final authority layer must not reintroduce the flat-palette families that caused drift.
           banned_final_layer = ['#d9f1f8','#eff9fc','#17101d','#25142c','#f8f2e8','#f3eadf','#f3e9df']
           hits = [x for x in banned_final_layer if x in visual]
           assert not hits, f'Flat/legacy palette colors found in final Stardust layer: {hits}'
