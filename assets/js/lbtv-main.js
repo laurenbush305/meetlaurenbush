@@ -25,6 +25,17 @@
   const proofLinks = [...document.querySelectorAll('[data-proof-close]')];
   let proofReturnFocus = null;
 
+  // Hidden drawer content has no rendered innerText until opened. Give every
+  // interactive element an explicit accessible name so assistive tech and QA
+  // can identify it even while the drawer is closed.
+  proofClose?.setAttribute('aria-label', 'Close Proof / Source Index');
+  proofLinks.forEach(link => {
+    if (!link.hasAttribute('aria-label')) {
+      const label = link.textContent.replace(/\s+/g, ' ').trim();
+      if (label) link.setAttribute('aria-label', label);
+    }
+  });
+
   const openProof = trigger => {
     if (!proofIndex) return;
     proofReturnFocus = trigger || document.activeElement;
