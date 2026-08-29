@@ -47,7 +47,6 @@
       panel.hidden = !active;
       panel.classList.toggle('active', active);
       if (!active) panel.querySelectorAll('video').forEach(video => video.pause());
-      if (active) panel.querySelectorAll('video[data-poster]').forEach(loadPoster);
     });
 
     watch.dataset.program = name;
