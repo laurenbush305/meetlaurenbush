@@ -1,0 +1,26 @@
+/* A5.9 REVIEW POLISH
+   Fixes found in first rendered QA: preserve full LAUREN wordmark on desktop,
+   keep Lauren's face unobstructed on mobile, and retain all four casting doors. */
+
+@media(min-width:761px){
+  .hero-lauren{left:3.2vw;top:30vh;font-size:clamp(98px,10.4vw,160px)}
+  .hero-photo{left:43.5%;width:min(38vw,555px)}
+}
+
+@media(max-width:760px){
+  .hero{min-height:850px}
+  .hero-lauren{left:4vw;top:26.5%;font-size:19vw;z-index:9}
+  .hero-photo{left:34%;top:34%;width:62vw;height:46%;z-index:6}
+  .hero-transmission{right:4vw;bottom:17%;width:19vw}
+  .hero-transmission img{height:22vh;min-height:155px}
+  .hero-bush{left:4vw;bottom:15%;font-size:25vw;z-index:9}
+  .hero-actions{left:18px;bottom:22%}
+
+  .imagination{min-height:880px}
+  .imagination-talent{right:-5%;top:27%;width:58vw;height:48%}
+  .casting-doors{left:18px;right:18px;bottom:4%;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .casting-doors article{display:block!important;min-height:86px;padding:9px 10px}
+  .casting-doors strong{font-size:15px;margin:4px 0 2px}
+  .casting-doors p{font-size:7px;line-height:1.28}
+  .casting-doors span{font-size:5px}
+}
