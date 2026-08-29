@@ -1,4 +1,4 @@
-name: A5.10.3 Mobile Network Audit
+name: A5.10 Mobile Network Audit
 
 on:
   push:
@@ -23,12 +23,12 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Start static server
         run: |
-          python3 -m http.server 4173 >/tmp/a5103-server.log 2>&1 &
+          python3 -m http.server 4173 >/tmp/a5104-server.log 2>&1 &
           sleep 2
       - name: Audit initial 360px network at DPR 1 2 3
         run: |
-          mkdir -p qa-artifacts/a5103
-          cat > /tmp/a5103-network.cjs <<'NODE'
+          mkdir -p qa-artifacts/a5104
+          cat > /tmp/a5104-network.cjs <<'NODE'
           const { chromium } = require('playwright');
           const fs = require('fs');
 
@@ -38,7 +38,7 @@ jobs:
             catch { return url; }
           };
 
-          const budgetsKiB = { 1: 900, 2: 1700, 3: 2200 };
+          const budgetsKiB = { 1: 750, 2: 1250, 3: 1600 };
           const expectedHero = {
             1: 'assets/img/a5102/blue-skirt-480.webp',
             2: 'assets/img/a5102/blue-skirt-720.webp',
@@ -133,11 +133,6 @@ jobs:
               console.log('Deferred real images loaded early:', deferredRealLoaded.length);
               console.log('Initial video transfer count:', videoTransfers.length);
               console.log('Largest image transfer:', largestImageKiB, 'KiB');
-              console.log('Largest resources:');
-              for (const r of [...resources].sort((a,b)=>(b.transferSize||b.encodedBodySize)-(a.transferSize||a.encodedBodySize)).slice(0,15)) {
-                const bytes = r.transferSize||r.encodedBodySize||0;
-                console.log(`${toKiB(bytes).toString().padStart(7)} KiB  ${String(r.initiatorType).padEnd(8)} ${r.path}`);
-              }
 
               if (totalKiB > budgetsKiB[dpr]) failures.push(`DPR${dpr} total ${totalKiB} KiB exceeds ${budgetsKiB[dpr]} KiB`);
               if (hero !== expectedHero[dpr]) failures.push(`DPR${dpr} selected hero ${hero || '(none)'}; expected ${expectedHero[dpr]}`);
@@ -147,23 +142,60 @@ jobs:
               if (deferredImages.length && placeholderCount !== deferredImages.length) failures.push(`DPR${dpr} kept only ${placeholderCount}/${deferredImages.length} deferred proof image(s) on placeholders before scroll`);
               if (deferredImages.length && deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred static proof image(s) before scroll`);
 
-              await page.screenshot({path:`qa-artifacts/a5103/initial-360-dpr${dpr}.png`,fullPage:false});
+              await page.screenshot({path:`qa-artifacts/a5104/initial-360-dpr${dpr}.png`,fullPage:false});
+
+              if (dpr === 1) {
+                const initialHeight = data.scrollHeight;
+                const maxScroll = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
+                for (let y = 0; y <= maxScroll; y += 550) {
+                  await page.evaluate(scrollY => window.scrollTo(0, scrollY), y);
+                  await page.waitForTimeout(45);
+                }
+                await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+                await page.waitForTimeout(250);
+
+                const watch = page.locator('#watch');
+                if (await watch.count()) {
+                  await watch.scrollIntoViewIfNeeded();
+                  const tabs = page.locator('#watch [data-watch]');
+                  for (let i = 0; i < await tabs.count(); i++) {
+                    await tabs.nth(i).click();
+                    await page.waitForTimeout(100);
+                  }
+                }
+
+                const wake = await page.evaluate(() => {
+                  const imgs = [...document.querySelectorAll('img[data-deferred-proof]')];
+                  const real = img => img.currentSrc && !img.currentSrc.startsWith('data:image/');
+                  return {
+                    total: imgs.length,
+                    loaded: imgs.filter(img => img.dataset.loaded === 'true' && real(img) && img.complete && img.naturalWidth > 1).length,
+                    finalScrollHeight: document.documentElement.scrollHeight
+                  };
+                });
+                console.log('Deferred wake-up:', `${wake.loaded}/${wake.total}`);
+                console.log('Scroll-height delta:', wake.finalScrollHeight - initialHeight);
+                all.dpr1.deferredWake = wake;
+                if (wake.loaded !== 15) failures.push(`DPR1 loaded only ${wake.loaded}/15 deferred proof image tag(s) during scroll-through`);
+                if (Math.abs(wake.finalScrollHeight - initialHeight) > 2) failures.push(`DPR1 document height shifted by ${wake.finalScrollHeight - initialHeight}px after deferred images loaded`);
+              }
+
               await page.close();
             }
 
-            fs.writeFileSync('qa-artifacts/a5103/network-audit.json', JSON.stringify(all,null,2));
+            fs.writeFileSync('qa-artifacts/a5104/network-audit.json', JSON.stringify(all,null,2));
             await browser.close();
 
             if (failures.length) {
-              console.error('\nA5.10 mobile network budget failures:');
+              console.error('\nA5.10 mobile network failures:');
               failures.forEach(f=>console.error(`- ${f}`));
               process.exit(1);
             }
           })().catch(err=>{console.error(err);process.exit(1)});
           NODE
-          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a5103-network.cjs
-      - name: Upload A5.10.3 audit
+          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a5104-network.cjs
+      - name: Upload A5.10.4 audit
         uses: actions/upload-artifact@v4
         with:
-          name: a5103-mobile-network-audit
-          path: qa-artifacts/a5103/
+          name: a5104-mobile-network-audit
+          path: qa-artifacts/a5104/
