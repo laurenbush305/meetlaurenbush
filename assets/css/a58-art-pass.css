@@ -4,10 +4,12 @@
 @import url('a5101-360-polish.css');
 @import url('a5106-bright-palette.css');
 @import url('a5107-accessible-signal-palette.css');
+@import url('a5108-stardust-restoration.css');
 
-/* A5.10.7 FIRST-PAINT WRAPPER
-   Preserve the authored layout, responsive work and performance system, then apply the
-   documented Season Zero signal palette and accessibility roles synchronously. */
+/* A5.10.8 FIRST-PAINT WRAPPER
+   Layout, responsive behavior, accessibility roles and performance mechanics remain inherited.
+   A5.10.8 is the final visual-authority layer and restores the locked Stardust cinematic material world:
+   pearl / icy silver / optical glass / chrome first, with color appearing as light events rather than flat fields. */
 
 /* The full print treatment is inherited from a58-art-pass-base.css. Keep this marker here because the production guard validates the public stylesheet entrypoint. */
 @media print{}
