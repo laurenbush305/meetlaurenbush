@@ -1,4 +1,18 @@
 (() => {
+  const styles = [
+    ['a59-design', 'assets/css/a59-design-elevation.css'],
+    ['a59-polish', 'assets/css/a59-polish-fix.css']
+  ];
+
+  styles.forEach(([key, href]) => {
+    if (document.querySelector(`link[data-${key}]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.setAttribute(`data-${key}`, 'true');
+    document.head.appendChild(link);
+  });
+
   const watch = document.querySelector('#watch');
   if (!watch) return;
 
