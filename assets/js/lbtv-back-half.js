@@ -31,6 +31,7 @@
 
   const loadImage = img => {
     if (!img || img.dataset.loaded === 'true') return;
+    img.loading = 'eager';
     img.fetchPriority = 'low';
     if (img.dataset.sizes) img.sizes = img.dataset.sizes;
     if (img.dataset.srcset) img.srcset = img.dataset.srcset;
