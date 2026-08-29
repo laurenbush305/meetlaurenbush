@@ -21,16 +21,18 @@ jobs:
           from pathlib import Path
 
           wrapper = Path('assets/css/a58-art-pass.css').read_text()
-          visual = Path('assets/css/a5108-stardust-restoration.css').read_text().lower()
+          restoration = Path('assets/css/a5108-stardust-restoration.css').read_text().lower()
+          optics = Path('assets/css/a5108-stardust-optics.css').read_text().lower()
           canon = Path('docs/SEASON-ZERO-VISUAL-CANON.md').read_text()
           color_note = Path('docs/SEASON-ZERO-COLOR-SYSTEM.md').read_text()
 
           imports = re.findall(r"@import url\('([^']+)'\);", wrapper)
-          assert imports[-1] == 'a5108-stardust-restoration.css', imports
+          assert imports[-2:] == ['a5108-stardust-restoration.css','a5108-stardust-optics.css'], imports[-2:]
           assert 'locked visual authority' in canon.lower()
           assert 'do not translate this brief into a flat palette system' in canon.lower()
           assert 'implementation support only. not visual authority' in color_note.lower()
-          assert 'color-scheme:only light' in visual
+          assert 'color-scheme:only light' in restoration
+          assert 'css and real media are the default foundation' in canon.lower()
 
           required_visual_tokens = [
             '--sd-pearl:#fbfcfd', '--sd-ice:#e9eef1', '--sd-silver:#c7d0d6',
@@ -38,11 +40,14 @@ jobs:
             '--sd-green:#c9f1df', '--sd-hot:#ff2b88'
           ]
           for token in required_visual_tokens:
-            assert token in visual, f'Missing Stardust token: {token}'
+            assert token in restoration, f'Missing Stardust token: {token}'
+
+          for phrase in ['partial refraction','chrome/glass','pearl transmission']:
+            assert phrase in optics, f'Missing approved camera-kit behavior: {phrase}'
 
           banned_final_layer = ['#d9f1f8','#eff9fc','#17101d','#25142c','#f8f2e8','#f3eadf','#f3e9df']
-          hits = [x for x in banned_final_layer if x in visual]
-          assert not hits, f'Flat/legacy palette colors found in final Stardust layer: {hits}'
+          hits = [x for x in banned_final_layer if x in restoration or x in optics]
+          assert not hits, f'Flat/legacy palette colors found in A5.10.8 visual authority: {hits}'
 
           pages = sorted(Path('.').glob('*.html'))
           assert pages
@@ -73,13 +78,19 @@ jobs:
           python3 -m http.server 4173 >/tmp/a5108-server.log 2>&1 &
           sleep 2
 
-      - name: Render light and forced-dark contexts
+      - name: Render dark-preference and forced-dark contexts
         run: |
           cat > a5108-visual.mjs <<'JS'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
 
           fs.mkdirSync('a5108-visual-qa', {recursive:true});
+
+          const chapters = {
+            hero:'.hero', person:'.person', explain:'.explain', create:'.create',
+            television:'.television', host:'.host', activate:'.activate', watch:'.watch',
+            trust:'.trust', imagination:'.imagination', book:'.book'
+          };
 
           function parseRgb(s) {
             const m = s.match(/rgba?\(([^)]+)\)/);
@@ -99,13 +110,15 @@ jobs:
             const context = await browser.newContext({viewport:{width:390,height:844}, colorScheme:'dark'});
             const page = await context.newPage();
             await page.goto('http://127.0.0.1:4173/index.html', {waitUntil:'networkidle'});
-            await page.screenshot({path:`a5108-visual-qa/home-${label}-390.png`, fullPage:true});
+
+            // First paint, before section-scrolling wakes deferred media.
+            await page.screenshot({path:`a5108-visual-qa/home-${label}-390-first-paint.png`, fullPage:true});
 
             const data = await page.evaluate(() => {
               const bg = sel => getComputedStyle(document.querySelector(sel)).backgroundColor;
               const color = sel => getComputedStyle(document.querySelector(sel)).color;
               return {
-                htmlScheme:getComputedStyle(document.documentElement).colorScheme,
+                htmlScheme:getComputedStyle(document.documentElement).colorScheme.toLowerCase(),
                 heroBg:bg('.hero'), personBg:bg('.person'), explainBg:bg('.explain'),
                 activateBg:bg('.activate'), trustBg:bg('.trust'), imaginationBg:bg('.imagination'),
                 televisionBg:bg('.television'), watchBg:bg('.watch'), bookBg:bg('.book'),
@@ -114,7 +127,10 @@ jobs:
               };
             });
             console.log(label, data);
-            if (!data.htmlScheme.includes('only light')) throw new Error(`${label}: document is not locked to only light`);
+            const schemeWords = data.htmlScheme.split(/\s+/);
+            if (!schemeWords.includes('light') || schemeWords.includes('dark')) {
+              throw new Error(`${label}: document is not locked to light-only rendering (${data.htmlScheme})`);
+            }
             for (const key of ['heroBg','personBg','explainBg','activateBg','trustBg','imaginationBg']) {
               const L=lum(parseRgb(data[key]));
               if (L === null || L < .72) throw new Error(`${label}: ${key} became too dark (${data[key]}, L=${L})`);
@@ -131,11 +147,22 @@ jobs:
               const L=lum(parseRgb(data[key]));
               if (L === null || L < .75) throw new Error(`${label}: ${key} is not light readable foreground (${data[key]}, L=${L})`);
             }
+
+            // Chapter screenshots intentionally scroll to the component so deferred real media is awake.
+            for (const [name, selector] of Object.entries(chapters)) {
+              const locator=page.locator(selector);
+              await locator.scrollIntoViewIfNeeded();
+              await page.waitForTimeout(220);
+              await locator.screenshot({path:`a5108-visual-qa/${name}-${label}-390.png`});
+            }
+
+            // Capture the hydrated page after a real scroll-through for human review.
+            await page.screenshot({path:`a5108-visual-qa/home-${label}-390-hydrated.png`, fullPage:true});
             await context.close();
           }
 
           const normal = await chromium.launch({headless:true});
-          await inspect(normal,'normal-dark-preference');
+          await inspect(normal,'dark-preference');
           await normal.close();
 
           const forced = await chromium.launch({headless:true,args:['--force-dark-mode','--enable-features=WebContentsForceDark']});
@@ -151,7 +178,7 @@ jobs:
           import { chromium } from 'playwright';
           import AxeBuilder from '@axe-core/playwright';
           const browser=await chromium.launch({headless:true});
-          const context=await browser.newContext({viewport:{width:390,height:844}});
+          const context=await browser.newContext({viewport:{width:390,height:844}, colorScheme:'dark'});
           const page=await context.newPage();
           await page.goto('http://127.0.0.1:4173/index.html',{waitUntil:'networkidle'});
           const r=await new AxeBuilder({page}).withRules(['color-contrast']).analyze();
