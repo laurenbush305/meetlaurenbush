@@ -2,7 +2,7 @@ name: A5.10 Mobile Network Audit
 
 on:
   push:
-    branches: [build/a5103-mobile-network, build/a5104-static-lazy]
+    branches: [build/a5103-mobile-network, build/a5104-static-lazy, build/a5105-remaining-early-media]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -23,12 +23,12 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Start static server
         run: |
-          python3 -m http.server 4173 >/tmp/a5104-server.log 2>&1 &
+          python3 -m http.server 4173 >/tmp/a5105-server.log 2>&1 &
           sleep 2
       - name: Audit initial 360px network at DPR 1 2 3
         run: |
-          mkdir -p qa-artifacts/a5104
-          cat > /tmp/a5104-network.cjs <<'NODE'
+          mkdir -p qa-artifacts/a5105
+          cat > /tmp/a5105-network.cjs <<'NODE'
           const { chromium } = require('playwright');
           const fs = require('fs');
 
@@ -104,12 +104,13 @@ jobs:
               const isRealImage = i => i.currentSrc && !i.currentSrc.startsWith('data:image/');
               const loadedImages = data.images.filter(isRealImage).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
               const belowFoldLoaded = loadedImages.filter(i=>i.top > data.viewport.h + 100 && i.complete && i.naturalWidth > 1);
+              const imageTransfers = resources.filter(r=>r.initiatorType === 'img').map(r=>({path:r.path,kiB:toKiB(r.transferSize||r.encodedBodySize||0)})).sort((a,b)=>b.kiB-a.kiB);
               const deferredImages = data.images.filter(i=>i.deferred);
               const deferredRealLoaded = deferredImages.filter(isRealImage).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
               const placeholderCount = deferredImages.filter(i=>i.currentSrc && i.currentSrc.startsWith('data:image/')).length;
               const hero = loadedImages.find(i=>(i.src||'').includes('blue-skirt-approved'))?.currentPath || '';
               const videoTransfers = resources.filter(r=>r.initiatorType === 'video');
-              const largestImageKiB = Math.max(0, ...resources.filter(r=>r.initiatorType === 'img').map(r=>toKiB(r.transferSize||r.encodedBodySize||0)));
+              const largestImageKiB = Math.max(0, ...imageTransfers.map(r=>r.kiB));
 
               all[`dpr${dpr}`] = {
                 ...data,
@@ -118,6 +119,7 @@ jobs:
                 totalKiB,
                 byTypeBytes:byType,
                 belowFoldLoaded,
+                imageTransfers,
                 deferredImageCount:deferredImages.length,
                 deferredPlaceholderCount:placeholderCount,
                 deferredRealLoaded,
@@ -129,6 +131,8 @@ jobs:
               console.log(`\nDPR ${dpr}: ${totalKiB} KiB initial resource transfer (budget ${budgetsKiB[dpr]} KiB)`);
               console.log('Selected hero:', hero);
               console.log('Real below-fold loaded image count:', belowFoldLoaded.length);
+              console.log('Real below-fold loaded images:', JSON.stringify(belowFoldLoaded.map(i=>({path:i.currentPath,top:Math.round(i.top),src:i.src}))));
+              console.log('Initial image transfers:', JSON.stringify(imageTransfers));
               console.log('Deferred placeholders:', `${placeholderCount}/${deferredImages.length}`);
               console.log('Deferred real images loaded early:', deferredRealLoaded.length);
               console.log('Initial video transfer count:', videoTransfers.length);
@@ -142,7 +146,7 @@ jobs:
               if (deferredImages.length && placeholderCount !== deferredImages.length) failures.push(`DPR${dpr} kept only ${placeholderCount}/${deferredImages.length} deferred proof image(s) on placeholders before scroll`);
               if (deferredImages.length && deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred static proof image(s) before scroll`);
 
-              await page.screenshot({path:`qa-artifacts/a5104/initial-360-dpr${dpr}.png`,fullPage:false});
+              await page.screenshot({path:`qa-artifacts/a5105/initial-360-dpr${dpr}.png`,fullPage:false});
 
               if (dpr === 1) {
                 const initialHeight = data.scrollHeight;
@@ -208,7 +212,7 @@ jobs:
               await page.close();
             }
 
-            fs.writeFileSync('qa-artifacts/a5104/network-audit.json', JSON.stringify(all,null,2));
+            fs.writeFileSync('qa-artifacts/a5105/network-audit.json', JSON.stringify(all,null,2));
             await browser.close();
 
             if (failures.length) {
@@ -218,9 +222,9 @@ jobs:
             }
           })().catch(err=>{console.error(err);process.exit(1)});
           NODE
-          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a5104-network.cjs
-      - name: Upload A5.10.4 audit
+          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a5105-network.cjs
+      - name: Upload A5.10.5 audit
         uses: actions/upload-artifact@v4
         with:
-          name: a5104-mobile-network-audit
-          path: qa-artifacts/a5104/
+          name: a5105-mobile-network-audit
+          path: qa-artifacts/a5105/
