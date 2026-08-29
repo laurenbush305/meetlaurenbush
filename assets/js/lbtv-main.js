@@ -14,7 +14,7 @@
     cover.type = 'button';
     cover.className = 'video-cover';
     cover.setAttribute('aria-label', "Play What's in My Pickleball Bag");
-    cover.innerHTML = '<img src="assets/img/a55/wimpb-campaign-main.jpg" alt="" decoding="async"><span>Play WIMPB</span>';
+    cover.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="assets/img/a5103/wimpb-campaign-main-480.jpg" data-srcset="assets/img/a5103/wimpb-campaign-main-360.jpg 360w, assets/img/a5103/wimpb-campaign-main-480.jpg 480w" data-sizes="100vw" data-deferred-proof="true" alt="" decoding="async"><span>Play WIMPB</span>';
     cover.addEventListener('click', () => {
       cover.remove();
       const play = explainVideo.play();
