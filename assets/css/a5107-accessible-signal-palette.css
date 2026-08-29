@@ -8,6 +8,7 @@
 */
 
 :root{
+  color-scheme:only light;
   --sz-white:#ffffff;
   --sz-ink:#0d0f13;
   --sz-ink-soft:#34404a;

@@ -110,3 +110,16 @@ Same network, calmer producer-facing application: white, powder blue, black, chr
 6. Full-page backgrounds may only use approved White, Powder Blue, Broadcast Black or Broadcast Violet families unless a future brief explicitly changes this document.
 7. Browser QA screenshots must be visually reviewed at 360px and desktop after any palette change. A green functional test alone is not sufficient.
 8. Do not revive legacy warm-paper colors through gradients, alpha blends or new tokens with different names.
+
+
+## Browser auto-dark protection
+
+The public site is intentionally art-directed and does not permit third-party/browser auto-dark recoloring. Every root public HTML document must include these declarations in `<head>` before stylesheets:
+
+- `<meta name="color-scheme" content="only light">`
+- `<meta name="supported-color-schemes" content="light">`
+- `<meta name="darkreader-lock">`
+
+The final palette stylesheet must also declare `color-scheme: only light` on `:root`. This is required because Brave iOS Night Mode uses Dark Reader-style page recoloring that can turn approved light surfaces dark while leaving authored foreground colors unreadable.
+
+This protection is part of the Season Zero color system. Do not remove it while the site remains light-first and art-directed. Browser chrome may remain dark according to the user's browser settings; the document itself must retain the authored palette.
