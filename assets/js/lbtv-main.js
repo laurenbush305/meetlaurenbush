@@ -14,13 +14,38 @@
     cover.type = 'button';
     cover.className = 'video-cover';
     cover.setAttribute('aria-label', "Play What's in My Pickleball Bag");
-    cover.innerHTML = '<img src="assets/img/a55/wimpb-campaign-main.jpg" alt="" decoding="async"><span>Play WIMPB</span>';
+    cover.innerHTML = '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="assets/img/a5103/wimpb-campaign-main-480.jpg" data-srcset="assets/img/a5103/wimpb-campaign-main-360.jpg 360w, assets/img/a5103/wimpb-campaign-main-480.jpg 480w" data-sizes="100vw" data-deferred-proof="true" alt="" decoding="async"><span>Play WIMPB</span>';
     cover.addEventListener('click', () => {
       cover.remove();
       const play = explainVideo.play();
       if (play && typeof play.catch === 'function') play.catch(() => {});
     });
     explainFrame.appendChild(cover);
+
+    // This cover is created after lbtv-back-half.js has registered its static
+    // deferred-media set, so hydrate it independently as Explain approaches.
+    const coverImage = cover.querySelector('img[data-src]');
+    const loadCover = () => {
+      if (!coverImage || coverImage.dataset.loaded === 'true') return;
+      coverImage.loading = 'eager';
+      coverImage.fetchPriority = 'low';
+      if (coverImage.dataset.sizes) coverImage.sizes = coverImage.dataset.sizes;
+      if (coverImage.dataset.srcset) coverImage.srcset = coverImage.dataset.srcset;
+      if (coverImage.dataset.src) coverImage.src = coverImage.dataset.src;
+      coverImage.dataset.loaded = 'true';
+    };
+    if (coverImage) {
+      if ('IntersectionObserver' in window) {
+        const coverObserver = new IntersectionObserver(entries => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          loadCover();
+          coverObserver.disconnect();
+        }, { rootMargin: '1000px 0px' });
+        coverObserver.observe(explainFrame);
+      } else {
+        loadCover();
+      }
+    }
   }
 
   const proofIndex = document.querySelector('#proof-index');
