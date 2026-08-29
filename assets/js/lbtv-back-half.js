@@ -39,6 +39,11 @@
     img.dataset.loaded = 'true';
   };
 
+  const loadDeferredWithin = root => {
+    if (!root) return;
+    root.querySelectorAll('img[data-src], img[data-srcset]').forEach(loadImage);
+  };
+
   if (deferredImages.length) {
     if ('IntersectionObserver' in window) {
       const imageObserver = new IntersectionObserver(entries => {
@@ -54,13 +59,19 @@
     }
   }
 
+  const proofTrigger = document.querySelector('.proof-index-trigger');
+  const proofIndex = document.querySelector('#proof-index');
+  if (proofTrigger && proofIndex) {
+    proofTrigger.addEventListener('click', () => loadDeferredWithin(proofIndex));
+  }
+
   const watch = document.querySelector('#watch');
   if (!watch) return;
 
   const tabs = [...watch.querySelectorAll('[data-watch]')];
   const panels = [...watch.querySelectorAll('[data-watch-panel]')];
 
-  const activate = (name, focus = false) => {
+  const activate = (name, focus = false, hydrate = false) => {
     tabs.forEach(tab => {
       const active = tab.dataset.watch === name;
       tab.classList.toggle('active', active);
@@ -73,6 +84,7 @@
       const active = panel.dataset.watchPanel === name;
       panel.hidden = !active;
       panel.classList.toggle('active', active);
+      if (active && hydrate) loadDeferredWithin(panel);
       if (!active) panel.querySelectorAll('video').forEach(video => video.pause());
     });
 
@@ -80,7 +92,7 @@
   };
 
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activate(tab.dataset.watch));
+    tab.addEventListener('click', () => activate(tab.dataset.watch, false, true));
     tab.addEventListener('keydown', event => {
       let next = null;
       if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % tabs.length;
@@ -89,7 +101,7 @@
       if (event.key === 'End') next = tabs.length - 1;
       if (next !== null) {
         event.preventDefault();
-        activate(tabs[next].dataset.watch, true);
+        activate(tabs[next].dataset.watch, true, true);
       }
     });
   });
