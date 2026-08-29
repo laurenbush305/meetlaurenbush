@@ -1,0 +1,154 @@
+name: A5.10.3 Mobile Network Audit
+
+on:
+  push:
+    branches: [build/a5103-mobile-network]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  initial-load-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser tooling
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 4173 >/tmp/a5103-server.log 2>&1 &
+          sleep 2
+      - name: Audit initial 360px network at DPR 1 2 3
+        run: |
+          mkdir -p qa-artifacts/a5103
+          cat > /tmp/a5103-network.cjs <<'NODE'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+
+          const toKiB = n => Math.round((n / 1024) * 10) / 10;
+          const cleanPath = url => {
+            try { const u = new URL(url); return u.pathname.replace(/^\//,''); }
+            catch { return url; }
+          };
+
+          const budgetsKiB = { 1: 900, 2: 1700, 3: 2200 };
+          const expectedHero = {
+            1: 'assets/img/a5102/blue-skirt-480.webp',
+            2: 'assets/img/a5102/blue-skirt-720.webp',
+            3: 'assets/img/a5102/blue-skirt-960.webp'
+          };
+
+          (async()=>{
+            const browser = await chromium.launch({headless:true});
+            const all = {};
+            const failures = [];
+
+            for (const dpr of [1,2,3]) {
+              const page = await browser.newPage({viewport:{width:360,height:800}, deviceScaleFactor:dpr});
+              await page.goto('http://127.0.0.1:4173/index.html', {waitUntil:'networkidle'});
+              await page.waitForTimeout(250);
+              const data = await page.evaluate(()=>{
+                const resources = performance.getEntriesByType('resource').map(r=>({
+                  name:r.name,
+                  initiatorType:r.initiatorType,
+                  transferSize:r.transferSize || 0,
+                  encodedBodySize:r.encodedBodySize || 0,
+                  decodedBodySize:r.decodedBodySize || 0,
+                  duration:r.duration
+                }));
+                const images = [...document.images].map(img=>({
+                  src:img.getAttribute('src'),
+                  currentSrc:img.currentSrc,
+                  loading:img.loading || '',
+                  complete:img.complete,
+                  naturalWidth:img.naturalWidth,
+                  naturalHeight:img.naturalHeight,
+                  top:img.getBoundingClientRect().top,
+                  bottom:img.getBoundingClientRect().bottom
+                }));
+                const videos = [...document.querySelectorAll('video')].map(v=>({
+                  poster:v.getAttribute('poster'),
+                  dataPoster:v.getAttribute('data-poster'),
+                  preload:v.preload,
+                  top:v.getBoundingClientRect().top,
+                  bottom:v.getBoundingClientRect().bottom,
+                  currentSrc:v.currentSrc || ''
+                }));
+                return {
+                  viewport:{w:innerWidth,h:innerHeight,dpr:devicePixelRatio},
+                  scrollHeight:document.documentElement.scrollHeight,
+                  resources,
+                  images,
+                  videos
+                };
+              });
+
+              const resources = data.resources.map(r=>({...r,path:cleanPath(r.name)}));
+              const total = resources.reduce((s,r)=>s+(r.transferSize||r.encodedBodySize||0),0);
+              const totalKiB = toKiB(total);
+              const byType = {};
+              for (const r of resources) {
+                const t = r.initiatorType || 'other';
+                byType[t] = (byType[t] || 0) + (r.transferSize||r.encodedBodySize||0);
+              }
+              const loadedImages = data.images.filter(i=>i.currentSrc).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
+              const belowFoldLoaded = loadedImages.filter(i=>i.top > data.viewport.h + 100 && i.complete && i.naturalWidth > 0);
+              const hero = loadedImages.find(i=>(i.src||'').includes('blue-skirt-approved'))?.currentPath || '';
+              const videoTransfers = resources.filter(r=>r.initiatorType === 'video');
+              const largestImageKiB = Math.max(0, ...resources.filter(r=>r.initiatorType === 'img').map(r=>toKiB(r.transferSize||r.encodedBodySize||0)));
+
+              all[`dpr${dpr}`] = {
+                ...data,
+                resources,
+                totalBytes:total,
+                totalKiB,
+                byTypeBytes:byType,
+                belowFoldLoaded,
+                selectedHero:hero,
+                videoTransferCount:videoTransfers.length,
+                largestImageKiB
+              };
+
+              console.log(`\nDPR ${dpr}: ${totalKiB} KiB initial resource transfer (budget ${budgetsKiB[dpr]} KiB)`);
+              console.log('Selected hero:', hero);
+              console.log('Below-fold loaded image count:', belowFoldLoaded.length);
+              console.log('Initial video transfer count:', videoTransfers.length);
+              console.log('Largest image transfer:', largestImageKiB, 'KiB');
+              console.log('Largest resources:');
+              for (const r of [...resources].sort((a,b)=>(b.transferSize||b.encodedBodySize)-(a.transferSize||a.encodedBodySize)).slice(0,15)) {
+                const bytes = r.transferSize||r.encodedBodySize||0;
+                console.log(`${toKiB(bytes).toString().padStart(7)} KiB  ${String(r.initiatorType).padEnd(8)} ${r.path}`);
+              }
+
+              if (totalKiB > budgetsKiB[dpr]) failures.push(`DPR${dpr} total ${totalKiB} KiB exceeds ${budgetsKiB[dpr]} KiB`);
+              if (hero !== expectedHero[dpr]) failures.push(`DPR${dpr} selected hero ${hero || '(none)'}; expected ${expectedHero[dpr]}`);
+              if (videoTransfers.length) failures.push(`DPR${dpr} made ${videoTransfers.length} initial video transfer(s)`);
+              if (largestImageKiB > 400) failures.push(`DPR${dpr} has an initial image transfer of ${largestImageKiB} KiB (>400 KiB)`);
+
+              await page.screenshot({path:`qa-artifacts/a5103/initial-360-dpr${dpr}.png`,fullPage:false});
+              await page.close();
+            }
+
+            fs.writeFileSync('qa-artifacts/a5103/network-audit.json', JSON.stringify(all,null,2));
+            await browser.close();
+
+            if (failures.length) {
+              console.error('\nA5.10.3 budget failures:');
+              failures.forEach(f=>console.error(`- ${f}`));
+              process.exit(1);
+            }
+          })().catch(err=>{console.error(err);process.exit(1)});
+          NODE
+          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/a5103-network.cjs
+      - name: Upload A5.10.3 audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: a5103-mobile-network-audit
+          path: qa-artifacts/a5103/
