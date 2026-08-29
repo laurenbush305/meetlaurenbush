@@ -1,0 +1,157 @@
+name: A5.10.7 Color Contrast Guard
+
+on:
+  push:
+    branches:
+      - 'fix/a5107-accessible-signal-palette'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  color-system-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate locked palette tokens and contrast math
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          css = Path('assets/css/a5107-accessible-signal-palette.css').read_text()
+          wrapper = Path('assets/css/a58-art-pass.css').read_text()
+          doctrine = Path('docs/SEASON-ZERO-COLOR-SYSTEM.md').read_text()
+
+          assert "@import url('a5107-accessible-signal-palette.css');" in wrapper
+          imports = re.findall(r"@import url\('([^']+)'\);", wrapper)
+          assert imports[-1] == 'a5107-accessible-signal-palette.css', f'Palette layer must be last import, got {imports[-1]}'
+
+          banned = {
+            '#f8f2e8','#fffaf2','#fffaf3','#f3eadf','#f3e9df','#f7f1ea',
+            '#f8f2ea','#f7f0e7','#f6efe7','#f7f8f5','#d9d1c7'
+          }
+          lowered = css.lower()
+          hits = sorted(x for x in banned if x in lowered)
+          assert not hits, f'Banned warm/muddy colors found in final palette layer: {hits}'
+
+          expected = {
+            '--sz-white':'#ffffff',
+            '--sz-ink':'#0d0f13',
+            '--sz-ink-soft':'#34404a',
+            '--sz-powder':'#d9f1f8',
+            '--sz-chrome':'#c3ced4',
+            '--sz-aqua':'#0bbcd0',
+            '--sz-aqua-text':'#006b78',
+            '--sz-pink':'#ff1e86',
+            '--sz-pink-text':'#a80052',
+            '--sz-violet':'#6a2be0',
+            '--sz-coral':'#ff6a44',
+            '--sz-coral-text':'#a6381a',
+            '--sz-night':'#0b0c10',
+            '--sz-night-2':'#17101d',
+            '--sz-night-3':'#25142c',
+          }
+          for token, value in expected.items():
+            pat = rf'{re.escape(token)}\s*:\s*{re.escape(value)}\s*;'
+            assert re.search(pat, lowered), f'Missing/changed locked token {token}: {value}'
+
+          def rgb(h):
+            h=h.lstrip('#')
+            return [int(h[i:i+2],16)/255 for i in (0,2,4)]
+          def luminance(h):
+            out=[]
+            for c in rgb(h):
+              out.append(c/12.92 if c <= .04045 else ((c+.055)/1.055)**2.4)
+            return .2126*out[0]+.7152*out[1]+.0722*out[2]
+          def ratio(a,b):
+            la,lb=luminance(a),luminance(b)
+            hi,lo=max(la,lb),min(la,lb)
+            return (hi+.05)/(lo+.05)
+
+          pairs = [
+            ('Ink / White','#0d0f13','#ffffff',7.0),
+            ('Ink Soft / White','#34404a','#ffffff',7.0),
+            ('Aqua Text / White','#006b78','#ffffff',4.5),
+            ('Pink Text / White','#a80052','#ffffff',4.5),
+            ('Violet / White','#6a2be0','#ffffff',4.5),
+            ('Coral Text / White','#a6381a','#ffffff',4.5),
+            ('Ink / Powder','#0d0f13','#d9f1f8',7.0),
+            ('Ink Soft / Powder','#34404a','#d9f1f8',7.0),
+            ('Aqua Text / Powder','#006b78','#d9f1f8',4.5),
+            ('White / Night','#ffffff','#0b0c10',7.0),
+            ('Soft Light / Night','#c7d3d9','#0b0c10',7.0),
+            ('Aqua / Night','#0bbcd0','#0b0c10',4.5),
+            ('Pink / Deep Violet','#ff1e86','#25142c',4.5),
+            ('Ink / Pink Fill','#0d0f13','#ff1e86',4.5),
+            ('Ink / Aqua Fill','#0d0f13','#0bbcd0',4.5),
+            ('Ink / Coral Fill','#0d0f13','#ff6a44',4.5),
+          ]
+          for name, fg, bg, minimum in pairs:
+            value=ratio(fg,bg)
+            print(f'{name}: {value:.2f}:1')
+            assert value >= minimum, f'{name} contrast {value:.2f}:1 < {minimum}:1'
+
+          assert 'Do not use cream, beige, greige' in doctrine
+          assert 'Browser QA screenshots must be visually reviewed at 360px and desktop' in doctrine
+          print('Season Zero palette doctrine + contrast math: PASS')
+          PY
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install rendered contrast tooling
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 @axe-core/playwright@4.10.2 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4173 >/tmp/a5107-server.log 2>&1 &
+          echo $! > /tmp/a5107-server.pid
+          sleep 2
+
+      - name: Audit rendered color contrast at mobile and desktop
+        run: |
+          cat > /tmp/a5107-contrast.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import AxeBuilder from '@axe-core/playwright';
+
+          const browser = await chromium.launch({headless:true});
+          const viewports = [
+            {name:'mobile-360', width:360, height:800},
+            {name:'desktop-1440', width:1440, height:1000},
+          ];
+          const pages = ['index.html','casting-sheet.html','project-scrambled-up.html'];
+          let failed = false;
+
+          for (const vp of viewports) {
+            const context = await browser.newContext({viewport:{width:vp.width,height:vp.height}});
+            for (const path of pages) {
+              const page = await context.newPage();
+              await page.goto(`http://127.0.0.1:4173/${path}`, {waitUntil:'networkidle'});
+              const results = await new AxeBuilder({page}).withRules(['color-contrast']).analyze();
+              if (results.violations.length) {
+                failed = true;
+                console.error(`\n${vp.name} / ${path}: color contrast violations`);
+                for (const violation of results.violations) {
+                  console.error(`${violation.id}: ${violation.help}`);
+                  for (const node of violation.nodes) {
+                    console.error(`  ${node.target.join(' ')} :: ${node.failureSummary}`);
+                  }
+                }
+              } else {
+                console.log(`${vp.name} / ${path}: PASS`);
+              }
+              await page.close();
+            }
+            await context.close();
+          }
+          await browser.close();
+          if (failed) process.exit(1);
+          JS
+          node /tmp/a5107-contrast.mjs
