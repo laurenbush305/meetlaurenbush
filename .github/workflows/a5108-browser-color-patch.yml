@@ -17,11 +17,11 @@ jobs:
       - name: Lock public pages against browser auto-dark recoloring
         run: |
           python3 - <<'PY'
+          import re
           from pathlib import Path
 
           pages = sorted(Path('.').glob('*.html'))
           assert pages, 'No public HTML pages found'
-          marker = '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
           protection = '\n'.join([
               '<meta name="color-scheme" content="only light">',
               '<meta name="supported-color-schemes" content="light">',
@@ -33,8 +33,9 @@ jobs:
               text = path.read_text()
               if '<meta name="darkreader-lock">' in text:
                   continue
-              assert marker in text, f'{path}: viewport marker missing'
-              text = text.replace(marker, marker + '\n' + protection, 1)
+              match = re.search(r'<meta\s+name=["\']viewport["\'][^>]*?/?>', text, re.I)
+              assert match, f'{path}: viewport meta missing'
+              text = text[:match.end()] + '\n' + protection + text[match.end():]
               path.write_text(text)
               changed.append(str(path))
 
