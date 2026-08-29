@@ -1,0 +1,37 @@
+/* A5.10.8 STARDUST SURFACE LOCK
+   Technical post-layer only. This file contains no art-direction gradients.
+   It restores deterministic authored material bodies after background shorthands in the visual layers.
+   Stardust Optics remains the final ART-DIRECTION layer; this is the browser-proof floor underneath it. */
+
+:root{color-scheme:only light!important}
+html,body{background-color:#fbfcfd!important}
+
+/* Daylight / Off-Air material body */
+.hero,.person,.explain,.create,.activate,.trust,.imagination{
+  background-color:#fbfcfd!important;
+}
+
+/* On-Air material body */
+.television,.host,.watch,.book{
+  background-color:#090c12!important;
+}
+
+/* Producer-facing siblings */
+body.cast58,
+.cast58 .casting-hero,
+.cast58 .proof-section,
+.a510-cast .proof-section,
+.cast58 .operator-section,
+.project-file,
+.project-file .project-hero,
+.project-file .project-evidence,
+.project-file .project-notes{
+  background-color:#fbfcfd!important;
+}
+
+.cast58 .door-section,
+.cast58 .booking-section,
+.project-file .project-close,
+.project-file .project-foot{
+  background-color:#090c12!important;
+}
