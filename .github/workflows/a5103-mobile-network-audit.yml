@@ -71,7 +71,9 @@ jobs:
                   naturalWidth:img.naturalWidth,
                   naturalHeight:img.naturalHeight,
                   top:img.getBoundingClientRect().top,
-                  bottom:img.getBoundingClientRect().bottom
+                  bottom:img.getBoundingClientRect().bottom,
+                  deferred:img.hasAttribute('data-static-src'),
+                  deferredSource:img.getAttribute('data-static-src') || ''
                 }));
                 const videos = [...document.querySelectorAll('video')].map(v=>({
                   poster:v.getAttribute('poster'),
@@ -98,8 +100,13 @@ jobs:
                 const t = r.initiatorType || 'other';
                 byType[t] = (byType[t] || 0) + (r.transferSize||r.encodedBodySize||0);
               }
-              const loadedImages = data.images.filter(i=>i.currentSrc).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
-              const belowFoldLoaded = loadedImages.filter(i=>i.top > data.viewport.h + 100 && i.complete && i.naturalWidth > 0);
+
+              const isRealImage = i => i.currentSrc && !i.currentSrc.startsWith('data:image/');
+              const loadedImages = data.images.filter(isRealImage).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
+              const belowFoldLoaded = loadedImages.filter(i=>i.top > data.viewport.h + 100 && i.complete && i.naturalWidth > 1);
+              const deferredImages = data.images.filter(i=>i.deferred);
+              const deferredRealLoaded = deferredImages.filter(isRealImage).map(i=>({...i,currentPath:cleanPath(i.currentSrc)}));
+              const placeholderCount = deferredImages.filter(i=>i.currentSrc && i.currentSrc.startsWith('data:image/')).length;
               const hero = loadedImages.find(i=>(i.src||'').includes('blue-skirt-approved'))?.currentPath || '';
               const videoTransfers = resources.filter(r=>r.initiatorType === 'video');
               const largestImageKiB = Math.max(0, ...resources.filter(r=>r.initiatorType === 'img').map(r=>toKiB(r.transferSize||r.encodedBodySize||0)));
@@ -111,6 +118,9 @@ jobs:
                 totalKiB,
                 byTypeBytes:byType,
                 belowFoldLoaded,
+                deferredImageCount:deferredImages.length,
+                deferredPlaceholderCount:placeholderCount,
+                deferredRealLoaded,
                 selectedHero:hero,
                 videoTransferCount:videoTransfers.length,
                 largestImageKiB
@@ -118,7 +128,9 @@ jobs:
 
               console.log(`\nDPR ${dpr}: ${totalKiB} KiB initial resource transfer (budget ${budgetsKiB[dpr]} KiB)`);
               console.log('Selected hero:', hero);
-              console.log('Below-fold loaded image count:', belowFoldLoaded.length);
+              console.log('Real below-fold loaded image count:', belowFoldLoaded.length);
+              console.log('Deferred placeholders:', `${placeholderCount}/${deferredImages.length}`);
+              console.log('Deferred real images loaded early:', deferredRealLoaded.length);
               console.log('Initial video transfer count:', videoTransfers.length);
               console.log('Largest image transfer:', largestImageKiB, 'KiB');
               console.log('Largest resources:');
@@ -131,6 +143,7 @@ jobs:
               if (hero !== expectedHero[dpr]) failures.push(`DPR${dpr} selected hero ${hero || '(none)'}; expected ${expectedHero[dpr]}`);
               if (videoTransfers.length) failures.push(`DPR${dpr} made ${videoTransfers.length} initial video transfer(s)`);
               if (largestImageKiB > 400) failures.push(`DPR${dpr} has an initial image transfer of ${largestImageKiB} KiB (>400 KiB)`);
+              if (deferredImages.length && deferredRealLoaded.length) failures.push(`DPR${dpr} loaded ${deferredRealLoaded.length} deferred static proof image(s) before scroll`);
 
               await page.screenshot({path:`qa-artifacts/a5103/initial-360-dpr${dpr}.png`,fullPage:false});
               await page.close();
@@ -140,7 +153,7 @@ jobs:
             await browser.close();
 
             if (failures.length) {
-              console.error('\nA5.10.3 budget failures:');
+              console.error('\nA5.10 mobile network budget failures:');
               failures.forEach(f=>console.error(`- ${f}`));
               process.exit(1);
             }
