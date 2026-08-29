@@ -1,0 +1,94 @@
+name: A5.10.3 Srcset Efficiency Filter
+
+on:
+  push:
+    branches: [build/a5103-mobile-network]
+    paths:
+      - .github/workflows/a5103-srcset-filter.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  filter-srcsets:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: build/a5103-mobile-network
+          fetch-depth: 0
+      - name: Install image metadata tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick
+      - name: Keep only efficient responsive candidates
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+
+          sources = [
+              'assets/img/lauren-black-top.webp',
+              'assets/img/explain-portrait-wide.jpg',
+              'assets/img/ecosystem/floral-glasses-approved-exact.jpg',
+              'assets/img/a55/wimpb-campaign-main.jpg',
+              'assets/img/a55/finance-intelligence.jpg',
+              'assets/img/a3/montis-cut-02.jpg',
+              'assets/img/scrambled-host-new.webp',
+              'assets/img/scrambled-podium-smile.webp',
+              'assets/img/ti-tiny-trap-pilates.jpg',
+              'assets/img/host-celsius-main-a52.jpg',
+              'assets/img/activate-centerline-wide.jpg',
+              'assets/img/gotennis-rooftop-atl-a52.jpg',
+              'assets/img/apq-poster.jpg',
+              'assets/img/montis-poster-wide.jpg',
+              'assets/img/montis-poster.jpg',
+          ]
+
+          path = Path('index.html')
+          html = path.read_text()
+          report = ['# A5.10.3 Srcset Efficiency Filter', '']
+
+          for source in sources:
+              src = Path(source)
+              original_size = src.stat().st_size
+              natural_width = int(subprocess.check_output(['identify','-format','%w',str(src)], text=True))
+              pattern = re.compile(r'(<img\s+src="' + re.escape(source) + r'"\s+)srcset="([^"]+)"\s+sizes="100vw"')
+              match = pattern.search(html)
+              if not match:
+                  raise SystemExit(f'Missing responsive tag for {source}')
+
+              by_width = {}
+              for item in match.group(2).split(','):
+                  candidate, width_token = item.strip().rsplit(' ', 1)
+                  width = int(width_token[:-1])
+                  size = Path(candidate).stat().st_size
+                  if size < original_size:
+                      by_width[width] = (candidate, size)
+
+              # At the original natural width, use whichever file is smaller.
+              current = by_width.get(natural_width)
+              if current is None or original_size < current[1]:
+                  by_width[natural_width] = (source, original_size)
+
+              candidates = ', '.join(f'{candidate} {width}w' for width, (candidate, _) in sorted(by_width.items()))
+              replacement = match.group(1) + f'srcset="{candidates}" sizes="100vw"'
+              html = html[:match.start()] + replacement + html[match.end():]
+              report.append(f'- `{source}` → {candidates}')
+
+          path.write_text(html)
+          Path('A5.10.3_SRCSET_FILTER.md').write_text('\n'.join(report) + '\n')
+          PY
+      - name: Commit efficient srcsets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html A5.10.3_SRCSET_FILTER.md
+          if git diff --cached --quiet; then
+            echo "No srcset changes."
+            exit 0
+          fi
+          git commit -m "Filter A5.10.3 responsive candidates by byte efficiency"
+          git push origin HEAD:build/a5103-mobile-network
