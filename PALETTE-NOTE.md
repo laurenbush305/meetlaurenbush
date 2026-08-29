@@ -1,1 +1,0 @@
-A5.10.6 palette correction: remove warm paper, cream, beige, greige and dusty-sage drift from the public site. Preserve the existing layout, proof, copy, responsive behavior and media system. Public-facing neutral is optical white / ice white; accents are pool aqua, chrome, black, hot pink, with saturated purple reserved for television/watch.
