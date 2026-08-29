@@ -1,0 +1,33 @@
+/* A5.10.1 / 360 POLISH
+   Mobile-first corrections found in the 360px audit.
+   Goals: keep skip links truly off-canvas until keyboard focus, improve utility legibility and tap targets,
+   expose all Watch programs without mystery horizontal scrolling, and soften dense mobile proof copy. */
+
+/* Accessibility control should never enter the visual composition unless deliberately focused. */
+.skip{top:0!important;transform:translateY(-240%)!important;transition:transform .12s ease}
+.skip:focus,.skip:focus-visible{top:8px!important;transform:none!important}
+
+@media(max-width:760px){
+  /* Mobile utility type was reading too microscopic at 360. */
+  .topbar nav a:not(.nav-book),.topbar nav button.proof-index-trigger{font-size:7.5px!important;letter-spacing:.07em}
+  .topbar nav .nav-book{font-size:7.5px;min-height:40px;display:inline-flex;align-items:center;padding:0 11px}
+  .button{min-height:44px}
+  .hero-actions .button{min-height:44px!important;padding:0 13px!important;font-size:8px!important}
+
+  /* All five LBTV programs must be visible without an unexplained sideways swipe. */
+  .watch{min-height:980px}
+  .watch-stage{bottom:21%;height:auto}
+  .watch-tuner{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));overflow:visible!important;gap:0!important;bottom:5%!important}
+  .watch-tuner button{grid-column:span 2;min-width:0!important;min-height:52px!important;flex:initial!important;flex-basis:auto!important;padding:8px 7px!important}
+  .watch-tuner button:nth-child(4),.watch-tuner button:nth-child(5){grid-column:span 3}
+  .watch-tuner button span{font-size:7.5px!important;line-height:1.2}
+  .watch-tuner button b{font-size:8px!important}
+
+  /* Mobile supporting copy remains secondary, but should not require squinting. */
+  .trust-proof p{font-size:10.5px!important;line-height:1.45!important}
+  .casting-doors p{font-size:8.5px!important;line-height:1.35!important}
+  .casting-doors span{font-size:6px!important}
+
+  /* Casting Sheet selected-file media gets a paper-toned loading state rather than black voids. */
+  .a510-cast .file-media,.a510-cast .operator-photo{background:linear-gradient(145deg,#e8f5f2 0 58%,#f3e4eb 58%)!important}
+}
