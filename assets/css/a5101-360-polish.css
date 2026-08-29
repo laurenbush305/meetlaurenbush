@@ -1,11 +1,11 @@
 /* A5.10.1 / 360 POLISH
    Mobile-first corrections found in the 360px audit.
-   Goals: keep skip links truly off-canvas until keyboard focus, improve utility legibility and tap targets,
+   Goals: keep skip links truly visually hidden until keyboard focus, improve utility legibility and tap targets,
    expose all Watch programs without mystery horizontal scrolling, and soften dense mobile proof copy. */
 
-/* Accessibility control should never enter the visual composition unless deliberately focused. */
-.skip{top:0!important;transform:translateY(-240%)!important;transition:transform .12s ease}
-.skip:focus,.skip:focus-visible{top:8px!important;transform:none!important}
+/* Use the durable visually-hidden pattern. Transformed fixed elements can still be painted in stitched browser captures. */
+.skip{position:fixed!important;top:0!important;left:0!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important;transform:none!important}
+.skip:focus,.skip:focus-visible{top:8px!important;left:12px!important;width:auto!important;height:auto!important;padding:10px 14px!important;margin:0!important;overflow:visible!important;clip:auto!important;clip-path:none!important;white-space:normal!important;background:#fff!important;transform:none!important}
 
 @media(max-width:760px){
   /* Mobile utility type was reading too microscopic at 360. */
