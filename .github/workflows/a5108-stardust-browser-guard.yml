@@ -29,13 +29,14 @@ jobs:
           assert 'a5107-accessible-signal-palette.css' not in wrapper
           assert 'implementation-only layer' in accessibility
           assert 'does not define art direction' in accessibility
+          assert 'scroll-margin-top:94px' in accessibility
           for phrase in ['locked visual authority','do not translate this brief into a flat palette system','pearl','refraction','css and real media are the default foundation']:
               assert phrase in canon, phrase
           for page in Path('.').glob('*.html'):
               text=page.read_text().lower()
               for required in ['<meta name="color-scheme" content="only light">','<meta name="supported-color-schemes" content="light">','<meta name="darkreader-lock">']:
                   assert required in text, f'{page}: {required}'
-          print('Stardust authority + browser locks + accessibility constraint boundary: PASS')
+          print('Stardust authority + browser locks + accessibility/usability boundary: PASS')
           PY
 
       - uses: actions/setup-node@v4
@@ -78,6 +79,20 @@ jobs:
             }
           }
 
+          async function hydrateDeferredImages(page){
+            const deferred=page.locator('img[data-src], img[data-srcset], video[data-poster]');
+            const count=await deferred.count();
+            for(let i=0;i<count;i++){
+              const loc=deferred.nth(i);
+              if(await loc.isVisible().catch(()=>false)){
+                await loc.scrollIntoViewIfNeeded().catch(()=>{});
+                await page.waitForTimeout(90);
+              }
+            }
+            await page.evaluate(()=>window.scrollTo(0,0));
+            await page.waitForTimeout(180);
+          }
+
           async function inspectHomepage(browser,label,width,height){
             const context=await browser.newContext({viewport:{width,height},colorScheme:'dark'});
             const page=await context.newPage();
@@ -101,10 +116,18 @@ jobs:
               const L=lum(rgb(state[k].bg)); if(L===null||L>.08) failures.push(`${label}: ${k} lost On Air depth ${state[k].bg}`);
             }
 
+            const topbar=page.locator('.topbar');
+            const topbarBox=await topbar.boundingBox();
             for(const [name,selector] of Object.entries(chapters)){
               const loc=page.locator(selector);
               await loc.scrollIntoViewIfNeeded();
               await page.waitForTimeout(300);
+              if(name!=='hero' && topbarBox){
+                const sectionBox=await loc.boundingBox();
+                if(sectionBox && sectionBox.y < topbarBox.height + 8){
+                  failures.push(`${label}-${width}: ${name} chapter starts under sticky nav (section y=${sectionBox.y.toFixed(1)}, nav h=${topbarBox.height.toFixed(1)})`);
+                }
+              }
               await loc.screenshot({path:`qa-artifacts/a5108/${name}-${label}-${width}.png`});
             }
             await auditPage(page,`${label}-${width}-homepage`);
@@ -121,8 +144,9 @@ jobs:
             const context=await normal.newContext({viewport:{width:390,height:844},colorScheme:'dark'});
             const page=await context.newPage();
             await page.goto(`http://127.0.0.1:4173/${path}`,{waitUntil:'networkidle'});
+            await hydrateDeferredImages(page);
             await auditPage(page,`dark-preference-390-${path}`);
-            await page.screenshot({path:`qa-artifacts/a5108/${path.replace('.html','')}-390.png`,fullPage:true});
+            await page.screenshot({path:`qa-artifacts/a5108/${path.replace('.html','')}-390-hydrated.png`,fullPage:true});
             await context.close();
           }
           await normal.close();
