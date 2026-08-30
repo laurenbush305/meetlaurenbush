@@ -5,9 +5,10 @@
 @import url('a5108-stardust-restoration.css');
 @import url('a5108-stardust-optics.css');
 @import url('a5108-stardust-surface-lock.css');
+@import url('a5108-stardust-accessibility.css');
 
 /* A5.10.8 STARDUST REBUILD WRAPPER
-   A5.10.5 is the rollback foundation. Stardust restoration + optics define art direction; surface-lock only protects authored material bodies. */
+   A5.10.5 is the rollback foundation. Stardust restoration + optics define art direction; surface-lock protects authored material bodies; accessibility constraints protect readable foregrounds only. */
 
 /* The full print treatment is inherited from a58-art-pass-base.css. Keep this marker here because the production guard validates the public stylesheet entrypoint. */
 @media print{}
