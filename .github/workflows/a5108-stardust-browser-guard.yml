@@ -120,7 +120,7 @@ jobs:
             const topbarBox=await topbar.boundingBox();
             for(const [name,selector] of Object.entries(chapters)){
               const loc=page.locator(selector);
-              await loc.scrollIntoViewIfNeeded();
+              await page.evaluate((sel)=>document.querySelector(sel)?.scrollIntoView({block:'start',inline:'nearest'}),selector);
               await page.waitForTimeout(300);
               if(name!=='hero' && topbarBox){
                 const sectionBox=await loc.boundingBox();
