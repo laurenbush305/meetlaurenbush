@@ -1,0 +1,253 @@
+/* A5.10.8 — STARDUST OPTICAL MATERIAL FINISH
+   Final material pass grounded in the locked Stardust Camera Kit:
+   partial refraction foreground + razor-thin silver/glass signal rail + pearl transmission.
+   No decorative crystal objects. No flat section colors. Real media stays primary. */
+
+:root{
+  --sd-prism-a:rgba(123,231,236,.30);
+  --sd-prism-b:rgba(255,192,214,.24);
+  --sd-prism-c:rgba(200,192,255,.25);
+  --sd-prism-d:rgba(201,241,223,.18);
+  --sd-white-hot:rgba(255,255,255,.94);
+  --sd-metal-line:rgba(126,143,154,.46);
+  --sd-metal-light:rgba(255,255,255,.92);
+}
+
+/* A prism should read as LIGHT MOVING THROUGH MATERIAL, not as a pastel field. */
+.hero{
+  background:
+    linear-gradient(114deg,transparent 0 69%,rgba(255,255,255,0) 69.2%,var(--sd-white-hot) 69.55%,rgba(123,231,236,.34) 69.8%,rgba(255,192,214,.24) 70.2%,rgba(200,192,255,.22) 70.55%,rgba(255,255,255,.72) 70.9%,transparent 71.35%),
+    radial-gradient(ellipse at 79% 25%,rgba(123,231,236,.27),transparent 24%),
+    radial-gradient(ellipse at 91% 49%,rgba(255,192,214,.20),transparent 18%),
+    radial-gradient(ellipse at 64% 82%,rgba(200,192,255,.17),transparent 23%),
+    linear-gradient(132deg,#fff 0%,#f7f9fa 34%,#e8edf0 58%,#fcfdfe 78%,#eef2f5 100%)!important;
+  box-shadow:inset 0 -1px 0 rgba(125,143,154,.24)!important;
+}
+.hero-atmosphere{
+  opacity:.96!important;
+  background:
+    radial-gradient(circle at 79% 19%,rgba(255,255,255,.98) 0 4%,rgba(255,255,255,.46) 9%,transparent 19%),
+    conic-gradient(from 212deg at 77% 33%,transparent 0 12%,rgba(123,231,236,.18) 16%,rgba(255,192,214,.16) 19%,rgba(200,192,255,.17) 22%,rgba(201,241,223,.12) 25%,transparent 30% 100%),
+    linear-gradient(112deg,transparent 0 55.6%,rgba(255,255,255,.90) 55.75% 55.95%,rgba(183,199,209,.28) 56.02% 56.16%,transparent 56.35%)!important;
+}
+.hero-glass{
+  border-color:rgba(255,255,255,.90)!important;
+  border-right-color:rgba(118,137,149,.42)!important;
+  box-shadow:inset 1px 1px 0 #fff,inset -1px 0 0 rgba(119,138,150,.20),0 30px 76px rgba(28,40,50,.13)!important;
+}
+.hero-glass:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(126deg,rgba(255,255,255,.58),transparent 24% 69%,rgba(123,231,236,.16) 76%,rgba(255,192,214,.12) 82%,rgba(200,192,255,.14) 88%,rgba(255,255,255,.40));
+  mix-blend-mode:screen;opacity:.78;
+}
+.hero-transmission{
+  border:1px solid rgba(133,150,161,.34)!important;
+  box-shadow:0 20px 54px rgba(31,43,52,.13),inset 0 1px 0 #fff,inset 0 -1px 0 rgba(142,158,168,.18)!important;
+}
+.hero-photo{filter:drop-shadow(0 34px 40px rgba(28,40,49,.20))!important}
+
+/* PERSON: beauty-editorial pearl with a reflected spectral edge behind real portrait planes. */
+.person{
+  background:
+    linear-gradient(128deg,transparent 0 18%,rgba(255,255,255,.72) 18.2% 18.45%,rgba(200,192,255,.19) 18.7% 19.15%,rgba(123,231,236,.16) 19.35%,transparent 20.2%),
+    radial-gradient(ellipse at 12% 24%,rgba(200,192,255,.18),transparent 22%),
+    radial-gradient(ellipse at 86% 76%,rgba(123,231,236,.18),transparent 25%),
+    linear-gradient(146deg,#fcfdfe,#edf2f4 48%,#fff 76%,#f1f4f6)!important;
+}
+.person-studio,.person-wide,.person-floral{
+  border:1px solid rgba(126,143,154,.34)!important;
+  box-shadow:0 26px 64px rgba(28,40,49,.13),inset 0 1px 0 rgba(255,255,255,.96)!important;
+}
+.person-wide:after,.person-floral:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(132deg,rgba(255,255,255,.20),transparent 27% 75%,rgba(123,231,236,.08) 82%,rgba(255,192,214,.07));mix-blend-mode:screen;
+}
+.person-acrylic{
+  border-left:1px solid rgba(255,255,255,.92)!important;
+  border-right:1px solid rgba(126,144,156,.34)!important;
+  box-shadow:inset 0 1px 0 #fff,0 18px 48px rgba(37,48,57,.08)!important;
+}
+
+/* EXPLAIN: WIMPB world, with Finance behaving like an illuminated transmission. */
+.explain{
+  background:
+    linear-gradient(118deg,transparent 0 76%,rgba(255,255,255,.90) 76.2% 76.45%,rgba(123,231,236,.27) 76.7% 77.1%,rgba(201,241,223,.16) 77.25% 77.6%,transparent 78.1%),
+    radial-gradient(ellipse at 86% 22%,rgba(123,231,236,.23),transparent 24%),
+    radial-gradient(ellipse at 18% 84%,rgba(201,241,223,.16),transparent 22%),
+    linear-gradient(142deg,#fff,#edf2f4 56%,#fbfcfd)!important;
+}
+.finance-transmission,.explain-detail{
+  border:1px solid rgba(125,143,154,.38)!important;
+  box-shadow:0 24px 62px rgba(28,40,49,.14),inset 0 1px 0 rgba(255,255,255,.96)!important;
+}
+.finance-transmission:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(126deg,rgba(255,255,255,.20),transparent 22% 76%,rgba(123,231,236,.10),rgba(200,192,255,.08));mix-blend-mode:screen;
+}
+
+/* CREATE: the media frame reads glossy physical acrylic, with one spectral edge. */
+.create{
+  background:
+    radial-gradient(ellipse at 88% 17%,rgba(255,192,214,.18),transparent 23%),
+    radial-gradient(ellipse at 15% 83%,rgba(200,192,255,.14),transparent 24%),
+    linear-gradient(144deg,#fbfcfd,#edf1f4 58%,#fff)!important;
+}
+.create-film{
+  border:1px solid rgba(209,219,225,.74)!important;
+  box-shadow:0 34px 88px rgba(14,20,26,.24),inset 0 1px 0 rgba(255,255,255,.17),inset -1px 0 0 rgba(123,231,236,.12)!important;
+}
+.create-film:before{
+  content:"";position:absolute;z-index:5;pointer-events:none;inset:-1px;
+  border:1px solid transparent;
+  border-image:linear-gradient(128deg,#fff 0%,rgba(123,231,236,.72) 28%,rgba(255,192,214,.48) 55%,rgba(200,192,255,.58) 74%,rgba(255,255,255,.55) 100%) 1;
+  opacity:.56;
+}
+
+/* ON AIR: black is depth, not a purple page skin. Spectral heat hugs media and edges. */
+.television{
+  background:
+    radial-gradient(ellipse at 83% 19%,rgba(255,118,88,.13),transparent 22%),
+    radial-gradient(ellipse at 72% 43%,rgba(255,43,136,.10),transparent 24%),
+    radial-gradient(ellipse at 18% 84%,rgba(125,92,226,.10),transparent 25%),
+    linear-gradient(148deg,#070a0f 0,#0d1117 58%,#11121a 100%)!important;
+}
+.tv-bg{
+  opacity:.84!important;
+  background:
+    radial-gradient(ellipse at 79% 23%,rgba(255,118,88,.28),transparent 22%),
+    radial-gradient(ellipse at 73% 48%,rgba(255,43,136,.23),transparent 24%),
+    radial-gradient(ellipse at 22% 82%,rgba(125,92,226,.18),transparent 26%),
+    radial-gradient(ellipse at 36% 24%,rgba(123,231,236,.10),transparent 20%),transparent!important;
+}
+.tv-portrait,.tv-detail,.tv-set-detail,.tv-archive-flash{
+  outline:1px solid rgba(205,217,224,.36)!important;
+  box-shadow:0 28px 72px rgba(0,0,0,.46),0 0 0 1px rgba(255,255,255,.04)!important;
+}
+.tv-portrait:after,.tv-detail:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(128deg,rgba(255,255,255,.08),transparent 25% 74%,rgba(255,118,88,.08) 82%,rgba(255,43,136,.06));mix-blend-mode:screen;
+}
+
+/* HOST: keep the room real. Chrome framing and a faint cool reflection are enough. */
+.host{background:linear-gradient(150deg,#080b10,#0c1015 64%,#10131a)!important}
+.host-video,.host-room-support{
+  outline:1px solid rgba(215,224,230,.34)!important;
+  box-shadow:0 30px 74px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+.host-video:after,.host-room-support:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(132deg,rgba(255,255,255,.06),transparent 27% 78%,rgba(123,231,236,.07));mix-blend-mode:screen;
+}
+.host-word{color:rgba(205,218,225,.22)!important;text-shadow:0 1px 0 rgba(255,255,255,.03)!important}
+
+/* ACTIVATE: environment first, with warm activation light and cool glass hardware. */
+.activate{
+  background:
+    linear-gradient(122deg,transparent 0 73%,rgba(255,255,255,.86) 73.2% 73.45%,rgba(255,118,88,.20) 73.7% 74.15%,rgba(201,241,223,.16) 74.3% 74.65%,transparent 75.1%),
+    radial-gradient(ellipse at 84% 20%,rgba(255,118,88,.16),transparent 22%),
+    radial-gradient(ellipse at 17% 81%,rgba(201,241,223,.18),transparent 23%),
+    linear-gradient(142deg,#fbfcfd,#edf2f4 56%,#fff)!important;
+}
+.activate-centerline,.activate-gotennis,.activate-material{
+  outline:1px solid rgba(127,144,155,.36)!important;
+  box-shadow:0 25px 64px rgba(28,40,49,.14),inset 0 1px 0 rgba(255,255,255,.90)!important;
+}
+
+/* WATCH: physical tuning surface, same Stardust matter in lower light. */
+.watch{
+  background:
+    radial-gradient(ellipse at 18% 22%,rgba(123,231,236,.08),transparent 22%),
+    radial-gradient(ellipse at 78% 76%,rgba(255,43,136,.08),transparent 25%),
+    linear-gradient(148deg,#070a0f,#0d1117 62%,#11121a)!important;
+}
+.watch-weather{opacity:.72!important}
+.watch-stage{
+  border:1px solid rgba(211,222,228,.36)!important;
+  box-shadow:0 34px 86px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.07)!important;
+}
+.watch-stage:before{
+  content:"";position:absolute;z-index:4;pointer-events:none;inset:-1px;
+  border:1px solid transparent;
+  border-image:linear-gradient(130deg,rgba(255,255,255,.48),rgba(123,231,236,.28) 32%,rgba(255,43,136,.22) 66%,rgba(200,192,255,.30),rgba(255,255,255,.30)) 1;
+  opacity:.55;
+}
+.watch-tuner{background:rgba(5,8,12,.36)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* BETWEEN CUES: production-world pearl, not KPI cards. */
+.trust{
+  background:
+    linear-gradient(116deg,transparent 0 20%,rgba(255,255,255,.86) 20.2% 20.45%,rgba(200,192,255,.18) 20.7% 21.05%,rgba(123,231,236,.15) 21.2% 21.55%,transparent 22.1%),
+    radial-gradient(ellipse at 87% 20%,rgba(123,231,236,.16),transparent 22%),
+    linear-gradient(143deg,#fbfcfd,#eef2f4 58%,#fff)!important;
+}
+.trust-photo{outline:1px solid rgba(128,145,156,.38)!important;box-shadow:0 30px 74px rgba(28,40,49,.15)!important}
+.trust-proof{
+  background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(232,238,242,.54))!important;
+  border:1px solid rgba(126,143,154,.36)!important;
+  box-shadow:0 26px 66px rgba(28,40,49,.13),inset 0 1px 0 #fff!important;
+}
+.trust-proof article{background:rgba(255,255,255,.42)!important;border-color:rgba(126,143,154,.24)!important}
+
+/* CASTING IMAGINATION: key-art atmosphere through pearl material, never a teal/magenta split. */
+.imagination{
+  background:
+    linear-gradient(120deg,transparent 0 66%,rgba(255,255,255,.88) 66.2% 66.45%,rgba(123,231,236,.24) 66.7% 67.05%,rgba(255,192,214,.18) 67.2% 67.55%,rgba(200,192,255,.22) 67.7% 68.05%,transparent 68.55%),
+    radial-gradient(ellipse at 15% 20%,rgba(123,231,236,.18),transparent 23%),
+    radial-gradient(ellipse at 86% 25%,rgba(255,192,214,.15),transparent 21%),
+    radial-gradient(ellipse at 77% 82%,rgba(200,192,255,.17),transparent 24%),
+    linear-gradient(142deg,#fbfcfd,#edf2f4 52%,#fff 78%,#eef2f4)!important;
+}
+.casting-doors article{
+  background:linear-gradient(145deg,rgba(255,255,255,.70),rgba(229,236,240,.52))!important;
+  border:1px solid rgba(124,142,153,.36)!important;
+  box-shadow:0 20px 50px rgba(28,40,49,.11),inset 0 1px 0 #fff!important;
+}
+.casting-doors article:before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(132deg,rgba(255,255,255,.32),transparent 26% 78%,rgba(123,231,236,.08),rgba(200,192,255,.07));mix-blend-mode:screen;
+}
+
+/* BOOK: calm black pearl end card. One cue, one reflection. */
+.book{
+  background:
+    linear-gradient(118deg,transparent 0 74%,rgba(255,255,255,.05) 74.2% 74.45%,rgba(123,231,236,.07) 74.7% 75.05%,rgba(255,43,136,.08) 75.2% 75.55%,transparent 76%),
+    radial-gradient(ellipse at 86% 82%,rgba(255,43,136,.08),transparent 24%),
+    radial-gradient(ellipse at 12% 18%,rgba(123,231,236,.07),transparent 22%),
+    linear-gradient(148deg,#06090d,#0a0e13 64%,#101219)!important;
+}
+
+/* Producer-facing siblings keep the same material physics at lower intensity. */
+.cast58 .casting-hero,.project-file .project-hero{
+  background:
+    linear-gradient(120deg,transparent 0 71%,rgba(255,255,255,.86) 71.2% 71.45%,rgba(123,231,236,.16) 71.7% 72.05%,rgba(200,192,255,.12) 72.2% 72.5%,transparent 73%),
+    radial-gradient(ellipse at 18% 20%,rgba(123,231,236,.13),transparent 22%),
+    linear-gradient(142deg,#fbfcfd,#edf2f4 58%,#fff)!important;
+}
+.cast58 .proof-card,.a510-cast .credit-strip,.project-file .evidence-card,.project-file .project-note-row{
+  border-color:rgba(126,143,154,.34)!important;
+  box-shadow:0 18px 46px rgba(28,40,49,.10),inset 0 1px 0 rgba(255,255,255,.92)!important;
+}
+
+/* The tiny hardware rail gets a true chrome/spectral edge. */
+.signal-seam{
+  background:linear-gradient(90deg,rgba(111,128,139,.50),#fff 18%,rgba(123,231,236,.72) 35%,rgba(255,255,255,.96) 47%,rgba(255,192,214,.56) 59%,rgba(200,192,255,.60) 72%,rgba(255,255,255,.90) 84%,rgba(111,128,139,.48))!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.42),0 0 10px rgba(123,231,236,.18),0 0 14px rgba(255,192,214,.12)!important;
+}
+
+@media(max-width:760px){
+  /* Mobile needs the optical event to survive the tighter crop, but it remains a narrow light event. */
+  .hero{
+    background:
+      linear-gradient(112deg,transparent 0 80%,rgba(255,255,255,.92) 80.15% 80.45%,rgba(123,231,236,.30) 80.7% 81.1%,rgba(255,192,214,.20) 81.25% 81.6%,rgba(200,192,255,.20) 81.75% 82.1%,transparent 82.55%),
+      radial-gradient(ellipse at 78% 20%,rgba(123,231,236,.22),transparent 23%),
+      radial-gradient(ellipse at 93% 54%,rgba(255,192,214,.14),transparent 19%),
+      linear-gradient(150deg,#fff,#edf2f4 60%,#fbfcfd)!important;
+  }
+  .person{background:radial-gradient(ellipse at 87% 76%,rgba(123,231,236,.15),transparent 23%),linear-gradient(148deg,#fbfcfd,#edf2f4 72%,#fff)!important}
+  .explain{background:linear-gradient(119deg,transparent 0 84%,rgba(255,255,255,.88) 84.2% 84.45%,rgba(123,231,236,.23) 84.7% 85.1%,rgba(201,241,223,.12) 85.25% 85.55%,transparent 86%),linear-gradient(148deg,#fff,#edf2f4 72%,#fbfcfd)!important}
+  .create{background:radial-gradient(ellipse at 86% 15%,rgba(255,192,214,.15),transparent 22%),linear-gradient(148deg,#fbfcfd,#eef2f4 72%,#fff)!important}
+  .activate{background:radial-gradient(ellipse at 84% 14%,rgba(255,118,88,.13),transparent 22%),linear-gradient(148deg,#fbfcfd,#edf2f4 72%,#fff)!important}
+  .trust{background:radial-gradient(ellipse at 84% 15%,rgba(123,231,236,.13),transparent 22%),linear-gradient(148deg,#fbfcfd,#edf2f4 72%,#fff)!important}
+  .imagination{background:linear-gradient(119deg,transparent 0 77%,rgba(255,255,255,.86) 77.2% 77.45%,rgba(123,231,236,.21) 77.7% 78.05%,rgba(255,192,214,.15) 78.2% 78.5%,rgba(200,192,255,.17) 78.65% 79%,transparent 79.45%),linear-gradient(148deg,#fbfcfd,#edf2f4 68%,#fff)!important}
+  .signal-seam{height:2px!important}
+}
