@@ -45,21 +45,22 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          required='''<meta name="color-scheme" content="only light">\n<meta name="supported-color-schemes" content="light">\n<meta name="darkreader-lock">'''
+          import re
+          required='<meta name="color-scheme" content="only light">\n<meta name="supported-color-schemes" content="light">\n<meta name="darkreader-lock">'
           pages=sorted(Path('.').glob('*.html'))
           assert pages
+          viewport_re=re.compile(r'(<meta\s+name="viewport"\s+content="[^"]+"\s*/?>)',re.I)
+          charset_re=re.compile(r'(<meta\s+charset="utf-8"\s*/?>)',re.I)
           for p in pages:
               text=p.read_text()
               if '<meta name="darkreader-lock">' not in text:
-                  viewport='<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
-                  if viewport in text:
-                      text=text.replace(viewport,viewport+'\n'+required,1)
+                  if viewport_re.search(text):
+                      text=viewport_re.sub(lambda m:m.group(1)+'\n'+required,text,count=1)
+                  elif charset_re.search(text):
+                      text=charset_re.sub(lambda m:m.group(1)+'\n'+required,text,count=1)
                   else:
-                      charset='<meta charset="utf-8">'
-                      assert charset in text, p
-                      text=text.replace(charset,charset+'\n'+required,1)
-              import re
-              text=re.sub(r'<meta name="theme-color" content="#[0-9a-fA-F]{6}">','<meta name="theme-color" content="#fbfcfd">',text)
+                      raise AssertionError(f'No insertion point in {p}')
+              text=re.sub(r'<meta\s+name="theme-color"\s+content="#[0-9a-fA-F]{6}"\s*/?>','<meta name="theme-color" content="#fbfcfd">',text)
               p.write_text(text)
           print('Browser color lock applied to',len(pages),'HTML pages')
           PY
