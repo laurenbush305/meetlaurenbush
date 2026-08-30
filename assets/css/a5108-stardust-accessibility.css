@@ -1,0 +1,20 @@
+/* A5.10.8 STARDUST ACCESSIBILITY + USABILITY CONSTRAINTS
+   Implementation-only layer. This file does not define art direction.
+   It protects readable foregrounds and predictable navigation behavior without changing Stardust materials. */
+
+.project-file .evidence-copy .proof-note{
+  color:#34414a!important;
+  opacity:1!important;
+}
+
+/* A chapter should never arrive with its headline hidden under the sticky network bar.
+   This applies to fragment navigation, keyboard navigation and scripted scroll-to-section QA. */
+.person,.explain,.create,.television,.host,.activate,.watch,.trust,.imagination,.book{
+  scroll-margin-top:82px;
+}
+
+@media(max-width:760px){
+  .person,.explain,.create,.television,.host,.activate,.watch,.trust,.imagination,.book{
+    scroll-margin-top:94px;
+  }
+}

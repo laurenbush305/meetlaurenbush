@@ -1,0 +1,16 @@
+/* A5.10.8 STARDUST LOADING MATERIAL
+   Visual loading-state support only. Media waiting to resolve should sit on pearl / icy-silver material,
+   never the legacy mint-pink diagonal placeholder. Real photography remains the destination. */
+
+.a510-cast .file-media,
+.a510-cast .operator-photo{
+  background:
+    linear-gradient(118deg,
+      #fbfcfd 0%,
+      #f4f7f8 28%,
+      #e5ebee 47%,
+      #ffffff 58%,
+      #edf2f4 73%,
+      #fbfcfd 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 20px 48px rgba(27,40,49,.08)!important;
+}
