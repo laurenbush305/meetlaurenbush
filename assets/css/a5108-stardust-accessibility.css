@@ -1,0 +1,8 @@
+/* A5.10.8 STARDUST ACCESSIBILITY CONSTRAINTS
+   Implementation-only layer. This file does not define art direction.
+   It exists to prevent low-opacity foreground text from undermining the Stardust material system. */
+
+.project-file .evidence-copy .proof-note{
+  color:#34414a!important;
+  opacity:1!important;
+}
