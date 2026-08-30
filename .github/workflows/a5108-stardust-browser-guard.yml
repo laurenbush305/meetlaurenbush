@@ -21,17 +21,21 @@ jobs:
           from pathlib import Path
           wrapper=Path('assets/css/a58-art-pass.css').read_text()
           canon=Path('docs/SEASON-ZERO-VISUAL-CANON.md').read_text().lower()
+          accessibility=Path('assets/css/a5108-stardust-accessibility.css').read_text().lower()
           imports=re.findall(r"@import url\('([^']+)'\);",wrapper)
-          assert imports[-3:]==['a5108-stardust-restoration.css','a5108-stardust-optics.css','a5108-stardust-surface-lock.css'], imports[-3:]
+          expected=['a5108-stardust-restoration.css','a5108-stardust-optics.css','a5108-stardust-surface-lock.css','a5108-stardust-accessibility.css']
+          assert imports[-4:]==expected, imports[-4:]
           assert 'a5106-bright-palette.css' not in wrapper
           assert 'a5107-accessible-signal-palette.css' not in wrapper
+          assert 'implementation-only layer' in accessibility
+          assert 'does not define art direction' in accessibility
           for phrase in ['locked visual authority','do not translate this brief into a flat palette system','pearl','refraction','css and real media are the default foundation']:
               assert phrase in canon, phrase
           for page in Path('.').glob('*.html'):
               text=page.read_text().lower()
               for required in ['<meta name="color-scheme" content="only light">','<meta name="supported-color-schemes" content="light">','<meta name="darkreader-lock">']:
                   assert required in text, f'{page}: {required}'
-          print('Stardust authority + browser locks: PASS')
+          print('Stardust authority + browser locks + accessibility constraint boundary: PASS')
           PY
 
       - uses: actions/setup-node@v4
