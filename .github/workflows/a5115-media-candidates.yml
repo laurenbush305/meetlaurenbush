@@ -21,7 +21,9 @@ jobs:
           python3 - "$dur" <<'PY' > /tmp/times.txt
           import sys
           d=float(sys.argv[1])
-          for p in (.08,.22,.38,.54,.70,.86): print(f'{d*p:0.3f}')
+          for p in (.08,.22,.38,.54,.70,.86):
+              s=f'{d*p:.3f}'
+              print('0'+s if s.startswith('.') else s)
           PY
           n=1
           while read t; do
