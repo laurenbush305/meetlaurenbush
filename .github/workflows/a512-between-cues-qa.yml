@@ -17,16 +17,16 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for A5.12.1 on public domain
+      - name: Wait for A5.12.2 on public domain
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?qa=a5121-$i" | grep -q 'a512-between-cues.css?v=a5121'; then
-              echo 'A5.12.1 is live.'
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?qa=a5122-$i" | grep -q 'a512-between-cues.css?v=a5122'; then
+              echo 'A5.12.2 is live.'
               exit 0
             fi
             sleep 10
           done
-          echo 'Timed out waiting for A5.12.1.' >&2
+          echo 'Timed out waiting for A5.12.2.' >&2
           exit 1
       - name: Render Between cues
         run: |
@@ -39,7 +39,7 @@ jobs:
           for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
             const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
             const page=await ctx.newPage();
-            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5121-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5122-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
             if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
             await page.locator('#trust').scrollIntoViewIfNeeded();
             await page.waitForTimeout(900);
