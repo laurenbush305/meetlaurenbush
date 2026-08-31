@@ -1,0 +1,136 @@
+name: A5.18 Whole Home Production QA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Wait for current public release
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a518-final-$i" | grep -q 'data-release-status="a516-imagination-design"'; then
+              echo 'Current production release is live.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Timed out waiting for current production release.' >&2
+          exit 1
+      - name: Audit whole homepage
+        run: |
+          cat > a518.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          fs.mkdirSync('qa-artifacts/a518',{recursive:true});
+          const browser=await chromium.launch({headless:true});
+          const failures=[];
+          const expected=['hero','person','explain','create','television','host','activate','watch','trust','imagination','book'];
+          const modes=[['desktop',1440,1000],['tablet',768,1024],['mobile',390,844]];
+          for(const [mode,width,height] of modes){
+            const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
+            const page=await ctx.newPage();
+            const consoleErrors=[];
+            page.on('pageerror',e=>consoleErrors.push(`pageerror: ${e.message}`));
+            page.on('console',m=>{if(m.type()==='error') consoleErrors.push(`console: ${m.text()}`)});
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a518-${mode}-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
+            await page.waitForTimeout(1200);
+            const state=await page.evaluate((expected)=>{
+              const sections=[...document.querySelectorAll('main > section')];
+              const rects=sections.map(s=>{const r=s.getBoundingClientRect();return{id:s.id,top:r.top+scrollY,bottom:r.bottom+scrollY,h:r.height}});
+              const nav=document.querySelector('.topbar').getBoundingClientRect();
+              return {
+                release:document.body.dataset.releaseStatus,
+                viewport:innerWidth,
+                scrollWidth:document.documentElement.scrollWidth,
+                pageHeight:document.documentElement.scrollHeight,
+                ids:sections.map(s=>s.id),
+                rects,
+                nav:{h:nav.height,bg:getComputedStyle(document.querySelector('.topbar')).backgroundColor,z:getComputedStyle(document.querySelector('.topbar')).zIndex},
+                expected
+              };
+            },expected);
+            if(state.release!=='a516-imagination-design') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
+            if(JSON.stringify(state.ids)!==JSON.stringify(expected)) failures.push(`${mode}: wrong section order ${JSON.stringify(state.ids)}`);
+            for(let i=1;i<state.rects.length;i++){
+              const gap=state.rects[i].top-state.rects[i-1].bottom;
+              if(Math.abs(gap)>3) failures.push(`${mode}: section gap/overlap ${state.rects[i-1].id}->${state.rects[i].id}: ${gap}px`);
+            }
+            if(consoleErrors.length) failures.push(`${mode}: runtime errors ${consoleErrors.join(' | ')}`);
+            fs.writeFileSync(`qa-artifacts/a518/${mode}-state.json`,JSON.stringify({...state,consoleErrors},null,2));
+            await page.screenshot({path:`qa-artifacts/a518/${mode}-full-page.png`,fullPage:true});
+
+            // Anchor landing checks for every scene with a heading or hero target.
+            for(const id of expected.slice(1)){
+              await page.evaluate(id=>{location.hash=`#${id}`},id);
+              await page.waitForTimeout(180);
+              const landing=await page.evaluate(id=>{
+                const section=document.getElementById(id);
+                const nav=document.querySelector('.topbar').getBoundingClientRect();
+                const h=section.querySelector('h1,h2') || section;
+                const r=h.getBoundingClientRect();
+                return {top:r.top,bottom:r.bottom,navBottom:nav.bottom};
+              },id);
+              if(landing.top < landing.navBottom+4) failures.push(`${mode}: #${id} heading lands under nav ${JSON.stringify(landing)}`);
+            }
+
+            // Watch program switching.
+            await page.evaluate(()=>{location.hash='#watch'});
+            await page.waitForTimeout(250);
+            for(const program of ['scrambled','wimpb','montis','apq','archive']){
+              const button=page.locator(`[data-watch="${program}"]`);
+              await button.click();
+              await page.waitForTimeout(160);
+              const ok=await page.evaluate(program=>{
+                const active=document.querySelector(`[data-watch-panel="${program}"]`);
+                const selected=document.querySelector(`[data-watch="${program}"]`);
+                return !!active && !active.hidden && selected?.getAttribute('aria-selected')==='true';
+              },program);
+              if(!ok) failures.push(`${mode}: Watch did not switch to ${program}`);
+            }
+
+            // Proof drawer opens and closes without leaking when closed.
+            const proofButton=page.locator('[data-proof-open]').first();
+            if(await proofButton.count()){
+              await proofButton.click();
+              await page.waitForTimeout(180);
+              const open=await page.evaluate(()=>{
+                const p=document.querySelector('#proof-index');
+                return {aria:p?.getAttribute('aria-hidden'),display:p?getComputedStyle(p).display:null};
+              });
+              if(open.aria!=='false'||open.display==='none') failures.push(`${mode}: proof drawer failed to open ${JSON.stringify(open)}`);
+              await page.locator('.proof-index-close').click();
+              await page.waitForTimeout(180);
+              const closed=await page.evaluate(()=>{
+                const p=document.querySelector('#proof-index');
+                return {aria:p?.getAttribute('aria-hidden'),display:p?getComputedStyle(p).display:null};
+              });
+              if(closed.aria!=='true'||closed.display!=='none') failures.push(`${mode}: proof drawer still paints closed ${JSON.stringify(closed)}`);
+            } else failures.push(`${mode}: proof trigger missing`);
+
+            await ctx.close();
+          }
+          await browser.close();
+          fs.writeFileSync('qa-artifacts/a518/failures.json',JSON.stringify(failures,null,2));
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          JS
+          node a518.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a518-whole-home
+          path: qa-artifacts/a518
+          if-no-files-found: error
