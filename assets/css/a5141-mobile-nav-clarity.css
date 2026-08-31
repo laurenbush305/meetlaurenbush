@@ -1,10 +1,14 @@
 /* A5.14.1 — MOBILE NAV CLARITY
-   Prevent section content and archival captions from visually ghosting through the fixed navigation. */
+   Prevent section content and archival receipts from intruding into the fixed mobile navigation. */
 @media(max-width:760px){
   .topbar{
+    z-index:1200!important;
+    isolation:isolate;
     background:#f7f8f5;
     -webkit-backdrop-filter:none;
     backdrop-filter:none;
     box-shadow:0 1px 0 rgba(11,15,20,.08),0 8px 24px rgba(11,15,20,.035);
   }
+  .topbar>.brand,.topbar>nav{position:relative;z-index:2}
+  #proof-index[aria-hidden="true"]{display:none!important}
 }
