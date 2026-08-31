@@ -1,0 +1,56 @@
+/* A5.11.3 CASTING SHEET RENDER FIX
+   Casting-only production correction for operator headline fit and stable full-page capture.
+   Keeps the editorial scale without allowing headline overflow at desktop widths. */
+
+.cast58 .operator-copy{
+  min-width:0;
+}
+
+.cast58 .operator-copy h2{
+  font-size:clamp(54px,6vw,86px)!important;
+  line-height:.82!important;
+  letter-spacing:-.07em!important;
+  max-width:100%;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+
+.cast58 .operator-wrap{
+  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  gap:clamp(42px,5vw,76px);
+}
+
+.cast58 .operator-proof{
+  min-width:0;
+}
+
+.cast58 .operator-proof article{
+  min-width:0;
+}
+
+@media(max-width:1100px) and (min-width:901px){
+  .cast58 .operator-copy h2{
+    font-size:clamp(58px,7vw,74px)!important;
+  }
+  .cast58 .operator-wrap{
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+    gap:40px;
+  }
+}
+
+@media(max-width:900px){
+  .cast58 .operator-wrap{
+    grid-template-columns:1fr;
+    gap:42px;
+  }
+  .cast58 .operator-copy h2{
+    font-size:clamp(54px,10vw,78px)!important;
+  }
+}
+
+@media(max-width:760px){
+  .cast58 .operator-copy h2{
+    font-size:clamp(50px,14vw,64px)!important;
+    line-height:.84!important;
+  }
+}
