@@ -13,10 +13,10 @@
 @import url('a5114-casting-person-presence.css?v=a5114');
 @import url('a5115-quality.css?v=a5115');
 @import url('a512-between-cues.css?v=a5123');
-@import url('a513-host-design.css?v=a513');
-@import url('a514-activate-design.css?v=a514');
-@import url('a5141-mobile-nav-clarity.css?v=a5141');
+@import url('a513-host-design.css?v=a5142');
+@import url('a514-activate-design.css?v=a5142');
+@import url('a5141-mobile-nav-clarity.css?v=a5142');
 
-/* A5.14.1 PRODUCTION WRAPPER
+/* A5.14.2 PRODUCTION WRAPPER
    Stardust remains the foundation. Verified production corrections and section design passes sit last. */
 @media print{}
