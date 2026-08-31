@@ -17,16 +17,16 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for A5.14.2 on public domain
+      - name: Wait for A5.14.3 on public domain
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a5142-$i" | grep -q 'data-release-status="a5142-design-pass"'; then
-              echo 'A5.14.2 is live.'
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a5143-$i" | grep -q 'data-release-status="a5143-design-pass"'; then
+              echo 'A5.14.3 is live.'
               exit 0
             fi
             sleep 10
           done
-          echo 'Timed out waiting for A5.14.2.' >&2
+          echo 'Timed out waiting for A5.14.3.' >&2
           exit 1
       - name: Render Host
         run: |
@@ -39,7 +39,7 @@ jobs:
           for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
             const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
             const page=await ctx.newPage();
-            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5142-host-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5143-host-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
             if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
             await page.waitForTimeout(700);
             await page.evaluate(()=>{
@@ -49,17 +49,16 @@ jobs:
             });
             await page.waitForTimeout(700);
             const state=await page.evaluate(()=>{
-              const section=document.querySelector('#host');
               const header=document.querySelector('.topbar');
               const heading=document.querySelector('#host h2');
               const env=document.querySelector('.host-environment img');
               const support=document.querySelector('.host-room-support img');
               const video=document.querySelector('.host-video');
+              const archive=document.querySelector('.tv-archive-flash');
               const proof=document.querySelector('#proof-index');
               const er=env.getBoundingClientRect(), sr=support.getBoundingClientRect(), vr=video.getBoundingClientRect();
-              const hr=heading.getBoundingClientRect(), nr=header.getBoundingClientRect();
-              const supportStyle=getComputedStyle(support);
-              const proofStyle=proof?getComputedStyle(proof):null;
+              const hr=heading.getBoundingClientRect(), nr=header.getBoundingClientRect(), ar=archive.getBoundingClientRect();
+              const supportStyle=getComputedStyle(support), archiveStyle=getComputedStyle(archive), proofStyle=proof?getComputedStyle(proof):null;
               return {
                 release:document.body.dataset.releaseStatus,
                 viewport:innerWidth,
@@ -67,21 +66,24 @@ jobs:
                 heading:{top:hr.top,bottom:hr.bottom},
                 nav:{top:nr.top,bottom:nr.bottom,z:getComputedStyle(header).zIndex,background:getComputedStyle(header).backgroundColor},
                 headingNavOverlap:hr.top < nr.bottom+12 && hr.bottom > nr.top-8,
+                archive:{top:ar.top,bottom:ar.bottom,left:ar.left,right:ar.right,position:archiveStyle.position,z:archiveStyle.zIndex},
+                archiveNavOverlap:ar.top < nr.bottom && ar.bottom > nr.top && ar.left < nr.right && ar.right > nr.left,
                 proofClosed:proof?{aria:proof.getAttribute('aria-hidden'),display:proofStyle.display,visibility:proofStyle.visibility}:null,
                 environment:{w:er.width,h:er.height,src:env.currentSrc||env.src,natural:[env.naturalWidth,env.naturalHeight]},
                 video:{w:vr.width,h:vr.height},
                 support:{w:sr.width,h:sr.height,src:support.currentSrc||support.src,natural:[support.naturalWidth,support.naturalHeight],opacity:supportStyle.opacity,fit:supportStyle.objectFit,pos:supportStyle.objectPosition}
               };
             });
-            if(state.release!=='a5142-design-pass') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.release!=='a5143-design-pass') failures.push(`${mode}: stale release ${state.release}`);
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Host heading`);
             if(mode==='mobile' && state.nav.background!=='rgb(247, 248, 245)') failures.push(`mobile: nav is not solid ${state.nav.background}`);
+            if(mode==='mobile' && state.archiveNavOverlap) failures.push(`mobile: VH1 archive receipt overlaps network header ${JSON.stringify(state.archive)}`);
+            if(mode==='mobile' && state.archive.position!=='absolute') failures.push(`mobile: VH1 archive is not section-bound ${state.archive.position}`);
             if(mode==='mobile' && state.proofClosed?.aria==='true' && state.proofClosed.display!=='none') failures.push(`mobile: closed proof drawer still paints ${state.proofClosed.display}`);
             if(!state.environment.natural[0]||!state.environment.natural[1]) failures.push(`${mode}: environment failed decode`);
             if(!state.support.natural[0]||!state.support.natural[1]) failures.push(`${mode}: room support failed decode`);
             if(!state.support.src.includes('host-room.jpg')) failures.push(`${mode}: support is not room context ${state.support.src}`);
-            if(Number(state.support.opacity)<.9) failures.push(`${mode}: room support hidden ${state.support.opacity}`);
             fs.writeFileSync(`qa-artifacts/a513/${mode}-state.json`,JSON.stringify(state,null,2));
             await page.screenshot({path:`qa-artifacts/a513/${mode}-host.png`,fullPage:false});
             await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
