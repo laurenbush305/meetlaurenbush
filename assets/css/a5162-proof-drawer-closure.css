@@ -1,0 +1,11 @@
+/* A5.16.2 PROOF DRAWER CLOSURE
+   A closed Proof / Source Index must leave no painted root box behind.
+   ARIA remains the source of truth for the open/closed state. */
+
+#proof-index[aria-hidden="true"] {
+  display: none !important;
+}
+
+#proof-index[aria-hidden="false"] {
+  display: block !important;
+}
