@@ -1,10 +1,22 @@
 (() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Force the current live-visibility layer to load independently of any cached
+  // a58-art-pass.css import graph. This is intentionally versioned so the browser
+  // cannot keep serving the pre-fix crop rules after deployment.
+  if (!document.querySelector('link[data-a511-live-visibility]')) {
+    const liveVisibility = document.createElement('link');
+    liveVisibility.rel = 'stylesheet';
+    liveVisibility.href = 'assets/css/a5108-stardust-accessibility.css?v=a511-live-visibility-20260830';
+    liveVisibility.dataset.a511LiveVisibility = 'true';
+    document.head.appendChild(liveVisibility);
+  }
+
   // Keep anchor destinations below the fixed navigation, including proof-index
-  // jumps to the back half of the page.
+  // jumps to the back half of the page. The previous 76px value was too short at
+  // the live desktop scale and allowed chapter titles / faces to sit under the bar.
   document.querySelectorAll('main > section').forEach(section => {
-    section.style.scrollMarginTop = '76px';
+    section.style.scrollMarginTop = '112px';
   });
 
   const explainFrame = document.querySelector('.explain-video');
