@@ -54,18 +54,24 @@ html{scroll-padding-top:112px!important}
   text-transform:uppercase!important;
 }
 
-/* Small Host support slot may remain contextual, but it should not become another anonymous room shot. */
+/* HOST support is intentionally contextual. The dominant frame and video already carry Lauren;
+   this small card proves the working room instead of repeating the same portrait a third time. */
 .host-room-support{
-  background:#0b0f14 url('../img/a55/host-talent.jpg') center top/contain no-repeat!important;
+  background:rgba(255,255,255,.93)!important;
 }
-.host-room-support>img{opacity:0!important}
-.host-room-support .source-tab{font-size:0!important}
-.host-room-support .source-tab b{font-size:0!important}
+.host-room-support>img{
+  opacity:1!important;
+  object-fit:cover!important;
+  object-position:center 48%!important;
+}
+.host-room-support .source-tab{
+  font-size:7px!important;
+}
+.host-room-support .source-tab b{
+  font-size:10px!important;
+}
 .host-room-support .source-tab:after{
-  content:'LAUREN / LIVE ROOM';
-  font:700 7px/1.2 'Space Mono',monospace!important;
-  letter-spacing:.07em!important;
-  text-transform:uppercase!important;
+  content:none!important;
 }
 
 /* Casting Sheet + project files: talent-first crops must never sacrifice the face. */
