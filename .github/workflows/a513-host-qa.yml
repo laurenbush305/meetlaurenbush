@@ -1,0 +1,94 @@
+name: A5.13 Host Live QA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Wait for A5.13 on public domain
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?qa=a513-$i" | grep -q 'a513-host-design.css?v=a513'; then
+              echo 'A5.13 is live.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Timed out waiting for A5.13.' >&2
+          exit 1
+      - name: Render Host
+        run: |
+          cat > a513.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          fs.mkdirSync('qa-artifacts/a513',{recursive:true});
+          const browser=await chromium.launch({headless:true});
+          const failures=[];
+          for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
+            const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
+            const page=await ctx.newPage();
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a513-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
+            await page.waitForTimeout(700);
+            await page.evaluate(()=>{
+              const section=document.querySelector('#host');
+              const header=document.querySelector('.topbar');
+              window.scrollTo({top:section.offsetTop-header.getBoundingClientRect().height-24,behavior:'instant'});
+            });
+            await page.waitForTimeout(700);
+            const state=await page.evaluate(()=>{
+              const section=document.querySelector('#host');
+              const header=document.querySelector('.topbar');
+              const heading=document.querySelector('#host h2');
+              const env=document.querySelector('.host-environment img');
+              const support=document.querySelector('.host-room-support img');
+              const video=document.querySelector('.host-video');
+              const er=env.getBoundingClientRect(), sr=support.getBoundingClientRect(), vr=video.getBoundingClientRect();
+              const hr=heading.getBoundingClientRect(), nr=header.getBoundingClientRect();
+              const supportStyle=getComputedStyle(support);
+              return {
+                viewport:innerWidth,
+                scrollWidth:document.documentElement.scrollWidth,
+                heading:{top:hr.top,bottom:hr.bottom},
+                nav:{top:nr.top,bottom:nr.bottom},
+                headingNavOverlap:hr.top < nr.bottom+12 && hr.bottom > nr.top-8,
+                environment:{w:er.width,h:er.height,src:env.currentSrc||env.src,natural:[env.naturalWidth,env.naturalHeight]},
+                video:{w:vr.width,h:vr.height},
+                support:{w:sr.width,h:sr.height,src:support.currentSrc||support.src,natural:[support.naturalWidth,support.naturalHeight],opacity:supportStyle.opacity,fit:supportStyle.objectFit,pos:supportStyle.objectPosition}
+              };
+            });
+            if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
+            if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Host heading`);
+            if(!state.environment.natural[0]||!state.environment.natural[1]) failures.push(`${mode}: environment failed decode`);
+            if(!state.support.natural[0]||!state.support.natural[1]) failures.push(`${mode}: room support failed decode`);
+            if(!state.support.src.includes('host-room.jpg')) failures.push(`${mode}: support is not room context ${state.support.src}`);
+            if(Number(state.support.opacity)<.9) failures.push(`${mode}: room support hidden ${state.support.opacity}`);
+            fs.writeFileSync(`qa-artifacts/a513/${mode}-state.json`,JSON.stringify(state,null,2));
+            await page.screenshot({path:`qa-artifacts/a513/${mode}-host.png`,fullPage:false});
+            await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
+            await page.locator('#host').screenshot({path:`qa-artifacts/a513/${mode}-host-full.png`});
+            await ctx.close();
+          }
+          await browser.close();
+          fs.writeFileSync('qa-artifacts/a513/failures.json',JSON.stringify(failures,null,2));
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          JS
+          node a513.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a513-host
+          path: qa-artifacts/a513
+          if-no-files-found: error
