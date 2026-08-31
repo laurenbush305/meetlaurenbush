@@ -1,0 +1,68 @@
+/* A5.13 — HOST DESIGN PASS
+   Give each media surface a distinct job: Lauren commands the environment, video carries motion,
+   and the support card proves the room. */
+
+.host{
+  background:
+    radial-gradient(circle at 72% 28%,rgba(131,223,225,.1),transparent 25%),
+    radial-gradient(circle at 91% 76%,rgba(255,44,136,.12),transparent 27%),
+    #0c1014;
+}
+
+.host-video{
+  box-shadow:0 30px 86px rgba(0,0,0,.38);
+}
+
+.host-room-support{
+  width:min(22vw,300px);
+  height:18%;
+  left:39%;
+  bottom:7%;
+  transform:rotate(-.35deg);
+  border:1px solid rgba(255,255,255,.7);
+}
+
+.host-room-support img{
+  object-fit:cover!important;
+  object-position:center 48%!important;
+}
+
+.host-room-support .source-tab{
+  left:9px;
+  bottom:9px;
+}
+
+@media(max-width:1024px){
+  .host-room-support{left:35%;width:25vw}
+}
+
+@media(max-width:760px){
+  .host{min-height:1040px}
+  .host-copy{top:7%}
+  .host-environment{inset:17% 0 38% 0}
+  .host-video{
+    left:18px;
+    bottom:6%;
+    width:56%;
+    height:30%;
+  }
+  .host-room-support{
+    left:auto;
+    right:14px;
+    bottom:8%;
+    width:35%;
+    height:16%;
+    transform:none;
+    padding:4px;
+  }
+  .host-room-support .source-tab{
+    left:7px;
+    bottom:7px;
+    padding:6px 7px;
+  }
+}
+
+@media(max-width:390px){
+  .host-video{width:55%;height:29%}
+  .host-room-support{width:36%;height:15%}
+}
