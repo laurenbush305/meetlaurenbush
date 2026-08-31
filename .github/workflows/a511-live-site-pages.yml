@@ -1,5 +1,5 @@
 name: A5.11 Full Live Site QA
-# Post-deploy verification trigger for the published A5.11.2 media repair.
+# Post-deploy verification for A5.11.3 casting render correction and current live-media repairs.
 
 on:
   push:
@@ -20,6 +20,18 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
+      - name: Wait for A5.11.3 on public domain
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?qa=a5113-$i" | grep -q 'a5113-casting-render-fix'; then
+              echo 'A5.11.3 is live.'
+              exit 0
+            fi
+            echo "Waiting for GitHub Pages deployment ($i/30)..."
+            sleep 10
+          done
+          echo 'Timed out waiting for A5.11.3 public CSS.' >&2
+          exit 1
       - name: Render every public page from the live domain
         run: |
           cat > live-site.mjs <<'JS'
@@ -43,7 +55,7 @@ jobs:
               const errors=[];
               page.on('pageerror',e=>errors.push(e.message));
               page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
-              const res=await page.goto(`https://meetlaurenbush.com${path}?qa=post-a5112-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+              const res=await page.goto(`https://meetlaurenbush.com${path}?qa=post-a5113-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
               if(!res?.ok()) failures.push(`${label}-${mode}: HTTP ${res?.status()}`);
               await page.waitForTimeout(900);
               await page.evaluate(async()=>{
@@ -76,11 +88,40 @@ jobs:
                 for(const [k,v] of Object.entries(repairState)) if(v.oldChild!=='none') failures.push(`${label}-${mode}: old ${k} JPEG still rendered`);
               }
 
+              let castingLayout=null;
+              if(label==='casting'){
+                castingLayout=await page.evaluate(()=>{
+                  const h=document.querySelector('#operator-title');
+                  const c=document.querySelector('.operator-copy');
+                  const hr=h.getBoundingClientRect();
+                  const cr=c.getBoundingClientRect();
+                  return {
+                    viewport:innerWidth,
+                    headline:{left:hr.left,right:hr.right,width:hr.width,fontSize:getComputedStyle(h).fontSize,text:h.innerText},
+                    copy:{left:cr.left,right:cr.right,width:cr.width},
+                    scrollWidth:document.documentElement.scrollWidth
+                  };
+                });
+                if(castingLayout.headline.right > castingLayout.viewport + 1) failures.push(`${label}-${mode}: operator headline escapes viewport right=${castingLayout.headline.right} viewport=${castingLayout.viewport}`);
+                if(castingLayout.headline.right > castingLayout.copy.right + 1) failures.push(`${label}-${mode}: operator headline escapes its column right=${castingLayout.headline.right} copy=${castingLayout.copy.right}`);
+                if(castingLayout.scrollWidth > castingLayout.viewport + 2) failures.push(`${label}-${mode}: horizontal overflow scrollWidth=${castingLayout.scrollWidth} viewport=${castingLayout.viewport}`);
+              }
+
               if(errors.length) failures.push(...errors.map(x=>`${label}-${mode}: console ${x}`));
-              fs.writeFileSync(`qa-artifacts/live-site/${label}-${mode}-state.json`,JSON.stringify({url:page.url(),imageAudit,repairState,errors},null,2));
+              fs.writeFileSync(`qa-artifacts/live-site/${label}-${mode}-state.json`,JSON.stringify({url:page.url(),imageAudit,repairState,castingLayout,errors},null,2));
               await page.evaluate(()=>window.scrollTo(0,0));
-              await page.waitForTimeout(200);
+              await page.waitForTimeout(250);
+
+              // Full-page screenshots and sticky/fixed headers are a bad marriage in Chromium stitching.
+              // QA the real header first, then pin it into normal document flow only for the proof image.
+              await page.addStyleTag({content:'.topbar{position:absolute!important;top:0!important;left:0!important;right:0!important}'});
               await page.screenshot({path:`qa-artifacts/live-site/${label}-${mode}.png`,fullPage:true});
+
+              if(label==='casting'){
+                await page.locator('.operator-section').scrollIntoViewIfNeeded();
+                await page.waitForTimeout(250);
+                await page.locator('.operator-section').screenshot({path:`qa-artifacts/live-site/${label}-${mode}-operator.png`});
+              }
               await ctx.close();
             }
           }
