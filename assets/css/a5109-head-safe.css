@@ -1,0 +1,62 @@
+/* A5.10.9 — HEAD-SAFE PRODUCTION PATCH
+   Protects Lauren's face/head across live editorial crops without changing the approved art direction.
+   Portrait-led frames anchor to the top edge; extreme wide thumbnail slots use contain where cover can remove the subject.
+*/
+
+/* HOMEPAGE: human/portrait-led proof */
+.hero-transmission img,
+.person-studio img,
+.person-wide img,
+.person-floral img,
+.tv-detail img,
+.host-environment img{
+  object-position:center top!important;
+}
+
+/* Tiny wide archive/proof slots were capable of cropping the person out entirely. */
+.tv-archive-flash img,
+.proof-index-list img{
+  object-fit:contain!important;
+  object-position:center top!important;
+  background:#0b0f14!important;
+}
+
+/* CASTING SHEET: talent-first crops must never sacrifice the face. */
+.cast58 .casting-hero-media img{
+  object-position:center top!important;
+}
+.a510-cast .file-row.scrambled .file-media img,
+.a510-cast .file-row.wimpb .file-media img{
+  object-position:center top!important;
+}
+
+/* PROJECT FILES: hero and documentary stills keep Lauren's head in frame. */
+.project-file.scrambled-file .project-hero-media img,
+.project-file.wimpb-file .project-hero-media img,
+.project-file.scrambled-file .evidence-media img{
+  object-position:center top!important;
+}
+
+/* Mobile gets the same protection after the layout compresses. */
+@media(max-width:760px){
+  .hero-transmission img,
+  .person-studio img,
+  .person-wide img,
+  .person-floral img,
+  .tv-detail img,
+  .host-environment img,
+  .cast58 .casting-hero-media img,
+  .a510-cast .file-row.scrambled .file-media img,
+  .a510-cast .file-row.wimpb .file-media img,
+  .project-file.scrambled-file .project-hero-media img,
+  .project-file.wimpb-file .project-hero-media img,
+  .project-file.scrambled-file .evidence-media img{
+    object-position:center top!important;
+  }
+
+  .tv-archive-flash img,
+  .proof-index-list img{
+    object-fit:contain!important;
+    object-position:center top!important;
+  }
+}
