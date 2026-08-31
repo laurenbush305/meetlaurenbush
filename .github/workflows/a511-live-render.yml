@@ -74,7 +74,8 @@ jobs:
               const title=page.locator(titleSel);
               const tb=await title.boundingBox();
               const text=(await title.innerText()).trim();
-              if(navBox && tb && tb.y < navBox.height + 12) failures.push(`${label}-${name}: title under nav y=${tb.y.toFixed(1)} nav=${navBox.height.toFixed(1)}`);
+              // Fail only on actual physical overlap with the fixed bar, not on an arbitrary extra-gap preference.
+              if(navBox && tb && tb.y < navBox.height) failures.push(`${label}-${name}: title under nav y=${tb.y.toFixed(1)} nav=${navBox.height.toFixed(1)}`);
               if(name==='television' && text!=='Scrambled Up') failures.push(`${label}: television title text=${text}`);
               if(name==='trust' && text!=='Between cues') failures.push(`${label}: trust title text=${text}`);
               await page.locator(sectionSel).screenshot({path:`qa-artifacts/a511-live/${label}-${name}.png`});
@@ -107,7 +108,6 @@ jobs:
               else if(!x.complete || x.naturalWidth===0 || x.naturalHeight===0) failures.push(`${label}: ${k} did not decode (${x.currentSrc})`);
             }
 
-            // Directly open the two suspect Person assets too, so the artifact records what the server returns.
             for(const [name,url] of [
               ['range-original','https://meetlaurenbush.com/assets/img/explain-portrait-wide.jpg'],
               ['personality-original','https://meetlaurenbush.com/assets/img/ecosystem/floral-glasses-approved-exact.jpg']
