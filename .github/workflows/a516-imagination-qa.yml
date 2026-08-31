@@ -17,16 +17,16 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for current public release
+      - name: Wait for A5.16 on public domain
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a516-audit-$i" | grep -q 'data-release-status="a515-watch-design"'; then
-              echo 'Current release is live.'
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a516-design-$i" | grep -q 'data-release-status="a516-imagination-design"'; then
+              echo 'A5.16 Casting Imagination is live.'
               exit 0
             fi
             sleep 10
           done
-          echo 'Timed out waiting for current public release.' >&2
+          echo 'Timed out waiting for A5.16 Casting Imagination.' >&2
           exit 1
       - name: Render Casting Imagination
         run: |
@@ -39,39 +39,63 @@ jobs:
           for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
             const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
             const page=await ctx.newPage();
-            const res=await page.goto(`https://meetlaurenbush.com/?qa=a516-imagination-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a516-design-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
             if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
-            await page.waitForTimeout(800);
+            await page.waitForTimeout(900);
             await page.evaluate(()=>{
               const section=document.querySelector('#imagination');
               const header=document.querySelector('.topbar');
               window.scrollTo({top:section.offsetTop-header.getBoundingClientRect().height-24,behavior:'instant'});
             });
-            await page.waitForTimeout(800);
+            await page.waitForTimeout(900);
             const state=await page.evaluate(()=>{
               const section=document.querySelector('#imagination').getBoundingClientRect();
               const heading=document.querySelector('#imagination h2').getBoundingClientRect();
+              const copyEnd=document.querySelector('.imagination-copy > p:last-child').getBoundingClientRect();
               const nav=document.querySelector('.topbar').getBoundingClientRect();
-              const talent=document.querySelector('.imagination-talent img');
+              const figure=document.querySelector('.imagination-talent');
+              const fr=figure.getBoundingClientRect();
+              const talent=figure.querySelector('img');
               const tr=talent.getBoundingClientRect();
-              const doors=[...document.querySelectorAll('.casting-doors article')].map(el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}});
+              const doors=[...document.querySelectorAll('.casting-doors article')].map(el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,bottom:r.bottom,right:r.right,background:getComputedStyle(el).backgroundColor}});
+              const doorRail=document.querySelector('.casting-doors').getBoundingClientRect();
               return {
                 release:document.body.dataset.releaseStatus,
                 viewport:innerWidth,
                 scrollWidth:document.documentElement.scrollWidth,
                 section:{top:section.top,bottom:section.bottom,h:section.height},
                 heading:{top:heading.top,bottom:heading.bottom,w:heading.width,h:heading.height},
+                copyEnd:{top:copyEnd.top,bottom:copyEnd.bottom},
                 nav:{top:nav.top,bottom:nav.bottom},
                 headingNavOverlap:heading.top<nav.bottom+12&&heading.bottom>nav.top-8,
+                figure:{x:fr.x,y:fr.y,w:fr.width,h:fr.height,position:getComputedStyle(figure).position},
                 talent:{x:tr.x,y:tr.y,w:tr.width,h:tr.height,src:talent.currentSrc||talent.src,natural:[talent.naturalWidth,talent.naturalHeight],fit:getComputedStyle(talent).objectFit,pos:getComputedStyle(talent).objectPosition},
+                rail:{x:doorRail.x,y:doorRail.y,w:doorRail.width,h:doorRail.height},
                 doors
               };
             });
-            if(state.release!=='a515-watch-design') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.release!=='a516-imagination-design') failures.push(`${mode}: stale release ${state.release}`);
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Casting Imagination heading`);
             if(!state.talent.natural[0]||!state.talent.natural[1]) failures.push(`${mode}: talent image failed decode`);
             if(state.doors.length!==4) failures.push(`${mode}: expected 4 casting doors, found ${state.doors.length}`);
+            const sameX=state.doors.every(d=>Math.abs(d.x-state.doors[0].x)<2);
+            const sameW=state.doors.every(d=>Math.abs(d.w-state.doors[0].w)<2);
+            const stacked=state.doors.slice(1).every((d,i)=>d.y>=state.doors[i].bottom-1);
+            if(!sameX||!sameW||!stacked) failures.push(`${mode}: casting doors are not one stacked call-sheet rail ${JSON.stringify(state.doors)}`);
+            if(mode==='desktop'){
+              if(state.rail.w<500) failures.push(`desktop: casting call-sheet rail too narrow ${state.rail.w}`);
+              if(state.doors.some(d=>d.h<48||d.h>82)) failures.push(`desktop: casting row height outside editorial range ${JSON.stringify(state.doors)}`);
+              if(state.figure.position!=='absolute') failures.push(`desktop: talent frame lost key-art positioning ${state.figure.position}`);
+            }
+            if(mode==='mobile'){
+              const gap=state.figure.y-state.copyEnd.bottom;
+              if(gap>90) failures.push(`mobile: dead air remains between intro and portrait ${gap}px`);
+              if(gap<18) failures.push(`mobile: portrait crowds intro ${gap}px`);
+              if(state.figure.position!=='relative') failures.push(`mobile: talent frame did not enter natural flow ${state.figure.position}`);
+              if(state.rail.w<340) failures.push(`mobile: call-sheet rail too narrow ${state.rail.w}`);
+              if(state.doors.some(d=>d.h<58||d.h>90)) failures.push(`mobile: casting row height outside readable range ${JSON.stringify(state.doors)}`);
+            }
             fs.writeFileSync(`qa-artifacts/a516/${mode}-state.json`,JSON.stringify(state,null,2));
             await page.screenshot({path:`qa-artifacts/a516/${mode}-imagination.png`,fullPage:false});
             await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
