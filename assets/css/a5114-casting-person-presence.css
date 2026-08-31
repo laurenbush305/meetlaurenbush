@@ -1,0 +1,29 @@
+/* A5.11.4 CASTING PERSON-PRESENCE FIX
+   The operator frame must show Lauren, not an empty room-context shot. */
+
+.cast58 .operator-photo img{
+  content:url('../img/host-celsius-main-a52.jpg')!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 30%!important;
+}
+
+.cast58 .operator-photo .source-tab{
+  font-size:0;
+}
+.cast58 .operator-photo .source-tab b{
+  display:none;
+}
+.cast58 .operator-photo .source-tab::after{
+  content:'Lauren / live hosting / room';
+  font:400 7px/1.2 'Space Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+@media(max-width:760px){
+  .cast58 .operator-photo img{
+    object-position:center 28%!important;
+  }
+}
