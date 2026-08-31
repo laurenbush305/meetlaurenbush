@@ -17,16 +17,16 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for A5.14.2 on public domain
+      - name: Wait for A5.14.3 on public domain
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a5142-$i" | grep -q 'data-release-status="a5142-design-pass"'; then
-              echo 'A5.14.2 is live.'
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a5143-$i" | grep -q 'data-release-status="a5143-design-pass"'; then
+              echo 'A5.14.3 is live.'
               exit 0
             fi
             sleep 10
           done
-          echo 'Timed out waiting for A5.14.2.' >&2
+          echo 'Timed out waiting for A5.14.3.' >&2
           exit 1
       - name: Render Activate
         run: |
@@ -39,7 +39,7 @@ jobs:
           for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
             const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
             const page=await ctx.newPage();
-            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5142-activate-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5143-activate-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
             if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
             await page.waitForTimeout(700);
             await page.evaluate(()=>{
@@ -56,10 +56,8 @@ jobs:
               const result=document.querySelector('.activate-gotennis');
               const resultImg=result.querySelector('img');
               const material=document.querySelector('.activate-material');
-              const materialImg=material.querySelector('img');
               const hr=heading.getBoundingClientRect(), nr=header.getBoundingClientRect();
-              const mr=main.getBoundingClientRect(), rr=result.getBoundingClientRect(), xr=material.getBoundingClientRect();
-              const ms=getComputedStyle(material);
+              const mr=main.getBoundingClientRect(), rr=result.getBoundingClientRect();
               return {
                 release:document.body.dataset.releaseStatus,
                 viewport:innerWidth,
@@ -69,20 +67,17 @@ jobs:
                 headingNavOverlap:hr.top < nr.bottom+12 && hr.bottom > nr.top-8,
                 main:{x:mr.x,y:mr.y,w:mr.width,h:mr.height,src:mainImg.currentSrc||mainImg.src,natural:[mainImg.naturalWidth,mainImg.naturalHeight]},
                 result:{x:rr.x,y:rr.y,w:rr.width,h:rr.height,src:resultImg.currentSrc||resultImg.src,natural:[resultImg.naturalWidth,resultImg.naturalHeight]},
-                material:{x:xr.x,y:xr.y,w:xr.width,h:xr.height,display:ms.display,visibility:ms.visibility,opacity:ms.opacity,src:materialImg.currentSrc||materialImg.src,natural:[materialImg.naturalWidth,materialImg.naturalHeight]}
+                materialPresent:!!material
               };
             });
-            if(state.release!=='a5142-design-pass') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.release!=='a5143-design-pass') failures.push(`${mode}: stale release ${state.release}`);
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Activate heading`);
-            for(const [name,x] of [['main',state.main],['result',state.result],['material',state.material]]){
+            for(const [name,x] of [['main',state.main],['result',state.result]]){
               if(!x.natural[0]||!x.natural[1]) failures.push(`${mode}: ${name} image failed decode ${x.src}`);
             }
-            if(!state.material.src.includes('activate-centerline-02.jpg')) failures.push(`${mode}: material receipt is not the A5.14.2 source ${state.material.src}`);
-            if(mode==='mobile'){
-              if(state.result.w >= state.main.w*.9) failures.push(`mobile: GoTennis result still reads as a second full-width hero ${state.result.w}/${state.main.w}`);
-              if(state.material.display==='none'||state.material.visibility==='hidden'||Number(state.material.opacity)<.9) failures.push('mobile: material receipt not visible');
-            }
+            if(state.materialPresent) failures.push(`${mode}: retired third material receipt still exists in DOM`);
+            if(mode==='mobile' && state.result.w >= state.main.w*.9) failures.push(`mobile: GoTennis result still reads as a second full-width hero ${state.result.w}/${state.main.w}`);
             fs.writeFileSync(`qa-artifacts/a514/${mode}-state.json`,JSON.stringify(state,null,2));
             await page.screenshot({path:`qa-artifacts/a514/${mode}-activate.png`,fullPage:false});
             await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
