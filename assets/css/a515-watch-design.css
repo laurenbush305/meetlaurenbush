@@ -1,0 +1,106 @@
+/* A5.15 WATCH DESKTOP DESIGN PASS
+   Give the program metadata a real editorial rail instead of a corner caption.
+   Mobile remains intentionally unchanged. */
+
+@media (min-width: 761px) {
+  .watch {
+    min-height: 980px;
+  }
+
+  .watch-stage {
+    left: 5%;
+    top: 27%;
+    width: 70%;
+    height: 62%;
+    overflow: hidden;
+    border-color: rgba(255,255,255,.17);
+    box-shadow: 0 38px 96px rgba(0,0,0,.38);
+  }
+
+  .watch-program::before {
+    content: '';
+    position: absolute;
+    z-index: 4;
+    top: 8%;
+    bottom: 8%;
+    left: 66%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,.24) 18%, rgba(255,255,255,.24) 82%, transparent);
+  }
+
+  .watch-program::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 34%;
+    background: linear-gradient(135deg, rgba(9,12,16,.48), rgba(9,12,16,.82));
+    backdrop-filter: blur(7px);
+    pointer-events: none;
+  }
+
+  .watch-foreground {
+    left: 3.5%;
+    top: 5%;
+    width: 59%;
+    height: 88%;
+  }
+
+  .watch-meta {
+    z-index: 6;
+    left: 69.5%;
+    right: 3.5%;
+    top: 50%;
+    bottom: auto;
+    width: auto;
+    transform: translateY(-50%);
+    display: grid;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .watch-meta span {
+    font-size: 7px;
+    letter-spacing: .12em;
+  }
+
+  .watch-meta strong {
+    max-width: 100%;
+    font-size: clamp(30px, 2.85vw, 42px);
+    line-height: .92;
+    letter-spacing: -.055em;
+    text-wrap: balance;
+  }
+
+  .watch-meta small {
+    max-width: 29ch;
+    font-size: 8px;
+    line-height: 1.55;
+    color: rgba(255,255,255,.7);
+  }
+
+  #watch-wimpb .watch-meta strong,
+  #watch-archive .watch-meta strong,
+  #watch-apq .watch-meta strong {
+    font-size: clamp(27px, 2.45vw, 36px);
+    line-height: .94;
+  }
+
+  .watch-tuner {
+    right: 4%;
+    top: 30%;
+    width: 18.5%;
+  }
+
+  .watch-tuner button {
+    min-height: 72px;
+    padding: 0 14px;
+    grid-template-columns: 34px 1fr;
+  }
+
+  .watch-tuner button span {
+    font-size: 8px;
+  }
+}
