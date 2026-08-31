@@ -1,0 +1,35 @@
+name: A5.15 Release Patch
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/css/a515-watch-design.css'
+      - 'assets/css/a58-art-pass.css'
+      - '.github/workflows/a515-release-patch.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch A5.15 release marker and cache key
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('a58-art-pass.css?v=a5143-20260831','a58-art-pass.css?v=a515-20260831')
+          s=s.replace('data-release-status="a5143-design-pass"','data-release-status="a515-watch-design"')
+          p.write_text(s)
+          PY
+          if git diff --quiet -- index.html; then
+            echo 'A5.15 marker already present.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Release A5.15 Watch design'
+          git push
