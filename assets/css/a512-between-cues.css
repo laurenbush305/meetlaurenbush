@@ -1,6 +1,7 @@
-/* A5.12 — BETWEEN CUES DESIGN PASS
+/* A5.12.1 — BETWEEN CUES DESIGN PASS
    Reframes the operator section around the portrait source instead of forcing it into a landscape box.
-   Keeps Lauren visible, removes letterboxing, and strengthens the editorial relationship between copy, portrait and receipts. */
+   Keeps Lauren visible, removes letterboxing, strengthens the editorial relationship between copy, portrait and receipts,
+   and gives the mobile title enough clearance beneath the sticky navigation. */
 
 .trust{
   min-height:940px;
@@ -72,10 +73,11 @@
 
 @media(max-width:760px){
   .trust{
-    min-height:1210px;
-    padding:72px 18px;
+    min-height:1300px;
+    padding:164px 18px 72px;
+    scroll-margin-top:96px;
     background:
-      radial-gradient(ellipse at 75% 33%,rgba(131,223,225,.15),transparent 31%),
+      radial-gradient(ellipse at 75% 36%,rgba(131,223,225,.15),transparent 31%),
       linear-gradient(165deg,#f3eadf 0 42%,#fffaf2 42% 100%);
   }
 
@@ -97,7 +99,7 @@
   .trust-photo{
     left:auto;
     right:18px;
-    top:30%;
+    top:38%;
     width:min(72vw,300px);
     height:auto;
     aspect-ratio:4/5;
@@ -107,7 +109,7 @@
   .trust-proof{
     left:18px;
     right:18px;
-    bottom:4%;
+    bottom:3%;
     grid-template-columns:1fr;
   }
 
@@ -123,6 +125,6 @@
 }
 
 @media(max-width:390px){
-  .trust{min-height:1180px}
-  .trust-photo{width:min(74vw,282px);top:31%}
+  .trust{min-height:1280px;padding-top:164px}
+  .trust-photo{width:min(74vw,282px);top:38%}
 }
