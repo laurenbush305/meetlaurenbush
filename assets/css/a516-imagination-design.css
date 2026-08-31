@@ -1,0 +1,237 @@
+/* A5.16 CASTING IMAGINATION DESIGN PASS
+   Turn the four generic cards into a casting call-sheet rail and remove mobile dead air. */
+
+@media (min-width: 761px) {
+  .imagination {
+    min-height: 900px;
+  }
+
+  .imagination-copy {
+    width: min(52vw, 710px);
+  }
+
+  .imagination-talent {
+    right: 5%;
+    top: 6%;
+    width: min(39vw, 520px);
+    height: 80%;
+    padding-top: 22px;
+  }
+
+  .imagination-talent::before {
+    content: 'CASTING FRAME / 01';
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    letter-spacing: .14em;
+    color: rgba(11,15,20,.55);
+  }
+
+  .imagination-talent::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -8px;
+    right: 8px;
+    bottom: -8px;
+    z-index: -1;
+    border: 1px solid rgba(11,15,20,.16);
+    box-shadow: 14px 14px 0 rgba(131,223,225,.16), 24px 24px 0 rgba(255,44,136,.07);
+  }
+
+  .casting-doors {
+    left: var(--pad);
+    right: 48%;
+    bottom: 6%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(11,15,20,.28);
+  }
+
+  .casting-doors article {
+    position: relative;
+    min-height: 58px;
+    padding: 0 12px 0 0;
+    display: grid;
+    grid-template-columns: 78px 150px minmax(0,1fr);
+    align-items: center;
+    column-gap: 14px;
+    background: transparent;
+    backdrop-filter: none;
+    border: 0;
+    border-bottom: 1px solid rgba(11,15,20,.20);
+  }
+
+  .casting-doors article::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    bottom: 13px;
+    width: 2px;
+    background: var(--aqua);
+    opacity: .68;
+  }
+
+  .casting-doors article:nth-child(even)::before {
+    background: var(--pink);
+    opacity: .58;
+  }
+
+  .casting-doors span {
+    padding-left: 14px;
+    font-size: 6px;
+    letter-spacing: .12em;
+  }
+
+  .casting-doors strong {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1;
+    letter-spacing: -.04em;
+  }
+
+  .casting-doors p {
+    margin: 0;
+    font-size: 8px;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 760px) {
+  .imagination {
+    min-height: 0 !important;
+    padding: 72px 18px 48px !important;
+    overflow: hidden;
+  }
+
+  .imagination-copy {
+    width: 100%;
+  }
+
+  .imagination-copy h2 {
+    max-width: 340px;
+    font-size: clamp(53px, 15.5vw, 64px);
+    line-height: .82;
+  }
+
+  .imagination-copy > p:last-child {
+    max-width: 24ch;
+    margin-top: 18px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .imagination-talent {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: min(76vw, 286px) !important;
+    height: auto !important;
+    aspect-ratio: 1122 / 1402;
+    margin: 42px auto 26px !important;
+    padding-top: 18px;
+  }
+
+  .imagination-talent::before {
+    content: 'CASTING FRAME / 01';
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 6px;
+    letter-spacing: .12em;
+    color: rgba(11,15,20,.5);
+  }
+
+  .imagination-talent::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -6px;
+    right: 6px;
+    bottom: -6px;
+    z-index: -1;
+    border: 1px solid rgba(11,15,20,.14);
+    box-shadow: 8px 8px 0 rgba(131,223,225,.14), 14px 14px 0 rgba(255,44,136,.06);
+  }
+
+  .imagination-talent img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  .casting-doors {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    margin: 20px 0 0;
+    border-top: 1px solid rgba(11,15,20,.26);
+  }
+
+  .casting-doors article {
+    position: relative;
+    min-height: 68px;
+    padding: 10px 8px 10px 0;
+    display: grid;
+    grid-template-columns: 58px minmax(0,1fr);
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    align-items: center;
+    background: transparent;
+    backdrop-filter: none;
+    border: 0;
+    border-bottom: 1px solid rgba(11,15,20,.18);
+  }
+
+  .casting-doors article::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: var(--aqua);
+    opacity: .7;
+  }
+
+  .casting-doors article:nth-child(even)::before {
+    background: var(--pink);
+    opacity: .58;
+  }
+
+  .casting-doors span {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    padding-left: 10px;
+    font-size: 6px;
+    letter-spacing: .11em;
+  }
+
+  .casting-doors strong {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 19px;
+    line-height: 1;
+  }
+
+  .casting-doors p {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 3px 0 0;
+    font-size: 8px;
+    line-height: 1.35;
+  }
+}
