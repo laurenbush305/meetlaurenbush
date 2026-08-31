@@ -2,9 +2,9 @@
    Prevent section content and archival captions from visually ghosting through the fixed navigation. */
 @media(max-width:760px){
   .topbar{
-    background:rgba(247,248,245,.985);
-    -webkit-backdrop-filter:blur(18px) saturate(1.06);
-    backdrop-filter:blur(18px) saturate(1.06);
+    background:#f7f8f5;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
     box-shadow:0 1px 0 rgba(11,15,20,.08),0 8px 24px rgba(11,15,20,.035);
   }
 }
