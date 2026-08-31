@@ -20,7 +20,7 @@ jobs:
       - name: Wait for current public release
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a518-final-$i" | grep -q 'data-release-status="a5161-tablet-polish"'; then
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a518-final-$i" | grep -q 'data-release-status="a5162-proof-closure"'; then
               echo 'Current production release is live.'
               exit 0
             fi
@@ -82,7 +82,7 @@ jobs:
                 expected
               };
             },expected);
-            if(state.release!=='a5161-tablet-polish') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.release!=='a5162-proof-closure') failures.push(`${mode}: stale release ${state.release}`);
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(JSON.stringify(state.ids)!==JSON.stringify(expected)) failures.push(`${mode}: wrong section order ${JSON.stringify(state.ids)}`);
             for(let i=1;i<state.rects.length;i++){
