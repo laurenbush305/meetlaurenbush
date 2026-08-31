@@ -1,0 +1,23 @@
+name: A5.16.2 Release Patch
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  patch-release:
+    if: contains(github.event.head_commit.message, '[a5162-release]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish A5.16.2 marker and cache key
+        run: |
+          sed -i 's/a58-art-pass.css?v=a5161-20260831/a58-art-pass.css?v=a5162-20260831/g' index.html
+          sed -i 's/data-release-status="a5161-tablet-polish"/data-release-status="a5162-proof-closure"/g' index.html
+          grep -q 'a58-art-pass.css?v=a5162-20260831' index.html
+          grep -q 'data-release-status="a5162-proof-closure"' index.html
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Publish A5.16.2 proof closure'
+          git push
