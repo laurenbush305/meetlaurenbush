@@ -1,0 +1,68 @@
+name: A5.11.5 Media Candidate Review
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build candidate sheets
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg python3-pil >/dev/null
+          mkdir -p qa-artifacts/media-candidates/wimpb qa-artifacts/media-candidates/centerline
+
+          # Sample the actual WIMPB video at several points so we can replace the soft 480px hero with a genuine high-res frame.
+          dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 assets/video/explain-pickleball-bag-web.mp4)
+          python3 - "$dur" <<'PY' > /tmp/times.txt
+          import sys
+          d=float(sys.argv[1])
+          for p in (.08,.22,.38,.54,.70,.86): print(f'{d*p:.3f}')
+          PY
+          n=1
+          while read t; do
+            ffmpeg -loglevel error -ss "$t" -i assets/video/explain-pickleball-bag-web.mp4 -frames:v 1 -q:v 2 "qa-artifacts/media-candidates/wimpb/frame-${n}.jpg"
+            n=$((n+1))
+          done < /tmp/times.txt
+          cp assets/img/a55/wimpb-campaign-main.jpg qa-artifacts/media-candidates/wimpb/current-480.jpg
+
+          # Higher-resolution Centerline options from the existing source set.
+          cp assets/img/a56/centerline-material.jpg qa-artifacts/media-candidates/centerline/current-material.jpg
+          cp assets/img/activate-centerline-02.jpg qa-artifacts/media-candidates/centerline/activate-centerline-02.jpg
+          cp assets/img/activate-centerline.jpg qa-artifacts/media-candidates/centerline/activate-centerline.jpg
+          cp assets/img/activate-centerline-wide.jpg qa-artifacts/media-candidates/centerline/activate-centerline-wide.jpg
+          cp assets/img/activate-room.jpg qa-artifacts/media-candidates/centerline/activate-room.jpg
+
+          python3 <<'PY'
+          from PIL import Image,ImageOps,ImageDraw,ImageFont
+          import glob,os,json
+          out='qa-artifacts/media-candidates'
+          font=ImageFont.load_default()
+          def sheet(paths,name,cols=3):
+              tw,th=420,330; labelh=42
+              rows=(len(paths)+cols-1)//cols
+              canvas=Image.new('RGB',(cols*tw,rows*(th+labelh)),'white')
+              meta=[]
+              for i,p in enumerate(paths):
+                  im=Image.open(p).convert('RGB'); orig=im.size
+                  thumb=ImageOps.contain(im,(tw-16,th-16))
+                  x=(i%cols)*tw+(tw-thumb.width)//2
+                  y=(i//cols)*(th+labelh)+(th-thumb.height)//2
+                  canvas.paste(thumb,(x,y))
+                  label=f'{os.path.basename(p)} | {orig[0]}x{orig[1]}'
+                  ImageDraw.Draw(canvas).text(((i%cols)*tw+8,(i//cols)*(th+labelh)+th+8),label,fill='black',font=font)
+                  meta.append({'file':os.path.basename(p),'width':orig[0],'height':orig[1]})
+              canvas.save(f'{out}/{name}.jpg',quality=92)
+              json.dump(meta,open(f'{out}/{name}.json','w'),indent=2)
+          sheet(sorted(glob.glob(out+'/wimpb/*.jpg')),'wimpb-candidates',3)
+          sheet(sorted(glob.glob(out+'/centerline/*.jpg')),'centerline-candidates',3)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a5115-media-candidates
+          path: qa-artifacts/media-candidates
+          if-no-files-found: error
