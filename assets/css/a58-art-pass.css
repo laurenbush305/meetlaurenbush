@@ -8,9 +8,10 @@
 @import url('a5108-stardust-surface-lock.css');
 @import url('a5108-stardust-accessibility.css');
 @import url('a5109-head-safe.css');
+@import url('a5112-media-repair.css?v=a5112');
 
-/* A5.10.9 HEAD-SAFE PRODUCTION WRAPPER
-   A5.10.8 remains the Stardust foundation. The final crop-protection layer keeps Lauren's face/head visible across portrait-led proof on homepage, Casting Sheet and project files. */
+/* A5.11.2 PRODUCTION WRAPPER
+   A5.10.8 remains the Stardust foundation. Head-safe portrait treatment and the live-media repair sit last so public browser reality wins over stale decorative crop rules. */
 
 /* The full print treatment is inherited from a58-art-pass-base.css. Keep this marker here because the production guard validates the public stylesheet entrypoint. */
 @media print{}
