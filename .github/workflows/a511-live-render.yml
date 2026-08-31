@@ -37,7 +37,7 @@ jobs:
 
       - name: Render live production
         run: |
-          cat > /tmp/a511-live.mjs <<'JS'
+          cat > a511-live.mjs <<'JS'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
           fs.mkdirSync('qa-artifacts/a511-live', {recursive:true});
@@ -76,9 +76,8 @@ jobs:
               await page.locator(sectionSel).screenshot({path:`qa-artifacts/a511-live/${label}-${name}.png`});
             }
 
-            // Verify the live image sources and fitted crop rules for the exact problem areas.
             const imageState=await page.evaluate(()=>{
-              const read=(sel)=>{const el=document.querySelector(sel); if(!el)return null; const cs=getComputedStyle(el); return {src:el.currentSrc||el.src,fit:cs.objectFit,pos:cs.objectPosition,rect:el.getBoundingClientRect().toJSON?.()||{x:el.getBoundingClientRect().x,y:el.getBoundingClientRect().y,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height}}};
+              const read=(sel)=>{const el=document.querySelector(sel); if(!el)return null; const cs=getComputedStyle(el); const r=el.getBoundingClientRect(); return {src:el.currentSrc||el.src,fit:cs.objectFit,pos:cs.objectPosition,rect:{x:r.x,y:r.y,width:r.width,height:r.height}}};
               return {
                 tvPortrait:read('.tv-portrait img'),
                 tvDetail:read('.tv-detail img'),
@@ -107,7 +106,7 @@ jobs:
           fs.writeFileSync('qa-artifacts/a511-live/failures.json',JSON.stringify(failures,null,2));
           if(failures.length){console.error(failures.join('\n'));process.exit(1)}
           JS
-          node /tmp/a511-live.mjs
+          node a511-live.mjs
 
       - uses: actions/upload-artifact@v4
         if: always()
