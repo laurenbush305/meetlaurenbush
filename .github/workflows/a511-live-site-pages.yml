@@ -1,0 +1,78 @@
+name: A5.11 Full Live Site QA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  live-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Render every public page from the live domain
+        run: |
+          cat > live-site.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          fs.mkdirSync('qa-artifacts/live-site',{recursive:true});
+          const failures=[];
+          const browser=await chromium.launch({headless:true});
+          const pages=[
+            ['home','/'],
+            ['casting','/casting-sheet.html'],
+            ['scrambled','/project-scrambled-up.html'],
+            ['pickleball-bag','/project-pickleball-bag.html'],
+            ['montis','/project-dear-diary-montis.html'],
+            ['centerline','/project-honcho-centerline.html']
+          ];
+          for(const [label,path] of pages){
+            for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
+              const ctx=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,colorScheme:'light'});
+              const page=await ctx.newPage();
+              const errors=[];
+              page.on('pageerror',e=>errors.push(e.message));
+              page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+              const res=await page.goto(`https://meetlaurenbush.com${path}?qa=full-${Date.now()}`,{waitUntil:'networkidle',timeout:60000});
+              if(!res?.ok()) failures.push(`${label}-${mode}: HTTP ${res?.status()}`);
+              await page.waitForTimeout(900);
+              const imgs=page.locator('img');
+              const count=await imgs.count();
+              for(let i=0;i<count;i++){
+                const img=imgs.nth(i);
+                await img.scrollIntoViewIfNeeded().catch(()=>{});
+                await page.waitForTimeout(90);
+              }
+              await page.waitForTimeout(700);
+              const imageAudit=await page.evaluate(()=>[...document.images].map((img,i)=>({i,alt:img.alt,src:img.currentSrc||img.src,complete:img.complete,w:img.naturalWidth,h:img.naturalHeight,display:getComputedStyle(img).display,visibility:getComputedStyle(img).visibility,opacity:getComputedStyle(img).opacity})).filter(x=>x.display!=='none'));
+              for(const x of imageAudit){
+                if(!x.complete||x.w===0||x.h===0) failures.push(`${label}-${mode}: undecoded image ${x.i} ${x.src}`);
+              }
+              if(errors.length) failures.push(...errors.map(x=>`${label}-${mode}: console ${x}`));
+              fs.writeFileSync(`qa-artifacts/live-site/${label}-${mode}-state.json`,JSON.stringify({url:page.url(),imageAudit,errors},null,2));
+              await page.evaluate(()=>window.scrollTo(0,0));
+              await page.waitForTimeout(250);
+              await page.screenshot({path:`qa-artifacts/live-site/${label}-${mode}.png`,fullPage:true});
+              await ctx.close();
+            }
+          }
+          await browser.close();
+          fs.writeFileSync('qa-artifacts/live-site/failures.json',JSON.stringify(failures,null,2));
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          JS
+          node live-site.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a511-full-live-site
+          path: qa-artifacts/live-site
+          if-no-files-found: error
