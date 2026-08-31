@@ -16,20 +16,12 @@ jobs:
           sudo apt-get install -y -qq ffmpeg python3-pil >/dev/null
           mkdir -p qa-artifacts/media-candidates/wimpb qa-artifacts/media-candidates/centerline
 
-          # Sample the actual WIMPB video at several points so we can replace the soft 480px hero with a genuine high-res frame.
-          dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 assets/video/explain-pickleball-bag-web.mp4)
-          python3 - "$dur" <<'PY' > /tmp/times.txt
-          import sys
-          d=float(sys.argv[1])
-          for p in (.08,.22,.38,.54,.70,.86):
-              s=f'{d*p:.3f}'
-              print('0'+s if s.startswith('.') else s)
-          PY
+          # Sample the actual WIMPB video at clean whole-second marks so we can replace the soft 480px hero with a genuine high-res frame.
           n=1
-          while read t; do
+          for t in 1 3 5 7 9 11; do
             ffmpeg -loglevel error -ss "$t" -i assets/video/explain-pickleball-bag-web.mp4 -frames:v 1 -q:v 2 "qa-artifacts/media-candidates/wimpb/frame-${n}.jpg"
             n=$((n+1))
-          done < /tmp/times.txt
+          done
           cp assets/img/a55/wimpb-campaign-main.jpg qa-artifacts/media-candidates/wimpb/current-480.jpg
 
           # Higher-resolution Centerline options from the existing source set.
