@@ -1,0 +1,91 @@
+name: A5.16 Casting Imagination Visual QA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Wait for current public release
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a516-audit-$i" | grep -q 'data-release-status="a515-watch-design"'; then
+              echo 'Current release is live.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Timed out waiting for current public release.' >&2
+          exit 1
+      - name: Render Casting Imagination
+        run: |
+          cat > a516.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          fs.mkdirSync('qa-artifacts/a516',{recursive:true});
+          const browser=await chromium.launch({headless:true});
+          const failures=[];
+          for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
+            const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
+            const page=await ctx.newPage();
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a516-imagination-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
+            await page.waitForTimeout(800);
+            await page.evaluate(()=>{
+              const section=document.querySelector('#imagination');
+              const header=document.querySelector('.topbar');
+              window.scrollTo({top:section.offsetTop-header.getBoundingClientRect().height-24,behavior:'instant'});
+            });
+            await page.waitForTimeout(800);
+            const state=await page.evaluate(()=>{
+              const section=document.querySelector('#imagination').getBoundingClientRect();
+              const heading=document.querySelector('#imagination h2').getBoundingClientRect();
+              const nav=document.querySelector('.topbar').getBoundingClientRect();
+              const talent=document.querySelector('.imagination-talent img');
+              const tr=talent.getBoundingClientRect();
+              const doors=[...document.querySelectorAll('.casting-doors article')].map(el=>{const r=el.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height}});
+              return {
+                release:document.body.dataset.releaseStatus,
+                viewport:innerWidth,
+                scrollWidth:document.documentElement.scrollWidth,
+                section:{top:section.top,bottom:section.bottom,h:section.height},
+                heading:{top:heading.top,bottom:heading.bottom,w:heading.width,h:heading.height},
+                nav:{top:nav.top,bottom:nav.bottom},
+                headingNavOverlap:heading.top<nav.bottom+12&&heading.bottom>nav.top-8,
+                talent:{x:tr.x,y:tr.y,w:tr.width,h:tr.height,src:talent.currentSrc||talent.src,natural:[talent.naturalWidth,talent.naturalHeight],fit:getComputedStyle(talent).objectFit,pos:getComputedStyle(talent).objectPosition},
+                doors
+              };
+            });
+            if(state.release!=='a515-watch-design') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
+            if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Casting Imagination heading`);
+            if(!state.talent.natural[0]||!state.talent.natural[1]) failures.push(`${mode}: talent image failed decode`);
+            if(state.doors.length!==4) failures.push(`${mode}: expected 4 casting doors, found ${state.doors.length}`);
+            fs.writeFileSync(`qa-artifacts/a516/${mode}-state.json`,JSON.stringify(state,null,2));
+            await page.screenshot({path:`qa-artifacts/a516/${mode}-imagination.png`,fullPage:false});
+            await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
+            await page.locator('#imagination').screenshot({path:`qa-artifacts/a516/${mode}-imagination-full.png`});
+            await ctx.close();
+          }
+          await browser.close();
+          fs.writeFileSync('qa-artifacts/a516/failures.json',JSON.stringify(failures,null,2));
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          JS
+          node a516.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a516-imagination
+          path: qa-artifacts/a516
+          if-no-files-found: error
