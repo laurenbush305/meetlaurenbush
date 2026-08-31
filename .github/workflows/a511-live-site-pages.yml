@@ -1,5 +1,5 @@
 name: A5.11 Full Live Site QA
-# Post-deploy verification for A5.11.3 casting render correction and current live-media repairs.
+# Post-deploy verification for A5.11.4 Lauren-visible Casting Sheet operator frame.
 
 on:
   push:
@@ -20,17 +20,17 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for A5.11.3 on public domain
+      - name: Wait for A5.11.4 on public domain
         run: |
           for i in $(seq 1 30); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?qa=a5113-$i" | grep -q 'a5113-casting-render-fix'; then
-              echo 'A5.11.3 is live.'
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?qa=a5114-$i" | grep -q 'a5114-casting-person-presence'; then
+              echo 'A5.11.4 is live.'
               exit 0
             fi
             echo "Waiting for GitHub Pages deployment ($i/30)..."
             sleep 10
           done
-          echo 'Timed out waiting for A5.11.3 public CSS.' >&2
+          echo 'Timed out waiting for A5.11.4 public CSS.' >&2
           exit 1
       - name: Render every public page from the live domain
         run: |
@@ -55,7 +55,7 @@ jobs:
               const errors=[];
               page.on('pageerror',e=>errors.push(e.message));
               page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
-              const res=await page.goto(`https://meetlaurenbush.com${path}?qa=post-a5113-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+              const res=await page.goto(`https://meetlaurenbush.com${path}?qa=post-a5114-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
               if(!res?.ok()) failures.push(`${label}-${mode}: HTTP ${res?.status()}`);
               await page.waitForTimeout(900);
               await page.evaluate(async()=>{
@@ -66,7 +66,7 @@ jobs:
                 scrollTo(0,document.documentElement.scrollHeight);
               });
               await page.waitForTimeout(900);
-              const imageAudit=await page.evaluate(()=>[...document.images].map((img,i)=>({i,alt:img.alt,src:img.currentSrc||img.src,complete:img.complete,w:img.naturalWidth,h:img.naturalHeight,display:getComputedStyle(img).display,visibility:getComputedStyle(img).visibility,opacity:getComputedStyle(img).opacity})).filter(x=>x.display!=='none'));
+              const imageAudit=await page.evaluate(()=>[...document.images].map((img,i)=>({i,alt:img.alt,src:img.currentSrc||img.src,complete:img.complete,w:img.naturalWidth,h:img.naturalHeight,display:getComputedStyle(img).display,visibility:getComputedStyle(img).visibility,opacity:getComputedStyle(img).opacity,content:getComputedStyle(img).content})).filter(x=>x.display!=='none'));
               for(const x of imageAudit){
                 if(!x.complete||x.w===0||x.h===0) failures.push(`${label}-${mode}: undecoded image ${x.i} ${x.src}`);
               }
@@ -93,27 +93,28 @@ jobs:
                 castingLayout=await page.evaluate(()=>{
                   const h=document.querySelector('#operator-title');
                   const c=document.querySelector('.operator-copy');
+                  const img=document.querySelector('.operator-photo img');
                   const hr=h.getBoundingClientRect();
                   const cr=c.getBoundingClientRect();
+                  const ic=getComputedStyle(img);
                   return {
                     viewport:innerWidth,
                     headline:{left:hr.left,right:hr.right,width:hr.width,fontSize:getComputedStyle(h).fontSize,text:h.innerText},
                     copy:{left:cr.left,right:cr.right,width:cr.width},
+                    operatorImage:{src:img.currentSrc||img.src,content:ic.content,objectPosition:ic.objectPosition},
                     scrollWidth:document.documentElement.scrollWidth
                   };
                 });
                 if(castingLayout.headline.right > castingLayout.viewport + 1) failures.push(`${label}-${mode}: operator headline escapes viewport right=${castingLayout.headline.right} viewport=${castingLayout.viewport}`);
                 if(castingLayout.headline.right > castingLayout.copy.right + 1) failures.push(`${label}-${mode}: operator headline escapes its column right=${castingLayout.headline.right} copy=${castingLayout.copy.right}`);
                 if(castingLayout.scrollWidth > castingLayout.viewport + 2) failures.push(`${label}-${mode}: horizontal overflow scrollWidth=${castingLayout.scrollWidth} viewport=${castingLayout.viewport}`);
+                if(!castingLayout.operatorImage.content.includes('host-celsius-main-a52.jpg')) failures.push(`${label}-${mode}: operator frame still not using Lauren-visible asset ${castingLayout.operatorImage.content}`);
               }
 
               if(errors.length) failures.push(...errors.map(x=>`${label}-${mode}: console ${x}`));
               fs.writeFileSync(`qa-artifacts/live-site/${label}-${mode}-state.json`,JSON.stringify({url:page.url(),imageAudit,repairState,castingLayout,errors},null,2));
               await page.evaluate(()=>window.scrollTo(0,0));
               await page.waitForTimeout(250);
-
-              // Full-page screenshots and sticky/fixed headers are a bad marriage in Chromium stitching.
-              // QA the real header first, then pin it into normal document flow only for the proof image.
               await page.addStyleTag({content:'.topbar{position:absolute!important;top:0!important;left:0!important;right:0!important}'});
               await page.screenshot({path:`qa-artifacts/live-site/${label}-${mode}.png`,fullPage:true});
 
