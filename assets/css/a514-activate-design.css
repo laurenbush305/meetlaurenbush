@@ -1,6 +1,6 @@
-/* A5.14 — ACTIVATE DESIGN PASS
-   Centerline remains the dominant field proof. GoTennis becomes a result card, and the material receipt
-   behaves like supporting evidence instead of a third competing hero. Desktop stays close to the approved composition. */
+/* A5.14.3 — ACTIVATE DESIGN PASS
+   Centerline remains the dominant field proof. GoTennis carries the result receipt.
+   The third material thumbnail is intentionally suppressed after live visual review because it weakens the hierarchy. */
 
 .activate-centerline{
   box-shadow:0 34px 90px rgba(31,52,58,.12);
@@ -11,12 +11,12 @@
 }
 
 .activate-material{
-  box-shadow:0 22px 58px rgba(31,52,58,.14);
+  display:none!important;
 }
 
 @media(max-width:760px){
   .activate{
-    min-height:1120px;
+    min-height:1060px;
     padding:72px 18px;
   }
 
@@ -29,7 +29,7 @@
     right:18px;
     top:22%;
     width:auto;
-    height:38%;
+    height:39%;
   }
 
   .activate-centerline img{
@@ -39,9 +39,9 @@
   .activate-gotennis{
     left:auto;
     right:18px;
-    top:63%;
+    top:64%;
     width:76%;
-    height:29%;
+    height:30%;
     box-shadow:0 28px 72px rgba(24,48,54,.18);
   }
 
@@ -62,30 +62,9 @@
   .activate-result h3{
     max-width:24ch;
   }
-
-  .activate-material{
-    display:block;
-    left:18px;
-    right:auto;
-    bottom:6%;
-    width:34%;
-    height:13%;
-    transform:rotate(-1deg);
-    z-index:8;
-  }
-
-  .activate-material img{
-    object-fit:cover!important;
-    object-position:center!important;
-  }
-
-  .activate-material .source-tab{
-    padding:5px 6px;
-  }
 }
 
 @media(max-width:390px){
-  .activate{min-height:1100px}
-  .activate-gotennis{width:77%;height:29%}
-  .activate-material{width:35%;height:12%}
+  .activate{min-height:1040px}
+  .activate-gotennis{width:77%;height:30%}
 }
