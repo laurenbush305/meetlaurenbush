@@ -1,0 +1,365 @@
+/* A5.19 WARM PRISMATIC STARDUST
+   Calibration pass: atmosphere system + Hero + Person only.
+   Keep A5.16.2 geometry intact while moving the visual temperature
+   from cool editorial white toward luminous, warm, refracted daylight. */
+
+:root {
+  --wps-ink: #121013;
+  --wps-ivory: #fff9f0;
+  --wps-cream: #f6eadc;
+  --wps-pearl: #fffdf8;
+  --wps-stone: #e9ded3;
+  --wps-apricot: #f2aa73;
+  --wps-amber: #e79a52;
+  --wps-rose: #e99ab1;
+  --wps-lilac: #b7a3e7;
+  --wps-aqua: #79d7d4;
+  --wps-pink: #ff2c88;
+  --wps-night: #0d0d12;
+  --wps-glass: rgba(255, 250, 243, .56);
+  --wps-hairline: rgba(82, 55, 48, .15);
+  --wps-shadow-warm: rgba(102, 66, 48, .16);
+}
+
+/* The persistent chrome participates in the room without becoming another scene. */
+.topbar {
+  background: rgba(255, 249, 241, .88);
+  border-bottom-color: rgba(91, 63, 52, .12);
+  backdrop-filter: blur(20px) saturate(1.12);
+  -webkit-backdrop-filter: blur(20px) saturate(1.12);
+  box-shadow: 0 8px 28px rgba(99, 66, 48, .045);
+}
+
+.topbar nav .nav-book {
+  background: var(--wps-ink);
+  box-shadow: 0 8px 24px rgba(58, 35, 29, .12);
+}
+
+.signal-seam {
+  background: linear-gradient(90deg,
+    rgba(231,154,82,.92) 0%,
+    rgba(255,235,204,.92) 22%,
+    rgba(121,215,212,.88) 48%,
+    rgba(233,154,177,.88) 72%,
+    rgba(183,163,231,.92) 100%);
+  box-shadow: 0 0 16px rgba(233,154,177,.12);
+}
+
+/* HERO ------------------------------------------------------------------ */
+.hero {
+  color: var(--wps-ink);
+  background:
+    radial-gradient(ellipse at 11% 15%, rgba(242,170,115,.46) 0%, rgba(242,170,115,.18) 20%, transparent 43%),
+    radial-gradient(ellipse at 78% 17%, rgba(255,222,178,.74) 0%, rgba(255,222,178,.25) 27%, transparent 48%),
+    radial-gradient(ellipse at 83% 45%, rgba(121,215,212,.27) 0%, rgba(121,215,212,.12) 19%, transparent 38%),
+    radial-gradient(ellipse at 69% 67%, rgba(183,163,231,.20) 0%, rgba(183,163,231,.08) 20%, transparent 42%),
+    radial-gradient(ellipse at 27% 84%, rgba(233,154,177,.19) 0%, transparent 36%),
+    linear-gradient(118deg, #fff9f0 0%, #f8eadb 35%, #f9f1e5 62%, #f0ece9 100%);
+}
+
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Soft architectural sun wash, deliberately broad rather than stripey. */
+.hero::before {
+  z-index: 0;
+  inset: 64px -8% 48px 0;
+  background:
+    linear-gradient(108deg,
+      transparent 0 31%,
+      rgba(255,247,225,.20) 35%,
+      rgba(255,206,132,.34) 42%,
+      rgba(238,162,173,.20) 49%,
+      rgba(167,148,232,.19) 54%,
+      rgba(113,215,214,.17) 60%,
+      transparent 68%),
+    radial-gradient(ellipse at 53% 72%, rgba(255,255,255,.52), transparent 46%);
+  filter: blur(1.5px);
+  opacity: .92;
+}
+
+/* Fine optical edge: a hint of refracted glass, not a tech beam. */
+.hero::after {
+  z-index: 1;
+  width: clamp(250px, 30vw, 470px);
+  height: 115%;
+  right: 7%;
+  top: -7%;
+  background: linear-gradient(103deg,
+    transparent 0 27%,
+    rgba(255,255,255,.58) 28.2% 29.1%,
+    rgba(121,215,212,.22) 30.3% 32%,
+    rgba(183,163,231,.16) 33% 34.2%,
+    rgba(233,154,177,.14) 35% 36%,
+    transparent 38% 100%);
+  transform: rotate(2deg);
+  filter: blur(.3px);
+  opacity: .68;
+}
+
+.hero-atmosphere {
+  background:
+    radial-gradient(circle at 76% 20%, rgba(255,255,255,.72), transparent 18%),
+    radial-gradient(ellipse at 48% 58%, rgba(255,241,218,.34), transparent 44%);
+  opacity: .86;
+}
+
+.hero-meta {
+  text-shadow: 0 1px 0 rgba(255,255,255,.42);
+}
+
+.hero-meta .mono {
+  color: rgba(65, 43, 38, .76);
+}
+
+.hero-promise strong {
+  background: linear-gradient(transparent 59%, rgba(233,154,177,.42) 59% 92%, transparent 92%);
+}
+
+.hero-lauren,
+.hero-bush {
+  color: #111014;
+  text-shadow: 0 1px 0 rgba(255,255,255,.28);
+}
+
+.hero-photo {
+  filter:
+    drop-shadow(0 40px 58px rgba(102,66,48,.17))
+    drop-shadow(0 8px 18px rgba(255,237,213,.35));
+}
+
+.hero-photo::before {
+  inset: 5% -9% 1% -8%;
+  background:
+    radial-gradient(ellipse at 52% 42%, rgba(255,252,244,.88) 0 29%, rgba(248,188,126,.18) 48%, rgba(121,215,212,.10) 61%, transparent 76%);
+  filter: blur(20px);
+}
+
+.hero-transmission {
+  background: rgba(255, 250, 242, .93);
+  outline-color: rgba(255,255,255,.94);
+  box-shadow:
+    0 26px 72px rgba(91,58,45,.18),
+    0 0 0 1px rgba(160,113,88,.10);
+}
+
+.hero-transmission figcaption {
+  color: rgba(45, 30, 27, .88);
+}
+
+.hero-actions .button-quiet {
+  background: rgba(255, 250, 242, .76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(18,16,19,.68);
+}
+
+.hero-actions .button-pink {
+  box-shadow: 0 10px 30px rgba(255,44,136,.20);
+}
+
+.hero-rail {
+  background:
+    radial-gradient(circle at 76% 0%, rgba(233,154,177,.12), transparent 34%),
+    linear-gradient(90deg, #111014 0%, #171114 48%, #0f1415 100%);
+  box-shadow: 0 -8px 28px rgba(87,55,44,.07);
+}
+
+.hero-glass {
+  right: 14vw;
+  top: 8vh;
+  width: 150px;
+  height: 64vh;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,255,255,.58) 18%,
+    rgba(255,218,166,.18) 34%,
+    rgba(121,215,212,.19) 53%,
+    rgba(183,163,231,.14) 68%,
+    rgba(233,154,177,.13) 80%,
+    transparent 100%);
+  filter: blur(10px);
+  opacity: .82;
+  mix-blend-mode: screen;
+}
+
+/* PERSON ---------------------------------------------------------------- */
+.person {
+  color: var(--wps-ink);
+  background:
+    radial-gradient(ellipse at 9% 14%, rgba(242,170,115,.31) 0%, rgba(242,170,115,.10) 25%, transparent 47%),
+    radial-gradient(ellipse at 77% 19%, rgba(255,221,179,.52) 0%, rgba(255,221,179,.15) 29%, transparent 49%),
+    radial-gradient(ellipse at 84% 73%, rgba(121,215,212,.18) 0%, transparent 35%),
+    radial-gradient(ellipse at 38% 89%, rgba(233,154,177,.14) 0%, transparent 31%),
+    linear-gradient(128deg, #fffaf2 0%, #f5e9dc 52%, #f6f0e9 100%);
+}
+
+.person::before,
+.person::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.person::before {
+  z-index: 1;
+  width: 56%;
+  height: 118%;
+  left: -5%;
+  top: -12%;
+  background: linear-gradient(112deg,
+    transparent 0 34%,
+    rgba(255,255,255,.56) 36% 38%,
+    rgba(255,194,120,.22) 40% 47%,
+    rgba(121,215,212,.14) 49% 53%,
+    rgba(183,163,231,.11) 55% 58%,
+    transparent 61% 100%);
+  transform: rotate(-2deg);
+  opacity: .76;
+}
+
+.person::after {
+  z-index: 2;
+  right: -9%;
+  bottom: -23%;
+  width: 50%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,154,177,.16) 0%, rgba(183,163,231,.09) 34%, transparent 67%);
+  filter: blur(18px);
+}
+
+.person-type {
+  color: rgba(92, 62, 52, .055);
+}
+
+.person-copy {
+  text-shadow: 0 1px 0 rgba(255,255,255,.46);
+}
+
+.person-copy > p:last-child {
+  color: rgba(58, 41, 36, .70);
+}
+
+.person-studio {
+  background: #e5d9cd;
+  outline-color: rgba(255,255,255,.90);
+  box-shadow:
+    0 42px 100px rgba(100,65,48,.16),
+    0 0 0 1px rgba(145,103,83,.08);
+}
+
+.person-wide {
+  box-shadow:
+    0 30px 76px rgba(100,65,48,.14),
+    0 0 0 1px rgba(145,103,83,.08);
+}
+
+.person-floral {
+  background: rgba(255, 250, 243, .96);
+  box-shadow:
+    0 30px 78px rgba(100,65,48,.17),
+    0 0 0 1px rgba(145,103,83,.08);
+}
+
+.person-acrylic {
+  background:
+    linear-gradient(145deg,
+      rgba(255,255,255,.67) 0%,
+      rgba(255,222,179,.15) 27%,
+      rgba(121,215,212,.16) 47%,
+      rgba(183,163,231,.12) 68%,
+      rgba(233,154,177,.12) 84%,
+      rgba(255,255,255,.28) 100%);
+  border: 1px solid rgba(255,255,255,.52);
+  backdrop-filter: blur(12px) saturate(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.72),
+    0 24px 64px rgba(95,64,52,.08);
+}
+
+.source-tab {
+  background: rgba(255, 250, 243, .91);
+  color: rgba(30, 24, 23, .88);
+  backdrop-filter: blur(9px) saturate(1.04);
+  -webkit-backdrop-filter: blur(9px) saturate(1.04);
+}
+
+/* Keep the calibration atmospheric on small screens, not visually noisy. */
+@media (max-width: 760px) {
+  .topbar {
+    background: #fff9f1;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero {
+    background:
+      radial-gradient(ellipse at 16% 14%, rgba(242,170,115,.40) 0%, rgba(242,170,115,.12) 26%, transparent 48%),
+      radial-gradient(ellipse at 82% 31%, rgba(121,215,212,.22) 0%, transparent 37%),
+      radial-gradient(ellipse at 72% 67%, rgba(183,163,231,.15) 0%, transparent 35%),
+      radial-gradient(ellipse at 24% 78%, rgba(233,154,177,.16) 0%, transparent 35%),
+      linear-gradient(142deg, #fff9f0 0%, #f7eadc 50%, #f4eeea 100%);
+  }
+
+  .hero::before {
+    inset: 60px -30% 48px -18%;
+    opacity: .76;
+  }
+
+  .hero::after {
+    right: -27%;
+    width: 92vw;
+    opacity: .52;
+  }
+
+  .hero-glass {
+    right: 2vw;
+    width: 94px;
+    opacity: .60;
+  }
+
+  .person {
+    background:
+      radial-gradient(ellipse at 12% 9%, rgba(242,170,115,.24) 0%, transparent 42%),
+      radial-gradient(ellipse at 82% 38%, rgba(121,215,212,.14) 0%, transparent 38%),
+      radial-gradient(ellipse at 42% 88%, rgba(233,154,177,.11) 0%, transparent 34%),
+      linear-gradient(152deg, #fffaf3 0%, #f5e9dd 60%, #f6f0e9 100%);
+  }
+
+  .person::before {
+    width: 94%;
+    left: -35%;
+    opacity: .48;
+  }
+
+  .person::after {
+    opacity: .60;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero::before,
+  .hero-glass,
+  .person::after {
+    animation: a519-prism-breathe 16s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes a519-prism-breathe {
+  from { opacity: .72; transform: translate3d(0,0,0) rotate(0deg); }
+  to { opacity: .92; transform: translate3d(0,-5px,0) rotate(.25deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero-glass,
+  .person::after {
+    animation: none !important;
+  }
+}
