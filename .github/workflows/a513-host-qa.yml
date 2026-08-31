@@ -55,19 +55,22 @@ jobs:
               const support=document.querySelector('.host-room-support img');
               const video=document.querySelector('.host-video');
               const archive=document.querySelector('.tv-archive-flash');
+              const television=document.querySelector('#television');
               const proof=document.querySelector('#proof-index');
               const er=env.getBoundingClientRect(), sr=support.getBoundingClientRect(), vr=video.getBoundingClientRect();
               const hr=heading.getBoundingClientRect(), nr=header.getBoundingClientRect(), ar=archive.getBoundingClientRect();
-              const supportStyle=getComputedStyle(support), archiveStyle=getComputedStyle(archive), proofStyle=proof?getComputedStyle(proof):null;
+              const supportStyle=getComputedStyle(support), archiveStyle=getComputedStyle(archive), tvStyle=getComputedStyle(television), proofStyle=proof?getComputedStyle(proof):null;
+              const navStyle=getComputedStyle(header);
               return {
                 release:document.body.dataset.releaseStatus,
                 viewport:innerWidth,
                 scrollWidth:document.documentElement.scrollWidth,
                 heading:{top:hr.top,bottom:hr.bottom},
-                nav:{top:nr.top,bottom:nr.bottom,z:getComputedStyle(header).zIndex,background:getComputedStyle(header).backgroundColor},
+                nav:{top:nr.top,bottom:nr.bottom,z:navStyle.zIndex,background:navStyle.backgroundColor},
                 headingNavOverlap:hr.top < nr.bottom+12 && hr.bottom > nr.top-8,
                 archive:{top:ar.top,bottom:ar.bottom,left:ar.left,right:ar.right,position:archiveStyle.position,z:archiveStyle.zIndex},
                 archiveNavOverlap:ar.top < nr.bottom && ar.bottom > nr.top && ar.left < nr.right && ar.right > nr.left,
+                television:{overflow:tvStyle.overflow,contain:tvStyle.contain,isolation:tvStyle.isolation},
                 proofClosed:proof?{aria:proof.getAttribute('aria-hidden'),display:proofStyle.display,visibility:proofStyle.visibility}:null,
                 environment:{w:er.width,h:er.height,src:env.currentSrc||env.src,natural:[env.naturalWidth,env.naturalHeight]},
                 video:{w:vr.width,h:vr.height},
@@ -78,8 +81,10 @@ jobs:
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Host heading`);
             if(mode==='mobile' && state.nav.background!=='rgb(247, 248, 245)') failures.push(`mobile: nav is not solid ${state.nav.background}`);
-            if(mode==='mobile' && state.archiveNavOverlap) failures.push(`mobile: VH1 archive receipt overlaps network header ${JSON.stringify(state.archive)}`);
             if(mode==='mobile' && state.archive.position!=='absolute') failures.push(`mobile: VH1 archive is not section-bound ${state.archive.position}`);
+            if(mode==='mobile' && state.television.overflow!=='hidden') failures.push(`mobile: Television does not clip archive receipts ${state.television.overflow}`);
+            if(mode==='mobile' && !state.television.contain.includes('paint')) failures.push(`mobile: Television lacks paint containment ${state.television.contain}`);
+            if(mode==='mobile' && state.archiveNavOverlap && Number(state.archive.z)>=Number(state.nav.z)) failures.push(`mobile: VH1 archive can paint above header ${JSON.stringify(state.archive)}`);
             if(mode==='mobile' && state.proofClosed?.aria==='true' && state.proofClosed.display!=='none') failures.push(`mobile: closed proof drawer still paints ${state.proofClosed.display}`);
             if(!state.environment.natural[0]||!state.environment.natural[1]) failures.push(`${mode}: environment failed decode`);
             if(!state.support.natural[0]||!state.support.natural[1]) failures.push(`${mode}: room support failed decode`);
