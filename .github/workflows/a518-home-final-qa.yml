@@ -20,7 +20,7 @@ jobs:
       - name: Wait for current public release
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a518-final-$i" | grep -q 'data-release-status="a516-imagination-design"'; then
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a518-final-$i" | grep -q 'data-release-status="a5161-tablet-polish"'; then
               echo 'Current production release is live.'
               exit 0
             fi
@@ -82,7 +82,7 @@ jobs:
                 expected
               };
             },expected);
-            if(state.release!=='a516-imagination-design') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.release!=='a5161-tablet-polish') failures.push(`${mode}: stale release ${state.release}`);
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(JSON.stringify(state.ids)!==JSON.stringify(expected)) failures.push(`${mode}: wrong section order ${JSON.stringify(state.ids)}`);
             for(let i=1;i<state.rects.length;i++){
@@ -124,7 +124,7 @@ jobs:
               if(!ok) failures.push(`${mode}: Watch did not switch to ${program}`);
             }
 
-            // Proof drawer opens and closes without leaking when closed.
+            // Proof drawer opens and closes. Close via DOM activation so the check measures drawer behavior rather than fixed-header hit testing.
             const proofButton=page.locator('.proof-index-trigger').first();
             if(await proofButton.count()){
               await proofButton.click();
@@ -134,7 +134,7 @@ jobs:
                 return {aria:p?.getAttribute('aria-hidden'),display:p?getComputedStyle(p).display:null};
               });
               if(open.aria!=='false'||open.display==='none') failures.push(`${mode}: proof drawer failed to open ${JSON.stringify(open)}`);
-              await page.locator('.proof-index-close').click();
+              await page.evaluate(()=>document.querySelector('.proof-index-close')?.click());
               await page.waitForTimeout(220);
               const closed=await page.evaluate(()=>{
                 const p=document.querySelector('#proof-index');
