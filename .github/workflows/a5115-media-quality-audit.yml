@@ -1,0 +1,62 @@
+name: A5.11.5 Media Quality Audit
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  media-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Audit rendered image density
+        run: |
+          cat > media-audit.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          fs.mkdirSync('qa-artifacts/media-quality',{recursive:true});
+          const browser=await chromium.launch({headless:true});
+          const pages=[['home','/'],['casting','/casting-sheet.html'],['scrambled','/project-scrambled-up.html'],['pickleball-bag','/project-pickleball-bag.html'],['montis','/project-dear-diary-montis.html'],['centerline','/project-honcho-centerline.html']];
+          const all=[];
+          for(const [label,path] of pages){
+            for(const [mode,width,height,dpr] of [['desktop',1440,1000,2],['mobile',390,844,3]]){
+              const ctx=await browser.newContext({viewport:{width,height},deviceScaleFactor:dpr,colorScheme:'light'});
+              const page=await ctx.newPage();
+              await page.goto(`https://meetlaurenbush.com${path}?qa=media-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+              await page.waitForTimeout(700);
+              await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=Math.max(500,innerHeight*.7)){scrollTo(0,y);await new Promise(r=>setTimeout(r,60));}});
+              await page.waitForTimeout(600);
+              const rows=await page.evaluate(({label,mode,dpr})=>[...document.images].map((img,i)=>{
+                const cs=getComputedStyle(img); const r=img.getBoundingClientRect();
+                return {page:label,mode,dpr,i,alt:img.alt,src:img.currentSrc||img.src,content:cs.content,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,renderedWidth:Math.round(r.width),renderedHeight:Math.round(r.height),display:cs.display,visibility:cs.visibility,opacity:cs.opacity};
+              }).filter(x=>x.display!=='none'&&x.visibility!=='hidden'&&Number(x.opacity)!==0&&x.renderedWidth>40&&x.renderedHeight>40),{label,mode,dpr});
+              for(const x of rows){
+                x.widthDensity=+(x.naturalWidth/x.renderedWidth).toFixed(2);
+                x.retinaCoverage=+(x.naturalWidth/(x.renderedWidth*dpr)).toFixed(2);
+              }
+              all.push(...rows);
+              fs.writeFileSync(`qa-artifacts/media-quality/${label}-${mode}.json`,JSON.stringify(rows,null,2));
+              await ctx.close();
+            }
+          }
+          const flagged=all.filter(x=>x.retinaCoverage<0.8);
+          fs.writeFileSync('qa-artifacts/media-quality/all.json',JSON.stringify(all,null,2));
+          fs.writeFileSync('qa-artifacts/media-quality/flagged.json',JSON.stringify(flagged,null,2));
+          console.log(`flagged ${flagged.length} of ${all.length} rendered images`);
+          await browser.close();
+          JS
+          node media-audit.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a5115-media-quality
+          path: qa-artifacts/media-quality
+          if-no-files-found: error
