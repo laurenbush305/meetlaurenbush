@@ -17,16 +17,16 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for A5.14.3 on public domain
+      - name: Wait for A5.15 on public domain
         run: |
           for i in $(seq 1 36); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=watch-$i" | grep -q 'data-release-status="a5143-design-pass"'; then
-              echo 'A5.14.3 is live.'
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a515-watch-$i" | grep -q 'data-release-status="a515-watch-design"'; then
+              echo 'A5.15 Watch is live.'
               exit 0
             fi
             sleep 10
           done
-          echo 'Timed out waiting for A5.14.3.' >&2
+          echo 'Timed out waiting for A5.15 Watch.' >&2
           exit 1
       - name: Render Watch
         run: |
@@ -57,9 +57,11 @@ jobs:
               const t=document.querySelector('.watch-tuner').getBoundingClientRect();
               return {release:document.body.dataset.releaseStatus,viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth,section:{top:s.top,bottom:s.bottom},heading:{top:h.top,bottom:h.bottom},nav:{top:n.top,bottom:n.bottom},stage:{x:st.x,y:st.y,w:st.width,h:st.height},tuner:{x:t.x,y:t.y,w:t.width,h:t.height},headingNavOverlap:h.top<n.bottom+12&&h.bottom>n.top-8};
             });
-            if(base.release!=='a5143-design-pass') failures.push(`${mode}: stale release ${base.release}`);
+            if(base.release!=='a515-watch-design') failures.push(`${mode}: stale release ${base.release}`);
             if(base.scrollWidth>base.viewport+2) failures.push(`${mode}: horizontal overflow ${base.scrollWidth}/${base.viewport}`);
             if(base.headingNavOverlap) failures.push(`${mode}: nav overlaps Watch heading`);
+            if(mode==='desktop' && base.stage.w < 950) failures.push(`desktop: Watch stage did not widen ${base.stage.w}`);
+            if(mode==='desktop' && base.tuner.w > 300) failures.push(`desktop: tuner did not tighten ${base.tuner.w}`);
             fs.writeFileSync(`qa-artifacts/a515/${mode}-base.json`,JSON.stringify(base,null,2));
             await page.screenshot({path:`qa-artifacts/a515/${mode}-watch.png`,fullPage:false});
             await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
@@ -72,12 +74,24 @@ jobs:
               const panel=page.locator(`[data-watch-panel="${program}"]`);
               const state=await panel.evaluate(el=>{
                 const media=el.querySelector('.watch-foreground');
+                const meta=el.querySelector('.watch-meta');
+                const stage=el.parentElement;
                 const r=media.getBoundingClientRect();
+                const mr=meta.getBoundingClientRect();
+                const sr=stage.getBoundingClientRect();
                 const img=media.tagName==='IMG'?media:null;
-                return {hidden:el.hidden,tag:media.tagName,media:{x:r.x,y:r.y,w:r.width,h:r.height},natural:img?[img.naturalWidth,img.naturalHeight]:null,src:img?(img.currentSrc||img.src):null};
+                const rail=getComputedStyle(el,'::after');
+                return {hidden:el.hidden,tag:media.tagName,media:{x:r.x,y:r.y,w:r.width,h:r.height,right:r.right},meta:{x:mr.x,y:mr.y,w:mr.width,h:mr.height,right:mr.right},stage:{x:sr.x,w:sr.width,right:sr.right},rail:{content:rail.content,width:rail.width},natural:img?[img.naturalWidth,img.naturalHeight]:null,src:img?(img.currentSrc||img.src):null};
               });
               if(state.hidden) failures.push(`${mode}/${program}: active panel remained hidden`);
               if(state.tag==='IMG' && (!state.natural?.[0]||!state.natural?.[1])) failures.push(`${mode}/${program}: image failed decode ${state.src}`);
+              if(mode==='desktop'){
+                if(state.meta.x < state.stage.x + state.stage.w*.66) failures.push(`desktop/${program}: metadata did not enter right rail`);
+                if(state.media.right > state.stage.x + state.stage.w*.66) failures.push(`desktop/${program}: media crossed editorial rail`);
+                if(state.meta.right > state.stage.right-12) failures.push(`desktop/${program}: metadata clips stage edge`);
+                if(state.rail.content==='none') failures.push(`desktop/${program}: editorial rail pseudo-layer missing`);
+              }
+              if(mode==='mobile' && state.rail.content!=='none') failures.push(`mobile/${program}: desktop editorial rail leaked into mobile`);
               fs.writeFileSync(`qa-artifacts/a515/${mode}-${program}.json`,JSON.stringify(state,null,2));
               await page.locator('#watch').screenshot({path:`qa-artifacts/a515/${mode}-${program}.png`});
             }
