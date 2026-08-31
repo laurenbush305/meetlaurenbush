@@ -1,3 +1,4 @@
+# A5.19 live calibration rerun 2026-08-31
 name: A5.19 Warm Prismatic Calibration QA
 on:
   push:
