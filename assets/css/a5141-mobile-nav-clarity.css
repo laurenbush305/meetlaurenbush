@@ -1,14 +1,30 @@
-/* A5.14.1 — MOBILE NAV CLARITY
-   Prevent section content and archival receipts from intruding into the fixed mobile navigation. */
+/* A5.14.3 — MOBILE HEADER + ARCHIVE CONTAINMENT
+   The VH1 receipt belongs to Television. It must never paint into the fixed network header while Host is active. */
 @media(max-width:760px){
   .topbar{
-    z-index:1200!important;
-    isolation:isolate;
-    background:#f7f8f5;
-    -webkit-backdrop-filter:none;
-    backdrop-filter:none;
+    z-index:12000!important;
+    isolation:isolate!important;
+    background:#f7f8f5!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
     box-shadow:0 1px 0 rgba(11,15,20,.08),0 8px 24px rgba(11,15,20,.035);
   }
   .topbar>.brand,.topbar>nav{position:relative;z-index:2}
   #proof-index[aria-hidden="true"]{display:none!important}
+
+  .television{
+    overflow:hidden!important;
+    contain:paint!important;
+    isolation:isolate!important;
+  }
+  .tv-archive-flash{
+    position:absolute!important;
+    z-index:6!important;
+    top:auto!important;
+    right:18px!important;
+    bottom:6%!important;
+    left:auto!important;
+    transform:none!important;
+    translate:none!important;
+  }
 }
