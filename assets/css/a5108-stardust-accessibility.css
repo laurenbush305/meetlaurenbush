@@ -1,20 +1,107 @@
-/* A5.10.8 STARDUST ACCESSIBILITY + USABILITY CONSTRAINTS
-   Implementation-only layer. This file does not define art direction.
-   It protects readable foregrounds and predictable navigation behavior without changing Stardust materials. */
+/* A5.11 LIVE VISIBILITY + USABILITY CONSTRAINTS
+   Keeps Lauren visible in portrait-led proof and keeps section arrivals below the fixed network bar.
+   This layer is intentionally implementation-only and does not change the locked Stardust art direction. */
 
 .project-file .evidence-copy .proof-note{
   color:#34414a!important;
   opacity:1!important;
 }
 
-/* A chapter should never arrive with its headline hidden under the sticky network bar.
-   This applies to fragment navigation, keyboard navigation and scripted scroll-to-section QA. */
+/* The live topbar is visually taller than the old 76px scripted offset at desktop browser scale.
+   Force every chapter arrival below it, including scripted inline scrollMarginTop values. */
+html{scroll-padding-top:112px!important}
 .person,.explain,.create,.television,.host,.activate,.watch,.trust,.imagination,.book{
-  scroll-margin-top:82px;
+  scroll-margin-top:112px!important;
+}
+
+/* Portrait-led homepage proof: protect face/head before artistic crop. */
+.hero-transmission img,
+.person-studio img,
+.person-wide img,
+.person-floral img,
+.tv-detail img,
+.host-environment img{
+  object-position:center top!important;
+}
+
+/* The VH1 archive frame is portrait source inside a wide slot. Cover was removing Lauren's face.
+   Contain preserves the complete source instead of manufacturing a torso crop. */
+.tv-archive-flash img,
+.proof-index-list a[href="#television"] img[data-src*="ti-tiny-trap-pilates"]{
+  object-fit:contain!important;
+  object-position:center top!important;
+  background:#0b0f14!important;
+}
+
+/* BETWEEN CUES: the old dominant slot literally used host-room.jpg, where Lauren is not the subject.
+   Keep the section structure but surface a verified Lauren-visible live-hosting frame instead. */
+.trust-photo{
+  background:#0b0f14 url('../img/host-celsius-main-a52.jpg') center top/contain no-repeat!important;
+}
+.trust-photo>img{
+  opacity:0!important;
+}
+.trust-photo .source-tab{
+  font-size:0!important;
+}
+.trust-photo .source-tab b{
+  font-size:0!important;
+}
+.trust-photo .source-tab:after{
+  content:'LAUREN / LIVE HOSTING / REAL ROOM';
+  font:700 7px/1.2 'Space Mono',monospace!important;
+  letter-spacing:.07em!important;
+  text-transform:uppercase!important;
+}
+
+/* Small Host support slot may remain contextual, but it should not become another anonymous room shot. */
+.host-room-support{
+  background:#0b0f14 url('../img/a55/host-talent.jpg') center top/contain no-repeat!important;
+}
+.host-room-support>img{opacity:0!important}
+.host-room-support .source-tab{font-size:0!important}
+.host-room-support .source-tab b{font-size:0!important}
+.host-room-support .source-tab:after{
+  content:'LAUREN / LIVE ROOM';
+  font:700 7px/1.2 'Space Mono',monospace!important;
+  letter-spacing:.07em!important;
+  text-transform:uppercase!important;
+}
+
+/* Casting Sheet + project files: talent-first crops must never sacrifice the face. */
+.cast58 .casting-hero-media img,
+.a510-cast .file-row.scrambled .file-media img,
+.a510-cast .file-row.wimpb .file-media img,
+.project-file.scrambled-file .project-hero-media img,
+.project-file.wimpb-file .project-hero-media img,
+.project-file.scrambled-file .evidence-media img{
+  object-position:center top!important;
 }
 
 @media(max-width:760px){
+  html{scroll-padding-top:118px!important}
   .person,.explain,.create,.television,.host,.activate,.watch,.trust,.imagination,.book{
-    scroll-margin-top:94px;
+    scroll-margin-top:118px!important;
+  }
+
+  .hero-transmission img,
+  .person-studio img,
+  .person-wide img,
+  .person-floral img,
+  .tv-detail img,
+  .host-environment img,
+  .cast58 .casting-hero-media img,
+  .a510-cast .file-row.scrambled .file-media img,
+  .a510-cast .file-row.wimpb .file-media img,
+  .project-file.scrambled-file .project-hero-media img,
+  .project-file.wimpb-file .project-hero-media img,
+  .project-file.scrambled-file .evidence-media img{
+    object-position:center top!important;
+  }
+
+  .tv-archive-flash img,
+  .proof-index-list a[href="#television"] img[data-src*="ti-tiny-trap-pilates"]{
+    object-fit:contain!important;
+    object-position:center top!important;
   }
 }
