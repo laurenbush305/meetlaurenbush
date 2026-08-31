@@ -1,0 +1,92 @@
+name: A5.17 Book End Card Visual QA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Wait for current public release
+        run: |
+          for i in $(seq 1 36); do
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a517-book-audit-$i" | grep -q 'data-release-status="a516-imagination-design"'; then
+              echo 'Current release is live.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Timed out waiting for current public release.' >&2
+          exit 1
+      - name: Render Book end card
+        run: |
+          cat > a517.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          fs.mkdirSync('qa-artifacts/a517',{recursive:true});
+          const browser=await chromium.launch({headless:true});
+          const failures=[];
+          for(const [mode,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
+            const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
+            const page=await ctx.newPage();
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a517-book-${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
+            await page.waitForTimeout(800);
+            await page.evaluate(()=>{
+              const section=document.querySelector('#book');
+              const header=document.querySelector('.topbar');
+              window.scrollTo({top:section.offsetTop-header.getBoundingClientRect().height-24,behavior:'instant'});
+            });
+            await page.waitForTimeout(800);
+            const state=await page.evaluate(()=>{
+              const section=document.querySelector('#book').getBoundingClientRect();
+              const card=document.querySelector('.book-card').getBoundingClientRect();
+              const heading=document.querySelector('#book h2').getBoundingClientRect();
+              const direct=document.querySelector('.book-direct a').getBoundingClientRect();
+              const nav=document.querySelector('.topbar').getBoundingClientRect();
+              const actions=[...document.querySelectorAll('.book-actions a')].map(el=>{const r=el.getBoundingClientRect();return{text:el.textContent.trim(),x:r.x,y:r.y,w:r.width,h:r.height}});
+              return {
+                release:document.body.dataset.releaseStatus,
+                viewport:innerWidth,
+                scrollWidth:document.documentElement.scrollWidth,
+                section:{top:section.top,bottom:section.bottom,w:section.width,h:section.height},
+                card:{x:card.x,y:card.y,w:card.width,h:card.height},
+                heading:{top:heading.top,bottom:heading.bottom,w:heading.width,h:heading.height},
+                direct:{x:direct.x,y:direct.y,w:direct.width,h:direct.height},
+                nav:{top:nav.top,bottom:nav.bottom},
+                actions,
+                headingNavOverlap:heading.top<nav.bottom+12&&heading.bottom>nav.top-8
+              };
+            });
+            if(state.release!=='a516-imagination-design') failures.push(`${mode}: stale release ${state.release}`);
+            if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
+            if(state.headingNavOverlap) failures.push(`${mode}: nav overlaps Book heading`);
+            if(state.actions.length!==2) failures.push(`${mode}: expected 2 booking actions, found ${state.actions.length}`);
+            if(state.direct.w<=0||state.direct.h<=0) failures.push(`${mode}: direct email is not visible`);
+            fs.writeFileSync(`qa-artifacts/a517/${mode}-state.json`,JSON.stringify(state,null,2));
+            await page.screenshot({path:`qa-artifacts/a517/${mode}-book.png`,fullPage:false});
+            await page.evaluate(()=>document.querySelector('.topbar').style.visibility='hidden');
+            await page.locator('#book').screenshot({path:`qa-artifacts/a517/${mode}-book-full.png`});
+            await ctx.close();
+          }
+          await browser.close();
+          fs.writeFileSync('qa-artifacts/a517/failures.json',JSON.stringify(failures,null,2));
+          if(failures.length){console.error(failures.join('\n'));process.exit(1)}
+          JS
+          node a517.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: a517-book
+          path: qa-artifacts/a517
+          if-no-files-found: error
