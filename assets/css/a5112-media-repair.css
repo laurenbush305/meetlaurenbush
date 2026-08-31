@@ -1,0 +1,39 @@
+/* A5.11.2 LIVE MEDIA REPAIR
+   Three small supporting JPEGs decoded unreliably in Chromium on the public domain.
+   Keep the approved frame geometry, but render those surfaces from already-proven project assets.
+   The replacement images also keep Lauren visible instead of spending scarce portfolio space on anonymous detail crops. */
+
+.explain-detail-bag{
+  background-image:url('../img/a55/wimpb-campaign-main.jpg')!important;
+  background-size:cover!important;
+  background-position:center 30%!important;
+  background-repeat:no-repeat!important;
+}
+
+.tv-set-detail{
+  background-image:url('../img/scrambled-podium-smile.webp')!important;
+  background-size:cover!important;
+  background-position:center top!important;
+  background-repeat:no-repeat!important;
+  background-color:#0b0f14!important;
+}
+
+.activate-material{
+  background-image:url('../img/activate-centerline-wide.jpg')!important;
+  background-size:cover!important;
+  background-position:center 36%!important;
+  background-repeat:no-repeat!important;
+}
+
+/* The old child JPEGs are intentionally retired from rendering so a failed decode cannot leave a blank card. */
+.explain-detail-bag>img,
+.tv-set-detail>img,
+.activate-material>img{
+  display:none!important;
+}
+
+@media(max-width:760px){
+  .explain-detail-bag{background-position:center 24%!important}
+  .tv-set-detail{background-position:center top!important}
+  .activate-material{background-position:center 30%!important}
+}
