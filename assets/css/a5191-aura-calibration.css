@@ -1,0 +1,214 @@
+/* A5.19.1 AURA CALIBRATION
+   Visual correction after live pixel review against the Aura reference.
+   Preserve all A5.16.2 geometry. Increase architectural amber warmth and
+   controlled cyan/magenta projection so the atmosphere reads as light in a room,
+   not pastel gradient decoration. */
+
+:root{
+  --a5191-amber:#f2a04f;
+  --a5191-gold:#ffd05f;
+  --a5191-coral:#ef775e;
+  --a5191-cyan:#55d7d4;
+  --a5191-magenta:#dc4fc3;
+  --a5191-violet:#8867d9;
+}
+
+/* HERO: warmer room, brighter projection, same composition. */
+.hero{
+  background:
+    radial-gradient(ellipse at 9% 18%,rgba(239,119,94,.34) 0%,rgba(242,160,79,.24) 21%,transparent 43%),
+    radial-gradient(ellipse at 43% 24%,rgba(255,208,95,.48) 0%,rgba(255,191,101,.26) 23%,transparent 48%),
+    radial-gradient(ellipse at 79% 17%,rgba(85,215,212,.32) 0%,rgba(85,215,212,.14) 24%,transparent 44%),
+    radial-gradient(ellipse at 87% 43%,rgba(220,79,195,.24) 0%,rgba(136,103,217,.12) 22%,transparent 43%),
+    radial-gradient(ellipse at 61% 80%,rgba(242,160,79,.24) 0%,transparent 42%),
+    linear-gradient(116deg,#fff6e8 0%,#f6d8bd 27%,#f8e4cb 47%,#eef0e8 72%,#f4e4df 100%);
+}
+
+.hero::before{
+  inset:64px -10% 48px -3%;
+  background:
+    linear-gradient(103deg,
+      transparent 0 25%,
+      rgba(255,224,151,.18) 29%,
+      rgba(255,184,81,.48) 37%,
+      rgba(239,119,94,.30) 44%,
+      rgba(220,79,195,.27) 50%,
+      rgba(85,215,212,.33) 57%,
+      rgba(255,213,105,.24) 63%,
+      transparent 70%),
+    radial-gradient(ellipse at 39% 72%,rgba(255,177,73,.27),transparent 40%),
+    radial-gradient(ellipse at 70% 25%,rgba(255,255,255,.45),transparent 31%);
+  filter:blur(1px) saturate(1.12);
+  opacity:.98;
+}
+
+.hero::after{
+  width:clamp(300px,34vw,520px);
+  right:5%;
+  top:-8%;
+  background:linear-gradient(103deg,
+    transparent 0 23%,
+    rgba(255,255,255,.74) 24.2% 25.2%,
+    rgba(255,194,91,.32) 26% 28%,
+    rgba(85,215,212,.42) 29% 31.4%,
+    rgba(136,103,217,.27) 32% 33.5%,
+    rgba(220,79,195,.31) 34% 35.6%,
+    rgba(239,119,94,.18) 36.3% 37.5%,
+    transparent 39% 100%);
+  filter:blur(.15px) saturate(1.18);
+  opacity:.86;
+}
+
+.hero-atmosphere{
+  background:
+    radial-gradient(circle at 72% 17%,rgba(255,255,255,.70),transparent 16%),
+    radial-gradient(ellipse at 48% 56%,rgba(255,206,113,.26),transparent 41%),
+    radial-gradient(ellipse at 88% 58%,rgba(85,215,212,.12),transparent 28%);
+  opacity:.92;
+}
+
+.hero-photo{
+  filter:
+    drop-shadow(0 42px 62px rgba(116,68,39,.20))
+    drop-shadow(0 8px 22px rgba(255,190,95,.30));
+}
+
+.hero-photo::before{
+  background:radial-gradient(ellipse at 52% 42%,
+    rgba(255,250,235,.88) 0 27%,
+    rgba(255,177,73,.24) 45%,
+    rgba(85,215,212,.15) 58%,
+    rgba(220,79,195,.08) 67%,
+    transparent 77%);
+  filter:blur(18px);
+}
+
+.hero-glass{
+  background:linear-gradient(180deg,
+    transparent 0%,
+    rgba(255,255,255,.66) 14%,
+    rgba(255,191,82,.30) 30%,
+    rgba(239,119,94,.20) 41%,
+    rgba(220,79,195,.20) 53%,
+    rgba(85,215,212,.28) 66%,
+    rgba(255,208,95,.16) 79%,
+    transparent 100%);
+  filter:blur(8px) saturate(1.16);
+  opacity:.94;
+}
+
+/* PERSON: same editorial collage, richer projected daylight. */
+.person{
+  background:
+    radial-gradient(ellipse at 7% 15%,rgba(239,119,94,.28) 0%,rgba(242,160,79,.18) 23%,transparent 45%),
+    radial-gradient(ellipse at 35% 26%,rgba(255,208,95,.36) 0%,rgba(255,189,95,.17) 26%,transparent 49%),
+    radial-gradient(ellipse at 79% 20%,rgba(85,215,212,.23) 0%,rgba(85,215,212,.09) 24%,transparent 44%),
+    radial-gradient(ellipse at 87% 70%,rgba(220,79,195,.17) 0%,rgba(136,103,217,.09) 23%,transparent 42%),
+    linear-gradient(126deg,#fff6e9 0%,#f3d9bf 37%,#f5e6d4 58%,#eff2ed 80%,#f5e8e3 100%);
+}
+
+.person::before{
+  width:62%;
+  height:122%;
+  left:-7%;
+  top:-13%;
+  background:linear-gradient(110deg,
+    transparent 0 29%,
+    rgba(255,255,255,.68) 31% 33%,
+    rgba(255,199,87,.40) 35% 42%,
+    rgba(239,119,94,.24) 44% 48%,
+    rgba(220,79,195,.24) 50% 53%,
+    rgba(85,215,212,.27) 55% 59%,
+    transparent 62% 100%);
+  filter:saturate(1.12);
+  opacity:.92;
+}
+
+.person::after{
+  right:-7%;
+  bottom:-18%;
+  width:56%;
+  height:76%;
+  background:radial-gradient(circle,
+    rgba(255,166,69,.20) 0%,
+    rgba(239,119,94,.16) 24%,
+    rgba(220,79,195,.12) 43%,
+    rgba(85,215,212,.08) 57%,
+    transparent 72%);
+  filter:blur(16px) saturate(1.12);
+  opacity:.86;
+}
+
+.person-studio,
+.person-wide,
+.person-floral{
+  box-shadow:
+    0 34px 86px rgba(108,65,42,.18),
+    0 8px 24px rgba(255,187,91,.10),
+    0 0 0 1px rgba(139,91,68,.08);
+}
+
+.person-acrylic{
+  background:linear-gradient(145deg,
+    rgba(255,255,255,.70) 0%,
+    rgba(255,202,102,.22) 25%,
+    rgba(239,119,94,.14) 39%,
+    rgba(220,79,195,.14) 54%,
+    rgba(85,215,212,.21) 69%,
+    rgba(255,255,255,.28) 100%);
+  border-color:rgba(255,255,255,.58);
+  backdrop-filter:blur(12px) saturate(1.12);
+  -webkit-backdrop-filter:blur(12px) saturate(1.12);
+}
+
+/* Phone keeps the light vivid without becoming a wallpaper effect. */
+@media(max-width:760px){
+  .topbar{
+    background:#fff8ee;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
+  .hero{
+    background:
+      radial-gradient(ellipse at 12% 12%,rgba(239,119,94,.29) 0%,rgba(242,160,79,.19) 25%,transparent 47%),
+      radial-gradient(ellipse at 48% 28%,rgba(255,208,95,.34) 0%,transparent 39%),
+      radial-gradient(ellipse at 84% 32%,rgba(85,215,212,.28) 0%,transparent 38%),
+      radial-gradient(ellipse at 79% 65%,rgba(220,79,195,.18) 0%,rgba(136,103,217,.08) 24%,transparent 39%),
+      linear-gradient(140deg,#fff5e6 0%,#f3d4b7 45%,#eff0e8 72%,#f4e5df 100%);
+  }
+
+  .hero::before{
+    inset:58px -34% 44px -24%;
+    opacity:.94;
+  }
+
+  .hero::after{
+    right:-28%;
+    width:98vw;
+    opacity:.76;
+  }
+
+  .hero-glass{
+    right:-1vw;
+    width:104px;
+    opacity:.84;
+  }
+
+  .person{
+    background:
+      radial-gradient(ellipse at 11% 10%,rgba(239,119,94,.20) 0%,rgba(242,160,79,.14) 24%,transparent 43%),
+      radial-gradient(ellipse at 46% 26%,rgba(255,208,95,.26) 0%,transparent 39%),
+      radial-gradient(ellipse at 86% 39%,rgba(85,215,212,.20) 0%,transparent 38%),
+      radial-gradient(ellipse at 68% 86%,rgba(220,79,195,.12) 0%,transparent 34%),
+      linear-gradient(150deg,#fff6e9 0%,#f1d8c0 56%,#eff2ed 79%,#f4e7e1 100%);
+  }
+
+  .person::before{
+    width:98%;
+    left:-36%;
+    opacity:.76;
+  }
+
+  .person::after{opacity:.72;}
+}
