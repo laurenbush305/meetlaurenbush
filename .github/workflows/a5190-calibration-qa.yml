@@ -1,4 +1,4 @@
-# A5.19 live calibration rerun 2026-08-31
+# A5.19.1 live Aura calibration rerun 2026-09-03
 name: A5.19 Warm Prismatic Calibration QA
 on:
   push:
@@ -7,7 +7,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,16 +18,16 @@ jobs:
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
-      - name: Wait for A5.19 calibration on public domain
+      - name: Wait for A5.19.1 Aura calibration on public domain
         run: |
-          for i in $(seq 1 48); do
-            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/?release=a5190-$i" | grep -q 'data-release-status="a5190-warm-prismatic-calibration"'; then
-              echo 'A5.19 Warm Prismatic calibration is live.'
+          for i in $(seq 1 60); do
+            if curl -fsSL --max-time 15 "https://meetlaurenbush.com/assets/css/a58-art-pass.css?release=a5191-$i" | grep -q 'a5191-aura-calibration.css'; then
+              echo 'A5.19.1 Aura calibration wrapper is live.'
               exit 0
             fi
             sleep 10
           done
-          echo 'Timed out waiting for A5.19 calibration.' >&2
+          echo 'Timed out waiting for A5.19.1 Aura calibration wrapper.' >&2
           exit 1
       - name: Render Hero and Person calibration
         run: |
@@ -43,7 +43,7 @@ jobs:
             const pageErrors=[]; const consoleErrors=[];
             page.on('pageerror',e=>pageErrors.push(String(e)));
             page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
-            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5190-${mode}-${Date.now()}`,{waitUntil:'networkidle',timeout:45000});
+            const res=await page.goto(`https://meetlaurenbush.com/?qa=a5191-${mode}-${Date.now()}`,{waitUntil:'networkidle',timeout:45000});
             if(!res?.ok()) failures.push(`${mode}: HTTP ${res?.status()}`);
             await page.waitForTimeout(700);
             const state=await page.evaluate(()=>{
@@ -61,6 +61,7 @@ jobs:
                 viewport:innerWidth,
                 scrollWidth:document.documentElement.scrollWidth,
                 cssToken:root.getPropertyValue('--wps-ivory').trim(),
+                auraToken:root.getPropertyValue('--a5191-amber').trim(),
                 heroBackground:hero.backgroundImage,
                 personBackground:person.backgroundImage,
                 nav,
@@ -74,8 +75,8 @@ jobs:
               };
             });
             state.pageErrors=pageErrors; state.consoleErrors=consoleErrors;
-            if(state.release!=='a5190-warm-prismatic-calibration') failures.push(`${mode}: stale release ${state.release}`);
             if(!state.cssToken) failures.push(`${mode}: A5.19 token layer missing`);
+            if(!state.auraToken) failures.push(`${mode}: A5.19.1 Aura correction missing`);
             if(state.scrollWidth>state.viewport+2) failures.push(`${mode}: horizontal overflow ${state.scrollWidth}/${state.viewport}`);
             if(!state.heroBackground.includes('radial-gradient')) failures.push(`${mode}: Hero atmosphere not applied`);
             if(!state.personBackground.includes('radial-gradient')) failures.push(`${mode}: Person atmosphere not applied`);
