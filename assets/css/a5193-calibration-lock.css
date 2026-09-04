@@ -1,0 +1,64 @@
+/* A5.19.3 — CALIBRATION LOCK
+   Final Hero + Person calibration refinements after manual desktop/tablet/mobile review.
+   Keep the room-light language. Add a little amber depth and make mobile receipts fully legible. */
+
+.hero{
+  background:
+    radial-gradient(ellipse at 31% 32%,rgba(246,180,91,.62) 0%,rgba(240,163,74,.30) 25%,transparent 52%),
+    radial-gradient(ellipse at 8% 72%,rgba(239,147,108,.23) 0%,transparent 37%),
+    radial-gradient(ellipse at 81% 13%,rgba(120,203,200,.22) 0%,transparent 28%),
+    radial-gradient(ellipse at 91% 27%,rgba(180,155,221,.18) 0%,rgba(223,140,168,.11) 25%,transparent 42%),
+    linear-gradient(122deg,#fff8ec 0%,#f7e5ce 37%,#f3dfc5 59%,#f8eee1 81%,#f1ede7 100%);
+}
+.hero::before{
+  background:
+    radial-gradient(ellipse at 38% 34%,rgba(255,226,156,.78) 0%,rgba(245,174,77,.39) 31%,transparent 63%),
+    radial-gradient(ellipse at 63% 40%,rgba(239,147,108,.24) 0%,transparent 42%),
+    radial-gradient(ellipse at 73% 28%,rgba(223,140,168,.18) 0%,rgba(180,155,221,.11) 37%,transparent 58%),
+    radial-gradient(ellipse at 78% 57%,rgba(120,203,200,.14) 0%,transparent 43%);
+}
+
+.person{
+  background:
+    radial-gradient(ellipse at 27% 29%,rgba(247,182,98,.43) 0%,rgba(241,166,79,.19) 28%,transparent 54%),
+    radial-gradient(ellipse at 78% 18%,rgba(255,239,207,.48) 0%,transparent 38%),
+    radial-gradient(ellipse at 82% 71%,rgba(120,203,200,.12) 0%,rgba(180,155,221,.08) 30%,transparent 52%),
+    radial-gradient(ellipse at 58% 86%,rgba(223,140,168,.09) 0%,transparent 40%),
+    linear-gradient(132deg,#fff8ed 0%,#f7e6d1 48%,#f4e4d2 68%,#f6efe6 100%);
+}
+
+@media(max-width:760px){
+  .hero{
+    background:
+      radial-gradient(ellipse at 35% 24%,rgba(246,178,88,.55) 0%,rgba(239,160,70,.25) 31%,transparent 58%),
+      radial-gradient(ellipse at 88% 18%,rgba(120,203,200,.15) 0%,transparent 29%),
+      radial-gradient(ellipse at 88% 38%,rgba(180,155,221,.12) 0%,rgba(223,140,168,.08) 30%,transparent 48%),
+      radial-gradient(ellipse at 20% 82%,rgba(239,147,108,.14) 0%,transparent 36%),
+      linear-gradient(148deg,#fff8ec 0%,#f5e1c7 54%,#f5ede3 100%);
+  }
+
+  .person-floral .source-tab,
+  .person-wide .source-tab{
+    left:6px!important;
+    right:6px!important;
+    width:auto!important;
+    max-width:none!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    line-height:1.05!important;
+    padding:7px 8px!important;
+    display:flex!important;
+    align-items:flex-start!important;
+    gap:5px!important;
+    flex-wrap:wrap!important;
+  }
+  .person-floral .source-tab b,
+  .person-wide .source-tab b{
+    flex:0 0 auto;
+    margin:0!important;
+  }
+  .person-floral .source-tab{
+    font-size:6px!important;
+  }
+}
