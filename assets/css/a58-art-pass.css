@@ -29,9 +29,10 @@
 @import url('a5196-back-half-atmosphere.css?v=a5196');
 @import url('a51961-between-cues-editorial-proof.css?v=a51961');
 @import url('a5197-finish-pass.css?v=a5197');
+@import url('a5197-casting-finish.css?v=a5197c');
 
 /* A5.19.7 FINISHING LANE
-   Warm Prismatic Stardust is visually reconciled across the homepage. A5.19.7 improves
-   navigation, evidence-label readability, focus treatment, and browser-chrome readiness
-   without reopening approved scene geometry. */
+   Warm Prismatic Stardust is visually reconciled across the homepage and casting sheet.
+   A5.19.7 improves navigation, evidence-label readability, browser-chrome readiness, and
+   cross-page warmth without reopening approved scene architecture. */
 @media print{}
