@@ -15,7 +15,7 @@ const routes = [
   },
   {
     key: 'casting', path: '/casting-sheet.html', viewportNames: ['desktop', 'tablet', 'mobile'],
-    scenes: [['hero','.casting-hero'],['doors','.door-section'],['files','#selected-files'],['operator','.operator-section'],['booking','.booking-section']]
+    scenes: [['hero','.casting-hero'],['doors','.door-section'],['range','.range-section'],['files','#selected-files'],['operator','.operator-section'],['booking','.booking-section']]
   },
   { key:'project-scrambled', path:'/project-scrambled-up.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
   { key:'project-wimpb', path:'/project-pickleball-bag.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
@@ -79,6 +79,7 @@ const testCastingInteractions = async page => {
   if (count < 4) failures.push(`Casting sheet expected 4 selected-file links; found ${count}`);
   for (let i=0;i<count;i++) if (!(await fileLinks.nth(i).getAttribute('href'))) failures.push(`Casting selected-file link ${i+1} has no href`);
   if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
+  if ((await page.locator('.range-section .range-frame').count()) !== 5) failures.push('Casting range mosaic must contain exactly 5 public-safe frames');
   return failures;
 };
 
@@ -123,7 +124,7 @@ for (const route of routes) {
       return {
         release:document.body?.dataset?.releaseStatus||null,width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight,title:document.title,url:location.href,
         favicon:document.querySelector('link[rel~="icon"]')?.href||null,themeColor:document.querySelector('meta[name="theme-color"]')?.content||null,
-        typography:{nav:css('.topbar nav'),sectionCode:css('.section-code'),sourceTab:css('.source-tab')},surfaces:{castingHero:css('.casting-hero'),projectHero:css('.project-hero'),projectEvidence:css('.project-evidence')}
+        typography:{nav:css('.topbar nav'),sectionCode:css('.section-code'),sourceTab:css('.source-tab')},surfaces:{castingHero:css('.casting-hero'),castingRange:css('.range-section'),projectHero:css('.project-hero'),projectEvidence:css('.project-evidence')}
       };
     });
     Object.assign(state,diagnostics,{sha,interactionFailures,horizontalOverflow:state.scrollWidth>state.width});
