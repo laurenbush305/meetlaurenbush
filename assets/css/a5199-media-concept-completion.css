@@ -5,47 +5,52 @@
 /* HOMEPAGE / PERSON: turn the former acrylic corridor into a compact broadcast
    contact sheet using verified public proof. Architecture stays untouched. */
 .person .person-acrylic{
-  z-index:6!important;
-  left:51.5%!important;
-  top:39%!important;
-  width:11.5%!important;
-  height:43%!important;
-  border:1px solid rgba(255,255,255,.84);
+  z-index:8!important;
+  left:auto!important;
+  right:4%!important;
+  top:21%!important;
+  width:30%!important;
+  height:23%!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  border:5px solid rgba(255,250,241,.94)!important;
+  background-color:#fff8eb!important;
   background-image:
-    linear-gradient(180deg,rgba(255,246,229,.02),rgba(255,196,155,.08)),
+    linear-gradient(180deg,rgba(255,246,229,.01),rgba(255,196,155,.04)),
     url('../img/a55/wimpb-campaign-main.jpg'),
     url('../img/a55/host-talent.jpg'),
     url('../img/scrambled-podium-smile.webp'),
     url('../img/activate-card.jpg')!important;
-  background-size:100% 100%,100% 25%,100% 25%,100% 25%,100% 25%!important;
-  background-position:0 0,0 0,0 33.333%,0 66.666%,0 100%!important;
+  background-size:100% 100%,25% 100%,25% 100%,25% 100%,25% 100%!important;
+  background-position:0 0,0 0,33.333% 0,66.666% 0,100% 0!important;
   background-repeat:no-repeat!important;
   background-blend-mode:normal!important;
   backdrop-filter:none!important;
-  box-shadow:0 24px 64px rgba(54,39,34,.16)!important;
-  transform:rotate(-.65deg)!important;
+  box-shadow:0 22px 58px rgba(54,39,34,.17)!important;
+  transform:rotate(.35deg)!important;
   overflow:visible;
 }
 .person .person-acrylic::before{
-  content:'RANGE / SAME LAUREN';
+  content:'RANGE / SAME LAUREN · DIFFERENT DOOR';
   position:absolute;
-  left:-1px;
-  top:-25px;
+  left:-5px;
+  top:-27px;
   padding:6px 8px;
   background:#111014;
   color:#fff8eb;
   font:500 7px/1 'Space Mono',monospace;
-  letter-spacing:.1em;
+  letter-spacing:.095em;
   text-transform:uppercase;
   white-space:nowrap;
 }
 .person .person-acrylic::after{
   content:'';
   position:absolute;
-  inset:-10px -7px;
+  inset:-12px -9px;
   z-index:-1;
-  background:linear-gradient(150deg,rgba(255,190,138,.28),transparent 33%,rgba(122,224,224,.18) 66%,rgba(199,157,229,.17));
-  filter:blur(14px);
+  background:linear-gradient(100deg,rgba(255,190,138,.25),transparent 31%,rgba(122,224,224,.16) 64%,rgba(199,157,229,.16));
+  filter:blur(15px);
 }
 
 /* CASTING / RANGE: editorial mosaic, not a KPI/card grid. */
@@ -155,6 +160,11 @@
   color:rgba(17,16,20,.58);
 }
 .cast58 .range-note strong{font-family:Archivo,Arial,sans-serif;font-size:13px;letter-spacing:-.015em;text-transform:none;color:#111014}
+
+@media (max-width:900px) and (min-width:761px){
+  .person .person-acrylic{right:3%!important;top:25%!important;width:31%!important;height:19%!important}
+  .person .person-acrylic::before{font-size:6px}
+}
 
 @media (max-width:760px){
   .person .person-acrylic{display:none!important}
