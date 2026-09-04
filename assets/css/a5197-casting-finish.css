@@ -1,78 +1,97 @@
-/* A5.19.7 — CASTING SHEET CROSS-PAGE FINISH
-   Fresh live pixels showed the casting sheet was structurally strong but visually one
-   generation cooler than the Warm Prismatic Stardust homepage. This pass brings the
-   producer-facing page into the same room without reopening its approved architecture.
-   It also removes the remaining equal KPI-box treatment from Operating Depth.
-   The compound body selector intentionally outranks older A5.10 casting rules even
-   though the legacy project stylesheet loads after the shared art-pass import. */
+/* A5.19.7C3 — CASTING SHEET CROSS-PAGE FINISH
+   Pixel-reviewed against the live A5.19.7 homepage. The producer-facing architecture stays
+   intact; this pass makes the room visibly warmer, keeps the prismatic light restrained,
+   and preserves the editorial Operating Depth rail that replaced the old KPI grid. */
 
 .cast58.a510-cast{
-  --cast-ivory:#fff2db;
-  --cast-champagne:#f1c88f;
-  --cast-apricot:#ed865d;
-  --cast-rose:#e7799d;
-  --cast-lilac:#a47edc;
-  --cast-aqua:#50cfcc;
+  --cast-ivory:#fff0d7;
+  --cast-champagne:#edbf7e;
+  --cast-apricot:#eb8058;
+  --cast-rose:#df7196;
+  --cast-lilac:#9f7ad8;
+  --cast-aqua:#4cc9c7;
   --cast-ink:#111014;
-  background:#fff8eb;
+  background:#fff4e3 !important;
 }
 
 .cast58.a510-cast .casting-hero{
   background:
-    radial-gradient(ellipse at 70% 24%,rgba(241,200,143,.44) 0%,rgba(237,134,93,.14) 32%,transparent 54%),
-    radial-gradient(ellipse at 91% 34%,rgba(80,207,204,.20) 0%,rgba(164,126,220,.12) 30%,transparent 50%),
-    radial-gradient(ellipse at 73% 86%,rgba(231,121,157,.10) 0%,transparent 38%),
-    linear-gradient(118deg,#fff5e4 0 52%,#fff9ef 52% 76%,#f2e8e5 100%);
+    radial-gradient(ellipse at 69% 23%,rgba(237,191,126,.66) 0%,rgba(235,128,88,.24) 31%,transparent 55%),
+    radial-gradient(ellipse at 94% 33%,rgba(76,201,199,.28) 0%,rgba(159,122,216,.16) 29%,transparent 51%),
+    radial-gradient(ellipse at 73% 86%,rgba(223,113,150,.16) 0%,transparent 39%),
+    linear-gradient(118deg,#fff0d7 0 50%,#fff6e8 50% 72%,#efe4df 100%) !important;
 }
 
 .cast58.a510-cast .casting-hero:before{
-  opacity:.46;
-  mask-image:linear-gradient(90deg,#000,transparent 54%);
+  opacity:.38 !important;
+  mask-image:linear-gradient(90deg,#000,transparent 51%) !important;
 }
 
 .cast58.a510-cast .casting-hero-media:after{
-  background:linear-gradient(90deg,transparent 68%,rgba(255,248,235,.93));
+  background:linear-gradient(90deg,transparent 66%,rgba(255,241,218,.94)) !important;
 }
 
-.cast58.a510-cast .casting-number{color:rgba(95,58,36,.045)}
+.cast58.a510-cast .casting-hero-copy{
+  position:relative;
+  isolation:isolate;
+}
+
+.cast58.a510-cast .casting-hero-copy:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  width:min(42vw,620px);
+  height:min(54vw,700px);
+  right:2%;
+  top:14%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 37% 35%,rgba(255,221,170,.48),transparent 45%),
+    radial-gradient(circle at 68% 42%,rgba(76,201,199,.13),transparent 38%),
+    radial-gradient(circle at 54% 71%,rgba(223,113,150,.10),transparent 40%);
+  filter:blur(14px);
+  pointer-events:none;
+}
+
+.cast58.a510-cast .casting-number{color:rgba(99,58,34,.055) !important}
 
 .cast58.a510-cast .proof-section{
   background:
-    radial-gradient(ellipse at 84% 8%,rgba(80,207,204,.07),transparent 28%),
-    radial-gradient(ellipse at 16% 82%,rgba(237,134,93,.07),transparent 31%),
-    #fff8eb;
+    radial-gradient(ellipse at 86% 6%,rgba(76,201,199,.10),transparent 29%),
+    radial-gradient(ellipse at 15% 84%,rgba(235,128,88,.11),transparent 33%),
+    linear-gradient(180deg,#fff6e8 0%,#fff2df 100%) !important;
 }
 
-.cast58.a510-cast .file-list{border-top-color:rgba(103,62,38,.20)}
-.cast58.a510-cast .file-row{border-bottom-color:rgba(103,62,38,.15)}
-.cast58.a510-cast .file-number{color:rgba(103,62,38,.10)}
-.cast58.a510-cast .file-media{box-shadow:0 24px 64px rgba(94,51,28,.12)}
+.cast58.a510-cast .file-list{border-top-color:rgba(103,62,38,.22)}
+.cast58.a510-cast .file-row{border-bottom-color:rgba(103,62,38,.16)}
+.cast58.a510-cast .file-number{color:rgba(103,62,38,.11)}
+.cast58.a510-cast .file-media{box-shadow:0 24px 64px rgba(94,51,28,.14)}
 
 .cast58.a510-cast .credit-strip{
-  background:transparent;
+  background:rgba(255,255,255,.28) !important;
   border-top:1px solid rgba(103,62,38,.18);
   border-bottom:1px solid rgba(103,62,38,.13);
   border-left:0;
   border-right:0;
-  box-shadow:none;
+  box-shadow:0 18px 52px rgba(94,51,28,.06);
 }
 .cast58.a510-cast .credit{border-right-color:rgba(103,62,38,.13)}
 
 .cast58.a510-cast .operator-section{
   background:
-    radial-gradient(ellipse at 18% 28%,rgba(241,200,143,.30),transparent 39%),
-    radial-gradient(ellipse at 83% 17%,rgba(80,207,204,.14),transparent 31%),
-    radial-gradient(ellipse at 74% 87%,rgba(231,121,157,.09),transparent 33%),
-    linear-gradient(118deg,#f9ecd8 0%,#fff8eb 59%,#eee8e5 100%);
+    radial-gradient(ellipse at 18% 28%,rgba(237,191,126,.45),transparent 40%),
+    radial-gradient(ellipse at 84% 16%,rgba(76,201,199,.18),transparent 31%),
+    radial-gradient(ellipse at 75% 87%,rgba(223,113,150,.12),transparent 34%),
+    linear-gradient(118deg,#f5dfbe 0%,#fff1dc 57%,#eadfdc 100%) !important;
 }
 
 .cast58.a510-cast .operator-photo{
-  box-shadow:0 34px 88px rgba(94,51,28,.15);
-  outline:1px solid rgba(255,255,255,.84);
+  box-shadow:0 34px 88px rgba(94,51,28,.17);
+  outline:1px solid rgba(255,255,255,.86);
   outline-offset:-1px;
 }
 
-/* Replace the final dashboard-style proof grid with an editorial evidence rail. */
+/* Editorial evidence rail. No equal dashboard cards. */
 @media(min-width:761px){
   .cast58.a510-cast .operator-proof{
     display:block;
@@ -93,40 +112,35 @@
     background:transparent;
   }
 
-  .cast58.a510-cast .operator-proof span{
-    font-size:7px;
-    color:#087f86;
-  }
-
-  .cast58.a510-cast .operator-proof strong{
-    margin:0;
-    font-size:clamp(27px,2.35vw,36px);
-    line-height:.92;
-  }
-
-  .cast58.a510-cast .operator-proof p{
-    margin:0;
-    max-width:37ch;
-    font-size:9px;
-    line-height:1.45;
-    color:rgba(11,15,20,.66);
-  }
+  .cast58.a510-cast .operator-proof span{font-size:7px;color:#087f86}
+  .cast58.a510-cast .operator-proof strong{margin:0;font-size:clamp(27px,2.35vw,36px);line-height:.92}
+  .cast58.a510-cast .operator-proof p{margin:0;max-width:37ch;font-size:9px;line-height:1.45;color:rgba(11,15,20,.66)}
 }
 
 @media(max-width:900px){
   .cast58.a510-cast .casting-hero-media:after{
-    background:linear-gradient(180deg,transparent 68%,rgba(255,248,235,.94));
+    background:linear-gradient(180deg,transparent 66%,rgba(255,241,218,.96)) !important;
   }
 }
 
 @media(max-width:760px){
   .cast58.a510-cast .casting-hero{
     background:
-      radial-gradient(ellipse at 66% 16%,rgba(241,200,143,.38),transparent 38%),
-      radial-gradient(ellipse at 92% 38%,rgba(80,207,204,.17),transparent 30%),
-      radial-gradient(ellipse at 19% 86%,rgba(231,121,157,.08),transparent 32%),
-      linear-gradient(155deg,#fff4e2 0%,#fff8eb 72%,#eee8e4 100%);
+      radial-gradient(ellipse at 68% 13%,rgba(237,191,126,.57),transparent 39%),
+      radial-gradient(ellipse at 94% 39%,rgba(76,201,199,.22),transparent 31%),
+      radial-gradient(ellipse at 17% 87%,rgba(223,113,150,.12),transparent 33%),
+      linear-gradient(155deg,#ffefd5 0%,#fff4e3 69%,#eadfdb 100%) !important;
   }
+
+  .cast58.a510-cast .casting-hero-copy:before{
+    width:92vw;
+    height:92vw;
+    right:-32vw;
+    top:4%;
+    opacity:.8;
+  }
+
+  .cast58.a510-cast .proof-section{background:linear-gradient(180deg,#fff5e5,#fff0dc) !important}
 
   .cast58.a510-cast .operator-proof{
     display:block;
@@ -142,24 +156,8 @@
     background:transparent;
   }
 
-  .cast58.a510-cast .operator-proof span{
-    display:block;
-    margin-bottom:8px;
-    color:#087f86;
-  }
-
-  .cast58.a510-cast .operator-proof strong{
-    margin:0 0 7px;
-    font-size:clamp(28px,8.5vw,35px);
-  }
-
-  .cast58.a510-cast .operator-proof p{
-    margin:0;
-    max-width:34ch;
-    font-size:10px;
-    line-height:1.45;
-    color:rgba(11,15,20,.66);
-  }
-
-  .cast58.a510-cast .credit-strip{background:rgba(255,255,255,.22)}
+  .cast58.a510-cast .operator-proof span{display:block;margin-bottom:8px;color:#087f86}
+  .cast58.a510-cast .operator-proof strong{margin:0 0 7px;font-size:clamp(28px,8.5vw,35px)}
+  .cast58.a510-cast .operator-proof p{margin:0;max-width:34ch;font-size:10px;line-height:1.45;color:rgba(11,15,20,.66)}
+  .cast58.a510-cast .credit-strip{background:rgba(255,255,255,.3) !important}
 }
