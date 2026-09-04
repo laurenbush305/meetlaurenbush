@@ -25,8 +25,9 @@
 @import url('a5192-room-light.css?v=a5192');
 @import url('a5193-calibration-lock.css?v=a5193');
 @import url('a5194-explain-create-room-light.css?v=a5194');
+@import url('a5195-aura-elevation.css?v=a5195');
 
-/* A5.19.4 WARM PRISMATIC ROLLOUT
-   Hero + Person are the locked calibration. Explain + Create now inherit the
-   same amber/champagne room-light language with localized prismatic bloom. */
+/* A5.19.5 AURA ELEVATION
+   A5.19.3 was visually rejected as too pale beside Lauren's Aura reference.
+   Hero + Person remain calibration scenes until this stronger amber/prismatic pass is manually approved. */
 @media print{}
