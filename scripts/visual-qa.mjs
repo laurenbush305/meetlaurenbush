@@ -12,6 +12,7 @@ const routes = [
   {
     key: 'home',
     path: '/',
+    viewportNames: ['desktop', 'tablet', 'mobile'],
     scenes: [
       ['hero', 'main > section:first-of-type'],
       ['person', '#person'],
@@ -29,6 +30,7 @@ const routes = [
   {
     key: 'casting',
     path: '/casting-sheet.html',
+    viewportNames: ['desktop', 'tablet', 'mobile'],
     scenes: [
       ['hero', '.casting-hero'],
       ['doors', '.door-section'],
@@ -36,6 +38,30 @@ const routes = [
       ['operator', '.operator-section'],
       ['booking', '.booking-section']
     ]
+  },
+  {
+    key: 'project-scrambled',
+    path: '/project-scrambled-up.html',
+    viewportNames: ['desktop', 'mobile'],
+    scenes: [['hero', '.project-hero'], ['evidence', '.project-evidence'], ['notes', '.project-notes'], ['close', '.project-close']]
+  },
+  {
+    key: 'project-wimpb',
+    path: '/project-pickleball-bag.html',
+    viewportNames: ['desktop', 'mobile'],
+    scenes: [['hero', '.project-hero'], ['evidence', '.project-evidence'], ['notes', '.project-notes'], ['close', '.project-close']]
+  },
+  {
+    key: 'project-montis',
+    path: '/project-dear-diary-montis.html',
+    viewportNames: ['desktop', 'mobile'],
+    scenes: [['hero', '.project-hero'], ['evidence', '.project-evidence'], ['notes', '.project-notes'], ['close', '.project-close']]
+  },
+  {
+    key: 'project-centerline',
+    path: '/project-honcho-centerline.html',
+    viewportNames: ['desktop', 'mobile'],
+    scenes: [['hero', '.project-hero'], ['evidence', '.project-evidence'], ['notes', '.project-notes'], ['close', '.project-close']]
   }
 ];
 
@@ -47,25 +73,13 @@ const attachDiagnostics = page => {
   page.on('console', msg => {
     if (msg.type() !== 'error') return;
     const loc = msg.location();
-    diagnostics.consoleErrors.push({
-      text: msg.text(),
-      url: loc?.url || null,
-      line: loc?.lineNumber ?? null,
-      column: loc?.columnNumber ?? null
-    });
+    diagnostics.consoleErrors.push({ text: msg.text(), url: loc?.url || null, line: loc?.lineNumber ?? null, column: loc?.columnNumber ?? null });
   });
-  page.on('pageerror', err => {
-    diagnostics.consoleErrors.push({ text: `pageerror: ${err.message}`, url: null, line: null, column: null });
-  });
+  page.on('pageerror', err => diagnostics.consoleErrors.push({ text: `pageerror: ${err.message}`, url: null, line: null, column: null }));
   page.on('response', response => {
     if (response.status() >= 400) diagnostics.responseErrors.push({ status: response.status(), url: response.url() });
   });
-  page.on('requestfailed', request => {
-    diagnostics.requestFailures.push({
-      url: request.url(),
-      error: request.failure()?.errorText || 'request failed'
-    });
-  });
+  page.on('requestfailed', request => diagnostics.requestFailures.push({ url: request.url(), error: request.failure()?.errorText || 'request failed' }));
   return diagnostics;
 };
 
@@ -73,28 +87,22 @@ const testHomeInteractions = async page => {
   const failures = [];
   try {
     const proofTrigger = page.locator('.proof-index-trigger').first();
-    if (!(await proofTrigger.count())) {
-      failures.push('Proof trigger missing');
-    } else {
+    if (!(await proofTrigger.count())) failures.push('Proof trigger missing');
+    else {
       await proofTrigger.click();
       await page.waitForTimeout(120);
-      const opened = await page.locator('#proof-index').getAttribute('aria-hidden');
-      if (opened !== 'false') failures.push(`Proof drawer did not open; aria-hidden=${opened}`);
+      if ((await page.locator('#proof-index').getAttribute('aria-hidden')) !== 'false') failures.push('Proof drawer did not open');
       await page.keyboard.press('Escape');
       await page.waitForTimeout(120);
-      const closed = await page.locator('#proof-index').getAttribute('aria-hidden');
-      if (closed !== 'true') failures.push(`Proof drawer did not close on Escape; aria-hidden=${closed}`);
+      if ((await page.locator('#proof-index').getAttribute('aria-hidden')) !== 'true') failures.push('Proof drawer did not close on Escape');
     }
-  } catch (error) {
-    failures.push(`Proof drawer interaction: ${error.message}`);
-  }
+  } catch (error) { failures.push(`Proof drawer interaction: ${error.message}`); }
 
   try {
     const tabs = page.locator('#watch [data-watch]');
     const tabCount = await tabs.count();
-    if (tabCount < 2) {
-      failures.push('Watch tabs missing or incomplete');
-    } else {
+    if (tabCount < 2) failures.push('Watch tabs missing or incomplete');
+    else {
       const second = tabs.nth(1);
       const program = await second.getAttribute('data-watch');
       await second.click();
@@ -103,11 +111,8 @@ const testHomeInteractions = async page => {
       const activePanel = page.locator(`#watch [data-watch-panel="${program}"]`).first();
       if (!(await activePanel.count()) || (await activePanel.getAttribute('hidden')) !== null) failures.push(`Watch panel ${program} did not become visible`);
       await tabs.nth(0).click();
-      await page.waitForTimeout(80);
     }
-  } catch (error) {
-    failures.push(`Watch interaction: ${error.message}`);
-  }
+  } catch (error) { failures.push(`Watch interaction: ${error.message}`); }
   return failures;
 };
 
@@ -116,47 +121,49 @@ const testCastingInteractions = async page => {
   const fileLinks = page.locator('#selected-files .file-link');
   const count = await fileLinks.count();
   if (count < 4) failures.push(`Casting sheet expected 4 selected-file links; found ${count}`);
-  for (let i = 0; i < count; i++) {
-    const href = await fileLinks.nth(i).getAttribute('href');
-    if (!href) failures.push(`Casting selected-file link ${i + 1} has no href`);
-  }
-  const booking = page.locator('.booking-section a[href^="mailto:"]').first();
-  if (!(await booking.count())) failures.push('Casting booking mailto link missing');
+  for (let i = 0; i < count; i++) if (!(await fileLinks.nth(i).getAttribute('href'))) failures.push(`Casting selected-file link ${i + 1} has no href`);
+  if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
+  return failures;
+};
+
+const testProjectInteractions = async page => {
+  const failures = [];
+  if (!(await page.locator('.project-back[href*="casting-sheet"]').first().count())) failures.push('Project back-to-casting link missing');
+  if (!(await page.locator('.project-close a[href^="mailto:"]').first().count())) failures.push('Project booking mailto link missing');
   return failures;
 };
 
 for (const route of routes) {
   manifest.routes[route.key] = {};
-  for (const [name, width, height] of viewports) {
+  for (const [name, width, height] of viewports.filter(v => route.viewportNames.includes(v[0]))) {
     const ctx = await browser.newContext({ viewport: { width, height }, colorScheme: 'light' });
     const page = await ctx.newPage();
     const diagnostics = attachDiagnostics(page);
     const prefix = route.key === 'home' ? name : `${route.key}-${name}`;
 
-    await page.goto(`${site}${route.path}?visualqa=${sha}-${route.key}-${name}-${Date.now()}`, {
-      waitUntil: 'networkidle',
-      timeout: 60000
-    });
+    await page.goto(`${site}${route.path}?visualqa=${sha}-${route.key}-${name}-${Date.now()}`, { waitUntil: 'networkidle', timeout: 60000 });
     await page.evaluate(() => document.fonts?.ready);
 
     const interactionFailures = route.key === 'home'
       ? await testHomeInteractions(page)
-      : await testCastingInteractions(page);
+      : route.key === 'casting'
+        ? await testCastingInteractions(page)
+        : await testProjectInteractions(page);
 
     const max = await page.evaluate(() => document.documentElement.scrollHeight);
     for (let y = 0; y < max; y += Math.max(520, Math.floor(height * 0.72))) {
       await page.evaluate(nextY => scrollTo(0, nextY), y);
-      await page.waitForTimeout(110);
+      await page.waitForTimeout(90);
     }
     await page.evaluate(() => scrollTo(0, 0));
-    await page.waitForTimeout(450);
+    await page.waitForTimeout(400);
 
     await page.screenshot({ path: `qa-artifacts/${prefix}-full.png`, fullPage: true });
     for (const [key, selector] of route.scenes) {
       const loc = page.locator(selector).first();
       if (await loc.count()) {
         await loc.scrollIntoViewIfNeeded();
-        await page.waitForTimeout(160);
+        await page.waitForTimeout(140);
         await loc.screenshot({ path: `qa-artifacts/${prefix}-${key}.png` });
       }
     }
@@ -166,7 +173,7 @@ for (const route of routes) {
         const node = document.querySelector(selector);
         if (!node) return null;
         const style = getComputedStyle(node);
-        return { fontSize: style.fontSize, lineHeight: style.lineHeight, minHeight: style.minHeight };
+        return { fontSize: style.fontSize, lineHeight: style.lineHeight, minHeight: style.minHeight, backgroundColor: style.backgroundColor, backgroundImage: style.backgroundImage };
       };
       return {
         release: document.body?.dataset?.releaseStatus || null,
@@ -177,19 +184,12 @@ for (const route of routes) {
         url: location.href,
         favicon: document.querySelector('link[rel~="icon"]')?.href || null,
         themeColor: document.querySelector('meta[name="theme-color"]')?.content || null,
-        typography: {
-          nav: css('.topbar nav'),
-          sectionCode: css('.section-code'),
-          sourceTab: css('.source-tab')
-        }
+        typography: { nav: css('.topbar nav'), sectionCode: css('.section-code'), sourceTab: css('.source-tab') },
+        surfaces: { castingHero: css('.casting-hero'), projectHero: css('.project-hero'), projectEvidence: css('.project-evidence') }
       };
     });
 
-    Object.assign(state, diagnostics, {
-      sha,
-      interactionFailures,
-      horizontalOverflow: state.scrollWidth > state.width
-    });
+    Object.assign(state, diagnostics, { sha, interactionFailures, horizontalOverflow: state.scrollWidth > state.width });
     manifest.routes[route.key][name] = state;
     fs.writeFileSync(`qa-artifacts/${prefix}-state.json`, JSON.stringify(state, null, 2));
     await ctx.close();
@@ -200,13 +200,7 @@ fs.writeFileSync('qa-artifacts/manifest.json', JSON.stringify(manifest, null, 2)
 await browser.close();
 
 const states = Object.values(manifest.routes).flatMap(route => Object.values(route));
-const failed = states.some(v =>
-  v.horizontalOverflow ||
-  v.consoleErrors.length ||
-  v.responseErrors.length ||
-  v.requestFailures.length ||
-  v.interactionFailures.length
-);
+const failed = states.some(v => v.horizontalOverflow || v.consoleErrors.length || v.responseErrors.length || v.requestFailures.length || v.interactionFailures.length);
 
 if (failed) {
   console.error('Visual QA found a layout, browser, network, or interaction failure. Inspect the artifact manifest.');
