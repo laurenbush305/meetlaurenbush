@@ -23,9 +23,9 @@
 @import url('a519-warm-prismatic-stardust.css?v=a5190');
 @import url('a5191-aura-calibration.css?v=a5191');
 @import url('a5192-room-light.css?v=a5192');
+@import url('a5193-calibration-lock.css?v=a5193');
 
-/* A5.19.2 ROOM-LIGHT CALIBRATION WRAPPER
-   A5.16.2 geometry remains the protected baseline. A5.19.2 corrects the
-   over-literal rainbow projection and establishes amber/champagne room light
-   with localized prismatic bloom as the visual calibration language. */
+/* A5.19.3 CALIBRATION LOCK
+   Hero + Person visual language: amber/champagne room light first, localized
+   prismatic bloom second. Geometry remains protected. */
 @media print{}
