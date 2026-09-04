@@ -1,53 +1,100 @@
-name: Quiet Visual Capture
+name: Season Zero Visual QA
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
+      - '**/*.html'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - 'assets/img/**'
       - '.qa-trigger'
+      - '.github/workflows/visual-capture.yml'
 
 permissions:
   contents: read
 
+concurrency:
+  group: season-zero-visual-qa-main
+  cancel-in-progress: true
+
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
-    continue-on-error: true
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Wait for current design CSS to be public
-        continue-on-error: true
+
+      - name: Wait for changed public files to reach GitHub Pages
         shell: bash
         run: |
-          EXPECTED="a5194-explain-create-room-light.css"
-          for i in {1..36}; do
-            WRAP=$(curl -fsSL "https://meetlaurenbush.com/assets/css/a58-art-pass.css?wait=${RANDOM}${RANDOM}" || true)
-            FILE=$(curl -fsSL "https://meetlaurenbush.com/assets/css/${EXPECTED}?wait=${RANDOM}${RANDOM}" || true)
-            if printf '%s' "$WRAP" | grep -Fq "$EXPECTED" && printf '%s' "$FILE" | grep -Fq 'A5.19.4'; then
-              echo "Current design CSS is public."
+          set -euo pipefail
+          BEFORE="${{ github.event.before }}"
+          if [[ -z "${BEFORE}" || "${BEFORE}" =~ ^0+$ ]]; then
+            echo "No usable previous SHA; capture will verify the current public site."
+            exit 0
+          fi
+
+          mapfile -t FILES < <(
+            git diff --name-only "$BEFORE" "$GITHUB_SHA" -- '*.html' 'assets/css/**' 'assets/js/**' 'assets/img/**' \
+              | while read -r f; do [[ -f "$f" ]] && printf '%s\n' "$f"; done \
+              | head -n 5
+          )
+
+          if [[ ${#FILES[@]} -eq 0 ]]; then
+            echo "No public-file diff to poll; capture will verify the current public site."
+            exit 0
+          fi
+
+          echo "Polling representative changed files: ${FILES[*]}"
+          for attempt in {1..48}; do
+            all_match=1
+            for f in "${FILES[@]}"; do
+              local_hash=$(sha256sum "$f" | awk '{print $1}')
+              remote="https://meetlaurenbush.com/${f}?qa=${GITHUB_SHA}-${attempt}"
+              if ! curl -fsSL "$remote" -o /tmp/season-zero-remote; then
+                all_match=0
+                break
+              fi
+              remote_hash=$(sha256sum /tmp/season-zero-remote | awk '{print $1}')
+              if [[ "$local_hash" != "$remote_hash" ]]; then
+                all_match=0
+                break
+              fi
+            done
+            if [[ "$all_match" -eq 1 ]]; then
+              echo "Current public files match this commit."
               exit 0
             fi
             sleep 10
           done
-          echo "Public CSS wait timed out; capture will still run for inspection."
-          exit 0
+
+          echo "Timed out waiting for GitHub Pages to match the commit." >&2
+          exit 1
+
       - name: Install Chromium
-        continue-on-error: true
         run: |
-          npm init -y >/dev/null 2>&1 || true
-          npm install --no-save playwright@1.55.0 >/dev/null 2>&1 || true
-          npx playwright install --with-deps chromium >/dev/null 2>&1 || true
-      - name: Capture all homepage scenes
-        continue-on-error: true
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+
+      - name: Capture homepage scenes and QA state
+        env:
+          QA_SHA: ${{ github.sha }}
         run: |
           mkdir -p qa-artifacts
           cat > capture.mjs <<'JS'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
+
+          const sha=process.env.QA_SHA || 'unknown';
           const scenes=[
             ['hero','main > section:first-of-type'],
             ['person','#person'],
@@ -61,39 +108,69 @@ jobs:
             ['imagination','#imagination'],
             ['book','#book']
           ];
+
           const browser=await chromium.launch({headless:true});
+          const manifest={sha,capturedAt:new Date().toISOString(),site:'https://meetlaurenbush.com',viewports:{}};
+
           for(const [name,width,height] of [['desktop',1440,1000],['tablet',768,1024],['mobile',390,844]]){
             const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
             const page=await ctx.newPage();
-            await page.goto(`https://meetlaurenbush.com/?quietcapture=${Date.now()}-${name}`,{waitUntil:'domcontentloaded',timeout:45000});
-            await page.waitForTimeout(1200);
+            const errors=[];
+            page.on('console',msg=>{ if(msg.type()==='error') errors.push(`console: ${msg.text()}`); });
+            page.on('pageerror',err=>errors.push(`pageerror: ${err.message}`));
+
+            await page.goto(`https://meetlaurenbush.com/?visualqa=${sha}-${name}-${Date.now()}`,{waitUntil:'networkidle',timeout:60000});
+            await page.evaluate(()=>document.fonts?.ready);
+
             const max=await page.evaluate(()=>document.documentElement.scrollHeight);
             for(let y=0;y<max;y+=Math.max(520,Math.floor(height*.72))){
               await page.evaluate(y=>scrollTo(0,y),y);
-              await page.waitForTimeout(110);
+              await page.waitForTimeout(120);
             }
             await page.evaluate(()=>scrollTo(0,0));
             await page.waitForTimeout(500);
+
             await page.screenshot({path:`qa-artifacts/${name}-full.png`,fullPage:true});
             for(const [key,sel] of scenes){
               const loc=page.locator(sel).first();
               if(await loc.count()){
                 await loc.scrollIntoViewIfNeeded();
                 await page.waitForTimeout(180);
-                try{ await loc.screenshot({path:`qa-artifacts/${name}-${key}.png`}); }catch(e){}
+                await loc.screenshot({path:`qa-artifacts/${name}-${key}.png`});
               }
             }
-            const state=await page.evaluate(()=>({release:document.body?.dataset?.releaseStatus||null,width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}));
+
+            const state=await page.evaluate(()=>({
+              release:document.body?.dataset?.releaseStatus||null,
+              width:innerWidth,
+              scrollWidth:document.documentElement.scrollWidth,
+              height:document.documentElement.scrollHeight,
+              title:document.title,
+              url:location.href
+            }));
+            state.sha=sha;
+            state.consoleErrors=errors;
+            state.horizontalOverflow=state.scrollWidth>state.width;
+            manifest.viewports[name]=state;
             fs.writeFileSync(`qa-artifacts/${name}-state.json`,JSON.stringify(state,null,2));
             await ctx.close();
           }
+
+          fs.writeFileSync('qa-artifacts/manifest.json',JSON.stringify(manifest,null,2));
           await browser.close();
+
+          const failed=Object.values(manifest.viewports).some(v=>v.horizontalOverflow || v.consoleErrors.length);
+          if(failed){
+            console.error('Visual QA state found overflow or browser errors. Inspect artifact.');
+            process.exit(1);
+          }
           JS
-          node capture.mjs || true
+          node capture.mjs
+
       - uses: actions/upload-artifact@v4
         if: always()
-        continue-on-error: true
         with:
-          name: quiet-visual-capture
+          name: season-zero-visual-qa-${{ github.sha }}
           path: qa-artifacts
-          if-no-files-found: warn
+          if-no-files-found: error
+          retention-days: 30
