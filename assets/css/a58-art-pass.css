@@ -28,9 +28,10 @@
 @import url('a5195-aura-elevation.css?v=a5195');
 @import url('a5196-back-half-atmosphere.css?v=a5196');
 @import url('a51961-between-cues-editorial-proof.css?v=a51961');
+@import url('a5197-finish-pass.css?v=a5197');
 
-/* A5.19.6.1 BACK-HALF + BETWEEN CUES EDITORIAL PROOF
-   A5.19.6 carries Warm Prismatic Stardust into Activate, Between Cues, and Casting Imagination.
-   A5.19.6.1 converts the remaining equal KPI-style proof tiles into an editorial evidence rail
-   after fresh production pixels proved that structural correction was needed. */
+/* A5.19.7 FINISHING LANE
+   Warm Prismatic Stardust is visually reconciled across the homepage. A5.19.7 improves
+   navigation, evidence-label readability, focus treatment, and browser-chrome readiness
+   without reopening approved scene geometry. */
 @media print{}
