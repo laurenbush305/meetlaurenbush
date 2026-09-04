@@ -3,48 +3,51 @@ import fs from 'node:fs';
 
 const sha = process.env.QA_SHA || 'unknown';
 const site = 'https://meetlaurenbush.com';
-const scenes = [
-  ['hero', 'main > section:first-of-type'],
-  ['person', '#person'],
-  ['explain', '#explain'],
-  ['create', '#create'],
-  ['television', '#television'],
-  ['host', '#host'],
-  ['activate', '#activate'],
-  ['watch', '#watch'],
-  ['between-cues', '#trust'],
-  ['imagination', '#imagination'],
-  ['book', '#book']
-];
-
-const browser = await chromium.launch({
-  headless: true,
-  executablePath: process.env.CHROME_PATH
-});
-
-const manifest = {
-  sha,
-  capturedAt: new Date().toISOString(),
-  site,
-  viewports: {}
-};
-
-for (const [name, width, height] of [
+const viewports = [
   ['desktop', 1440, 1000],
   ['tablet', 768, 1024],
   ['mobile', 390, 844]
-]) {
-  const ctx = await browser.newContext({ viewport: { width, height }, colorScheme: 'light' });
-  const page = await ctx.newPage();
-  const consoleErrors = [];
-  const responseErrors = [];
-  const requestFailures = [];
-  const interactionFailures = [];
+];
+const routes = [
+  {
+    key: 'home',
+    path: '/',
+    scenes: [
+      ['hero', 'main > section:first-of-type'],
+      ['person', '#person'],
+      ['explain', '#explain'],
+      ['create', '#create'],
+      ['television', '#television'],
+      ['host', '#host'],
+      ['activate', '#activate'],
+      ['watch', '#watch'],
+      ['between-cues', '#trust'],
+      ['imagination', '#imagination'],
+      ['book', '#book']
+    ]
+  },
+  {
+    key: 'casting',
+    path: '/casting-sheet.html',
+    scenes: [
+      ['hero', '.casting-hero'],
+      ['doors', '.door-section'],
+      ['files', '#selected-files'],
+      ['operator', '.operator-section'],
+      ['booking', '.booking-section']
+    ]
+  }
+];
 
+const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH });
+const manifest = { sha, capturedAt: new Date().toISOString(), site, routes: {} };
+
+const attachDiagnostics = page => {
+  const diagnostics = { consoleErrors: [], responseErrors: [], requestFailures: [] };
   page.on('console', msg => {
     if (msg.type() !== 'error') return;
     const loc = msg.location();
-    consoleErrors.push({
+    diagnostics.consoleErrors.push({
       text: msg.text(),
       url: loc?.url || null,
       line: loc?.lineNumber ?? null,
@@ -52,130 +55,152 @@ for (const [name, width, height] of [
     });
   });
   page.on('pageerror', err => {
-    consoleErrors.push({ text: `pageerror: ${err.message}`, url: null, line: null, column: null });
+    diagnostics.consoleErrors.push({ text: `pageerror: ${err.message}`, url: null, line: null, column: null });
   });
   page.on('response', response => {
-    if (response.status() >= 400) {
-      responseErrors.push({ status: response.status(), url: response.url() });
-    }
+    if (response.status() >= 400) diagnostics.responseErrors.push({ status: response.status(), url: response.url() });
   });
   page.on('requestfailed', request => {
-    requestFailures.push({
+    diagnostics.requestFailures.push({
       url: request.url(),
       error: request.failure()?.errorText || 'request failed'
     });
   });
+  return diagnostics;
+};
 
-  await page.goto(`${site}/?visualqa=${sha}-${name}-${Date.now()}`, {
-    waitUntil: 'networkidle',
-    timeout: 60000
-  });
-  await page.evaluate(() => document.fonts?.ready);
-
-  // Interaction smoke: Proof drawer opens, closes by Escape, and returns to a closed state.
+const testHomeInteractions = async page => {
+  const failures = [];
   try {
     const proofTrigger = page.locator('.proof-index-trigger').first();
-    if (await proofTrigger.count()) {
+    if (!(await proofTrigger.count())) {
+      failures.push('Proof trigger missing');
+    } else {
       await proofTrigger.click();
       await page.waitForTimeout(120);
       const opened = await page.locator('#proof-index').getAttribute('aria-hidden');
-      if (opened !== 'false') interactionFailures.push(`Proof drawer did not open; aria-hidden=${opened}`);
+      if (opened !== 'false') failures.push(`Proof drawer did not open; aria-hidden=${opened}`);
       await page.keyboard.press('Escape');
       await page.waitForTimeout(120);
       const closed = await page.locator('#proof-index').getAttribute('aria-hidden');
-      if (closed !== 'true') interactionFailures.push(`Proof drawer did not close on Escape; aria-hidden=${closed}`);
-    } else {
-      interactionFailures.push('Proof trigger missing');
+      if (closed !== 'true') failures.push(`Proof drawer did not close on Escape; aria-hidden=${closed}`);
     }
   } catch (error) {
-    interactionFailures.push(`Proof drawer interaction: ${error.message}`);
+    failures.push(`Proof drawer interaction: ${error.message}`);
   }
 
-  // Interaction smoke: switch Watch program, verify panel state, then restore the first program.
   try {
     const tabs = page.locator('#watch [data-watch]');
     const tabCount = await tabs.count();
-    if (tabCount >= 2) {
+    if (tabCount < 2) {
+      failures.push('Watch tabs missing or incomplete');
+    } else {
       const second = tabs.nth(1);
       const program = await second.getAttribute('data-watch');
       await second.click();
       await page.waitForTimeout(120);
-      if ((await second.getAttribute('aria-selected')) !== 'true') {
-        interactionFailures.push(`Watch tab ${program} did not become selected`);
-      }
+      if ((await second.getAttribute('aria-selected')) !== 'true') failures.push(`Watch tab ${program} did not become selected`);
       const activePanel = page.locator(`#watch [data-watch-panel="${program}"]`).first();
-      if (!(await activePanel.count()) || (await activePanel.getAttribute('hidden')) !== null) {
-        interactionFailures.push(`Watch panel ${program} did not become visible`);
-      }
+      if (!(await activePanel.count()) || (await activePanel.getAttribute('hidden')) !== null) failures.push(`Watch panel ${program} did not become visible`);
       await tabs.nth(0).click();
       await page.waitForTimeout(80);
-    } else {
-      interactionFailures.push('Watch tabs missing or incomplete');
     }
   } catch (error) {
-    interactionFailures.push(`Watch interaction: ${error.message}`);
+    failures.push(`Watch interaction: ${error.message}`);
   }
+  return failures;
+};
 
-  // Hydrate the full long page before capture so lazy media and entered states are evidence, not guesses.
-  const max = await page.evaluate(() => document.documentElement.scrollHeight);
-  for (let y = 0; y < max; y += Math.max(520, Math.floor(height * 0.72))) {
-    await page.evaluate(nextY => scrollTo(0, nextY), y);
-    await page.waitForTimeout(120);
+const testCastingInteractions = async page => {
+  const failures = [];
+  const fileLinks = page.locator('#selected-files .file-link');
+  const count = await fileLinks.count();
+  if (count < 4) failures.push(`Casting sheet expected 4 selected-file links; found ${count}`);
+  for (let i = 0; i < count; i++) {
+    const href = await fileLinks.nth(i).getAttribute('href');
+    if (!href) failures.push(`Casting selected-file link ${i + 1} has no href`);
   }
-  await page.evaluate(() => scrollTo(0, 0));
-  await page.waitForTimeout(500);
+  const booking = page.locator('.booking-section a[href^="mailto:"]').first();
+  if (!(await booking.count())) failures.push('Casting booking mailto link missing');
+  return failures;
+};
 
-  await page.screenshot({ path: `qa-artifacts/${name}-full.png`, fullPage: true });
-  for (const [key, selector] of scenes) {
-    const loc = page.locator(selector).first();
-    if (await loc.count()) {
-      await loc.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(180);
-      await loc.screenshot({ path: `qa-artifacts/${name}-${key}.png` });
+for (const route of routes) {
+  manifest.routes[route.key] = {};
+  for (const [name, width, height] of viewports) {
+    const ctx = await browser.newContext({ viewport: { width, height }, colorScheme: 'light' });
+    const page = await ctx.newPage();
+    const diagnostics = attachDiagnostics(page);
+    const prefix = route.key === 'home' ? name : `${route.key}-${name}`;
+
+    await page.goto(`${site}${route.path}?visualqa=${sha}-${route.key}-${name}-${Date.now()}`, {
+      waitUntil: 'networkidle',
+      timeout: 60000
+    });
+    await page.evaluate(() => document.fonts?.ready);
+
+    const interactionFailures = route.key === 'home'
+      ? await testHomeInteractions(page)
+      : await testCastingInteractions(page);
+
+    const max = await page.evaluate(() => document.documentElement.scrollHeight);
+    for (let y = 0; y < max; y += Math.max(520, Math.floor(height * 0.72))) {
+      await page.evaluate(nextY => scrollTo(0, nextY), y);
+      await page.waitForTimeout(110);
     }
-  }
+    await page.evaluate(() => scrollTo(0, 0));
+    await page.waitForTimeout(450);
 
-  const state = await page.evaluate(() => {
-    const css = selector => {
-      const node = document.querySelector(selector);
-      if (!node) return null;
-      const style = getComputedStyle(node);
-      return {
-        fontSize: style.fontSize,
-        lineHeight: style.lineHeight,
-        minHeight: style.minHeight
-      };
-    };
-    return {
-      release: document.body?.dataset?.releaseStatus || null,
-      width: innerWidth,
-      scrollWidth: document.documentElement.scrollWidth,
-      height: document.documentElement.scrollHeight,
-      title: document.title,
-      url: location.href,
-      typography: {
-        nav: css('.topbar nav'),
-        sectionCode: css('.section-code'),
-        sourceTab: css('.source-tab')
+    await page.screenshot({ path: `qa-artifacts/${prefix}-full.png`, fullPage: true });
+    for (const [key, selector] of route.scenes) {
+      const loc = page.locator(selector).first();
+      if (await loc.count()) {
+        await loc.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(160);
+        await loc.screenshot({ path: `qa-artifacts/${prefix}-${key}.png` });
       }
-    };
-  });
+    }
 
-  state.sha = sha;
-  state.consoleErrors = consoleErrors;
-  state.responseErrors = responseErrors;
-  state.requestFailures = requestFailures;
-  state.interactionFailures = interactionFailures;
-  state.horizontalOverflow = state.scrollWidth > state.width;
-  manifest.viewports[name] = state;
-  fs.writeFileSync(`qa-artifacts/${name}-state.json`, JSON.stringify(state, null, 2));
-  await ctx.close();
+    const state = await page.evaluate(() => {
+      const css = selector => {
+        const node = document.querySelector(selector);
+        if (!node) return null;
+        const style = getComputedStyle(node);
+        return { fontSize: style.fontSize, lineHeight: style.lineHeight, minHeight: style.minHeight };
+      };
+      return {
+        release: document.body?.dataset?.releaseStatus || null,
+        width: innerWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+        height: document.documentElement.scrollHeight,
+        title: document.title,
+        url: location.href,
+        favicon: document.querySelector('link[rel~="icon"]')?.href || null,
+        themeColor: document.querySelector('meta[name="theme-color"]')?.content || null,
+        typography: {
+          nav: css('.topbar nav'),
+          sectionCode: css('.section-code'),
+          sourceTab: css('.source-tab')
+        }
+      };
+    });
+
+    Object.assign(state, diagnostics, {
+      sha,
+      interactionFailures,
+      horizontalOverflow: state.scrollWidth > state.width
+    });
+    manifest.routes[route.key][name] = state;
+    fs.writeFileSync(`qa-artifacts/${prefix}-state.json`, JSON.stringify(state, null, 2));
+    await ctx.close();
+  }
 }
 
 fs.writeFileSync('qa-artifacts/manifest.json', JSON.stringify(manifest, null, 2));
 await browser.close();
 
-const failed = Object.values(manifest.viewports).some(v =>
+const states = Object.values(manifest.routes).flatMap(route => Object.values(route));
+const failed = states.some(v =>
   v.horizontalOverflow ||
   v.consoleErrors.length ||
   v.responseErrors.length ||
