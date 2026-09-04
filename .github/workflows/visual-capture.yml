@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Wait for changed public files to reach GitHub Pages
         shell: bash
@@ -122,9 +122,19 @@ jobs:
           for(const [name,width,height] of [['desktop',1440,1000],['tablet',768,1024],['mobile',390,844]]){
             const ctx=await browser.newContext({viewport:{width,height},colorScheme:'light'});
             const page=await ctx.newPage();
-            const errors=[];
-            page.on('console',msg=>{ if(msg.type()==='error') errors.push(`console: ${msg.text()}`); });
-            page.on('pageerror',err=>errors.push(`pageerror: ${err.message}`));
+            const consoleErrors=[];
+            const responseErrors=[];
+            const requestFailures=[];
+            page.on('console',msg=>{ if(msg.type()==='error') consoleErrors.push(`console: ${msg.text()}`); });
+            page.on('pageerror',err=>consoleErrors.push(`pageerror: ${err.message}`));
+            page.on('response',response=>{
+              if(response.status()>=400){
+                responseErrors.push({status:response.status(),url:response.url()});
+              }
+            });
+            page.on('requestfailed',request=>{
+              requestFailures.push({url:request.url(),error:request.failure()?.errorText||'request failed'});
+            });
 
             await page.goto(`https://meetlaurenbush.com/?visualqa=${sha}-${name}-${Date.now()}`,{waitUntil:'networkidle',timeout:60000});
             await page.evaluate(()=>document.fonts?.ready);
@@ -156,7 +166,9 @@ jobs:
               url:location.href
             }));
             state.sha=sha;
-            state.consoleErrors=errors;
+            state.consoleErrors=consoleErrors;
+            state.responseErrors=responseErrors;
+            state.requestFailures=requestFailures;
             state.horizontalOverflow=state.scrollWidth>state.width;
             manifest.viewports[name]=state;
             fs.writeFileSync(`qa-artifacts/${name}-state.json`,JSON.stringify(state,null,2));
@@ -166,9 +178,11 @@ jobs:
           fs.writeFileSync('qa-artifacts/manifest.json',JSON.stringify(manifest,null,2));
           await browser.close();
 
-          const failed=Object.values(manifest.viewports).some(v=>v.horizontalOverflow || v.consoleErrors.length);
+          const failed=Object.values(manifest.viewports).some(v=>
+            v.horizontalOverflow || v.consoleErrors.length || v.responseErrors.length || v.requestFailures.length
+          );
           if(failed){
-            console.error('Visual QA state found overflow or browser errors. Inspect artifact.');
+            console.error('Visual QA found overflow, browser errors, failed responses, or failed requests. Inspect artifact.');
             process.exit(1);
           }
           JS
