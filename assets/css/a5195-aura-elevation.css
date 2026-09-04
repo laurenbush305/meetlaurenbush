@@ -1,0 +1,306 @@
+/* A5.19.5 — AURA ELEVATION
+   Manual visual correction after direct comparison with Lauren's Lunar Vibes / Aura reference.
+   Goal: a warm room with refracted light living inside it, not a pale portfolio wearing gradients.
+   Geometry is protected. This pass changes atmosphere, light, surface and optical depth only. */
+
+:root{
+  --a5195-ivory:#fff4df;
+  --a5195-champagne:#f4d4aa;
+  --a5195-amber:#f3a649;
+  --a5195-apricot:#ef8f62;
+  --a5195-rose:#e77e9e;
+  --a5195-lilac:#a982df;
+  --a5195-aqua:#56cfcc;
+  --a5195-ink:#111014;
+}
+
+/* HERO — make the first viewport feel illuminated, not merely warm. */
+.hero{
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 27% 29%,rgba(245,164,67,.78) 0%,rgba(240,145,72,.40) 24%,rgba(246,195,123,.16) 43%,transparent 59%),
+    radial-gradient(ellipse at 4% 72%,rgba(238,127,88,.34) 0%,rgba(238,127,88,.10) 30%,transparent 48%),
+    radial-gradient(ellipse at 82% 15%,rgba(76,210,207,.34) 0%,rgba(76,210,207,.11) 25%,transparent 42%),
+    radial-gradient(ellipse at 91% 34%,rgba(169,130,223,.28) 0%,rgba(231,126,158,.18) 29%,transparent 48%),
+    linear-gradient(121deg,#fff4df 0%,#f1c891 31%,#f3d6b1 53%,#edf1e9 76%,#f2d9de 100%);
+}
+
+.hero::before{
+  inset:7% 8% 8% 7%;
+  width:auto;
+  height:auto;
+  border-radius:46% 54% 48% 52% / 54% 46% 58% 42%;
+  background:
+    radial-gradient(ellipse at 32% 39%,rgba(255,231,167,.92) 0%,rgba(245,164,67,.48) 28%,transparent 57%),
+    radial-gradient(ellipse at 55% 44%,rgba(239,143,98,.34) 0%,transparent 43%),
+    radial-gradient(ellipse at 73% 31%,rgba(231,126,158,.27) 0%,rgba(169,130,223,.21) 36%,transparent 59%),
+    radial-gradient(ellipse at 80% 58%,rgba(76,210,207,.20) 0%,transparent 43%);
+  filter:blur(18px) saturate(1.12);
+  opacity:.96;
+  transform:rotate(-4deg);
+  z-index:0;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  width:clamp(340px,38vw,590px);
+  height:76%;
+  right:0;
+  top:-2%;
+  border-radius:36% 64% 47% 53% / 57% 40% 60% 43%;
+  background:
+    linear-gradient(106deg,
+      transparent 0 25%,
+      rgba(255,255,255,.62) 27% 29%,
+      rgba(255,207,105,.34) 30% 34%,
+      rgba(76,210,207,.48) 35% 40%,
+      rgba(169,130,223,.37) 41% 45%,
+      rgba(231,126,158,.39) 46% 50%,
+      rgba(239,143,98,.22) 51% 54%,
+      transparent 57% 100%),
+    radial-gradient(ellipse at 58% 45%,rgba(255,255,255,.35),transparent 48%);
+  filter:blur(8px) saturate(1.22);
+  opacity:.93;
+  transform:rotate(5deg);
+  mix-blend-mode:screen;
+}
+
+.hero-atmosphere{
+  z-index:0;
+  background:
+    radial-gradient(ellipse at 49% 61%,rgba(255,244,212,.62) 0%,rgba(255,216,144,.22) 37%,transparent 59%),
+    radial-gradient(ellipse at 76% 23%,rgba(255,255,255,.70) 0%,transparent 23%),
+    linear-gradient(113deg,transparent 0 58%,rgba(86,207,204,.09) 63%,rgba(169,130,223,.10) 69%,rgba(231,126,158,.09) 74%,transparent 80%);
+  opacity:.96;
+}
+
+.hero-title,
+.hero-meta,
+.hero-actions,
+.hero-scroll,
+.hero-rail,
+.hero-photo,
+.hero-transmission{position:relative;z-index:3;}
+
+.hero-photo{
+  filter:
+    drop-shadow(0 46px 72px rgba(102,54,26,.24))
+    drop-shadow(0 8px 28px rgba(245,166,73,.24));
+}
+.hero-photo::before{
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(255,251,240,.95) 0 29%,rgba(245,166,73,.27) 46%,rgba(76,210,207,.13) 57%,rgba(169,130,223,.09) 65%,transparent 77%);
+  filter:blur(17px);
+  opacity:.98;
+}
+
+.hero-transmission{
+  background:rgba(255,248,235,.95);
+  border-color:rgba(255,255,255,.82);
+  box-shadow:
+    0 28px 72px rgba(91,48,25,.21),
+    0 0 42px rgba(86,207,204,.08),
+    0 0 0 1px rgba(146,91,58,.08);
+}
+
+.hero-glass{
+  z-index:2;
+  right:7vw;
+  top:9vh;
+  width:150px;
+  height:64vh;
+  border-radius:48%;
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,.52) 0%,
+      rgba(255,211,126,.32) 22%,
+      rgba(239,143,98,.25) 38%,
+      rgba(231,126,158,.27) 51%,
+      rgba(169,130,223,.25) 63%,
+      rgba(76,210,207,.31) 76%,
+      rgba(255,255,255,.15) 100%);
+  filter:blur(13px) saturate(1.28);
+  opacity:.90;
+  transform:rotate(7deg);
+  mix-blend-mode:screen;
+}
+
+.hero-rail{
+  background:linear-gradient(90deg,#120f10 0%,#1b1111 48%,#101619 100%);
+  box-shadow:0 -14px 42px rgba(116,63,28,.14),0 -1px 0 rgba(244,175,83,.24);
+}
+
+/* PERSON — keep the editorial collage, but let projected light move through it. */
+.person{
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 25% 28%,rgba(245,168,75,.60) 0%,rgba(240,147,77,.27) 27%,transparent 53%),
+    radial-gradient(ellipse at 77% 16%,rgba(255,239,199,.62) 0%,transparent 38%),
+    radial-gradient(ellipse at 86% 61%,rgba(76,210,207,.22) 0%,rgba(169,130,223,.14) 31%,transparent 52%),
+    radial-gradient(ellipse at 61% 88%,rgba(231,126,158,.16) 0%,transparent 40%),
+    linear-gradient(129deg,#fff4df 0%,#f2cf9e 42%,#f3dbc1 63%,#edf1e9 82%,#f1dcdf 100%);
+}
+
+.person::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:76%;
+  height:112%;
+  left:-3%;
+  top:-8%;
+  border-radius:45% 55% 46% 54% / 56% 44% 58% 42%;
+  background:
+    linear-gradient(108deg,
+      transparent 0 24%,
+      rgba(255,255,255,.50) 27% 29%,
+      rgba(255,203,104,.39) 31% 38%,
+      rgba(239,143,98,.28) 39% 44%,
+      rgba(231,126,158,.25) 45% 49%,
+      rgba(169,130,223,.23) 50% 54%,
+      rgba(76,210,207,.29) 55% 60%,
+      transparent 63% 100%),
+    radial-gradient(ellipse at 35% 43%,rgba(255,226,159,.54),transparent 50%);
+  filter:blur(10px) saturate(1.20);
+  opacity:.91;
+  transform:rotate(-5deg);
+  mix-blend-mode:screen;
+}
+
+.person::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  right:-2%;
+  bottom:-9%;
+  width:55%;
+  height:68%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 38% 42%,rgba(245,166,73,.27) 0%,rgba(239,143,98,.18) 28%,rgba(231,126,158,.14) 44%,rgba(76,210,207,.10) 60%,transparent 75%);
+  filter:blur(19px) saturate(1.10);
+  opacity:.82;
+}
+
+.person-copy,
+.person-type,
+.person-studio,
+.person-wide,
+.person-floral,
+.person-acrylic{position:relative;z-index:2;}
+
+.person-studio,
+.person-wide,
+.person-floral{
+  background:#fff7e9;
+  outline-color:rgba(255,255,255,.92);
+  box-shadow:
+    0 38px 92px rgba(95,54,31,.20),
+    0 10px 30px rgba(245,166,73,.11),
+    0 0 34px rgba(76,210,207,.045),
+    0 0 0 1px rgba(136,85,56,.08);
+}
+
+.person-acrylic{
+  background:
+    linear-gradient(143deg,
+      rgba(255,255,255,.72) 0%,
+      rgba(255,207,116,.30) 26%,
+      rgba(239,143,98,.20) 41%,
+      rgba(231,126,158,.19) 55%,
+      rgba(169,130,223,.17) 67%,
+      rgba(76,210,207,.24) 80%,
+      rgba(255,255,255,.22) 100%);
+  border-color:rgba(255,255,255,.64);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.80),0 26px 70px rgba(91,52,29,.08);
+  backdrop-filter:blur(11px) saturate(1.18);
+  -webkit-backdrop-filter:blur(11px) saturate(1.18);
+}
+
+.source-tab{background:rgba(255,247,233,.95);}
+
+@media(max-width:760px){
+  .hero{
+    background:
+      radial-gradient(ellipse at 34% 23%,rgba(245,164,67,.68) 0%,rgba(240,145,72,.31) 31%,transparent 57%),
+      radial-gradient(ellipse at 92% 18%,rgba(76,210,207,.28) 0%,transparent 31%),
+      radial-gradient(ellipse at 88% 39%,rgba(169,130,223,.21) 0%,rgba(231,126,158,.16) 30%,transparent 49%),
+      radial-gradient(ellipse at 18% 83%,rgba(239,143,98,.20) 0%,transparent 38%),
+      linear-gradient(147deg,#fff3de 0%,#efc98f 50%,#f2deca 70%,#edf0e9 100%);
+  }
+  .hero::before{
+    inset:12% -8% 14% 13%;
+    filter:blur(18px) saturate(1.12);
+    opacity:.90;
+  }
+  .hero::after{
+    width:76vw;
+    height:48%;
+    right:-25%;
+    top:5%;
+    filter:blur(9px) saturate(1.20);
+    opacity:.84;
+  }
+  .hero-glass{
+    right:-12px;
+    top:21%;
+    width:88px;
+    height:45%;
+    filter:blur(13px) saturate(1.24);
+    opacity:.76;
+  }
+
+  .person{
+    background:
+      radial-gradient(ellipse at 34% 28%,rgba(245,168,75,.52) 0%,rgba(240,147,77,.22) 31%,transparent 56%),
+      radial-gradient(ellipse at 86% 53%,rgba(76,210,207,.18) 0%,rgba(169,130,223,.11) 31%,transparent 48%),
+      radial-gradient(ellipse at 37% 88%,rgba(231,126,158,.11) 0%,transparent 39%),
+      linear-gradient(153deg,#fff4df 0%,#f1d1a5 57%,#f0e0cf 75%,#eef1eb 100%);
+  }
+  .person::before{
+    width:112%;
+    height:65%;
+    left:-29%;
+    top:13%;
+    filter:blur(10px) saturate(1.16);
+    opacity:.76;
+  }
+  .person::after{
+    right:-20%;
+    bottom:2%;
+    width:78%;
+    height:42%;
+    opacity:.62;
+  }
+
+  /* Preserve A5.19.3 caption legibility. */
+  .person-floral .source-tab,
+  .person-wide .source-tab{
+    left:6px!important;
+    right:6px!important;
+    width:auto!important;
+    max-width:none!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    line-height:1.05!important;
+    padding:7px 8px!important;
+    display:flex!important;
+    align-items:flex-start!important;
+    gap:5px!important;
+    flex-wrap:wrap!important;
+  }
+  .person-floral .source-tab b,
+  .person-wide .source-tab b{
+    flex:0 0 auto;
+    margin:0!important;
+  }
+  .person-floral .source-tab{font-size:6px!important;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero::before,.hero::after,.hero-glass,.person::before,.person::after{animation:none!important;}
+}
