@@ -1,0 +1,177 @@
+/* A5.19.8 — PROJECT FILE EDITORIAL FINISH
+   Pixel-led cross-page calibration for the four public Selected Files. Preserve the
+   producer-facing file architecture and proof, but bring the pages into Warm Prismatic
+   Stardust: warm paper, optical light, stronger reading type and flatter evidence notes. */
+
+.project-file{
+  --pf-paper:#fff2dc;
+  --pf-paper-soft:#fff8ed;
+  --pf-champagne:#edbf7e;
+  --pf-apricot:#eb8058;
+  --pf-rose:#df7196;
+  --pf-lilac:#9f7ad8;
+  --pf-aqua:#4cc9c7;
+  --pf-ink:#0d1014;
+  --pf-night:#090d12;
+  background:var(--pf-paper-soft) !important;
+}
+
+.project-file .project-hero{
+  background:
+    radial-gradient(ellipse at 30% 18%,rgba(237,191,126,.46),transparent 38%),
+    radial-gradient(ellipse at 53% 77%,rgba(235,128,88,.13),transparent 34%),
+    radial-gradient(ellipse at 47% 42%,rgba(76,201,199,.12),transparent 34%),
+    linear-gradient(112deg,#fff0d8 0 51%,#fff8ed 51% 100%) !important;
+}
+
+.project-file .project-hero:before{
+  opacity:.32 !important;
+  mask-image:linear-gradient(90deg,#000,transparent 55%) !important;
+}
+
+.project-file .project-hero-copy{
+  position:relative;
+  isolation:isolate;
+}
+
+.project-file .project-hero-copy:after{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  width:min(42vw,560px);
+  height:min(42vw,560px);
+  left:38%;
+  top:22%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 32%,rgba(255,218,165,.42),transparent 46%),
+    radial-gradient(circle at 68% 45%,rgba(76,201,199,.14),transparent 37%),
+    radial-gradient(circle at 54% 72%,rgba(223,113,150,.10),transparent 38%);
+  filter:blur(16px);
+  pointer-events:none;
+}
+
+.project-file .project-hero-media:after{
+  background:linear-gradient(90deg,rgba(255,241,218,.19),transparent 18%) !important;
+}
+
+.project-file .project-intro{
+  font-size:15px !important;
+  line-height:1.62 !important;
+  color:rgba(13,16,20,.70) !important;
+}
+
+.project-file .project-back{
+  font-size:8px !important;
+  color:rgba(13,16,20,.76);
+}
+
+.project-file .project-ledger{
+  background:#0b0f14 !important;
+  border-top-color:rgba(255,255,255,.16) !important;
+}
+.project-file .project-ledger span{color:#60d9d5 !important}
+
+.project-file .project-evidence{
+  background:
+    radial-gradient(ellipse at 84% 11%,rgba(76,201,199,.08),transparent 29%),
+    radial-gradient(ellipse at 16% 82%,rgba(235,128,88,.08),transparent 31%),
+    linear-gradient(180deg,#fff8ed 0%,#fff1de 100%) !important;
+}
+
+.project-file .evidence-media{
+  box-shadow:0 34px 90px rgba(91,49,26,.15) !important;
+}
+
+.project-file .evidence-copy p{
+  color:rgba(13,16,20,.68) !important;
+}
+
+.project-file .evidence-copy .proof-note{
+  color:rgba(13,16,20,.58) !important;
+  border-top-color:rgba(105,64,39,.18) !important;
+}
+
+.project-file .project-notes{
+  background:
+    radial-gradient(ellipse at 18% 24%,rgba(237,191,126,.28),transparent 35%),
+    radial-gradient(ellipse at 86% 72%,rgba(159,122,216,.07),transparent 30%),
+    linear-gradient(118deg,#f6e3c7 0%,#fff2de 58%,#eee3df 100%) !important;
+}
+
+.project-file .project-notes-grid{
+  background:transparent !important;
+  border-top:1px solid rgba(105,64,39,.20) !important;
+  box-shadow:none !important;
+}
+
+.project-file .project-note-row{
+  background:transparent !important;
+  border-bottom-color:rgba(105,64,39,.15) !important;
+  box-shadow:none !important;
+}
+
+.project-file .project-note-row p{
+  font-size:13.5px !important;
+  line-height:1.58 !important;
+  color:rgba(13,16,20,.68) !important;
+}
+
+.project-file .project-note-row span{color:#087f86 !important}
+
+.project-file .project-close{
+  background:
+    radial-gradient(ellipse at 76% 36%,rgba(159,122,216,.08),transparent 30%),
+    radial-gradient(ellipse at 17% 75%,rgba(76,201,199,.055),transparent 28%),
+    #090d12 !important;
+}
+
+.project-file .project-close p{color:rgba(255,255,255,.68) !important}
+.project-file .project-close-actions .button-quiet{background:#f4eee6 !important;color:#0b0f14 !important}
+.project-file .project-foot{background:#05080c !important}
+
+/* Give project-specific media its own tiny atmospheric echo without turning the system into four brands. */
+.project-file.scrambled-file .project-hero{background:
+  radial-gradient(ellipse at 31% 19%,rgba(237,191,126,.48),transparent 39%),
+  radial-gradient(ellipse at 48% 76%,rgba(159,122,216,.10),transparent 31%),
+  linear-gradient(112deg,#fff0d8 0 51%,#fff8ed 51% 100%) !important}
+.project-file.wimpb-file .project-hero{background:
+  radial-gradient(ellipse at 31% 19%,rgba(237,191,126,.43),transparent 39%),
+  radial-gradient(ellipse at 49% 73%,rgba(76,201,199,.13),transparent 32%),
+  linear-gradient(112deg,#fff0d8 0 51%,#fff8ed 51% 100%) !important}
+.project-file.montis-file .project-hero{background:
+  radial-gradient(ellipse at 31% 19%,rgba(237,191,126,.42),transparent 39%),
+  radial-gradient(ellipse at 48% 74%,rgba(223,113,150,.11),transparent 32%),
+  linear-gradient(112deg,#fff0d8 0 51%,#fff8ed 51% 100%) !important}
+.project-file.centerline-file .project-hero{background:
+  radial-gradient(ellipse at 31% 19%,rgba(237,191,126,.45),transparent 39%),
+  radial-gradient(ellipse at 49% 74%,rgba(76,201,199,.10),transparent 31%),
+  linear-gradient(112deg,#fff0d8 0 51%,#fff8ed 51% 100%) !important}
+
+@media(max-width:760px){
+  .project-file .topbar nav a[href="casting-sheet.html"]{
+    display:inline-flex !important;
+    font-size:7px !important;
+    letter-spacing:.07em !important;
+  }
+  .project-file .topbar nav a[href="index.html#watch"]{display:none !important}
+
+  .project-file .project-hero{
+    background:
+      radial-gradient(ellipse at 71% 12%,rgba(237,191,126,.52),transparent 38%),
+      radial-gradient(ellipse at 93% 43%,rgba(76,201,199,.18),transparent 31%),
+      radial-gradient(ellipse at 17% 87%,rgba(223,113,150,.08),transparent 32%),
+      linear-gradient(160deg,#ffefd5 0%,#fff5e7 74%,#eee3df 100%) !important;
+  }
+  .project-file .project-hero-copy:after{
+    width:90vw;
+    height:90vw;
+    left:25%;
+    top:13%;
+    opacity:.75;
+  }
+  .project-file .project-intro{font-size:13.5px !important;line-height:1.62 !important}
+  .project-file .project-evidence{background:linear-gradient(180deg,#fff7eb,#fff0dc) !important}
+  .project-file .project-notes{background:linear-gradient(160deg,#f4dfc0,#fff0da 72%,#eee2dd) !important}
+  .project-file .project-note-row p{font-size:12px !important}
+}
