@@ -1,0 +1,252 @@
+/* A5.19.2 — WARM PRISMATIC ROOM LIGHT
+   Visual correction after opening the A5.19.1 live renders beside the Aura reference.
+   Rule: amber/champagne room first, prism second. Color blooms as projected light,
+   never as rainbow wallpaper. Geometry remains protected. */
+
+:root{
+  --room-ivory:#fff8ed;
+  --room-cream:#f7ead8;
+  --room-champagne:#efd7bb;
+  --room-amber:#f2aa58;
+  --room-apricot:#ef936c;
+  --room-rose:#df8ca8;
+  --room-lilac:#b49bdd;
+  --room-aqua:#78cbc8;
+  --room-ink:#111014;
+}
+
+.topbar{
+  background:rgba(255,248,237,.94);
+  border-bottom-color:rgba(91,61,43,.11);
+  box-shadow:0 8px 30px rgba(92,58,39,.045);
+}
+
+/* HERO ------------------------------------------------------------------ */
+.hero{
+  background:
+    radial-gradient(ellipse at 29% 31%,rgba(246,184,101,.55) 0%,rgba(242,170,88,.28) 24%,transparent 51%),
+    radial-gradient(ellipse at 7% 72%,rgba(239,147,108,.22) 0%,transparent 37%),
+    radial-gradient(ellipse at 82% 14%,rgba(120,203,200,.20) 0%,transparent 27%),
+    radial-gradient(ellipse at 91% 26%,rgba(180,155,221,.17) 0%,rgba(223,140,168,.10) 24%,transparent 42%),
+    linear-gradient(122deg,#fff9ef 0%,#f8ead7 37%,#f5e4cf 60%,#f8efe4 82%,#f2eee8 100%);
+}
+
+.hero::before{
+  inset:9% 18% 9% 12%;
+  width:auto;
+  height:auto;
+  border-radius:42% 58% 48% 52% / 58% 42% 58% 42%;
+  background:
+    radial-gradient(ellipse at 38% 34%,rgba(255,232,174,.72) 0%,rgba(247,181,88,.34) 31%,transparent 63%),
+    radial-gradient(ellipse at 63% 40%,rgba(239,147,108,.23) 0%,transparent 42%),
+    radial-gradient(ellipse at 73% 28%,rgba(223,140,168,.17) 0%,rgba(180,155,221,.10) 37%,transparent 58%),
+    radial-gradient(ellipse at 78% 57%,rgba(120,203,200,.13) 0%,transparent 43%);
+  filter:blur(28px) saturate(1.03);
+  opacity:.88;
+  transform:rotate(-5deg);
+}
+
+.hero::after{
+  width:clamp(260px,29vw,440px);
+  height:56%;
+  right:6%;
+  top:3%;
+  border-radius:54% 46% 60% 40% / 42% 57% 43% 58%;
+  background:
+    radial-gradient(circle at 34% 36%,rgba(255,255,255,.72) 0%,rgba(255,232,182,.24) 27%,transparent 48%),
+    radial-gradient(circle at 58% 38%,rgba(120,203,200,.28) 0%,transparent 34%),
+    radial-gradient(circle at 72% 55%,rgba(180,155,221,.20) 0%,rgba(223,140,168,.16) 30%,transparent 54%),
+    radial-gradient(circle at 44% 72%,rgba(239,147,108,.17) 0%,transparent 40%);
+  filter:blur(20px) saturate(1.08);
+  opacity:.82;
+  transform:rotate(8deg);
+  mix-blend-mode:screen;
+}
+
+.hero-atmosphere{
+  background:
+    radial-gradient(ellipse at 51% 63%,rgba(255,249,234,.44) 0%,transparent 43%),
+    radial-gradient(ellipse at 76% 23%,rgba(255,255,255,.56) 0%,transparent 22%);
+  opacity:.86;
+}
+
+.hero-glass{
+  right:10vw;
+  top:13vh;
+  width:118px;
+  height:56vh;
+  border-radius:50%;
+  background:
+    radial-gradient(ellipse at 50% 31%,rgba(255,255,255,.54) 0%,rgba(255,221,164,.22) 28%,transparent 56%),
+    radial-gradient(ellipse at 52% 59%,rgba(120,203,200,.17) 0%,rgba(180,155,221,.12) 34%,rgba(223,140,168,.09) 50%,transparent 73%);
+  filter:blur(18px);
+  opacity:.74;
+  transform:rotate(7deg);
+  mix-blend-mode:screen;
+}
+
+.hero-photo{
+  filter:drop-shadow(0 40px 60px rgba(112,67,40,.17));
+}
+.hero-photo::before{
+  background:radial-gradient(ellipse at 50% 45%,rgba(255,250,238,.86) 0 30%,rgba(245,180,99,.18) 48%,rgba(223,140,168,.07) 62%,transparent 77%);
+  filter:blur(24px);
+}
+.hero-photo img,
+.person-studio img,
+.person-wide img,
+.person-floral img{
+  filter:saturate(1.035) contrast(1.01) sepia(.018);
+}
+
+.hero-transmission{
+  background:rgba(255,250,242,.95);
+  box-shadow:0 24px 66px rgba(97,59,38,.16),0 0 0 1px rgba(133,91,66,.09);
+}
+
+.hero-rail{
+  background:linear-gradient(90deg,#111014 0%,#171113 54%,#111519 100%);
+  box-shadow:0 -10px 34px rgba(101,64,42,.08),0 -1px 0 rgba(245,185,104,.16);
+}
+
+/* PERSON ---------------------------------------------------------------- */
+.person{
+  background:
+    radial-gradient(ellipse at 26% 28%,rgba(247,185,107,.38) 0%,rgba(242,170,88,.17) 27%,transparent 53%),
+    radial-gradient(ellipse at 78% 18%,rgba(255,241,214,.46) 0%,transparent 38%),
+    radial-gradient(ellipse at 82% 71%,rgba(120,203,200,.11) 0%,rgba(180,155,221,.08) 30%,transparent 52%),
+    radial-gradient(ellipse at 58% 86%,rgba(223,140,168,.09) 0%,transparent 40%),
+    linear-gradient(132deg,#fff9ef 0%,#f8ead8 48%,#f5e7d7 68%,#f6f0e8 100%);
+}
+
+.person::before{
+  width:60%;
+  height:82%;
+  left:8%;
+  top:4%;
+  border-radius:48% 52% 42% 58% / 55% 43% 57% 45%;
+  background:
+    radial-gradient(ellipse at 30% 35%,rgba(255,230,172,.64) 0%,rgba(245,178,89,.28) 30%,transparent 60%),
+    radial-gradient(ellipse at 56% 44%,rgba(239,147,108,.18) 0%,transparent 42%),
+    radial-gradient(ellipse at 70% 32%,rgba(223,140,168,.13) 0%,rgba(180,155,221,.09) 35%,transparent 55%),
+    radial-gradient(ellipse at 73% 67%,rgba(120,203,200,.11) 0%,transparent 43%);
+  filter:blur(30px) saturate(1.02);
+  opacity:.82;
+  transform:rotate(-7deg);
+}
+
+.person::after{
+  right:3%;
+  bottom:-8%;
+  width:47%;
+  height:62%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 44% 48%,rgba(255,184,94,.16) 0%,rgba(239,147,108,.12) 28%,rgba(223,140,168,.08) 46%,rgba(120,203,200,.06) 60%,transparent 74%);
+  filter:blur(24px);
+  opacity:.72;
+}
+
+.person-type{color:rgba(95,62,44,.052);}
+
+.person-studio,
+.person-wide,
+.person-floral{
+  background:#fffaf2;
+  outline-color:rgba(255,255,255,.90);
+  box-shadow:0 34px 84px rgba(105,65,42,.15),0 9px 24px rgba(238,174,95,.07),0 0 0 1px rgba(132,91,67,.07);
+}
+
+.person-acrylic{
+  background:
+    radial-gradient(ellipse at 36% 34%,rgba(255,255,255,.65) 0%,transparent 43%),
+    radial-gradient(ellipse at 64% 54%,rgba(245,181,98,.13) 0%,rgba(223,140,168,.08) 29%,rgba(120,203,200,.08) 46%,transparent 66%);
+  border-color:rgba(255,255,255,.48);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.72),0 24px 64px rgba(95,64,52,.06);
+}
+
+.source-tab{
+  background:rgba(255,249,240,.94);
+  color:rgba(31,23,20,.89);
+}
+
+/* Small screens: preserve warmth but keep the color as local light, not wallpaper. */
+@media(max-width:760px){
+  .topbar{background:#fff8ed;}
+
+  .hero{
+    background:
+      radial-gradient(ellipse at 34% 23%,rgba(246,183,100,.48) 0%,rgba(242,170,88,.22) 31%,transparent 57%),
+      radial-gradient(ellipse at 88% 18%,rgba(120,203,200,.14) 0%,transparent 29%),
+      radial-gradient(ellipse at 88% 38%,rgba(180,155,221,.11) 0%,rgba(223,140,168,.08) 30%,transparent 48%),
+      radial-gradient(ellipse at 20% 82%,rgba(239,147,108,.13) 0%,transparent 36%),
+      linear-gradient(148deg,#fff9ef 0%,#f6e5cf 54%,#f5eee5 100%);
+  }
+  .hero::before{
+    inset:14% -12% 15% 16%;
+    border-radius:50%;
+    filter:blur(30px);
+    opacity:.82;
+    transform:rotate(-8deg);
+  }
+  .hero::after{
+    width:62vw;
+    height:34%;
+    right:-13%;
+    top:7%;
+    filter:blur(23px);
+    opacity:.62;
+    transform:rotate(8deg);
+  }
+  .hero-glass{
+    right:-8px;
+    top:24%;
+    width:70px;
+    height:41%;
+    filter:blur(20px);
+    opacity:.52;
+  }
+
+  .person{
+    background:
+      radial-gradient(ellipse at 34% 29%,rgba(246,184,102,.34) 0%,rgba(242,170,88,.13) 31%,transparent 55%),
+      radial-gradient(ellipse at 82% 58%,rgba(120,203,200,.09) 0%,rgba(180,155,221,.06) 30%,transparent 48%),
+      radial-gradient(ellipse at 36% 87%,rgba(223,140,168,.07) 0%,transparent 38%),
+      linear-gradient(154deg,#fff9ef 0%,#f7e8d5 61%,#f5eee6 100%);
+  }
+  .person::before{
+    width:92%;
+    height:58%;
+    left:18%;
+    top:20%;
+    border-radius:50%;
+    filter:blur(30px);
+    opacity:.66;
+    transform:rotate(-6deg);
+  }
+  .person::after{
+    right:-18%;
+    bottom:4%;
+    width:72%;
+    height:38%;
+    opacity:.48;
+  }
+
+  .person-floral .source-tab,
+  .person-wide .source-tab{
+    white-space:normal;
+    line-height:1.12;
+    padding:7px 8px;
+    font-size:7px;
+  }
+  .person-floral .source-tab b,
+  .person-wide .source-tab b{
+    display:block;
+    margin-bottom:2px;
+    font-size:10px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero::before,.hero::after,.hero-glass,.person::before,.person::after{animation:none!important;}
+}
