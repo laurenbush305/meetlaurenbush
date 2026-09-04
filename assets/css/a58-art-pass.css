@@ -26,8 +26,10 @@
 @import url('a5193-calibration-lock.css?v=a5193');
 @import url('a5194-explain-create-room-light.css?v=a5194');
 @import url('a5195-aura-elevation.css?v=a5195');
+@import url('a5196-back-half-atmosphere.css?v=a5196');
 
-/* A5.19.5 AURA ELEVATION
-   A5.19.3 was visually rejected as too pale beside Lauren's Aura reference.
-   Hero + Person remain calibration scenes until this stronger amber/prismatic pass is manually approved. */
+/* A5.19.6 BACK-HALF ATMOSPHERE
+   Hero + Person and Explain + Create passed fresh visual review after A5.19.5.
+   A5.19.6 carries Warm Prismatic Stardust into Activate, Between Cues, and Casting Imagination
+   without reopening approved geometry, proof hierarchy, copy, media, or interactions. */
 @media print{}
