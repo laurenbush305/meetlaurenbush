@@ -12,7 +12,6 @@ permissions:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/setup-node@v4
         with:
@@ -24,7 +23,7 @@ jobs:
       - name: Capture current live page with A5.19.5 optical layer
         run: |
           mkdir -p capture
-          cat > /tmp/capture.mjs <<'EOF'
+          cat > capture.mjs <<'EOF'
           import { chromium } from 'playwright';
           const browser = await chromium.launch({headless:true});
           const configs = [
@@ -41,12 +40,11 @@ jobs:
             await page.locator('#person').scrollIntoViewIfNeeded();
             await page.waitForTimeout(900);
             await page.locator('#person').screenshot({path:`capture/${name}-person.png`});
-            await page.screenshot({path:`capture/${name}-top.png`,fullPage:false});
             await page.close();
           }
           await browser.close();
           EOF
-          node /tmp/capture.mjs
+          node capture.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
