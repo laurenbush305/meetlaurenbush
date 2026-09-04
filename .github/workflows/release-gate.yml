@@ -1,0 +1,70 @@
+name: Season Zero Release Gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.release-qa-trigger'
+      - 'scripts/release-gate.mjs'
+      - '.github/workflows/release-gate.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: season-zero-release-gate
+  cancel-in-progress: true
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Verify all six public pages match this checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILES=(index.html casting-sheet.html project-scrambled-up.html project-pickleball-bag.html project-dear-diary-montis.html project-honcho-centerline.html)
+          for attempt in {1..60}; do
+            all_match=1
+            for f in "${FILES[@]}"; do
+              local_hash=$(sha256sum "$f" | awk '{print $1}')
+              if ! curl -fsSL "https://meetlaurenbush.com/${f}?releasegate=${GITHUB_SHA}-${attempt}" -o /tmp/sz-live; then all_match=0; break; fi
+              remote_hash=$(sha256sum /tmp/sz-live | awk '{print $1}')
+              if [[ "$local_hash" != "$remote_hash" ]]; then all_match=0; break; fi
+            done
+            if [[ "$all_match" -eq 1 ]]; then echo "All public pages match current checkout."; exit 0; fi
+            sleep 10
+          done
+          echo "Timed out waiting for production deploy." >&2
+          exit 1
+
+      - name: Prepare Chromium and WebKit
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_PATH="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [[ -z "$CHROME_PATH" ]]; then echo "Runner Chrome not found." >&2; exit 1; fi
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save --ignore-scripts playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps webkit
+
+      - name: Run six-width Chromium + WebKit release gate
+        env:
+          QA_SHA: ${{ github.sha }}
+        run: node scripts/release-gate.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: season-zero-release-gate-${{ github.sha }}
+          path: release-artifacts
+          if-no-files-found: error
+          retention-days: 30
