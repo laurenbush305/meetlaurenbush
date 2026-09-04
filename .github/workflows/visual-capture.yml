@@ -23,7 +23,7 @@ concurrency:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,29 +33,29 @@ jobs:
         with:
           node-version: 24
 
-      - name: Wait for changed public files to reach GitHub Pages
+      - name: Wait for current public files to reach GitHub Pages
         shell: bash
         run: |
           set -euo pipefail
           BEFORE="${{ github.event.before }}"
-          if [[ -z "${BEFORE}" || "${BEFORE}" =~ ^0+$ ]]; then
-            echo "No usable previous SHA; capture will verify the current public site."
-            exit 0
+          FILES=()
+
+          if [[ -n "${BEFORE}" && ! "${BEFORE}" =~ ^0+$ ]]; then
+            mapfile -t FILES < <(
+              git diff --name-only "$BEFORE" "$GITHUB_SHA" -- '*.html' 'assets/css/**' 'assets/js/**' 'assets/img/**' \
+                | while read -r f; do [[ -f "$f" ]] && printf '%s\n' "$f"; done \
+                | head -n 5
+            )
           fi
 
-          mapfile -t FILES < <(
-            git diff --name-only "$BEFORE" "$GITHUB_SHA" -- '*.html' 'assets/css/**' 'assets/js/**' 'assets/img/**' \
-              | while read -r f; do [[ -f "$f" ]] && printf '%s\n' "$f"; done \
-              | head -n 5
-          )
-
+          # QA-only and manual-trigger commits still need to prove they are photographing
+          # the current public site, not the previous Pages deployment.
           if [[ ${#FILES[@]} -eq 0 ]]; then
-            echo "No public-file diff to poll; capture will verify the current public site."
-            exit 0
+            FILES=(index.html casting-sheet.html)
           fi
 
-          echo "Polling representative changed files: ${FILES[*]}"
-          for attempt in {1..48}; do
+          echo "Polling public files against this checkout: ${FILES[*]}"
+          for attempt in {1..60}; do
             all_match=1
             for f in "${FILES[@]}"; do
               local_hash=$(sha256sum "$f" | awk '{print $1}')
@@ -71,13 +71,13 @@ jobs:
               fi
             done
             if [[ "$all_match" -eq 1 ]]; then
-              echo "Current public files match this commit."
+              echo "Current public files match this checkout."
               exit 0
             fi
             sleep 10
           done
 
-          echo "Timed out waiting for GitHub Pages to match the commit." >&2
+          echo "Timed out waiting for GitHub Pages to match the current checkout." >&2
           exit 1
 
       - name: Prepare browser automation
@@ -93,7 +93,7 @@ jobs:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save --ignore-scripts playwright-core@1.55.0 >/dev/null
           echo "Using runner browser: $CHROME_PATH"
 
-      - name: Capture homepage scenes, interactions, and QA state
+      - name: Capture homepage and casting-sheet scenes, interactions, and QA state
         env:
           QA_SHA: ${{ github.sha }}
         run: |
