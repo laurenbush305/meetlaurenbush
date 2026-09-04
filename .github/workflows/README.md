@@ -1,0 +1,1 @@
+Custom GitHub Actions removed on 2026-09-03. Production publishing is handled separately. Do not add push-triggered QA workflows without explicit approval.
