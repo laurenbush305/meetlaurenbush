@@ -44,14 +44,22 @@ jobs:
             mapfile -t FILES < <(
               git diff --name-only "$BEFORE" "$GITHUB_SHA" -- '*.html' 'assets/css/**' 'assets/js/**' 'assets/img/**' \
                 | while read -r f; do [[ -f "$f" ]] && printf '%s\n' "$f"; done \
-                | head -n 5
+                | head -n 8
             )
           fi
 
-          # QA-only and manual-trigger commits still need to prove they are photographing
-          # the current public site, not the previous Pages deployment.
+          # QA-only and manual-trigger commits must still prove the full public surface is
+          # current. This prevents a fresh QA script from photographing a previous Pages
+          # deploy while project-file changes are still propagating.
           if [[ ${#FILES[@]} -eq 0 ]]; then
-            FILES=(index.html casting-sheet.html)
+            FILES=(
+              index.html
+              casting-sheet.html
+              project-scrambled-up.html
+              project-pickleball-bag.html
+              project-dear-diary-montis.html
+              project-honcho-centerline.html
+            )
           fi
 
           echo "Polling public files against this checkout: ${FILES[*]}"
@@ -93,7 +101,7 @@ jobs:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save --ignore-scripts playwright-core@1.55.0 >/dev/null
           echo "Using runner browser: $CHROME_PATH"
 
-      - name: Capture homepage and casting-sheet scenes, interactions, and QA state
+      - name: Capture all public pages, interactions, and QA state
         env:
           QA_SHA: ${{ github.sha }}
         run: |
