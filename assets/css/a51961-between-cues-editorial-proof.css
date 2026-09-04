@@ -1,24 +1,26 @@
-/* A5.19.6.1 — BETWEEN CUES EDITORIAL EVIDENCE RAIL
-   Fresh A5.19.6 pixels proved the atmosphere is right but the three equal proof tiles
-   still read like a KPI dashboard. This is the one bounded structural correction earned
-   by the live render. Copy, proof claims, portrait, crop, and section hierarchy are protected. */
+/* A5.19.6.2 — BETWEEN CUES EDITORIAL EVIDENCE RAIL
+   Fresh A5.19.6.1 production pixels approved the editorial direction and exposed one
+   desktop fit defect: the third evidence row crossed the section boundary. This correction
+   lifts and compacts the rail while preserving copy, proof claims, portrait, and hierarchy. */
 
 @media (min-width:761px){
   .trust-proof{
     left:4%;
     right:auto;
-    bottom:5%;
+    bottom:9%;
     width:min(52vw,720px);
     display:block!important;
     background:transparent!important;
     border-top:1px solid rgba(103,62,38,.22)!important;
+    border-right:0!important;
     border-bottom:0!important;
+    border-left:0!important;
     box-shadow:none!important;
   }
 
   .trust-proof article{
     min-height:0!important;
-    padding:13px 0 14px!important;
+    padding:9px 0 10px!important;
     display:grid!important;
     grid-template-columns:104px minmax(150px,190px) minmax(0,1fr);
     column-gap:18px;
@@ -40,16 +42,16 @@
 
   .trust-proof strong{
     margin:0!important;
-    font-size:clamp(27px,2.35vw,36px)!important;
-    line-height:.92!important;
-    letter-spacing:-.055em!important;
+    font-size:clamp(26px,2.1vw,32px)!important;
+    line-height:.94!important;
+    letter-spacing:-.052em!important;
   }
 
   .trust-proof p{
     margin:0!important;
     max-width:36ch;
-    font-size:9px!important;
-    line-height:1.42!important;
+    font-size:8.5px!important;
+    line-height:1.38!important;
     color:rgba(11,15,20,.72)!important;
   }
 }
@@ -62,7 +64,9 @@
     display:block!important;
     background:transparent!important;
     border-top:1px solid rgba(103,62,38,.20)!important;
+    border-right:0!important;
     border-bottom:0!important;
+    border-left:0!important;
     box-shadow:none!important;
   }
 
