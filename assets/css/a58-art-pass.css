@@ -22,9 +22,10 @@
 @import url('a5162-proof-drawer-closure.css?v=a5162');
 @import url('a519-warm-prismatic-stardust.css?v=a5190');
 @import url('a5191-aura-calibration.css?v=a5191');
+@import url('a5192-room-light.css?v=a5192');
 
-/* A5.19.1 CALIBRATION WRAPPER
-   A5.16.2 geometry remains the protected baseline. The first Warm Prismatic
-   calibration was visually reviewed against the Aura reference and corrected
-   here with stronger architectural amber and controlled cyan/magenta projection. */
+/* A5.19.2 ROOM-LIGHT CALIBRATION WRAPPER
+   A5.16.2 geometry remains the protected baseline. A5.19.2 corrects the
+   over-literal rainbow projection and establishes amber/champagne room light
+   with localized prismatic bloom as the visual calibration language. */
 @media print{}
