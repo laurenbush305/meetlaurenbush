@@ -1,0 +1,34 @@
+/* A5.20.1 — PIXEL REVIEW FIXES
+   Corrections made only after fresh production screenshots were inspected. */
+
+/* Tablet Person: the portrait caption is nonessential and was being covered by the
+   overlapping personality frame. Remove the collision instead of shrinking the text. */
+@media (min-width:761px) and (max-width:1024px){
+  .person-studio .source-tab{display:none!important;}
+}
+
+/* Explain: the finance image already carries its own caption. The extra black proof
+   tag clipped against the adjoining portrait and made the composition feel busier. */
+@media (min-width:761px){
+  .finance-transmission::before{display:none!important;}
+  .finance-transmission{overflow:visible!important;}
+}
+
+/* Watch: preserve the LBTV rundown, but remove the remaining app-card treatment
+   from program metadata. Use ambient stage shading + editorial rules instead. */
+@media (min-width:761px){
+  .watch-program::after{
+    background:linear-gradient(90deg,rgba(7,9,12,0) 0%,rgba(7,9,12,.28) 28%,rgba(7,9,12,.68) 100%)!important;
+    backdrop-filter:none!important;
+  }
+  .watch-meta{
+    background:transparent!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  .watch-meta strong,
+  .watch-meta small,
+  .watch-meta span{background:transparent!important;}
+  .watch-tuner{bottom:6.2%!important;}
+}
