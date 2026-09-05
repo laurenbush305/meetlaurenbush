@@ -55,6 +55,19 @@ function diagnostics(page) {
   return state;
 }
 
+async function primeLazyMedia(page, height) {
+  const max = await page.evaluate(() => document.documentElement.scrollHeight);
+  const step = Math.max(520, Math.floor(height * .72));
+  for (let y = 0; y < max; y += step) {
+    await page.evaluate(nextY => scrollTo(0, nextY), y);
+    await page.waitForTimeout(85);
+  }
+  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForTimeout(180);
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.waitForTimeout(180);
+}
+
 async function inspectPage(browser, engine, pageKey, path, widthName, width, height, capture) {
   const ctx = await browser.newContext({ viewport:{width,height}, colorScheme:'light', reducedMotion:'no-preference' });
   const page = await ctx.newPage();
@@ -103,7 +116,7 @@ async function inspectPage(browser, engine, pageKey, path, widthName, width, hei
   }
 
   if(capture) {
-    await page.evaluate(() => scrollTo(0,0)); await page.waitForTimeout(150);
+    await primeLazyMedia(page, height);
     await page.screenshot({path:`${output}/${engine}-${pageKey}-${widthName}-full.png`,fullPage:true});
   }
 
