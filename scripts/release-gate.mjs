@@ -45,8 +45,12 @@ function diagnostics(page) {
   page.on('response', r => { if (r.status() >= 400) state.responseErrors.push({status:r.status(),url:r.url()}); });
   page.on('requestfailed', req => {
     const error = req.failure()?.errorText || 'request failed';
-    if (error === 'net::ERR_ABORTED' && req.resourceType() === 'media') return;
-    state.requestFailures.push({url:req.url(),error,resourceType:req.resourceType()});
+    const url = req.url();
+    const knownPartialVideoCancel =
+      /\.(mp4|webm)(?:$|\?)/i.test(url) &&
+      (error === 'net::ERR_ABORTED' || error === 'Load request cancelled');
+    if (knownPartialVideoCancel) return;
+    state.requestFailures.push({url,error,resourceType:req.resourceType()});
   });
   return state;
 }
