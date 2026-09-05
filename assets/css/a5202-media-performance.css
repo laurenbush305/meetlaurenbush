@@ -1,0 +1,14 @@
+/* A5.20.2 — MEDIA PERFORMANCE
+   Keep the approved Person range transmission composition while using existing
+   small public-safe derivatives that match the rendered tile size. */
+
+@media (min-width:761px){
+  .person .person-acrylic{
+    background-image:
+      linear-gradient(180deg,rgba(255,246,229,.01),rgba(255,196,155,.04)),
+      url('../img/a5103/wimpb-campaign-main-360.jpg'),
+      url('../img/a5102/host-talent-320.webp'),
+      url('../img/a5103/scrambled-podium-smile-360.webp'),
+      url('../img/a5103/activate-centerline-wide-360.jpg')!important;
+  }
+}
