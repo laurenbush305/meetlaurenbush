@@ -1,0 +1,185 @@
+/* A5.20.3 — PRISMATIC OBJECT LANGUAGE
+   Reference cue: iridescence should behave like physical signal objects,
+   not only atmospheric gradients. Keep the field editorial, sparse, and
+   subordinate to Lauren + proof. */
+
+/* Shared image treatment */
+.hero-atmosphere::after,
+.person-type::after,
+.watch-stage::after,
+.imagination-grid::after,
+.cast58 .casting-hero::after,
+.cast58 .range-section::after{
+  content:'';
+  position:absolute;
+  display:block;
+  pointer-events:none;
+  background-image:url('../img/prismatic-signal-cluster.svg');
+  background-repeat:no-repeat;
+  background-size:contain;
+  transform-origin:center;
+}
+
+/* HERO — first-glance prismatic signal. Keep it away from Lauren's face
+   and let it read as objects drifting into frame from the right edge. */
+.hero-atmosphere::after{
+  z-index:3;
+  width:min(49vw,720px);
+  aspect-ratio:1200/360;
+  right:-4.5%;
+  bottom:8%;
+  opacity:.88;
+  filter:saturate(1.08) contrast(1.03) drop-shadow(0 10px 24px rgba(93,53,112,.12));
+  transform:rotate(-3.2deg);
+}
+
+/* PERSON — a smaller human-world prism field in the open upper-right air.
+   It should feel like the visual equivalent of personality/range punctuation. */
+.person-type::after{
+  z-index:1;
+  width:min(31vw,460px);
+  aspect-ratio:1200/360;
+  right:3.5vw;
+  top:1.5vw;
+  opacity:.72;
+  filter:saturate(1.05) drop-shadow(0 8px 18px rgba(74,47,96,.1));
+  transform:rotate(5deg) scale(.94);
+}
+
+/* WATCH — bright prismatic signal against the dark broadcast field.
+   The objects live in the negative space, not over the program image. */
+.watch-stage::after{
+  z-index:7;
+  width:min(32vw,470px);
+  aspect-ratio:1200/360;
+  right:1.8%;
+  top:-10%;
+  opacity:.9;
+  mix-blend-mode:screen;
+  filter:saturate(1.18) brightness(1.08) drop-shadow(0 0 18px rgba(126,218,228,.16));
+  transform:rotate(3deg);
+}
+
+/* CASTING IMAGINATION — this is where the object language can breathe most.
+   A larger cluster in open paper space makes NEXT feel speculative/future-facing. */
+.imagination-grid::after{
+  z-index:0;
+  width:min(47vw,700px);
+  aspect-ratio:1200/360;
+  left:3%;
+  top:9%;
+  opacity:.66;
+  filter:saturate(1.04) drop-shadow(0 12px 25px rgba(74,47,96,.11));
+  transform:rotate(-4deg);
+}
+
+/* CASTING SHEET — connect the secondary page to the same object system.
+   Hero gets only a glint. Range gets a wider ribbon because the subject is range. */
+.cast58 .casting-hero::after{
+  z-index:1;
+  width:min(34vw,500px);
+  aspect-ratio:1200/360;
+  right:-3%;
+  top:8%;
+  opacity:.62;
+  filter:saturate(1.05) drop-shadow(0 8px 20px rgba(74,47,96,.1));
+  transform:rotate(4deg);
+}
+.cast58 .range-section::after{
+  z-index:1;
+  width:min(44vw,650px);
+  aspect-ratio:1200/360;
+  left:-5%;
+  bottom:2%;
+  opacity:.58;
+  filter:saturate(1.06) drop-shadow(0 8px 20px rgba(74,47,96,.1));
+  transform:rotate(-5deg);
+}
+.cast58 .range-head,
+.cast58 .range-mosaic,
+.cast58 .range-note{position:relative;z-index:3;}
+
+/* Add small faceted glints to structural seams. These are CSS objects,
+   intentionally tiny so the new language is repeated without becoming a motif dump. */
+.hero-rail::before,
+.watch-tuner::after,
+.imagination-copy::before{
+  content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.95),rgba(122,229,237,.9) 26%,rgba(200,155,240,.88) 49%,rgba(255,118,170,.86) 68%,rgba(255,211,123,.9));
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+  box-shadow:0 0 16px rgba(142,200,229,.32);
+  pointer-events:none;
+}
+.hero-rail{position:relative;}
+.hero-rail::before{right:-26px;top:50%;transform:translateY(-50%) rotate(9deg);}
+.watch-tuner{position:absolute!important;}
+.watch-tuner::after{right:-24px;top:50%;transform:translateY(-50%) rotate(-8deg);}
+.imagination-copy{position:absolute;}
+.imagination-copy::before{left:-27px;top:11px;transform:rotate(12deg);}
+
+/* Tablet — preserve the idea while keeping clear air around typography/photos. */
+@media (min-width:761px) and (max-width:1024px){
+  .hero-atmosphere::after{width:47vw;right:-7%;bottom:10%;opacity:.78;}
+  .person-type::after{width:29vw;right:2vw;top:2vw;opacity:.58;}
+  .watch-stage::after{width:33vw;right:-1%;top:-7%;opacity:.78;}
+  .imagination-grid::after{width:43vw;left:2%;top:11%;opacity:.5;}
+  .cast58 .casting-hero::after{width:34vw;right:-5%;top:10%;opacity:.5;}
+  .cast58 .range-section::after{width:42vw;left:-8%;bottom:3%;opacity:.46;}
+}
+
+/* Mobile — fewer, larger accents. Do not turn 390px into a sticker wall. */
+@media (max-width:760px){
+  .hero-atmosphere::after{
+    width:78vw;
+    right:-31%;
+    bottom:12%;
+    opacity:.72;
+    transform:rotate(-7deg);
+  }
+  .person-type::after{display:none;}
+  .watch-stage::after{
+    width:69vw;
+    right:-27%;
+    top:-3%;
+    opacity:.75;
+    transform:rotate(7deg);
+  }
+  .imagination-grid::after{
+    width:80vw;
+    left:-28%;
+    top:8%;
+    opacity:.46;
+    transform:rotate(-8deg);
+  }
+  .cast58 .casting-hero::after{
+    width:68vw;
+    right:-25%;
+    top:11%;
+    opacity:.48;
+  }
+  .cast58 .range-section::after{
+    width:76vw;
+    left:-34%;
+    bottom:4%;
+    opacity:.4;
+  }
+  .hero-rail::before,
+  .watch-tuner::after,
+  .imagination-copy::before{width:12px;height:12px;}
+  .hero-rail::before{right:-16px;}
+  .watch-tuner::after{right:-14px;}
+  .imagination-copy::before{left:-17px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-atmosphere::after,
+  .person-type::after,
+  .watch-stage::after,
+  .imagination-grid::after,
+  .cast58 .casting-hero::after,
+  .cast58 .range-section::after{transform:none;}
+}
