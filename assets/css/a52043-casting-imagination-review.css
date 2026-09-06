@@ -1,0 +1,170 @@
+/* A5.20.4.3 — CASTING IMAGINATION / PRIVATE REVIEW ONLY
+   Real review assets replace the capability matrix. Do not publish or merge
+   until the sources in assets/review/casting-imagination are publicly cleared. */
+
+.imagination{
+  min-height:920px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#eee9e4!important;
+}
+.imagination-grid,
+.imagination::before,
+.imagination::after,
+.imagination-copy::before,
+.imagination-copy::after{
+  display:none!important;
+  content:none!important;
+}
+.imagination-copy{
+  position:absolute!important;
+  z-index:12!important;
+  left:5%!important;
+  right:auto!important;
+  top:7%!important;
+  width:min(40vw,570px)!important;
+}
+.imagination-copy h2{
+  max-width:6.7ch!important;
+  margin:12px 0 16px!important;
+  font-size:clamp(76px,7.7vw,112px)!important;
+  line-height:.76!important;
+}
+.imagination-copy>p:last-child{
+  max-width:34ch!important;
+  margin:0!important;
+}
+.imagination-spread{
+  position:absolute;
+  inset:0;
+}
+.casting-frame{
+  position:absolute;
+  margin:0;
+  overflow:hidden;
+  background:#c9c0b9;
+  border:0;
+  box-shadow:none;
+  transform:none;
+}
+.casting-frame img,
+.casting-frame video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.casting-green{
+  z-index:5;
+  right:5%;
+  top:6%;
+  width:min(31vw,446px);
+  height:86%;
+}
+.casting-green img{object-position:50% 50%;}
+.casting-leather{
+  z-index:6;
+  left:5%;
+  bottom:7%;
+  width:min(27vw,388px);
+  height:47%;
+}
+.casting-leather img{object-position:50% 0;}
+.casting-beauty{
+  z-index:8;
+  left:34%;
+  top:38%;
+  width:min(16vw,230px);
+  height:34%;
+}
+.casting-beauty video{object-position:50% 38%;}
+.casting-denim{
+  z-index:9;
+  left:36%;
+  bottom:7%;
+  width:min(11vw,158px);
+  height:19%;
+}
+.casting-denim video{object-position:50% 34%;}
+
+@media (min-width:761px) and (max-width:1024px){
+  .imagination{min-height:1100px!important;}
+  .imagination-copy{
+    left:5%!important;
+    top:7%!important;
+    width:67%!important;
+  }
+  .imagination-copy h2{
+    max-width:7ch!important;
+    font-size:clamp(72px,10.5vw,94px)!important;
+  }
+  .casting-green{
+    left:5%;
+    right:auto;
+    top:28%;
+    width:55%;
+    height:65%;
+  }
+  .casting-green img{object-position:50% 50%;}
+  .casting-beauty{
+    left:62%;
+    top:29%;
+    width:29%;
+    height:24%;
+  }
+  .casting-leather{
+    left:auto;
+    right:4%;
+    bottom:7%;
+    width:34%;
+    height:43%;
+  }
+  .casting-denim{
+    left:56%;
+    bottom:7%;
+    width:15%;
+    height:18%;
+  }
+}
+
+@media (max-width:760px){
+  .imagination{
+    min-height:1280px!important;
+    padding:0!important;
+  }
+  .imagination-copy{
+    left:18px!important;
+    right:18px!important;
+    top:78px!important;
+    width:auto!important;
+  }
+  .imagination-copy h2{
+    max-width:7ch!important;
+    margin:11px 0 16px!important;
+    font-size:clamp(54px,16vw,64px)!important;
+    line-height:.8!important;
+  }
+  .casting-green{
+    left:18px;
+    right:18px;
+    top:294px;
+    width:auto;
+    height:540px;
+  }
+  .casting-green img{object-position:50% 50%;}
+  .casting-leather{
+    left:auto;
+    right:18px;
+    top:866px;
+    bottom:auto;
+    width:218px;
+    height:346px;
+  }
+  .casting-beauty{
+    left:18px;
+    top:992px;
+    width:152px;
+    height:220px;
+  }
+  .casting-denim{display:none;}
+}
