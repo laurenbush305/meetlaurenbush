@@ -2,25 +2,29 @@ import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 
 const sha = process.env.QA_SHA || 'unknown';
-const site = 'https://meetlaurenbush.com';
+const site = process.env.QA_SITE || 'https://meetlaurenbush.com';
 const viewports = [
   ['desktop', 1440, 1000],
+  ['laptop', 1024, 900],
   ['tablet', 768, 1024],
-  ['mobile', 390, 844]
+  ['wide-mobile', 430, 932],
+  ['mobile', 390, 844],
+  ['small-mobile', 360, 800]
 ];
+const primaryViewports = ['desktop','laptop','tablet','wide-mobile','mobile','small-mobile'];
 const routes = [
   {
-    key: 'home', path: '/', viewportNames: ['desktop', 'tablet', 'mobile'],
+    key: 'home', path: '/', viewportNames: primaryViewports,
     scenes: [['hero','main > section:first-of-type'],['person','#person'],['explain','#explain'],['create','#create'],['television','#television'],['host','#host'],['activate','#activate'],['watch','#watch'],['between-cues','#trust'],['imagination','#imagination'],['book','#book']]
   },
   {
-    key: 'casting', path: '/casting-sheet.html', viewportNames: ['desktop', 'tablet', 'mobile'],
+    key: 'casting', path: '/casting-sheet.html', viewportNames: primaryViewports,
     scenes: [['hero','.casting-hero'],['doors','.door-section'],['range','.range-section'],['files','#selected-files'],['operator','.operator-section'],['booking','.booking-section']]
   },
-  { key:'project-scrambled', path:'/project-scrambled-up.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
-  { key:'project-wimpb', path:'/project-pickleball-bag.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
-  { key:'project-montis', path:'/project-dear-diary-montis.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
-  { key:'project-centerline', path:'/project-honcho-centerline.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] }
+  { key:'project-scrambled', path:'/project-scrambled-up.html', viewportNames:['desktop','mobile','small-mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
+  { key:'project-wimpb', path:'/project-pickleball-bag.html', viewportNames:['desktop','mobile','small-mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
+  { key:'project-montis', path:'/project-dear-diary-montis.html', viewportNames:['desktop','mobile','small-mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
+  { key:'project-centerline', path:'/project-honcho-centerline.html', viewportNames:['desktop','mobile','small-mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] }
 ];
 
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH });
@@ -79,7 +83,7 @@ const testCastingInteractions = async page => {
   if (count < 4) failures.push(`Casting sheet expected 4 selected-file links; found ${count}`);
   for (let i=0;i<count;i++) if (!(await fileLinks.nth(i).getAttribute('href'))) failures.push(`Casting selected-file link ${i+1} has no href`);
   if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
-  if ((await page.locator('.range-section .range-frame').count()) !== 5) failures.push('Casting range mosaic must contain exactly 5 public-safe frames');
+  if ((await page.locator('.range-section .range-frame').count()) !== 5) failures.push('Casting range mosaic must contain exactly 5 frames');
   return failures;
 };
 
