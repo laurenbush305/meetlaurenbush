@@ -35,8 +35,9 @@
 @import url('a5201-pixel-review-fixes.css?v=a5201');
 @import url('a5202-media-performance.css?v=a5202');
 @import url('a5203-prismatic-object-language.css?v=a5203');
+@import url('a5204-production-luxury-pass.css?v=a5204');
 
-/* A5.20.3 PRISMATIC OBJECT LANGUAGE
-   Warm Prismatic Stardust now includes sparse, physical iridescent signal objects
-   alongside atmosphere, while preserving the locked scene architecture. */
+/* A5.20.4 PRODUCTION LUXURY PASS
+   A5.20.3 remains the locked design baseline. This layer adds approved photography,
+   restraint, legibility and production finishing without reopening architecture. */
 @media print{}
