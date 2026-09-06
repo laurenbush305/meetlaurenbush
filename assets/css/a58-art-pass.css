@@ -34,8 +34,9 @@
 @import url('a5200-design-completion.css?v=a5200');
 @import url('a5201-pixel-review-fixes.css?v=a5201');
 @import url('a5202-media-performance.css?v=a5202');
+@import url('a5203-prismatic-object-language.css?v=a5203');
 
-/* A5.20.2 DESIGN + MEDIA FINISH
-   Pixel-reviewed A5.20.1 design with smaller verified range-transmission assets.
-   Locked scene architecture and Warm Prismatic Stardust remain intact. */
+/* A5.20.3 PRISMATIC OBJECT LANGUAGE
+   Warm Prismatic Stardust now includes sparse, physical iridescent signal objects
+   alongside atmosphere, while preserving the locked scene architecture. */
 @media print{}
