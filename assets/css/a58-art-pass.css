@@ -36,8 +36,9 @@
 @import url('a5202-media-performance.css?v=a5202');
 @import url('a5203-prismatic-object-language.css?v=a5203');
 @import url('a5204-production-luxury-pass.css?v=a5204');
+@import url('a52041-review-safety.css?v=a52041');
 
 /* A5.20.4 PRODUCTION LUXURY PASS
    A5.20.3 remains the locked design baseline. This layer adds approved photography,
-   restraint, legibility and production finishing without reopening architecture. */
+   authored seams, restraint and review-only clearance scaffolds without reopening architecture. */
 @media print{}
