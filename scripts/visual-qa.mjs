@@ -12,6 +12,7 @@ const viewports = [
   ['small-mobile', 360, 800]
 ];
 const primaryViewports = ['desktop','laptop','tablet','wide-mobile','mobile','small-mobile'];
+const detailedSceneViewports = new Set(['desktop','tablet','mobile']);
 const routes = [
   {
     key: 'home', path: '/', viewportNames: primaryViewports,
@@ -110,14 +111,20 @@ for (const route of routes) {
 
     const max = await page.evaluate(() => document.documentElement.scrollHeight);
     for (let y=0; y<max; y+=Math.max(520,Math.floor(height*.72))) {
-      await page.evaluate(nextY => scrollTo(0,nextY), y); await page.waitForTimeout(80);
+      await page.evaluate(nextY => scrollTo(0,nextY), y); await page.waitForTimeout(70);
     }
-    await page.evaluate(() => scrollTo(0,0)); await page.waitForTimeout(350);
+    await page.evaluate(() => scrollTo(0,0)); await page.waitForTimeout(280);
 
+    // Every assigned viewport gets a complete editorial read of the route.
     await page.screenshot({ path:`qa-artifacts/${prefix}-full.png`, fullPage:true });
-    for (const [key,selector] of route.scenes) {
-      const loc=page.locator(selector).first();
-      if (await loc.count()) { await loc.scrollIntoViewIfNeeded(); await page.waitForTimeout(120); await loc.screenshot({ path:`qa-artifacts/${prefix}-${key}.png` }); }
+
+    // Close scene crops are reserved for the three art-direction review widths.
+    // The 1024/430/360 cuts are still fully represented by their full-page capture.
+    if (detailedSceneViewports.has(name)) {
+      for (const [key,selector] of route.scenes) {
+        const loc=page.locator(selector).first();
+        if (await loc.count()) { await loc.scrollIntoViewIfNeeded(); await page.waitForTimeout(100); await loc.screenshot({ path:`qa-artifacts/${prefix}-${key}.png` }); }
+      }
     }
 
     const state = await page.evaluate(() => {
