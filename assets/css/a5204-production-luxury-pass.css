@@ -1,0 +1,490 @@
+/* A5.20.4 — PRODUCTION LUXURY PASS
+   Same approved architecture. Stronger photography, rarer decoration, fewer visible seams.
+   The goal is authorship and restraint, not another redesign.
+
+   IMPORTANT: selectors marked CLEARANCE SLOT are review-branch composition scaffolds.
+   They name the exact held asset intended for that home. They must be replaced with
+   the cleared source or removed before this branch is eligible to merge to main. */
+
+/* ------------------------------------------------------------
+   PERSON — approved studio/editorial Lauren replaces repeat proof
+   ------------------------------------------------------------ */
+.person-wide img{
+  content:url('../img/editorial/yellow-sweater-landscape-900.webp')!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 43%!important;
+}
+.person-wide .source-tab{font-size:0!important;}
+.person-wide .source-tab b{display:none!important;}
+.person-wide .source-tab::after{
+  content:'Studio / editorial portrait';
+  font:400 8px/1.25 'Space Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.065em;
+}
+
+/* The old mini transmission recycled WIMPB / Host / Scrambled / Activate inside
+   PERSON. Recast that same compositional slot as the future human-world insert. */
+.person .person-acrylic{
+  left:auto!important;
+  right:4%!important;
+  top:auto!important;
+  bottom:7%!important;
+  width:min(22vw,315px)!important;
+  height:21%!important;
+  opacity:1!important;
+  border:1px solid rgba(17,16,20,.24)!important;
+  background:
+    linear-gradient(155deg,rgba(255,250,242,.96),rgba(231,221,210,.88))!important;
+  box-shadow:none!important;
+  transform:rotate(.6deg)!important;
+  overflow:hidden!important;
+}
+.person .person-acrylic::before{
+  content:'CLEARANCE SLOT\A MARTHA’S VINEYARD / EDGARTOWN\A PERSON · HUMAN WORLD';
+  white-space:pre-line;
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:14px;
+  padding:0!important;
+  background:transparent!important;
+  color:rgba(17,16,20,.68)!important;
+  font:500 8px/1.55 'Space Mono',monospace!important;
+  letter-spacing:.08em!important;
+}
+.person .person-acrylic::after{
+  content:'CAMERA ORIGINAL · PUBLIC-USE APPROVAL REQUIRED';
+  position:absolute;
+  left:14px;
+  bottom:12px;
+  color:rgba(17,16,20,.45);
+  font:500 6px/1.3 'Space Mono',monospace;
+  letter-spacing:.08em;
+}
+
+/* ------------------------------------------------------------
+   CREATE → TELEVISION — fashion interruption, not another section
+   ------------------------------------------------------------ */
+.create{overflow:visible!important;z-index:4!important;}
+.create::after{
+  content:'CLEARANCE SLOT\A GRAFFITI WALL · IMG_2784\A CREATE → TELEVISION / FULL-BODY EDITORIAL INTERRUPTION';
+  white-space:pre-line;
+  position:absolute;
+  z-index:30;
+  right:4.5%;
+  bottom:-20%;
+  width:min(25vw,360px);
+  aspect-ratio:4/5;
+  display:flex;
+  align-items:flex-end;
+  padding:18px;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.5);
+  background:
+    linear-gradient(145deg,rgba(25,27,31,.98),rgba(58,48,55,.96));
+  color:rgba(255,255,255,.8);
+  font:500 8px/1.55 'Space Mono',monospace;
+  letter-spacing:.075em;
+  box-shadow:0 30px 72px rgba(0,0,0,.18);
+  transform:rotate(.7deg);
+  pointer-events:none;
+}
+.television{z-index:2!important;}
+
+/* ------------------------------------------------------------
+   HOST — preserve live proof, reserve a genuinely different presenter world
+   ------------------------------------------------------------ */
+.host-room-support{
+  background:linear-gradient(150deg,#252933,#11151c)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:none!important;
+}
+.host-room-support img{display:none!important;}
+.host-room-support::before{
+  content:'CLEARANCE SLOT\A “WHAT’S UP EVERYBODY” · ROOFTOP\A DIRECT-TO-CAMERA PRESENTER';
+  white-space:pre-line;
+  position:absolute;
+  inset:14px;
+  display:flex;
+  align-items:flex-end;
+  color:rgba(255,255,255,.78);
+  font:500 7px/1.55 'Space Mono',monospace;
+  letter-spacing:.075em;
+}
+.host-room-support .source-tab{display:none!important;}
+
+/* ------------------------------------------------------------
+   ACTIVATE → TRUST — institutional/cultural bridge
+   ------------------------------------------------------------ */
+.activate{overflow:visible!important;z-index:3!important;}
+.activate::after{
+  content:'CLEARANCE SLOT  ·  SPELMAN BLUE ON THE GREENS / BENTLEY  ·  INSTITUTIONAL + CULTURAL TEXTURE';
+  position:absolute;
+  z-index:24;
+  left:7%;
+  bottom:-8%;
+  width:min(42vw,610px);
+  height:110px;
+  display:flex;
+  align-items:flex-end;
+  padding:16px 18px;
+  box-sizing:border-box;
+  background:linear-gradient(110deg,#f2eadf,#dfe9ef 68%,#d7edf0);
+  border-top:1px solid rgba(17,16,20,.18);
+  border-bottom:1px solid rgba(17,16,20,.18);
+  color:rgba(17,16,20,.63);
+  font:500 7px/1.4 'Space Mono',monospace;
+  letter-spacing:.075em;
+  pointer-events:none;
+}
+.trust{z-index:2!important;}
+
+/* ------------------------------------------------------------
+   BETWEEN CUES — professional presence + quiet humanity
+   ------------------------------------------------------------ */
+.trust-photo{
+  background:linear-gradient(150deg,#ded8d0,#f5eee5)!important;
+  border:1px solid rgba(17,16,20,.16)!important;
+  box-shadow:none!important;
+}
+.trust-photo img{display:none!important;}
+.trust-photo::before{
+  content:'CLEARANCE SLOT\A BLACK WOMEN INVEST · FULL-BODY EVENT\A PROFESSIONAL / COMMUNITY PRESENCE';
+  white-space:pre-line;
+  position:absolute;
+  inset:18px;
+  display:flex;
+  align-items:flex-end;
+  color:rgba(17,16,20,.68);
+  font:500 8px/1.55 'Space Mono',monospace;
+  letter-spacing:.08em;
+}
+.trust-photo .source-tab{display:none!important;}
+.trust::after{
+  content:'CLEARANCE SLOT\A BOAT AT SUNSET\A GOLDEN HOUR / HUMAN WORLD';
+  white-space:pre-line;
+  position:absolute;
+  z-index:5;
+  left:43%;
+  top:49%;
+  width:min(20vw,285px);
+  height:145px;
+  display:flex;
+  align-items:flex-end;
+  padding:12px 14px;
+  box-sizing:border-box;
+  background:linear-gradient(145deg,#f1d3b5,#d9e8eb 70%,#bfc8d3);
+  border:1px solid rgba(17,16,20,.15);
+  color:rgba(17,16,20,.58);
+  font:500 7px/1.5 'Space Mono',monospace;
+  letter-spacing:.07em;
+  transform:rotate(-.7deg);
+  pointer-events:none;
+}
+
+/* ------------------------------------------------------------
+   CASTING IMAGINATION — final range is photographic, not fantasy wallpaper
+   ------------------------------------------------------------ */
+.imagination-talent{
+  background:linear-gradient(150deg,#e8e0d7,#f6f1e9)!important;
+  border:1px solid rgba(17,16,20,.16)!important;
+  filter:none!important;
+}
+.imagination-talent img{display:none!important;}
+.imagination-talent::before{
+  content:'CLEARANCE SLOT / GREEN DRESS · FULL BODY'!important;
+  color:rgba(17,16,20,.58)!important;
+}
+.imagination-talent::after{
+  content:'CASTING RANGE LEAD\A PUBLIC-USE APPROVAL REQUIRED'!important;
+  white-space:pre-line;
+  display:flex;
+  align-items:flex-end;
+  padding:18px;
+  box-sizing:border-box;
+  color:rgba(17,16,20,.56);
+  font:500 7px/1.5 'Space Mono',monospace;
+  letter-spacing:.075em;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.imagination::before{
+  content:'CLEARANCE SLOT\A STUDIO LEATHER\A FASHION / EDITORIAL';
+  white-space:pre-line;
+  position:absolute;
+  z-index:6;
+  right:38%;
+  top:29%;
+  width:min(15vw,205px);
+  height:30%;
+  display:flex;
+  align-items:flex-end;
+  padding:12px;
+  box-sizing:border-box;
+  background:linear-gradient(160deg,#29262a,#5f5758);
+  border:1px solid rgba(255,255,255,.42);
+  color:rgba(255,255,255,.74);
+  font:500 6px/1.5 'Space Mono',monospace;
+  letter-spacing:.07em;
+  transform:rotate(-1deg);
+  pointer-events:none;
+}
+.imagination::after{
+  content:'CLEARANCE SLOT\A BLACK-TURTLENECK BEAUTY CLOSE-UP\A + DENIM-OVERALLS MOTION BEAT';
+  white-space:pre-line;
+  position:absolute;
+  z-index:6;
+  right:31%;
+  top:64%;
+  width:min(18vw,250px);
+  height:15%;
+  display:flex;
+  align-items:flex-end;
+  padding:11px 12px;
+  box-sizing:border-box;
+  background:rgba(255,250,243,.78);
+  border-top:1px solid rgba(17,16,20,.18);
+  border-bottom:1px solid rgba(17,16,20,.18);
+  color:rgba(17,16,20,.56);
+  font:500 6px/1.5 'Space Mono',monospace;
+  letter-spacing:.07em;
+  pointer-events:none;
+}
+
+/* ------------------------------------------------------------
+   BOOK — design the ending around the future final portrait now
+   ------------------------------------------------------------ */
+.book{place-items:stretch!important;align-items:center!important;}
+.book-card{
+  width:min(1120px,92%)!important;
+  grid-template-columns:1.05fr .42fr!important;
+  margin-right:24%!important;
+  background:rgba(255,255,255,.025)!important;
+  backdrop-filter:none!important;
+}
+.book::after{
+  content:'CLEARANCE SLOT\A STUDIO FLORAL DRESS\A FINAL WARM CAMPAIGN FRAME';
+  white-space:pre-line;
+  position:absolute;
+  z-index:4;
+  right:4.5%;
+  top:10%;
+  width:min(29vw,420px);
+  height:80%;
+  display:flex;
+  align-items:flex-end;
+  padding:18px;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.22);
+  background:linear-gradient(150deg,#302c2f,#715b5d 56%,#8f6f66);
+  color:rgba(255,255,255,.76);
+  font:500 7px/1.55 'Space Mono',monospace;
+  letter-spacing:.075em;
+  pointer-events:none;
+}
+
+/* ------------------------------------------------------------
+   CASTING SHEET — range before proof, without recycling homepage frames
+   ------------------------------------------------------------ */
+.cast58 .range-frame:nth-child(1){
+  background:linear-gradient(155deg,#ded8d0,#f5eee5)!important;
+  border:1px solid rgba(17,16,20,.14);
+}
+.cast58 .range-frame:nth-child(1) img{display:none!important;}
+.cast58 .range-frame:nth-child(1)::before{
+  content:'CLEARANCE SLOT\A BLACK STUDIO STOOL · IMG_6892\A RANGE LEAD / SEATED FULL BODY';
+  white-space:pre-line;
+  position:absolute;
+  inset:16px;
+  display:flex;
+  align-items:flex-end;
+  color:rgba(17,16,20,.65);
+  font:500 7px/1.55 'Space Mono',monospace;
+  letter-spacing:.075em;
+}
+.cast58 .range-frame:nth-child(1) figcaption{display:none!important;}
+
+.cast58 .range-frame:nth-child(2) img{
+  content:url('../img/headshot.jpg')!important;
+  object-fit:cover!important;
+  object-position:center 26%!important;
+}
+.cast58 .range-frame:nth-child(2) figcaption{font-size:0!important;}
+.cast58 .range-frame:nth-child(2) figcaption b{font-size:0!important;}
+.cast58 .range-frame:nth-child(2) figcaption b::after{
+  content:'Camera read';
+  font:760 12px/1 Archivo,Arial,sans-serif;
+  text-transform:none;
+}
+.cast58 .range-frame:nth-child(2) figcaption span{font-size:0!important;}
+.cast58 .range-frame:nth-child(2) figcaption span::after{
+  content:'Headshot / press';
+  font:500 7px/1.2 'Space Mono',monospace;
+  text-transform:uppercase;
+}
+
+.cast58 .range-frame:nth-child(5){
+  background:linear-gradient(150deg,#ddd5ca,#e7eceb)!important;
+  border:1px solid rgba(17,16,20,.14);
+}
+.cast58 .range-frame:nth-child(5) img{display:none!important;}
+.cast58 .range-frame:nth-child(5)::before{
+  content:'CLEARANCE SLOT\A BEACH LIFESTYLE · SEATED FULL BODY\A HUMAN / TRAVEL RANGE';
+  white-space:pre-line;
+  position:absolute;
+  inset:14px;
+  display:flex;
+  align-items:flex-end;
+  color:rgba(17,16,20,.62);
+  font:500 7px/1.55 'Space Mono',monospace;
+  letter-spacing:.075em;
+}
+.cast58 .range-frame:nth-child(5) figcaption{display:none!important;}
+
+/* ------------------------------------------------------------
+   RESTRAINT — signature objects, not wallpaper
+   ------------------------------------------------------------ */
+.person-type::after,
+.cast58 .casting-hero::after,
+.cast58 .range-section::after,
+.hero-rail::before,
+.watch-tuner::after,
+.imagination-copy::before{display:none!important;}
+.hero-atmosphere::after{opacity:.62!important;}
+.watch-stage::after{opacity:.72!important;}
+.imagination-grid::after{opacity:.42!important;}
+
+.section-code{
+  font-size:clamp(9px,.68vw,11px)!important;
+  letter-spacing:.08em!important;
+}
+.person-wide,.person-studio,.person-floral{box-shadow:none!important;}
+
+/* ------------------------------------------------------------
+   TABLET — keep the editorial sequence, reduce collision risk
+   ------------------------------------------------------------ */
+@media (min-width:761px) and (max-width:1024px){
+  .person-wide img{object-position:center 42%!important;}
+  .person .person-acrylic{right:3%!important;bottom:5%!important;width:24vw!important;height:18%!important;}
+  .create::after{right:3%;bottom:-13%;width:27vw;}
+  .activate::after{left:5%;bottom:-6%;width:46vw;height:96px;}
+  .trust::after{left:41%;top:50%;width:21vw;height:120px;}
+  .imagination::before{right:37%;width:16vw;height:27%;}
+  .imagination::after{right:29%;width:19vw;height:14%;}
+  .book-card{margin-right:22%!important;padding:42px!important;}
+  .book::after{right:3%;width:30vw;}
+}
+
+/* ------------------------------------------------------------
+   MOBILE — separate editorial cut, not desktop squeezed down
+   ------------------------------------------------------------ */
+@media (max-width:760px){
+  .person-wide img{object-position:center 40%!important;}
+  .person-wide .source-tab::after{font-size:7px;}
+  .hero-atmosphere::after{opacity:.5!important;}
+  .watch-stage::after{opacity:.58!important;}
+  .imagination-grid::after{opacity:.28!important;}
+
+  /* One intimate held human-world slot instead of the desktop transmission. */
+  .person .person-acrylic{
+    display:block!important;
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    width:44vw!important;
+    height:auto!important;
+    aspect-ratio:4/5;
+    margin:-58px 18px 20px auto!important;
+    transform:none!important;
+  }
+  .person .person-acrylic::before{font-size:6px!important;left:10px;right:10px;top:10px;}
+  .person .person-acrylic::after{font-size:5px;left:10px;bottom:9px;}
+
+  /* On phone the fashion seam becomes a deliberate vertical page turn rather
+     than an overlap that steals usable viewport width. */
+  .create{padding-bottom:230px!important;}
+  .create::after{
+    right:18px;
+    bottom:18px;
+    width:46vw;
+    max-width:210px;
+    height:195px;
+    aspect-ratio:auto;
+    padding:11px;
+    font-size:6px;
+    transform:none;
+  }
+  .host-room-support::before{inset:10px;font-size:6px;}
+  .activate{padding-bottom:190px!important;}
+  .activate::after{
+    left:18px;
+    right:18px;
+    bottom:32px;
+    width:auto;
+    height:116px;
+    padding:12px;
+    font-size:6px;
+  }
+  .trust{padding-bottom:270px!important;}
+  .trust::after{
+    left:18px;
+    top:auto;
+    bottom:132px;
+    width:47vw;
+    height:112px;
+    padding:9px;
+    font-size:6px;
+    transform:none;
+  }
+  .trust-photo::before{inset:12px;font-size:6px;}
+
+  .imagination{padding-bottom:70px!important;}
+  .imagination-talent{width:min(72vw,286px)!important;}
+  .imagination-talent::after{padding:12px;font-size:6px;}
+  .imagination::before{
+    right:12px;
+    top:44%;
+    width:31vw;
+    height:178px;
+    padding:8px;
+    font-size:5px;
+  }
+  .imagination::after{
+    right:auto;
+    left:18px;
+    top:58%;
+    width:41vw;
+    height:92px;
+    padding:8px;
+    font-size:5px;
+  }
+
+  .book{
+    min-height:860px!important;
+    padding:58px 18px 380px!important;
+  }
+  .book-card{
+    width:100%!important;
+    margin:0!important;
+    grid-template-columns:1fr!important;
+    padding:28px 22px!important;
+  }
+  .book::after{
+    right:18px;
+    left:18px;
+    top:auto;
+    bottom:28px;
+    width:auto;
+    height:320px;
+    padding:12px;
+    font-size:6px;
+  }
+
+  .cast58 .range-frame:nth-child(1)::before,
+  .cast58 .range-frame:nth-child(5)::before{font-size:6px;inset:10px;}
+}

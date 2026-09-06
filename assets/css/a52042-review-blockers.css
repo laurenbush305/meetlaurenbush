@@ -1,0 +1,15 @@
+/* A5.20.4 review blocker fix only.
+   Purpose: make the already-approved Yellow Sweater Person placement actually visible
+   in branch captures. No additional art-direction decisions are introduced here. */
+.person-wide{
+  background:url('../img/editorial/yellow-sweater-landscape-900.webp') center 43% / cover no-repeat!important;
+}
+.person-wide img{
+  opacity:0!important;
+}
+@media (min-width:761px) and (max-width:1024px){
+  .person-wide{background-position:center 42%!important;}
+}
+@media (max-width:760px){
+  .person-wide{background-position:center 40%!important;}
+}
