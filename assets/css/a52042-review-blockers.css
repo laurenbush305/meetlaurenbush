@@ -1,6 +1,6 @@
 /* A5.20.4 Person surgical pass.
-   Yellow Sweater is the campaign portrait; one small personality image and the
-   held Edgartown clearance home provide quiet counterpoints. */
+   Yellow Sweater is the campaign portrait. The Edgartown element remains a
+   non-rendering future insertion hook until cleared photography is available. */
 .person{
   min-height:900px!important;
   padding:0!important;
@@ -54,39 +54,9 @@
   text-transform:uppercase!important;
 }
 .person-wide .source-tab::after{content:none!important;}
-.person-floral{
-  left:auto!important;
-  right:4.5%!important;
-  top:auto!important;
-  bottom:7%!important;
-  width:min(15vw,210px)!important;
-  height:29%!important;
-  padding:4px!important;
-  transform:none!important;
-  z-index:9!important;
-}
+.person-floral,
 .person .person-acrylic{
-  left:auto!important;
-  right:20.5%!important;
-  top:auto!important;
-  bottom:7%!important;
-  width:min(12.5vw,180px)!important;
-  height:13%!important;
-  opacity:1!important;
-  transform:none!important;
-  z-index:8!important;
-}
-.person .person-acrylic::before{
-  left:11px!important;
-  right:11px!important;
-  top:10px!important;
-  font-size:6px!important;
-  line-height:1.45!important;
-}
-.person .person-acrylic::after{
-  left:11px!important;
-  bottom:9px!important;
-  font-size:5px!important;
+  display:none!important;
 }
 
 @media (min-width:761px) and (max-width:1024px){
@@ -104,35 +74,22 @@
     height:55%!important;
   }
   .person-wide img{object-position:49% 50%!important;}
-  .person-floral{
-    right:4%!important;
-    bottom:5%!important;
-    width:20%!important;
-    height:26%!important;
-  }
-  .person .person-acrylic{
-    left:56%!important;
-    right:auto!important;
-    bottom:5%!important;
-    width:18%!important;
-    height:11%!important;
-  }
 }
 
 @media (max-width:760px){
   .person{
-    min-height:1000px!important;
+    min-height:calc(304px + clamp(430px,70vw,530px))!important;
     padding:0!important;
   }
   .person-type{
     left:8px!important;
-    top:7%!important;
+    top:70px!important;
   }
   .person-copy{
     position:absolute!important;
     left:18px!important;
     right:18px!important;
-    top:8%!important;
+    top:80px!important;
     width:auto!important;
     max-width:none!important;
     margin:0!important;
@@ -146,10 +103,10 @@
     position:absolute!important;
     left:18px!important;
     right:18px!important;
-    top:25%!important;
+    top:250px!important;
     bottom:auto!important;
     width:auto!important;
-    height:43%!important;
+    height:clamp(430px,70vw,530px)!important;
   }
   .person-wide img{object-position:49% 50%!important;}
   .person-wide .source-tab{
@@ -158,33 +115,4 @@
     padding:7px 8px!important;
     font-size:6px!important;
   }
-  .person-floral{
-    position:absolute!important;
-    left:auto!important;
-    right:18px!important;
-    top:auto!important;
-    bottom:4%!important;
-    width:116px!important;
-    height:154px!important;
-    margin:0!important;
-  }
-  .person .person-acrylic{
-    display:block!important;
-    position:absolute!important;
-    left:18px!important;
-    right:auto!important;
-    top:auto!important;
-    bottom:6%!important;
-    width:120px!important;
-    height:90px!important;
-    margin:0!important;
-    aspect-ratio:auto!important;
-  }
-  .person .person-acrylic::before{
-    left:9px!important;
-    right:9px!important;
-    top:9px!important;
-    font-size:5px!important;
-  }
-  .person .person-acrylic::after{display:none!important;}
 }
