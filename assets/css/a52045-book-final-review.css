@@ -129,6 +129,13 @@
   .book-actions{gap:18px!important;margin-top:28px!important;}
 }
 
+@media (min-width:761px) and (max-width:800px){
+  .book-copy h2{
+    font-size:62px!important;
+    line-height:.82!important;
+  }
+}
+
 @media (max-width:760px){
   .book{
     min-height:590px!important;
