@@ -1,0 +1,44 @@
+SEASON ZERO — REAL ASSET REINTEGRATION / SCAFFOLDING REMOVAL
+PRIVATE REVIEW HANDOFF
+
+Purpose:
+Replace visible internal clearance-slot geometry with actual reviewed imagery on the protected Dress Rehearsal branch.
+Do not publish held assets. Do not treat inclusion in this pack as public-use clearance.
+
+GRAFFITI WALL
+File: PERSON_GraffitiFullBody_2784_POLISHED.jpg
+Role: Create → Television seam
+Status: PRIVATE REVIEW — needs explicit public-use clearance
+SHA-256: 00a577b29a05963e37f3e6087555e663f1153dcdada723f9753ccbefb80c6919
+
+ROOFTOP PRESENTER OPTION 5
+File: HOST_RooftopPresenter_Option5_46s.png
+Role: Host secondary frame
+Status: PRIVATE REVIEW — selected still, needs explicit public-use clearance
+SHA-256: 339b3b75b828f8341a47ea9514d2ab4e55422cacf909683f19895c361b6eab82
+
+SPELMAN / BENTLEY
+File: ACTIVATE_TRUST_Spelman_BlueOnGreens_Bentley_ORIGINAL.jpeg.jpg
+Role: Activate → Watch seam / institutional-cultural texture
+Status: PRIVATE REVIEW — needs explicit public-use clearance
+SHA-256: d1f633af6641f1fc412d6f97315906ec210aa04dcb74ee06cbd67250a7b06f9e
+
+BLACK STUDIO STOOL
+File: CASTING_BlackStool_6892_POLISHED.jpg
+Role: Casting Sheet range lead
+Status: PRIVATE REVIEW — needs explicit public-use clearance
+SHA-256: 878904d4fa95947783c9c5722a7d4c21f4ebe70099c78d81d8540d82958fc9a2
+
+APPROVED 2026 HEADSHOT
+File: Lauren Bush — Approved Headshot — 2026.png
+Role: Casting Sheet beauty / camera-read range
+Status: APPROVED PUBLIC
+SHA-256: 7461dc958cb9b3a167fe412f6d9c986e1ca5f067ff27dbc4548d179ba2222547
+
+PLACEMENT LAWS
+- No rendered 'CLEARANCE SLOT' boxes, labels, internal repo notes, or blank placeholder rectangles.
+- If a held asset cannot be used in a private-review composition, remove/hide the slot rather than rendering scaffolding.
+- Do not alter Person, Casting Imagination, or Book.
+- Martha's Vineyard and Black Studio Stool must not become near-neighbors because their seated/angled pose language is too similar.
+- Rooftop presenter uses the selected Option 5 / ~46s still in this pack.
+- Approved Headshot is the exact approved-public source recovered from Drive.
