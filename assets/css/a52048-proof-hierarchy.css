@@ -1,0 +1,162 @@
+/* A5.20.48 — proof hierarchy correction.
+   Local to Explain, Activate and Watch; no global system changes. */
+
+/* Explain: finance carries the subject; WIMPB is one quiet range counterpoint. */
+.explain-copy h2{max-width:9.4ch;margin-left:auto;}
+.finance-transmission{
+  padding:0!important;
+  overflow:hidden!important;
+  background:#091016!important;
+  transform:none!important;
+}
+.finance-transmission video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#091016;
+}
+.finance-transmission figcaption{z-index:4;}
+.explain-detail-bag{display:none!important;}
+
+@media (min-width:1025px){
+  .explain{min-height:900px!important;}
+  .explain-copy{width:min(38vw,500px)!important;}
+  .explain-copy h2{font-size:clamp(50px,5.3vw,76px)!important;}
+  .explain-stage{left:5%!important;right:5%!important;top:11%!important;bottom:7%!important;width:auto!important;}
+  .finance-transmission{
+    left:0!important;
+    top:29%!important;
+    bottom:auto!important;
+    width:min(46vw,640px)!important;
+    height:auto!important;
+    aspect-ratio:640/340!important;
+    z-index:6!important;
+  }
+  .explain-video{
+    left:auto!important;
+    right:27%!important;
+    top:58%!important;
+    bottom:auto!important;
+    width:min(13vw,176px)!important;
+    height:34%!important;
+    z-index:7!important;
+  }
+}
+
+@media (min-width:761px) and (max-width:1024px){
+  .explain{min-height:900px!important;}
+  .explain-copy{right:5%!important;top:9%!important;width:46%!important;}
+  .explain-stage{left:5%!important;right:5%!important;top:23%!important;bottom:7%!important;width:auto!important;}
+  .finance-transmission{
+    left:0!important;
+    top:22%!important;
+    bottom:auto!important;
+    width:min(62vw,640px)!important;
+    height:auto!important;
+    aspect-ratio:640/340!important;
+    z-index:6!important;
+  }
+  .explain-video{
+    left:auto!important;
+    right:0!important;
+    top:44%!important;
+    bottom:auto!important;
+    width:23%!important;
+    height:44%!important;
+    z-index:7!important;
+  }
+}
+
+/* Activate: the GoTennis result remains in the Proof index, not in the immediate run. */
+.activate-gotennis{display:none!important;}
+.activate-centerline{width:min(68%,900px)!important;}
+
+/* Watch: one intelligent lead, one archival lineage beat, one current sports beat. */
+#watch-finance .watch-finance-backdrop{
+  inset:0!important;
+  background:
+    radial-gradient(circle at 21% 38%,rgba(35,105,154,.34),transparent 34%),
+    linear-gradient(128deg,#071019,#101722 58%,#091018)!important;
+}
+#watch-finance .watch-finance-backdrop::after{background:rgba(5,9,13,.18)!important;}
+#watch-finance .watch-finance-foreground{object-fit:contain!important;}
+#watch-archive .watch-foreground{object-fit:contain!important;object-position:center!important;background:#090b0e!important;}
+.watch-tuner button{min-height:76px;}
+
+@media (min-width:761px){
+  #watch-finance .watch-finance-foreground{
+    left:3.5%!important;
+    top:50%!important;
+    width:min(59%,640px)!important;
+    height:auto!important;
+    aspect-ratio:640/340!important;
+    transform:translateY(-50%);
+  }
+  #watch-archive .watch-foreground{
+    left:13%!important;
+    top:7%!important;
+    width:min(38%,360px)!important;
+    height:86%!important;
+  }
+}
+
+@media (max-width:760px){
+  .explain{min-height:0!important;padding:72px 18px 60px!important;}
+  .explain-copy h2{max-width:7.5ch;margin-left:0!important;font-size:51px!important;}
+  .explain-stage{
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    width:100%!important;
+    height:620px!important;
+    margin-top:24px!important;
+    display:block!important;
+  }
+  .finance-transmission{
+    position:absolute!important;
+    left:0!important;
+    right:auto!important;
+    top:0!important;
+    bottom:auto!important;
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:640/340!important;
+    margin:0!important;
+    z-index:5!important;
+  }
+  .explain-video{
+    position:absolute!important;
+    left:auto!important;
+    right:0!important;
+    top:224px!important;
+    bottom:auto!important;
+    width:47%!important;
+    height:365px!important;
+    z-index:6!important;
+  }
+  .finance-transmission figcaption{left:7px!important;bottom:7px!important;font-size:6px!important;}
+
+  .activate{min-height:1000px!important;padding-bottom:320px!important;}
+  .activate-centerline{left:18px!important;right:18px!important;width:auto!important;}
+
+  .watch{min-height:880px!important;}
+  .watch-stage{height:55%!important;}
+  #watch-finance .watch-finance-foreground{
+    left:5%!important;
+    top:10%!important;
+    width:90%!important;
+    height:auto!important;
+    aspect-ratio:640/340!important;
+  }
+  #watch-finance .watch-meta{bottom:7%!important;}
+  #watch-archive .watch-foreground{
+    left:22%!important;
+    top:4%!important;
+    width:56%!important;
+    height:70%!important;
+  }
+  .watch-tuner button{flex:1 0 104px!important;min-height:60px!important;}
+}
