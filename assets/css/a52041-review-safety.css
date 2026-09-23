@@ -1,0 +1,26 @@
+/* A5.20.4.1 — BRANCH REVIEW SAFETY
+   The exact Approved 2026 Headshot is in Drive and has been visually reviewed,
+   but the legacy repo headshot.jpg has not yet been proven identical. Do not let
+   an ambiguous source masquerade as the approved asset in review captures. */
+
+.cast58 .range-frame:nth-child(2){
+  background:linear-gradient(150deg,#e2e4e5,#f5f2ed)!important;
+  border:1px solid rgba(17,16,20,.14);
+}
+.cast58 .range-frame:nth-child(2) img{display:none!important;}
+.cast58 .range-frame:nth-child(2)::before{
+  content:'APPROVED PUBLIC HOME\A APPROVED HEADSHOT — 2026\A EXACT DRIVE DERIVATIVE PENDING REPO MIRROR';
+  white-space:pre-line;
+  position:absolute;
+  inset:14px;
+  display:flex;
+  align-items:flex-end;
+  color:rgba(17,16,20,.62);
+  font:500 7px/1.55 'Space Mono',monospace;
+  letter-spacing:.075em;
+}
+.cast58 .range-frame:nth-child(2) figcaption{display:none!important;}
+
+@media(max-width:760px){
+  .cast58 .range-frame:nth-child(2)::before{inset:10px;font-size:6px;}
+}

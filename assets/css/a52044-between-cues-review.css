@@ -1,0 +1,130 @@
+/* A5.20.4.4 — BETWEEN CUES / PRIVATE REVIEW ONLY
+   Two real-world photographs replace clearance geometry and the evidence rail.
+   Do not publish or merge until assets/review/between-cues is publicly cleared. */
+
+.trust{
+  min-height:920px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#eee7df!important;
+}
+.trust::before,
+.trust::after{
+  content:none!important;
+  display:none!important;
+}
+.trust .signal-seam,
+.trust-photo,
+.trust-proof{
+  display:none!important;
+}
+.trust-copy{
+  position:absolute!important;
+  z-index:8!important;
+  left:5%!important;
+  right:auto!important;
+  top:8%!important;
+  width:min(38vw,548px)!important;
+}
+.trust-copy>p:last-child{
+  max-width:49ch!important;
+  margin:0!important;
+}
+.between-spread{
+  position:absolute!important;
+  inset:0!important;
+}
+.between-frame{
+  position:absolute!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  background:#c8bbb0!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.between-frame img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  filter:none!important;
+}
+.between-bwi{
+  z-index:4!important;
+  right:7%!important;
+  left:auto!important;
+  top:9%!important;
+  width:min(28vw,404px)!important;
+  height:65%!important;
+}
+.between-bwi img{
+  object-position:50% 48%!important;
+  transform:scale(1.12);
+}
+.between-boat{
+  z-index:6!important;
+  left:46.5%!important;
+  right:auto!important;
+  top:49%!important;
+  width:min(19vw,274px)!important;
+  height:41%!important;
+}
+.between-boat img{object-position:50% 45%!important;}
+
+@media (min-width:761px) and (max-width:1024px){
+  .trust{min-height:1100px!important;}
+  .trust-copy{
+    left:5%!important;
+    top:7%!important;
+    width:66%!important;
+  }
+  .between-bwi{
+    right:5%!important;
+    top:28%!important;
+    width:42%!important;
+    height:65%!important;
+  }
+  .between-boat{
+    left:30%!important;
+    top:58%!important;
+    width:31%!important;
+    height:34%!important;
+  }
+}
+
+@media (max-width:760px){
+  .trust{
+    min-height:1020px!important;
+    padding:0!important;
+    scroll-margin-top:58px!important;
+  }
+  .trust-copy{
+    left:18px!important;
+    right:18px!important;
+    top:78px!important;
+    width:auto!important;
+  }
+  .trust-copy h2{
+    margin:11px 0 14px!important;
+    font-size:70px!important;
+  }
+  .trust-copy>p:last-child{
+    max-width:34ch!important;
+    font-size:12px!important;
+    line-height:1.48!important;
+  }
+  .between-bwi{
+    left:112px!important;
+    right:18px!important;
+    top:318px!important;
+    width:auto!important;
+    height:430px!important;
+  }
+  .between-boat{
+    left:18px!important;
+    top:680px!important;
+    width:174px!important;
+    height:292px!important;
+  }
+}

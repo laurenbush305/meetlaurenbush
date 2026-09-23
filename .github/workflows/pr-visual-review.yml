@@ -1,0 +1,73 @@
+name: Season Zero PR Visual Review
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - 'assets/img/**'
+      - 'scripts/visual-qa.mjs'
+      - '.github/workflows/pr-visual-review.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: season-zero-pr-visual-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  capture-branch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Prepare browser automation
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_PATH="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [[ -z "$CHROME_PATH" ]]; then
+            echo "Runner Chrome not found." >&2
+            exit 1
+          fi
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save --ignore-scripts playwright-core@1.55.0 >/dev/null
+
+      - name: Serve protected branch locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/season-zero-pr-server.log 2>&1 &
+          echo $! > /tmp/season-zero-pr-server.pid
+          for attempt in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/index.html >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/season-zero-pr-server.log
+          exit 1
+
+      - name: Capture protected branch at six widths
+        env:
+          QA_SHA: ${{ github.event.pull_request.head.sha }}
+          QA_SITE: http://127.0.0.1:4173
+        run: |
+          mkdir -p qa-artifacts
+          node scripts/visual-qa.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: season-zero-pr-visual-${{ github.event.pull_request.head.sha }}
+          path: qa-artifacts
+          if-no-files-found: error
+          retention-days: 30

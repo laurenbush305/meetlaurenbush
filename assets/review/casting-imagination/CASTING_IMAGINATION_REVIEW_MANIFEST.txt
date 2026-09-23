@@ -1,0 +1,39 @@
+Season Zero — Casting Imagination private review asset pack
+Prepared 2026-09-06
+
+IMPORTANT: These assets are for protected-branch/private review only. Current census status requires public-use approval before publication.
+
+1) Green Dress full-body
+File: HERO_PERSON_GreenDress_FullBody_ORIGINAL.jpeg.jpg
+Drive ID: 1UiD34OAUO4rItjX6ptn1twqrnLMHtw4-
+Status: Working - Needs Public Approval
+Intended role: Casting Imagination lead / full-body campaign possibility
+
+2) Studio Leather editorial portrait
+File: CASTING_StudioLeather_6802_POLISHED.jpg
+Drive polished derivative ID: 1jQ8H9mKBCSx_VmyqOsI4XgpyAxKSbbMA
+Source ID: 1Rj_9xInQ-l6eP9F6iA5wNyq9ORIAaMbp
+Status: Working - Needs Public Approval
+Intended role: Casting Imagination editorial counterpoint
+
+3) Black-turtleneck beauty/casting close-up
+File: 1ba9e04ea8da40ca9b5b98fc02c69639.MOV
+Drive ID: 1GkrV7y15pLQs-ejSEBEqJyTvstasAIic
+Status: Working - Needs Public Approval
+Intended role: Casting Imagination beauty/camera-read motion or representative still
+
+4) Denim-overalls casual/personality motion
+File: 7dd46d37465e81042b892242c6f905a7.mp4
+Drive ID: 18T7nqEM-iPMuLoZJvyglwPFfumdpZCyb
+Status: Working - Needs Public Approval
+Intended role: Casting Imagination smaller casual/personality motion beat
+
+Art direction:
+- Do not treat these as equal tiles.
+- Green Dress is the lead.
+- Leather is a smaller sharp editorial counterpoint.
+- Black turtleneck is beauty/camera distance.
+- Denim is the smallest/playful beat.
+- No numbered capabilities matrix.
+- No fake campaigns or fantasy graphics.
+- Private review branch only until Lauren explicitly clears public use.
