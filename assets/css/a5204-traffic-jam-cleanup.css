@@ -1,0 +1,221 @@
+/* A5.20.4 - TRAFFIC JAM CLEANUP
+   Fast visual cleanup from 2026-09-26 desktop review.
+   Scope: Host headline fit, Activate text/media collision, Watch composition,
+   and Between Cues proof readability. Preserve copy and evidence. */
+
+@media (min-width:1025px){
+  /* HOST: keep the headline in the right lane instead of clipping off-screen. */
+  .host-copy{
+    right:3.5%!important;
+    top:10.5%!important;
+    width:min(38vw,570px)!important;
+  }
+  .host-copy h2{
+    max-width:100%!important;
+    font-size:clamp(62px,5.15vw,82px)!important;
+    line-height:.82!important;
+    letter-spacing:-.07em!important;
+    text-wrap:balance;
+  }
+  .host-copy>p:last-child{
+    max-width:38ch;
+    font-size:15px!important;
+    line-height:1.45!important;
+  }
+  .host-video{
+    right:5.5%!important;
+    top:35%!important;
+    width:min(25vw,360px)!important;
+    height:52%!important;
+  }
+
+  /* ACTIVATE: reserve a clean editorial text zone before the imagery begins. */
+  .activate{
+    min-height:1120px!important;
+    padding-top:84px!important;
+  }
+  .activate-copy{
+    max-width:min(53vw,760px)!important;
+  }
+  .activate-copy h2{
+    max-width:7.4ch!important;
+    font-size:clamp(72px,6.6vw,104px)!important;
+    line-height:.82!important;
+    letter-spacing:-.075em!important;
+    margin:12px 0 18px!important;
+    text-wrap:balance;
+  }
+  .activate-copy>p:last-child{
+    max-width:49ch!important;
+    font-size:17px!important;
+    line-height:1.5!important;
+    color:rgba(11,15,20,.78)!important;
+  }
+  .activate-centerline{
+    left:5%!important;
+    top:45%!important;
+    width:64%!important;
+    height:46%!important;
+  }
+  .activate-gotennis{
+    right:4.5%!important;
+    top:15%!important;
+    width:min(27vw,390px)!important;
+    height:72%!important;
+  }
+  .activate-result{
+    left:22px!important;
+    right:22px!important;
+    bottom:24px!important;
+  }
+  .activate-result>span{font-size:8px!important}
+  .activate-result h3{font-size:17px!important;line-height:1.12!important}
+  .activate-result p{font-size:11px!important;line-height:1.45!important}
+
+  /* WATCH: turn the Scrambled Up/program panel into one clean editorial split. */
+  .watch{
+    min-height:980px!important;
+  }
+  .watch-stage{
+    left:5%!important;
+    top:28%!important;
+    width:90%!important;
+    height:56%!important;
+    background:linear-gradient(115deg,rgba(7,9,12,.95),rgba(21,19,29,.96))!important;
+    border-top:1px solid rgba(255,255,255,.2)!important;
+    border-bottom:1px solid rgba(255,255,255,.16)!important;
+    overflow:hidden!important;
+  }
+  .watch-backdrop{
+    inset:-4%!important;
+    opacity:.48!important;
+  }
+  .watch-backdrop:after{
+    background:linear-gradient(90deg,rgba(7,9,12,.34) 0%,rgba(7,9,12,.68) 58%,rgba(7,9,12,.92) 100%)!important;
+  }
+  .watch-program::before{
+    left:57%!important;
+    top:9%!important;
+    bottom:9%!important;
+  }
+  .watch-program::after{
+    width:43%!important;
+    background:linear-gradient(90deg,rgba(7,9,12,.12),rgba(7,9,12,.84))!important;
+  }
+  .watch-foreground{
+    left:5%!important;
+    top:6%!important;
+    width:48%!important;
+    height:88%!important;
+    object-fit:contain!important;
+    background:#080a0d!important;
+    box-shadow:0 18px 52px rgba(0,0,0,.28)!important;
+  }
+  .watch-meta{
+    left:62%!important;
+    right:6%!important;
+    top:50%!important;
+    padding:22px 0!important;
+  }
+  .watch-meta span{
+    font-size:9px!important;
+    letter-spacing:.13em!important;
+  }
+  .watch-meta strong{
+    max-width:11ch!important;
+    font-size:clamp(40px,4vw,58px)!important;
+    line-height:.92!important;
+  }
+  .watch-meta small{
+    max-width:34ch!important;
+    font-size:11px!important;
+    line-height:1.5!important;
+    color:rgba(255,255,255,.76)!important;
+  }
+  #watch-wimpb .watch-meta strong,
+  #watch-archive .watch-meta strong,
+  #watch-apq .watch-meta strong{
+    font-size:clamp(34px,3.1vw,46px)!important;
+  }
+  .watch-tuner{
+    bottom:4.2%!important;
+  }
+  .watch-tuner button span{
+    font-size:8px!important;
+  }
+
+  /* BETWEEN CUES: the proof is important enough to read without squinting. */
+  .trust{
+    min-height:930px!important;
+  }
+  .trust-proof{
+    left:4%!important;
+    bottom:7.5%!important;
+    width:min(60vw,860px)!important;
+  }
+  .trust-proof article{
+    padding:13px 0 14px!important;
+    grid-template-columns:120px minmax(180px,220px) minmax(0,1fr)!important;
+    column-gap:22px!important;
+    align-items:center!important;
+  }
+  .trust-proof span{
+    font-size:9px!important;
+    line-height:1.3!important;
+  }
+  .trust-proof strong{
+    font-size:clamp(31px,2.5vw,38px)!important;
+    line-height:.94!important;
+  }
+  .trust-proof p{
+    max-width:40ch!important;
+    font-size:12.5px!important;
+    line-height:1.45!important;
+    color:rgba(11,15,20,.78)!important;
+  }
+}
+
+@media (min-width:761px) and (max-width:1024px){
+  .host-copy{
+    right:4%!important;
+    width:42%!important;
+  }
+  .host-copy h2{
+    font-size:clamp(54px,6.8vw,70px)!important;
+    line-height:.84!important;
+  }
+  .activate-copy h2{
+    font-size:clamp(64px,8vw,82px)!important;
+    line-height:.84!important;
+  }
+  .activate-copy>p:last-child{
+    font-size:15px!important;
+    line-height:1.5!important;
+    color:rgba(11,15,20,.76)!important;
+  }
+  .trust-proof p{font-size:11px!important}
+}
+
+@media (max-width:760px){
+  .host-copy h2{
+    font-size:clamp(54px,16vw,70px)!important;
+    line-height:.84!important;
+    text-wrap:balance;
+  }
+  .activate-copy h2{
+    max-width:7.2ch!important;
+    font-size:clamp(58px,17vw,74px)!important;
+    line-height:.84!important;
+    text-wrap:balance;
+  }
+  .activate-copy>p:last-child{
+    font-size:14px!important;
+    line-height:1.5!important;
+    color:rgba(11,15,20,.76)!important;
+  }
+  .watch-meta span{font-size:8px!important}
+  .watch-meta strong{font-size:32px!important}
+  .watch-meta small{font-size:10px!important;line-height:1.45!important}
+  .trust-proof span{font-size:8px!important}
+  .trust-proof p{font-size:11px!important;line-height:1.45!important}
+}
