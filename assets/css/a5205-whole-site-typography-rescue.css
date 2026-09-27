@@ -12,40 +12,40 @@
 /* Shared chrome + repeated utility text */
 .topbar nav,
 .topbar nav .proof-index-trigger{
-  font-size:11px!important;
+  font-size:12px!important;
 }
 .topbar nav a,
 .topbar nav button{
   line-height:1.2!important;
 }
 .section-code{
-  font-size:10px!important;
+  font-size:12px!important;
   line-height:1.4!important;
 }
 .source-tab{
-  font-size:10px!important;
+  font-size:11px!important;
   line-height:1.35!important;
 }
 .source-tab b{
-  font-size:12px!important;
+  font-size:14px!important;
 }
 .button{
-  font-size:11px!important;
+  font-size:12px!important;
 }
 footer,
 .project-foot,
 .casting-foot{
-  font-size:12px!important;
+  font-size:14px!important;
   line-height:1.5!important;
 }
 
 /* Homepage support copy */
-.hero-meta p:nth-child(2){font-size:16px!important}
-.hero-promise{font-size:16px!important}
-.hero-transmission figcaption{font-size:10px!important}
-.hero-transmission b{font-size:13px!important}
+.hero-meta p:nth-child(2){font-size:18px!important}
+.hero-promise{font-size:18px!important}
+.hero-transmission figcaption{font-size:11px!important}
+.hero-transmission b{font-size:15px!important}
 .hero-rail span,
-.hero-scroll{font-size:10px!important}
+.hero-scroll{font-size:11px!important}
 
 .person-copy>p:last-child,
 .explain-copy>p:last-child,
@@ -57,76 +57,76 @@ footer,
 .trust-copy>p:last-child,
 .imagination-copy>p:last-child,
 .book-copy>p:not(.section-code):not(.book-direct){
-  font-size:15px!important;
-  line-height:1.5!important;
+  font-size:17px!important;
+  line-height:1.55!important;
 }
 
 .finance-transmission figcaption,
 .tv-archive-flash figcaption,
 .host-command-slice span{
-  font-size:10px!important;
+  font-size:11px!important;
   line-height:1.35!important;
 }
-.tv-archive-flash b{font-size:12px!important}
+.tv-archive-flash b{font-size:14px!important}
 
 .activate-result>span,
 .watch-meta span,
 .trust-proof span,
 .casting-doors span{
-  font-size:10px!important;
+  font-size:12px!important;
   line-height:1.35!important;
 }
-.activate-result h3{font-size:18px!important}
+.activate-result h3{font-size:20px!important}
 .activate-result p,
 .watch-meta small,
 .trust-proof p,
 .casting-doors p{
-  font-size:13px!important;
+  font-size:16px!important;
   line-height:1.48!important;
 }
 
-.watch-tuner button b{font-size:10px!important}
-.watch-tuner button span{font-size:10px!important}
+.watch-tuner button b{font-size:11px!important}
+.watch-tuner button span{font-size:11px!important}
 
 /* Casting sheet */
-.cast58 .casting-status b{font-size:14px!important}
+.cast58 .casting-status b{font-size:16px!important}
 .cast58 .door .mono,
 .cast58 .proof-card-copy .mono,
 .cast58 .credit .mono,
 .a510-cast .file-copy .mono,
 .cast58.a510-cast .operator-proof span{
-  font-size:10px!important;
-  line-height:1.35!important;
+  font-size:12px!important;
+  line-height:1.4!important;
 }
 .cast58 .door p,
 .cast58 .proof-feature-copy p,
 .a510-cast .file-copy p{
-  font-size:14px!important;
+  font-size:16px!important;
   line-height:1.5!important;
 }
 .cast58 .proof-card-copy p,
 .cast58 .credit p,
 .cast58 .operator-proof p,
 .cast58.a510-cast .operator-proof p{
-  font-size:13px!important;
+  font-size:15px!important;
   line-height:1.48!important;
 }
-.cast58 .range-frame figcaption b{font-size:12px!important}
+.cast58 .range-frame figcaption b{font-size:14px!important}
 
 /* Project files */
 .project-file .project-back{
-  font-size:11px!important;
+  font-size:12px!important;
   line-height:1.35!important;
 }
 .project-file .topbar nav a:not(.nav-book){
-  font-size:10px!important;
+  font-size:11px!important;
 }
 .project-file .project-ledger strong{
-  font-size:14px!important;
+  font-size:16px!important;
 }
 .project-file .project-note-row p,
 .project-file .proof-note{
-  font-size:14px!important;
+  font-size:16px!important;
   line-height:1.5!important;
 }
 
@@ -192,4 +192,63 @@ footer,
 
   .watch-tuner button b,
   .watch-tuner button span{font-size:9px!important}
+}
+
+
+/* A5.20.6 — hard readability floor after full-site desktop review */
+@media (min-width:761px){
+  .project-file .project-intro,
+  .project-file .evidence-copy p,
+  .project-file .project-close p,
+  .cast58 .door-head>p,
+  .cast58 .proof-head>p,
+  .cast58 .operator-copy>p:not(.section-code),
+  .casting-line{
+    font-size:17px!important;
+    line-height:1.55!important;
+  }
+
+  .project-file .project-deck{
+    font-size:clamp(22px,2vw,30px)!important;
+  }
+
+  .project-file .project-ledger{
+    font-size:15px!important;
+  }
+
+  .project-file .project-ledger .mono,
+  .project-file .project-notes .mono,
+  .project-file .project-evidence .mono,
+  .cast58 .booking-row .mono,
+  .cast58 .casting-status .mono{
+    font-size:11px!important;
+    line-height:1.4!important;
+  }
+
+  .cast58 .booking-row strong{
+    font-size:17px!important;
+    line-height:1.45!important;
+  }
+
+  .proof-index-intro{
+    font-size:16px!important;
+    line-height:1.55!important;
+  }
+
+  .proof-index-list small{
+    font-size:13px!important;
+    line-height:1.45!important;
+  }
+
+  .proof-index-list em{
+    font-size:11px!important;
+  }
+
+  .proof-index-head .mono{
+    font-size:11px!important;
+  }
+
+  .book-direct a{
+    font-size:clamp(22px,2.4vw,34px)!important;
+  }
 }
