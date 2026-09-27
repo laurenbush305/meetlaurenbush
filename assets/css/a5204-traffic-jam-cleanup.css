@@ -144,34 +144,35 @@
     font-size:8px!important;
   }
 
-  /* BETWEEN CUES: the proof is important enough to read without squinting. */
+  /* BETWEEN CUES: make the evidence rail actually readable at normal desktop scale. */
   .trust{
-    min-height:930px!important;
+    min-height:960px!important;
   }
   .trust-proof{
     left:4%!important;
-    bottom:7.5%!important;
-    width:min(60vw,860px)!important;
+    bottom:6.5%!important;
+    width:min(68vw,980px)!important;
   }
   .trust-proof article{
-    padding:13px 0 14px!important;
-    grid-template-columns:120px minmax(180px,220px) minmax(0,1fr)!important;
-    column-gap:22px!important;
+    padding:17px 0 18px!important;
+    grid-template-columns:130px minmax(220px,260px) minmax(0,1fr)!important;
+    column-gap:28px!important;
     align-items:center!important;
   }
   .trust-proof span{
-    font-size:9px!important;
-    line-height:1.3!important;
+    font-size:11px!important;
+    line-height:1.35!important;
+    letter-spacing:.12em!important;
   }
   .trust-proof strong{
-    font-size:clamp(31px,2.5vw,38px)!important;
+    font-size:clamp(36px,3vw,46px)!important;
     line-height:.94!important;
   }
   .trust-proof p{
-    max-width:40ch!important;
-    font-size:12.5px!important;
-    line-height:1.45!important;
-    color:rgba(11,15,20,.78)!important;
+    max-width:42ch!important;
+    font-size:15px!important;
+    line-height:1.5!important;
+    color:rgba(11,15,20,.82)!important;
   }
 }
 
