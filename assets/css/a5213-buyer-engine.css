@@ -1,0 +1,49 @@
+/* A5.21.3 — BUYER ENGINE
+   Make the site answer the real buyer question: what changes when Lauren is on the project? */
+
+.engine-proof{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 28px;
+  margin-top:30px;
+  max-width:520px;
+  border-top:1px solid rgba(8,17,31,.18);
+}
+.engine-proof span{
+  padding:12px 0;
+  border-bottom:1px solid rgba(8,17,31,.14);
+  font:650 13px/1.35 Archivo,Arial,sans-serif;
+  letter-spacing:-.015em;
+  color:#08111f;
+}
+.hero-promise{
+  max-width:31ch!important;
+}
+.hero-promise strong{
+  color:inherit!important;
+}
+.person-copy h2{
+  max-width:8ch!important;
+}
+.explain-copy h2,
+.create-header h2,
+.host-copy h2,
+.activate-copy h2,
+.watch-heading h2,
+.trust-copy h2,
+.imagination-copy h2{
+  text-wrap:balance;
+}
+.casting-doors strong{
+  text-wrap:balance;
+}
+
+@media(max-width:760px){
+  .engine-proof{
+    grid-template-columns:1fr;
+    margin-top:22px;
+  }
+  .engine-proof span{
+    font-size:14px;
+  }
+}
