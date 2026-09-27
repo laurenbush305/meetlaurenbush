@@ -1,0 +1,168 @@
+/* A5.21.2 — OPTION A / VISIBLE COBALT
+   Make the chosen direction unmistakable on first glance. */
+
+:root{
+  --A-ink:#08111f;
+  --A-cobalt:#2458ff;
+  --A-cobalt-2:#1748d8;
+  --A-ivory:#f4f1ea;
+  --A-cool:#dfe5ee;
+}
+
+/* HOME HERO: bold Option A treatment */
+.hero{
+  background:
+    linear-gradient(90deg,var(--A-ink) 0 64%,var(--A-cobalt) 64% 100%)!important;
+  color:#fff!important;
+}
+.hero-title,
+.hero-lauren{
+  color:#fff!important;
+  text-shadow:none!important;
+}
+.hero-bush{
+  color:var(--A-cobalt)!important;
+  text-shadow:none!important;
+}
+.hero-meta,
+.hero-meta p,
+.hero-promise{
+  color:rgba(255,255,255,.84)!important;
+}
+.hero-meta .mono{
+  color:#8eabff!important;
+}
+.hero-promise strong{
+  color:#fff!important;
+  background:none!important;
+}
+.hero-photo{
+  filter:drop-shadow(0 34px 60px rgba(0,0,0,.28))!important;
+}
+.hero-transmission{
+  background:#f7f4ee!important;
+  color:var(--A-ink)!important;
+  border:0!important;
+  outline:0!important;
+}
+.hero-actions .button-pink{
+  background:var(--A-cobalt)!important;
+  color:#fff!important;
+}
+.hero-actions .button-quiet{
+  color:#fff!important;
+  border-color:rgba(255,255,255,.58)!important;
+}
+.hero-scroll{
+  color:#fff!important;
+}
+
+/* Make cobalt show up as a true signature across the site. */
+.topbar nav .nav-book,
+.button-pink{
+  background:var(--A-cobalt)!important;
+  color:#fff!important;
+}
+.section-code,
+.source-tab b,
+.casting-doors span,
+.trust-proof span,
+.cast58 .mono,
+.project-file .mono{
+  color:var(--A-cobalt)!important;
+}
+.brand i{
+  background:var(--A-cobalt)!important;
+}
+
+.explain{
+  background:var(--A-cool)!important;
+}
+.explain-copy h2{
+  color:var(--A-ink)!important;
+}
+.create{
+  background:var(--A-ivory)!important;
+}
+.create-header h2{
+  color:var(--A-ink)!important;
+}
+.television,
+.watch,
+.host,
+.book{
+  background:var(--A-ink)!important;
+}
+.tv-bg,
+.watch-weather{
+  background:var(--A-ink)!important;
+}
+.tv-copy h2,
+.watch-heading h2,
+.host-copy h2,
+.book h2{
+  color:#fff!important;
+}
+.tv-copy .section-code,
+.watch-heading .section-code,
+.host-copy .section-code,
+.book .section-code{
+  color:#8eabff!important;
+}
+.watch-tuner button.active{
+  border-bottom-color:var(--A-cobalt)!important;
+}
+.activate{
+  background:#eef1f5!important;
+}
+.imagination{
+  background:#e2e7ef!important;
+}
+.imagination-talent::after{
+  box-shadow:12px 12px 0 var(--A-cobalt),0 24px 56px rgba(8,17,31,.10)!important;
+}
+
+/* Casting sheet */
+.cast58 .casting-hero,
+.cast58.a510-cast .casting-hero{
+  background:
+    linear-gradient(90deg,var(--A-ivory) 0 62%,var(--A-cobalt) 62% 100%)!important;
+}
+.cast58 .door-section,
+.cast58 .booking-section{
+  background:var(--A-ink)!important;
+}
+.cast58 .door .mono,
+.cast58 .booking-section .mono{
+  color:#8eabff!important;
+}
+
+/* Project files */
+.project-file .project-hero,
+.project-file.scrambled-file .project-hero,
+.project-file.wimpb-file .project-hero,
+.project-file.montis-file .project-hero,
+.project-file.centerline-file .project-hero{
+  background:
+    linear-gradient(90deg,var(--A-ivory) 0 55%,#e2e7ef 55% 100%)!important;
+}
+.project-file .project-close{
+  background:var(--A-ink)!important;
+}
+.project-file .project-close .section-code{
+  color:#8eabff!important;
+}
+
+@media(max-width:760px){
+  .hero{
+    background:
+      linear-gradient(180deg,var(--A-ink) 0 72%,var(--A-cobalt) 72% 100%)!important;
+  }
+  .hero-bush{
+    color:var(--A-cobalt)!important;
+  }
+  .cast58 .casting-hero,
+  .cast58.a510-cast .casting-hero{
+    background:var(--A-ivory)!important;
+  }
+}
