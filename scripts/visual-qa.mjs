@@ -11,16 +11,16 @@ const viewports = [
 const routes = [
   {
     key: 'home', path: '/', viewportNames: ['desktop', 'tablet', 'mobile'],
-    scenes: [['hero','main > section:first-of-type'],['person','#person'],['explain','#explain'],['create','#create'],['television','#television'],['host','#host'],['activate','#activate'],['watch','#watch'],['between-cues','#trust'],['imagination','#imagination'],['book','#book']]
+    scenes: [['hero','.v2-hero'],['engine','#engine'],['work','#work'],['live','.v2-live'],['depth','.v2-depth'],['book','#book']]
   },
   {
     key: 'casting', path: '/casting-sheet.html', viewportNames: ['desktop', 'tablet', 'mobile'],
-    scenes: [['hero','.casting-hero'],['doors','.door-section'],['range','.range-section'],['files','#selected-files'],['operator','.operator-section'],['booking','.booking-section']]
+    scenes: [['hero','.casting-hero'],['doors','.door-section'],['files','#selected-files'],['operator','.operator-section'],['booking','.booking-section']]
   },
-  { key:'project-scrambled', path:'/project-scrambled-up.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
-  { key:'project-wimpb', path:'/project-pickleball-bag.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
-  { key:'project-montis', path:'/project-dear-diary-montis.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] },
-  { key:'project-centerline', path:'/project-honcho-centerline.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['notes','.project-notes'],['close','.project-close']] }
+  { key:'project-scrambled', path:'/project-scrambled-up.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['close','.project-close']] },
+  { key:'project-wimpb', path:'/project-pickleball-bag.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['close','.project-close']] },
+  { key:'project-montis', path:'/project-dear-diary-montis.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['close','.project-close']] },
+  { key:'project-centerline', path:'/project-honcho-centerline.html', viewportNames:['desktop','mobile'], scenes:[['hero','.project-hero'],['evidence','.project-evidence'],['close','.project-close']] }
 ];
 
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH });
@@ -47,28 +47,12 @@ const attachDiagnostics = page => {
 
 const testHomeInteractions = async page => {
   const failures = [];
-  try {
-    const proofTrigger = page.locator('.proof-index-trigger').first();
-    if (!(await proofTrigger.count())) failures.push('Proof trigger missing');
-    else {
-      await proofTrigger.click(); await page.waitForTimeout(120);
-      if ((await page.locator('#proof-index').getAttribute('aria-hidden')) !== 'false') failures.push('Proof drawer did not open');
-      await page.keyboard.press('Escape'); await page.waitForTimeout(120);
-      if ((await page.locator('#proof-index').getAttribute('aria-hidden')) !== 'true') failures.push('Proof drawer did not close on Escape');
-    }
-  } catch (error) { failures.push(`Proof drawer interaction: ${error.message}`); }
-  try {
-    const tabs = page.locator('#watch [data-watch]');
-    if ((await tabs.count()) < 2) failures.push('Watch tabs missing or incomplete');
-    else {
-      const second = tabs.nth(1); const program = await second.getAttribute('data-watch');
-      await second.click(); await page.waitForTimeout(120);
-      if ((await second.getAttribute('aria-selected')) !== 'true') failures.push(`Watch tab ${program} did not become selected`);
-      const activePanel = page.locator(`#watch [data-watch-panel="${program}"]`).first();
-      if (!(await activePanel.count()) || (await activePanel.getAttribute('hidden')) !== null) failures.push(`Watch panel ${program} did not become visible`);
-      await tabs.nth(0).click();
-    }
-  } catch (error) { failures.push(`Watch interaction: ${error.message}`); }
+  if (!(await page.locator('.v2-hero a[href^="mailto:"]').first().count())) failures.push('Homepage booking mailto link missing');
+  if (!(await page.locator('a[href="casting-sheet.html"]').first().count())) failures.push('Homepage casting-sheet link missing');
+  const workCards = page.locator('#work .v2-work-card');
+  const count = await workCards.count();
+  if (count !== 4) failures.push(`Homepage expected 4 selected-work cards; found ${count}`);
+  for (let i=0;i<count;i++) if (!(await workCards.nth(i).getAttribute('href'))) failures.push(`Homepage selected-work card ${i+1} has no href`);
   return failures;
 };
 
@@ -79,7 +63,8 @@ const testCastingInteractions = async page => {
   if (count < 4) failures.push(`Casting sheet expected 4 selected-file links; found ${count}`);
   for (let i=0;i<count;i++) if (!(await fileLinks.nth(i).getAttribute('href'))) failures.push(`Casting selected-file link ${i+1} has no href`);
   if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
-  if ((await page.locator('.range-section .range-frame').count()) !== 5) failures.push('Casting range mosaic must contain exactly 5 public-safe frames');
+  const doors = await page.locator('.door-section .door').count();
+  if (doors !== 4) failures.push(`Casting sheet expected 4 primary assignment rows; found ${doors}`);
   return failures;
 };
 
@@ -113,7 +98,7 @@ for (const route of routes) {
     await page.screenshot({ path:`qa-artifacts/${prefix}-full.png`, fullPage:true });
     for (const [key,selector] of route.scenes) {
       const loc=page.locator(selector).first();
-      if (await loc.count()) { await loc.scrollIntoViewIfNeeded(); await page.waitForTimeout(120); await loc.screenshot({ path:`qa-artifacts/${prefix}-${key}.png` }); }
+      if (await loc.count() && await loc.isVisible()) { await loc.scrollIntoViewIfNeeded(); await page.waitForTimeout(120); await loc.screenshot({ path:`qa-artifacts/${prefix}-${key}.png` }); }
     }
 
     const state = await page.evaluate(() => {
@@ -124,7 +109,7 @@ for (const route of routes) {
       return {
         release:document.body?.dataset?.releaseStatus||null,width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight,title:document.title,url:location.href,
         favicon:document.querySelector('link[rel~="icon"]')?.href||null,themeColor:document.querySelector('meta[name="theme-color"]')?.content||null,
-        typography:{nav:css('.topbar nav'),sectionCode:css('.section-code'),sourceTab:css('.source-tab')},surfaces:{castingHero:css('.casting-hero'),castingRange:css('.range-section'),projectHero:css('.project-hero'),projectEvidence:css('.project-evidence')}
+        typography:{nav:css('.topbar nav'),sectionCode:css('.section-code'),sourceTab:css('.source-tab'),homeLabel:css('.v2-section-label')},surfaces:{homeHero:css('.v2-hero'),homeWork:css('.v2-work'),castingHero:css('.casting-hero'),projectHero:css('.project-hero'),projectEvidence:css('.project-evidence')}
       };
     });
     Object.assign(state,diagnostics,{sha,interactionFailures,horizontalOverflow:state.scrollWidth>state.width});
