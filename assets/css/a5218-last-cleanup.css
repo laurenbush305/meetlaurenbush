@@ -1,0 +1,140 @@
+/* A5.21.8 — LAST CLEANUP
+   Fix the remaining visual snags found in the successful full-site QA:
+   mobile live crop, mobile depth stacking, portrait evidence media, and tiny action chrome. */
+
+/* Selected work: readable, deliberate action treatment */
+.cast58 .file-action small{display:none!important}
+.cast58 .file-action{
+  margin-top:12px!important;
+  justify-self:start!important;
+  text-align:left!important;
+}
+.cast58 .file-action .file-link{
+  display:inline-block!important;
+  width:auto!important;
+  padding:0 0 4px!important;
+  border:0!important;
+  border-bottom:1px solid currentColor!important;
+  background:transparent!important;
+  font-size:12px!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+
+/* Homepage card text should not disappear into the layout. */
+.v2-work-meta p{
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+.v2-work-meta small{
+  font-size:11px!important;
+}
+
+/* Mobile only */
+@media(max-width:900px){
+  /* Scrambled: fill the frame while keeping both faces safe. */
+  .v2-work-card:nth-child(1) .v2-work-media{
+    aspect-ratio:4/3!important;
+    overflow:hidden!important;
+  }
+  .v2-work-card:nth-child(1) .v2-work-media img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center 31%!important;
+  }
+
+  /* The brain section must actually stack, not impersonate a newspaper column. */
+  .v2-depth-wrap{
+    display:block!important;
+    width:100%!important;
+  }
+  .v2-depth-copy,
+  .v2-depth-stats{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .v2-depth-stats{
+    display:block!important;
+    margin-top:44px!important;
+  }
+  .v2-stat{
+    display:block!important;
+    width:100%!important;
+    padding:20px 0 22px!important;
+  }
+  .v2-stat strong,
+  .v2-stat span{
+    display:block!important;
+    width:100%!important;
+    max-width:31ch!important;
+  }
+
+  /* Casting cards: larger copy, fewer micro labels. */
+  .cast58 .file-copy h3{
+    font-size:30px!important;
+    line-height:1!important;
+  }
+  .cast58 .file-copy p{
+    font-size:15px!important;
+    line-height:1.5!important;
+  }
+  .cast58 .file-copy .mono{
+    font-size:10px!important;
+  }
+  .cast58 .file-action .file-link{
+    font-size:13px!important;
+  }
+
+  /* Project evidence: match the container to the actual media orientation.
+     This removes the weird half-black / half-image treatment on mobile. */
+  .project-file.scrambled-file .evidence-media,
+  .project-file.wimpb-file .evidence-media,
+  .project-file.montis-file .evidence-media{
+    min-height:0!important;
+    height:auto!important;
+    aspect-ratio:9/16!important;
+    max-height:680px!important;
+    background:#101721!important;
+  }
+  .project-file.centerline-file .evidence-media{
+    min-height:0!important;
+    height:auto!important;
+    aspect-ratio:16/10!important;
+    background:#eef1f5!important;
+  }
+  .project-file .evidence-media img,
+  .project-file .evidence-media video{
+    position:absolute!important;
+    inset:0!important;
+    left:0!important;
+    right:0!important;
+    top:0!important;
+    bottom:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    transform:none!important;
+    object-position:center!important;
+  }
+  .project-file.scrambled-file .evidence-media img,
+  .project-file.wimpb-file .evidence-media video,
+  .project-file.montis-file .evidence-media video{
+    object-fit:contain!important;
+  }
+  .project-file.centerline-file .evidence-media img{
+    object-fit:cover!important;
+  }
+}
+
+@media(max-width:560px){
+  .v2-work-meta p{font-size:15px!important}
+  .v2-work-meta small{font-size:10px!important}
+  .cast58 .file-list{gap:38px!important}
+  .cast58 .file-row{padding-bottom:28px!important}
+  .project-file .evidence-copy h2{
+    font-size:48px!important;
+    line-height:.94!important;
+  }
+}
