@@ -1,0 +1,620 @@
+/* A5.20.9 — CUTE / EDITORIAL RESET
+   Whole-site polish pass: less component-library energy, more warm editorial portfolio.
+   Preserve proof, improve composition, simplify the rooms. */
+
+@media (min-width:1025px){
+
+  /* ABOUT / PERSON — two photographs, one clear idea */
+  .person{
+    min-height:860px!important;
+    padding:96px var(--pad)!important;
+    display:grid!important;
+    grid-template-columns:minmax(360px,.85fr) minmax(480px,1.15fr)!important;
+    gap:clamp(44px,6vw,90px)!important;
+    align-items:center!important;
+    background:
+      radial-gradient(ellipse at 18% 20%,rgba(248,181,115,.22),transparent 40%),
+      radial-gradient(ellipse at 85% 78%,rgba(111,214,214,.11),transparent 36%),
+      linear-gradient(135deg,#fff9ef,#f4e8dc 62%,#edf3ef)!important;
+  }
+  .person-type,.person-acrylic,.person-wide{display:none!important}
+  .person-copy{
+    position:relative!important;
+    left:auto!important;
+    top:auto!important;
+    max-width:520px!important;
+    grid-column:1!important;
+    grid-row:1!important;
+    align-self:center!important;
+  }
+  .person-copy h2{
+    font-size:clamp(56px,5.8vw,86px)!important;
+    line-height:.9!important;
+    letter-spacing:-.065em!important;
+    margin:12px 0 18px!important;
+    max-width:7.2ch!important;
+  }
+  .person-copy>p:last-child{
+    max-width:29ch!important;
+    font-size:20px!important;
+    line-height:1.5!important;
+    color:rgba(11,15,20,.76)!important;
+  }
+  .person-studio{
+    position:relative!important;
+    left:auto!important;
+    top:auto!important;
+    width:100%!important;
+    height:620px!important;
+    margin:0!important;
+    grid-column:2!important;
+    grid-row:1!important;
+    box-shadow:0 28px 70px rgba(50,39,31,.14)!important;
+  }
+  .person-studio img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center 24%!important;
+  }
+  .person-floral{
+    position:absolute!important;
+    right:5%!important;
+    bottom:5%!important;
+    width:min(19vw,250px)!important;
+    height:31%!important;
+    transform:rotate(1.2deg)!important;
+    border:7px solid rgba(255,255,255,.94)!important;
+    box-shadow:0 22px 52px rgba(43,35,30,.15)!important;
+  }
+
+  /* CREATE — let the film be the hero */
+  .create{
+    min-height:900px!important;
+    padding:96px var(--pad)!important;
+    background:
+      radial-gradient(ellipse at 78% 18%,rgba(255,184,150,.17),transparent 34%),
+      linear-gradient(135deg,#fff7ed,#f3e8df)!important;
+  }
+  .create-header{
+    max-width:1180px!important;
+    margin:0 auto 34px!important;
+  }
+  .create-header h2{
+    font-size:clamp(62px,6.8vw,104px)!important;
+    line-height:.87!important;
+    max-width:8ch!important;
+    margin:12px 0 14px!important;
+  }
+  .create-header>p:last-child{
+    font-size:18px!important;
+    color:rgba(11,15,20,.74)!important;
+  }
+  .create-film{
+    max-width:1180px!important;
+    height:620px!important;
+    margin:0 auto!important;
+    background:transparent!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.6fr) minmax(260px,.6fr)!important;
+    grid-template-rows:1fr auto!important;
+    gap:14px!important;
+    overflow:visible!important;
+    box-shadow:none!important;
+  }
+  .create-video-lead{
+    position:relative!important;
+    left:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:100%!important;
+    grid-column:1!important;grid-row:1!important;
+    background:#0c0f11!important;
+    overflow:hidden!important;
+    box-shadow:0 30px 75px rgba(43,30,27,.16)!important;
+  }
+  .create-video-lead video{
+    width:100%!important;height:100%!important;
+    object-fit:contain!important;
+  }
+  .create-cut-a{
+    position:relative!important;
+    right:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:100%!important;
+    grid-column:2!important;grid-row:1!important;
+    transform:none!important;
+    border:0!important;
+    box-shadow:0 24px 60px rgba(43,30,27,.12)!important;
+  }
+  .create-cut-a img{object-fit:cover!important}
+  .create-cut-b{display:none!important}
+  .film-lower-third{
+    position:relative!important;
+    left:auto!important;right:auto!important;bottom:auto!important;
+    grid-column:1 / 3!important;grid-row:2!important;
+    color:var(--ink)!important;
+    border-top:1px solid rgba(11,15,20,.18)!important;
+    padding:14px 0 0!important;
+    font-size:11px!important;
+  }
+  .film-lower-third b{font-size:14px!important}
+
+  /* TELEVISION — one main image + one supporting image, no receipt pile */
+  .television{
+    min-height:900px!important;
+    padding:96px var(--pad)!important;
+  }
+  .tv-type,.tv-set-detail,.tv-archive-flash{display:none!important}
+  .tv-copy{
+    position:absolute!important;
+    left:var(--pad)!important;
+    top:15%!important;
+    width:min(34vw,470px)!important;
+  }
+  .tv-copy h2{
+    font-size:clamp(64px,7vw,108px)!important;
+    line-height:.84!important;
+    margin:12px 0 18px!important;
+  }
+  .tv-copy>p:last-child{font-size:19px!important}
+  .tv-portrait{
+    right:8%!important;
+    top:10%!important;
+    bottom:10%!important;
+    width:min(37vw,500px)!important;
+    padding:0!important;
+    background:#0b0f14!important;
+    border:0!important;
+    box-shadow:0 32px 80px rgba(0,0,0,.34)!important;
+  }
+  .tv-detail{
+    left:31%!important;
+    bottom:10%!important;
+    width:min(16vw,220px)!important;
+    height:31%!important;
+    border:6px solid rgba(255,255,255,.93)!important;
+    transform:rotate(-1deg)!important;
+  }
+
+  /* HOST — strong image + motion proof only */
+  .host{
+    min-height:920px!important;
+  }
+  .host-room-support,.host-word{display:none!important}
+  .host-copy{
+    right:4.5%!important;
+    top:10%!important;
+    width:min(37vw,540px)!important;
+  }
+  .host-copy h2{
+    font-size:clamp(62px,5.6vw,88px)!important;
+    line-height:.84!important;
+    text-wrap:balance!important;
+  }
+  .host-video{
+    right:6%!important;
+    top:35%!important;
+    width:min(27vw,390px)!important;
+    height:50%!important;
+    box-shadow:0 30px 84px rgba(0,0,0,.34)!important;
+  }
+  .host-environment{inset:0 38% 0 0!important}
+
+  /* WATCH — simpler program viewer, less dashboard */
+  .watch{
+    min-height:900px!important;
+    padding:90px var(--pad)!important;
+  }
+  .watch-heading{max-width:560px!important}
+  .watch-heading h2{
+    font-size:clamp(68px,7vw,106px)!important;
+    line-height:.84!important;
+  }
+  .watch-stage{
+    left:5%!important;
+    top:28%!important;
+    width:90%!important;
+    height:55%!important;
+    border:0!important;
+    background:rgba(8,10,14,.72)!important;
+    box-shadow:0 28px 80px rgba(0,0,0,.28)!important;
+  }
+  .watch-backdrop{display:none!important}
+  .watch-program::before,.watch-program::after{display:none!important}
+  .watch-foreground{
+    left:4%!important;
+    top:6%!important;
+    width:52%!important;
+    height:88%!important;
+    object-fit:contain!important;
+    background:#080a0d!important;
+  }
+  .watch-meta{
+    left:62%!important;
+    right:6%!important;
+    top:50%!important;
+    width:auto!important;
+    transform:translateY(-50%)!important;
+    border:0!important;
+    padding:0!important;
+    text-align:left!important;
+  }
+  .watch-meta strong{
+    font-size:clamp(40px,3.8vw,58px)!important;
+    line-height:.92!important;
+    max-width:10ch!important;
+  }
+  .watch-meta small{
+    font-size:16px!important;
+    max-width:30ch!important;
+  }
+  .watch-tuner{
+    left:5%!important;
+    right:5%!important;
+    bottom:4.5%!important;
+    top:auto!important;
+    width:auto!important;
+    display:flex!important;
+    gap:24px!important;
+    border:0!important;
+    overflow:visible!important;
+  }
+  .watch-tuner button{
+    min-height:auto!important;
+    padding:8px 0!important;
+    display:block!important;
+    border:0!important;
+    color:rgba(255,255,255,.54)!important;
+    background:transparent!important;
+  }
+  .watch-tuner button b{display:none!important}
+  .watch-tuner button span{
+    font-size:12px!important;
+    letter-spacing:.08em!important;
+  }
+  .watch-tuner button.active{
+    color:#fff!important;
+    border-bottom:2px solid var(--aqua)!important;
+  }
+  .watch-tuner button.active::before{display:none!important}
+
+  /* BETWEEN CUES — three editorial statements, not a KPI table */
+  .trust{
+    min-height:900px!important;
+    padding:96px var(--pad)!important;
+  }
+  .trust-copy{
+    width:min(40vw,560px)!important;
+  }
+  .trust-copy h2{
+    font-size:clamp(64px,6.4vw,96px)!important;
+    line-height:.86!important;
+  }
+  .trust-photo{
+    right:5%!important;
+    top:11%!important;
+    width:48%!important;
+    height:50%!important;
+  }
+  .trust-proof{
+    left:var(--pad)!important;
+    right:var(--pad)!important;
+    bottom:7%!important;
+    width:auto!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:34px!important;
+    border:0!important;
+  }
+  .trust-proof article{
+    display:block!important;
+    padding:18px 0 0!important;
+    border:0!important;
+    border-top:1px solid rgba(11,15,20,.22)!important;
+    background:transparent!important;
+  }
+  .trust-proof span{
+    display:block!important;
+    margin-bottom:12px!important;
+    font-size:11px!important;
+  }
+  .trust-proof strong{
+    display:block!important;
+    margin:0 0 12px!important;
+    font-size:clamp(32px,2.8vw,44px)!important;
+    line-height:.94!important;
+  }
+  .trust-proof p{
+    max-width:30ch!important;
+    font-size:15px!important;
+    line-height:1.5!important;
+  }
+
+  /* WHAT'S NEXT — clean list + portrait */
+  .imagination{
+    min-height:880px!important;
+    padding:96px var(--pad)!important;
+  }
+  .imagination-grid{display:none!important}
+  .imagination-copy{
+    width:min(48vw,650px)!important;
+  }
+  .imagination-copy h2{
+    font-size:clamp(64px,6.5vw,100px)!important;
+    line-height:.86!important;
+  }
+  .imagination-copy>p:last-child{
+    max-width:35ch!important;
+    font-size:18px!important;
+  }
+  .imagination-talent{
+    right:5%!important;
+    top:9%!important;
+    width:min(34vw,450px)!important;
+    height:72%!important;
+  }
+  .casting-doors{
+    left:var(--pad)!important;
+    right:48%!important;
+    bottom:7%!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:16px 28px!important;
+    border:0!important;
+  }
+  .casting-doors article{
+    min-height:0!important;
+    padding:14px 0 12px!important;
+    border:0!important;
+    border-top:1px solid rgba(11,15,20,.22)!important;
+    background:transparent!important;
+    overflow:visible!important;
+  }
+  .casting-doors span{
+    margin-bottom:7px!important;
+    font-size:11px!important;
+  }
+  .casting-doors strong{
+    font-size:24px!important;
+    line-height:1!important;
+    margin-bottom:5px!important;
+  }
+  .casting-doors p{
+    font-size:14px!important;
+    max-width:28ch!important;
+  }
+
+  /* CASTING SHEET — remove card grid energy */
+  .cast58 .doors{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:26px 44px!important;
+    background:transparent!important;
+  }
+  .cast58 .door{
+    min-height:0!important;
+    padding:22px 0 26px!important;
+    background:transparent!important;
+    border:0!important;
+    border-top:1px solid rgba(255,255,255,.24)!important;
+  }
+  .cast58 .door h3{
+    margin:12px 0 9px!important;
+    font-size:34px!important;
+  }
+  .cast58 .door p{
+    max-width:38ch!important;
+    font-size:16px!important;
+  }
+  .cast58 .range-mosaic{
+    gap:10px!important;
+  }
+  .cast58 .file-row{
+    border-top:1px solid rgba(11,15,20,.14)!important;
+  }
+
+  /* PROJECT PAGES — less dashboard, more case study */
+  .project-file .project-ledger{
+    margin:0!important;
+    padding:18px var(--pad)!important;
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:12px 36px!important;
+    background:#fffaf3!important;
+    border-top:1px solid rgba(9,13,18,.1)!important;
+    border-bottom:1px solid rgba(9,13,18,.1)!important;
+  }
+  .project-file .project-ledger div{
+    min-height:0!important;
+    padding:0!important;
+    border:0!important;
+    display:flex!important;
+    gap:8px!important;
+    align-items:baseline!important;
+  }
+  .project-file .project-ledger span{
+    font-size:11px!important;
+    color:rgba(9,13,18,.5)!important;
+  }
+  .project-file .project-ledger strong{
+    font-size:15px!important;
+  }
+  .project-file .project-notes-grid{
+    gap:0!important;
+  }
+  .project-file .project-note-row{
+    padding:16px 0!important;
+    border-top:1px solid rgba(9,13,18,.14)!important;
+  }
+  .project-file .proof-note{
+    margin-top:22px!important;
+    padding-top:12px!important;
+    border-top:1px solid rgba(9,13,18,.13)!important;
+    background:transparent!important;
+  }
+}
+
+@media (max-width:1024px){
+  .person-type,.person-acrylic,.person-wide,
+  .tv-type,.tv-set-detail,.tv-archive-flash,
+  .host-room-support,.host-word{display:none!important}
+
+  .create-film{
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .watch-backdrop{display:none!important}
+  .watch-program::before,.watch-program::after{display:none!important}
+}
+
+@media (max-width:760px){
+  .person{
+    min-height:0!important;
+    padding:72px 18px!important;
+  }
+  .person-copy{
+    position:relative!important;
+    left:auto!important;top:auto!important;
+    width:100%!important;
+    margin:0 0 24px!important;
+  }
+  .person-copy h2{font-size:58px!important}
+  .person-studio{
+    position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    width:100%!important;height:520px!important;
+  }
+  .person-floral{
+    position:relative!important;
+    right:auto!important;bottom:auto!important;
+    width:58%!important;height:260px!important;
+    margin:-80px 0 0 auto!important;
+    border:6px solid #fff!important;
+    z-index:5!important;
+  }
+
+  .create{
+    min-height:0!important;
+    padding:72px 18px!important;
+  }
+  .create-film{
+    height:auto!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  .create-video-lead{
+    position:relative!important;
+    left:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:auto!important;
+    aspect-ratio:9/16!important;
+  }
+  .create-cut-a{
+    position:relative!important;
+    right:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:220px!important;
+    transform:none!important;
+    border:0!important;
+  }
+  .film-lower-third{
+    position:relative!important;
+    left:auto!important;right:auto!important;bottom:auto!important;
+    display:block!important;
+    color:var(--ink)!important;
+    border-top:1px solid rgba(11,15,20,.18)!important;
+    padding-top:12px!important;
+  }
+
+  .television{min-height:880px!important}
+  .tv-copy h2{font-size:58px!important}
+  .tv-portrait{
+    top:29%!important;
+    bottom:22%!important;
+  }
+  .tv-detail{
+    left:18px!important;
+    bottom:6%!important;
+    width:38%!important;
+    height:18%!important;
+  }
+
+  .host{min-height:980px!important}
+  .host-copy h2{font-size:58px!important}
+  .host-environment{inset:17% 0 40% 0!important}
+  .host-video{
+    left:18px!important;right:auto!important;
+    top:auto!important;bottom:6%!important;
+    width:62%!important;height:30%!important;
+  }
+
+  .watch{min-height:980px!important}
+  .watch-stage{
+    top:20%!important;
+    height:60%!important;
+  }
+  .watch-foreground{
+    left:5%!important;
+    top:5%!important;
+    width:90%!important;
+    height:64%!important;
+  }
+  .watch-meta{
+    left:6%!important;
+    right:6%!important;
+    top:auto!important;
+    bottom:5%!important;
+    transform:none!important;
+  }
+  .watch-tuner{
+    left:18px!important;
+    right:18px!important;
+    bottom:4%!important;
+    gap:14px!important;
+    overflow-x:auto!important;
+    display:flex!important;
+  }
+  .watch-tuner button{flex:0 0 auto!important}
+
+  .trust{min-height:0!important;padding:72px 18px!important}
+  .trust-copy{width:100%!important}
+  .trust-photo{
+    position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    width:100%!important;height:420px!important;
+    margin:26px 0!important;
+  }
+  .trust-proof{
+    position:relative!important;
+    left:auto!important;right:auto!important;bottom:auto!important;
+    display:block!important;
+    width:100%!important;
+  }
+  .trust-proof article{
+    padding:18px 0!important;
+    border-top:1px solid rgba(11,15,20,.18)!important;
+  }
+
+  .imagination{min-height:0!important;padding:72px 18px!important}
+  .imagination-copy{width:100%!important}
+  .imagination-talent{
+    position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    width:78%!important;height:520px!important;
+    margin:20px auto 0!important;
+  }
+  .casting-doors{
+    position:relative!important;
+    left:auto!important;right:auto!important;bottom:auto!important;
+    margin-top:22px!important;
+    grid-template-columns:1fr!important;
+  }
+
+  .cast58 .doors{grid-template-columns:1fr!important}
+  .cast58 .door{padding:20px 0!important}
+
+  .project-file .project-ledger{
+    display:block!important;
+    padding:14px 18px!important;
+  }
+  .project-file .project-ledger div{
+    padding:8px 0!important;
+  }
+}
