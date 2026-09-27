@@ -1,0 +1,390 @@
+/* A5.21.0 — GROWN EDITORIAL TONE
+   Remove prismatic/sticker language. Shift the site toward warm, sharp,
+   magazine-like talent editorial: cream, ink, cognac, oxblood, photography. */
+
+:root{
+  --ink:#151311!important;
+  --paper:#f5f0e8!important;
+  --aqua:#6f293b!important;
+  --aqua-deep:#6f293b!important;
+  --pink:#6f293b!important;
+  --violet:#37252c!important;
+  --line:rgba(21,19,17,.16)!important;
+
+  --editorial-paper:#f5f0e8;
+  --editorial-paper-2:#ebe1d5;
+  --editorial-paper-3:#ddd0c2;
+  --editorial-ink:#151311;
+  --editorial-charcoal:#191617;
+  --editorial-oxblood:#6f293b;
+  --editorial-cognac:#9a6848;
+  --editorial-line:rgba(21,19,17,.16);
+}
+
+/* Kill the Lisa Frank layer outright. */
+.signal-seam,
+.hero-glass,
+.hero-atmosphere::after,
+.person-type::after,
+.watch-stage::after,
+.imagination-grid::after,
+.cast58 .casting-hero::after,
+.cast58 .range-section::after,
+.hero-rail::before,
+.watch-tuner::after,
+.imagination-copy::before{
+  display:none!important;
+  content:none!important;
+}
+
+/* Remove animated aura / prismatic overlays while preserving useful image shading. */
+.hero::before,
+.hero::after,
+.person::before,
+.person::after,
+.create::before,
+.book::before{
+  content:none!important;
+  display:none!important;
+}
+
+/* Chrome */
+body{
+  background:var(--editorial-paper)!important;
+  color:var(--editorial-ink)!important;
+}
+.topbar{
+  background:rgba(247,242,235,.94)!important;
+  border-bottom:1px solid rgba(21,19,17,.12)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+}
+.brand i{
+  background:var(--editorial-oxblood)!important;
+  box-shadow:none!important;
+}
+.topbar nav .nav-book,
+.button-pink{
+  background:var(--editorial-ink)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+.button-quiet{
+  background:transparent!important;
+  color:var(--editorial-ink)!important;
+  border-color:rgba(21,19,17,.48)!important;
+}
+.section-code,
+.cast58 .mono,
+.project-file .mono{
+  color:var(--editorial-oxblood)!important;
+}
+.source-tab{
+  background:rgba(247,242,235,.94)!important;
+  color:var(--editorial-ink)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+.source-tab b{color:var(--editorial-oxblood)!important}
+.media-frame{
+  outline-color:rgba(21,19,17,.10)!important;
+  box-shadow:0 22px 56px rgba(38,29,24,.12)!important;
+}
+
+/* HERO: creamy, photographic, no aurora. */
+.hero{
+  background:
+    linear-gradient(90deg,var(--editorial-paper) 0 68%,#e7ddd2 68% 100%)!important;
+  color:var(--editorial-ink)!important;
+}
+.hero-atmosphere{
+  background:none!important;
+}
+.hero-promise strong{
+  background:none!important;
+  color:var(--editorial-oxblood)!important;
+}
+.hero-photo{
+  filter:drop-shadow(0 36px 54px rgba(43,32,27,.16))!important;
+}
+.hero-photo::before{
+  background:none!important;
+  filter:none!important;
+}
+.hero-transmission{
+  background:#faf6f0!important;
+  outline-color:rgba(21,19,17,.12)!important;
+  box-shadow:0 18px 44px rgba(43,32,27,.13)!important;
+}
+.hero-rail{
+  background:var(--editorial-charcoal)!important;
+  box-shadow:none!important;
+}
+.hero-rail span:before{
+  background:var(--editorial-oxblood)!important;
+  box-shadow:none!important;
+}
+
+/* ABOUT / PERSON */
+.person{
+  background:#f2ece4!important;
+}
+.person-studio,
+.person-floral{
+  box-shadow:0 24px 56px rgba(43,32,27,.12)!important;
+  outline-color:rgba(21,19,17,.08)!important;
+}
+.person-floral{
+  border-color:#f8f4ee!important;
+}
+
+/* EXPLAIN */
+.explain{
+  background:#e9e2da!important;
+}
+.explain-video,
+.finance-transmission,
+.explain-detail-bag{
+  box-shadow:0 18px 46px rgba(43,32,27,.11)!important;
+  border-color:rgba(21,19,17,.11)!important;
+}
+.finance-transmission figcaption{
+  background:rgba(21,19,17,.88)!important;
+  color:#fff!important;
+}
+
+/* CREATE */
+.create{
+  background:#f7f2eb!important;
+}
+.create-video-lead,
+.create-cut-a{
+  box-shadow:0 24px 62px rgba(43,32,27,.13)!important;
+}
+.film-lower-third{
+  color:var(--editorial-ink)!important;
+  border-top-color:rgba(21,19,17,.16)!important;
+}
+
+/* TELEVISION */
+.television{
+  background:var(--editorial-charcoal)!important;
+}
+.tv-bg{
+  background:
+    linear-gradient(135deg,#171416 0%,#21191c 62%,#2a1b20 100%)!important;
+}
+.tv-portrait,
+.tv-detail{
+  box-shadow:0 26px 66px rgba(0,0,0,.31)!important;
+}
+.tv-detail{border-color:#f6f0e8!important}
+
+/* HOST */
+.host{
+  background:#111214!important;
+}
+.host-shade{
+  background:linear-gradient(90deg,rgba(8,9,10,.04),rgba(8,9,10,.46) 64%,#111214 100%)!important;
+}
+.host-environment:after{
+  background:linear-gradient(90deg,rgba(7,9,10,.04),rgba(7,9,10,.34) 64%,#111214 100%)!important;
+}
+.host-video{
+  box-shadow:0 26px 64px rgba(0,0,0,.31)!important;
+}
+
+/* FIELD / ACTIVATE */
+.activate{
+  background:#f2ece4!important;
+}
+.activate-centerline{
+  box-shadow:0 24px 62px rgba(43,32,27,.12)!important;
+}
+.activate-gotennis{
+  background:#181617!important;
+  box-shadow:0 24px 62px rgba(43,32,27,.14)!important;
+}
+.activate-gotennis figure:after{
+  background:linear-gradient(transparent,rgba(10,9,9,.92))!important;
+}
+
+/* WATCH */
+.watch{
+  background:#141213!important;
+}
+.watch-weather{
+  background:linear-gradient(135deg,#111011 0%,#1a1517 62%,#21171b 100%)!important;
+}
+.watch-stage{
+  background:#0f0f10!important;
+  box-shadow:0 24px 64px rgba(0,0,0,.28)!important;
+}
+.watch-tuner button.active{
+  border-bottom-color:var(--editorial-oxblood)!important;
+}
+
+/* BETWEEN CUES */
+.trust{
+  background:#f4eee6!important;
+}
+.trust-photo{
+  background:#eee5db!important;
+  box-shadow:0 24px 62px rgba(43,32,27,.12)!important;
+}
+.trust-proof article{
+  background:transparent!important;
+  border-top-color:rgba(21,19,17,.18)!important;
+}
+
+/* WHAT'S NEXT */
+.imagination{
+  background:#e9dfd4!important;
+}
+.imagination-grid{display:none!important}
+.imagination-talent{
+  filter:drop-shadow(0 24px 42px rgba(43,32,27,.12))!important;
+}
+.imagination-talent::after{
+  border-color:rgba(21,19,17,.14)!important;
+  box-shadow:12px 12px 0 #d8c8b8,0 26px 58px rgba(43,32,27,.10)!important;
+}
+.casting-doors article{
+  border-top-color:rgba(21,19,17,.18)!important;
+}
+.casting-doors span{
+  color:var(--editorial-oxblood)!important;
+}
+
+/* BOOK */
+.book{
+  background:#151314!important;
+}
+.book-card{
+  background:rgba(255,255,255,.03)!important;
+  border-color:rgba(255,255,255,.14)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* CASTING SHEET */
+body.cast58,
+.cast58.a510-cast{
+  background:var(--editorial-paper)!important;
+  color:var(--editorial-ink)!important;
+}
+.cast58 .casting-hero,
+.cast58.a510-cast .casting-hero{
+  background:
+    linear-gradient(90deg,var(--editorial-paper) 0 62%,#e8ded3 62% 100%)!important;
+}
+.cast58 .casting-hero:before,
+.cast58.a510-cast .casting-hero-copy:before{
+  content:none!important;
+  display:none!important;
+}
+.cast58 .casting-hero-media:after,
+.cast58.a510-cast .casting-hero-media:after{
+  background:linear-gradient(90deg,transparent 70%,rgba(245,240,232,.92))!important;
+}
+.cast58 .door-section{
+  background:var(--editorial-charcoal)!important;
+}
+.cast58 .door:after{display:none!important;content:none!important}
+.cast58 .proof-section,
+.cast58.a510-cast .proof-section{
+  background:#f7f2eb!important;
+}
+.cast58 .proof-card{
+  background:#eee6dc!important;
+}
+.cast58 .operator-section,
+.cast58.a510-cast .operator-section{
+  background:#e7ddd1!important;
+}
+.cast58 .operator-photo,
+.cast58.a510-cast .operator-photo{
+  box-shadow:0 24px 62px rgba(43,32,27,.12)!important;
+  outline-color:rgba(21,19,17,.08)!important;
+}
+.cast58 .credit-strip,
+.cast58.a510-cast .credit-strip{
+  background:transparent!important;
+  box-shadow:none!important;
+  border-color:rgba(21,19,17,.14)!important;
+}
+.cast58 .booking-section{
+  background:var(--editorial-charcoal)!important;
+}
+
+/* PROJECT PAGES */
+.project-file{
+  --pf-paper:var(--editorial-paper)!important;
+  --pf-paper-soft:#f8f3ec!important;
+  --pf-ink:var(--editorial-ink)!important;
+  --pf-aqua:var(--editorial-oxblood)!important;
+  --pf-pink:var(--editorial-oxblood)!important;
+  --pf-night:var(--editorial-charcoal)!important;
+  background:#f8f3ec!important;
+}
+.project-file .project-hero,
+.project-file.scrambled-file .project-hero,
+.project-file.wimpb-file .project-hero,
+.project-file.montis-file .project-hero,
+.project-file.centerline-file .project-hero{
+  background:
+    linear-gradient(90deg,#f6f0e8 0 54%,#e8ded3 54% 100%)!important;
+}
+.project-file .project-hero:before,
+.project-file .project-hero-copy:after{
+  content:none!important;
+  display:none!important;
+}
+.project-file .project-hero-media:after{
+  background:linear-gradient(90deg,rgba(246,240,232,.16),transparent 20%)!important;
+}
+.project-file .project-evidence{
+  background:#f8f3ec!important;
+}
+.project-file .evidence-media{
+  box-shadow:0 24px 64px rgba(43,32,27,.12)!important;
+}
+.project-file .project-notes{
+  background:#e8ded3!important;
+}
+.project-file .project-close{
+  background:var(--editorial-charcoal)!important;
+}
+.project-file .project-close-actions .button-quiet{
+  background:#f5f0e8!important;
+  color:var(--editorial-ink)!important;
+}
+.project-file .project-foot{
+  background:#0f0e0f!important;
+}
+
+/* Mobile + tablet: same grown palette, no candy gradients. */
+@media(max-width:1024px){
+  .hero{
+    background:
+      linear-gradient(180deg,#f6f0e8 0 72%,#e7ddd2 72% 100%)!important;
+  }
+  .person{background:#f2ece4!important}
+  .explain{background:#e9e2da!important}
+  .create{background:#f7f2eb!important}
+  .activate{background:#f2ece4!important}
+  .trust{background:#f4eee6!important}
+  .imagination{background:#e9dfd4!important}
+  .cast58 .casting-hero,
+  .cast58.a510-cast .casting-hero{
+    background:#f5f0e8!important;
+  }
+  .project-file .project-hero,
+  .project-file.scrambled-file .project-hero,
+  .project-file.wimpb-file .project-hero,
+  .project-file.montis-file .project-hero,
+  .project-file.centerline-file .project-hero{
+    background:#f6f0e8!important;
+  }
+}
