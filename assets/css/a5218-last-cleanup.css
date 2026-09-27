@@ -138,3 +138,123 @@
     line-height:.94!important;
   }
 }
+
+
+/* ABOUT LAUREN — the bridge between the headline and the receipts */
+.v2-about{
+  padding:clamp(94px,10vw,158px) clamp(24px,6vw,94px)!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.02fr) minmax(340px,.78fr)!important;
+  gap:clamp(54px,8vw,126px)!important;
+  align-items:center!important;
+  background:#f4f1ea!important;
+}
+.v2-about-copy{
+  max-width:720px!important;
+}
+.v2-about h2{
+  margin:0!important;
+  max-width:9ch!important;
+  font-size:clamp(58px,6.2vw,98px)!important;
+  line-height:.88!important;
+  letter-spacing:-.067em!important;
+  text-wrap:balance!important;
+}
+.v2-about h2 em{
+  font-family:Georgia,'Times New Roman',serif!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  color:#2458ff!important;
+  letter-spacing:-.055em!important;
+}
+.v2-about-lead{
+  margin:34px 0 0!important;
+  max-width:35ch!important;
+  font-size:clamp(20px,1.7vw,25px)!important;
+  line-height:1.5!important;
+  color:#08111f!important;
+}
+.v2-about-copy>p:not(.v2-section-label):not(.v2-about-lead){
+  margin:20px 0 0!important;
+  max-width:42ch!important;
+  font-size:17px!important;
+  line-height:1.65!important;
+  color:rgba(8,17,31,.68)!important;
+}
+.v2-about-signature{
+  margin-top:36px!important;
+  border-top:1px solid rgba(8,17,31,.18)!important;
+}
+.v2-about-signature span{
+  display:block!important;
+  padding:12px 0!important;
+  border-bottom:1px solid rgba(8,17,31,.12)!important;
+  font-size:clamp(24px,2.5vw,38px)!important;
+  line-height:1!important;
+  letter-spacing:-.04em!important;
+}
+.v2-about-signature span:nth-child(2){
+  font-family:Georgia,'Times New Roman',serif!important;
+  font-style:italic!important;
+  color:#2458ff!important;
+}
+.v2-about-photo{
+  margin:0!important;
+  width:100%!important;
+  max-width:510px!important;
+  justify-self:end!important;
+  aspect-ratio:3/4!important;
+  overflow:hidden!important;
+  background:#dfe5ee!important;
+}
+.v2-about-photo img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 36%!important;
+  display:block!important;
+}
+
+@media(max-width:900px){
+  .v2-about{
+    display:block!important;
+    padding:78px 22px!important;
+  }
+  .v2-about-copy{
+    max-width:none!important;
+  }
+  .v2-about h2{
+    max-width:8ch!important;
+    font-size:clamp(56px,14vw,78px)!important;
+  }
+  .v2-about-lead{
+    font-size:19px!important;
+    max-width:31ch!important;
+  }
+  .v2-about-copy>p:not(.v2-section-label):not(.v2-about-lead){
+    font-size:16px!important;
+    max-width:35ch!important;
+  }
+  .v2-about-signature{
+    margin-top:30px!important;
+  }
+  .v2-about-signature span{
+    font-size:30px!important;
+  }
+  .v2-about-photo{
+    max-width:none!important;
+    width:100%!important;
+    aspect-ratio:4/5!important;
+    margin:42px 0 0!important;
+  }
+}
+
+@media(max-width:560px){
+  .v2-about{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+  .v2-about-photo{
+    aspect-ratio:3/4!important;
+  }
+}
