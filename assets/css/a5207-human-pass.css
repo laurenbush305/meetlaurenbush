@@ -1,0 +1,36 @@
+/* A5.20.7 — HUMAN PASS
+   Reduce over-systematized micro-labeling and decorative "design system" language.
+   Keep the strong editorial look, lose the AI-art-director fingerprints. */
+
+.finance-transmission::before,
+.explain-detail-bag::after,
+.watch-tuner::before,
+.imagination::before,
+.imagination-copy::after,
+.imagination-talent::before,
+.casting-doors article::before,
+.person .person-acrylic::before,
+.cast58 .range-section::before{
+  content:none!important;
+  display:none!important;
+}
+
+.casting-doors article:nth-child(even){
+  transform:none!important;
+}
+
+.trust-photo .source-tab{
+  font-size:11px!important;
+  line-height:1.35!important;
+}
+.trust-photo .source-tab b{
+  font-size:14px!important;
+}
+.trust-photo .source-tab:after{
+  content:none!important;
+}
+
+@media(max-width:760px){
+  .trust-photo .source-tab{font-size:10px!important}
+  .trust-photo .source-tab b{font-size:12px!important}
+}
