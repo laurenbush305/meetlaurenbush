@@ -347,3 +347,23 @@
   .v2-live-current>a small{margin-top:2px!important}
   .cast58 .credit-strip{grid-template-columns:1fr!important}
 }
+
+
+/* OCT 6 2026 — PERMISSION-CLEARED BRAND TESTIMONIAL */
+.cast58 .file-testimonial{
+  margin-top:12px!important;
+  padding-top:10px!important;
+  border-top:1px solid rgba(11,15,20,.14)!important;
+  font-family:Georgia,'Times New Roman',serif!important;
+  font-style:italic!important;
+  font-size:15px!important;
+  line-height:1.45!important;
+  color:#2458ff!important;
+}
+.cast58 .file-testimonial strong{
+  font-family:Archivo,Arial,sans-serif!important;
+  font-style:normal!important;
+  font-size:11px!important;
+  letter-spacing:.02em!important;
+  color:rgba(11,15,20,.68)!important;
+}
