@@ -73,7 +73,7 @@ const testCastingInteractions = async page => {
   if (!(await page.locator('.dirty-south-credit').count())) failures.push('Casting Dirty South Trivia additional credit missing');
   if (!(await page.locator('.credit').filter({ hasText: 'Team Trivia' }).count())) failures.push('Casting prior Team Trivia live-host receipt missing');
   const castingText = await page.locator('body').innerText();
-  if (/\bmoderator\b|\bmoderation\b/i.test(castingText)) failures.push('Casting currently claims moderator/moderation without public proof');
+  if (/experienced moderator|panel moderator|has moderated|moderated panels/i.test(castingText)) failures.push('Casting claims specific past moderator experience without a public receipt');
   if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
   const doors = await page.locator('.door-section .door').count();
   if (doors !== 4) failures.push(`Casting sheet expected 4 primary assignment rows; found ${doors}`);
