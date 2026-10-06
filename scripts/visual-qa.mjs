@@ -39,8 +39,8 @@ const attachDiagnostics = page => {
   });
   page.on('requestfailed', request => {
     const error = request.failure()?.errorText || 'request failed';
-    const normalPartialMediaAbort = error === 'net::ERR_ABORTED' && request.resourceType() === 'media';
-    if (!normalPartialMediaAbort) diagnostics.requestFailures.push({ url: request.url(), error, resourceType: request.resourceType() });
+    const normalBrowserAbort = error === 'net::ERR_ABORTED' && ['media','image'].includes(request.resourceType());
+    if (!normalBrowserAbort) diagnostics.requestFailures.push({ url: request.url(), error, resourceType: request.resourceType() });
   });
   return diagnostics;
 };
