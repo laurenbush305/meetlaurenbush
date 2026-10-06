@@ -23,7 +23,7 @@ concurrency:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -56,6 +56,7 @@ jobs:
               index.html
               casting-sheet.html
               project-scrambled-up.html
+              project-finance-explainer.html
               project-pickleball-bag.html
               project-dear-diary-montis.html
               project-honcho-centerline.html
@@ -98,8 +99,9 @@ jobs:
             exit 1
           fi
           echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save --ignore-scripts playwright-core@1.55.0 >/dev/null
-          echo "Using runner browser: $CHROME_PATH"
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save --ignore-scripts playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps webkit >/dev/null
+          echo "Using runner Chrome: $CHROME_PATH and Playwright WebKit"
 
       - name: Capture all public pages, interactions, and QA state
         env:
