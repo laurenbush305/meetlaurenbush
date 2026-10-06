@@ -29,6 +29,12 @@ Deeper proof lives in the Casting Sheet and project files.
 
 Do not restore removed `#watch` or `#person` links. Permanent QA validates fragment targets.
 
+## Current live-work signal
+
+**Dirty South Trivia | Trivia Host | 2026–present** is an active professional hosting credit. The homepage Live section and Casting Sheet should keep this visible as current live-room proof, with a booking signal for select private events, interactive hosting, branded experiences, moderation and audience-led programming.
+
+The site may link to the official Dirty South Trivia website for context. Do not imply Lauren owns Dirty South Trivia or that every Dirty South event is independently bookable through Lauren.
+
 ## Current front-door proof mix
 
 1. **Scrambled Up** — Television
