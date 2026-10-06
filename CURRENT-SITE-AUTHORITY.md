@@ -31,7 +31,7 @@ Do not restore removed `#watch` or `#person` links. Permanent QA validates fragm
 
 ## Current live-work signal
 
-**Dirty South Trivia | Trivia Host | 2026–present** is an active professional hosting credit. The homepage Live section and Casting Sheet should keep this visible as current live-room proof, with a booking signal for select private events, interactive hosting, branded experiences, moderation and audience-led programming.
+**Dirty South Trivia | Trivia Host | 2026–present** is an active professional hosting credit. The homepage Live section and Casting Sheet should keep this visible as current live-room proof, with a booking signal for select private events, interactive hosting, branded experiences and audience-led programming.
 
 The site may link to the official Dirty South Trivia website for context. Do not imply Lauren owns Dirty South Trivia or that every Dirty South event is independently bookable through Lauren.
 
@@ -46,7 +46,7 @@ The site may link to the official Dirty South Trivia website for context. Do not
 
 ## October 6 maintenance checkpoint
 
-Public head at this checkpoint: `709be151c4dd7cdd634f3e9eb5ab5005e2d60652`
+Use the current `main` head as the implementation checkpoint. Do not pin future work to an older SHA from this document.
 
 Completed:
 - repaired corrupted About portrait
@@ -60,29 +60,22 @@ Completed:
 - added WebKit/Safari-style homepage and Casting checks
 - added cross-page fragment validation
 - added transfer-budget checks
+- added Dirty South Trivia as current professional live-hosting proof
+- added prior Team Trivia independent-host receipt to the Casting Sheet
+- added approved Scrambled Up host feedback
+- removed unsupported moderator/panel-moderator experience language
+- renamed the release workflow from legacy Season Zero language to Lauren Bush Site QA
 
-## Final release QA
+## Release QA
 
-GitHub Actions run: `37501660876`  
-Artifact: `11429503868`  
-Result: **PASS**
+The repository's **Lauren Bush Site QA** workflow is the release gate. It validates:
+- Homepage + Casting at 1440 / 1024 / 768 / 430 / 390 / 360 in Chromium
+- All public project files at desktop + 390 mobile
+- Homepage + Casting in WebKit at desktop + 390 mobile
+- horizontal overflow, console errors, HTTP/network failures, interactions, internal/cross-page fragments, legacy metadata and transfer budget
+- presence of the current Dirty South Trivia live-work credit and the historical Team Trivia live-host receipt
 
-Chromium:
-- Homepage + Casting: 1440 / 1024 / 768 / 430 / 390 / 360
-- All public project files: desktop + 390 mobile
-
-WebKit:
-- Homepage + Casting: desktop + 390 mobile
-
-Pass conditions:
-- zero horizontal overflow
-- zero console errors
-- zero HTTP response errors
-- zero non-benign request failures
-- zero interaction failures
-- zero broken internal or cross-page fragment targets
-- zero legacy Season Zero/LBTV metadata flags
-- no performance-budget failures
+Use the latest successful run on the current `main` head. Detailed release receipts are recorded in Notion → **02 — Site Build + QA**.
 
 ## Documentation authority
 
