@@ -1,4 +1,4 @@
-name: Season Zero Visual QA
+name: Lauren Bush Site QA
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: season-zero-visual-qa-main
+  group: lauren-bush-site-qa-main
   cancel-in-progress: true
 
 jobs:
@@ -69,11 +69,11 @@ jobs:
             for f in "${FILES[@]}"; do
               local_hash=$(sha256sum "$f" | awk '{print $1}')
               remote="https://meetlaurenbush.com/${f}?qa=${GITHUB_SHA}-${attempt}"
-              if ! curl -fsSL "$remote" -o /tmp/season-zero-remote; then
+              if ! curl -fsSL "$remote" -o /tmp/lauren-site-remote; then
                 all_match=0
                 break
               fi
-              remote_hash=$(sha256sum /tmp/season-zero-remote | awk '{print $1}')
+              remote_hash=$(sha256sum /tmp/lauren-site-remote | awk '{print $1}')
               if [[ "$local_hash" != "$remote_hash" ]]; then
                 all_match=0
                 break
@@ -113,7 +113,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: season-zero-visual-qa-${{ github.sha }}
+          name: lauren-bush-site-qa-${{ github.sha }}
           path: qa-artifacts
           if-no-files-found: error
           retention-days: 30
