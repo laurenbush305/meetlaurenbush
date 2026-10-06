@@ -54,6 +54,7 @@ const testHomeInteractions = async page => {
   if (!(await page.locator('.v2-hero a[href^="mailto:"]').first().count())) failures.push('Homepage booking mailto link missing');
   if (!(await page.locator('a[href="casting-sheet.html"]').first().count())) failures.push('Homepage casting-sheet link missing');
   if (!(await page.locator('a[href="project-finance-explainer.html"]').first().count())) failures.push('Homepage finance explainer project link missing');
+  if (!(await page.locator('.v2-live-current a[href="https://www.dirtysouthtrivia.com/"]').count())) failures.push('Homepage Dirty South Trivia live-work credit missing');
   const workCards = page.locator('#work .v2-work-card');
   const count = await workCards.count();
   if (count !== 4) failures.push(`Homepage expected 4 selected-work cards; found ${count}`);
@@ -68,6 +69,8 @@ const testCastingInteractions = async page => {
   if (count !== 4) failures.push(`Casting sheet expected 4 selected-file links; found ${count}`);
   for (let i=0;i<count;i++) if (!(await fileLinks.nth(i).getAttribute('href'))) failures.push(`Casting selected-file link ${i+1} has no href`);
   if (!(await page.locator('#selected-files a[href="project-finance-explainer.html"]').count())) failures.push('Casting finance explainer project link missing');
+  if (!(await page.locator('.casting-current-live[href="https://www.dirtysouthtrivia.com/"]').count())) failures.push('Casting Dirty South Trivia current-live credit missing');
+  if (!(await page.locator('.dirty-south-credit').count())) failures.push('Casting Dirty South Trivia additional credit missing');
   if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
   const doors = await page.locator('.door-section .door').count();
   if (doors !== 4) failures.push(`Casting sheet expected 4 primary assignment rows; found ${doors}`);
