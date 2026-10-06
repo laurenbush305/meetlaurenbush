@@ -72,6 +72,7 @@ const testCastingInteractions = async page => {
   if (!(await page.locator('.casting-current-live[href="https://www.dirtysouthtrivia.com/"]').count())) failures.push('Casting Dirty South Trivia current-live credit missing');
   if (!(await page.locator('.dirty-south-credit').count())) failures.push('Casting Dirty South Trivia additional credit missing');
   if (!(await page.locator('.credit').filter({ hasText: 'Team Trivia' }).count())) failures.push('Casting prior Team Trivia live-host receipt missing');
+  if (!(await page.locator('.file-testimonial').filter({ hasText: 'This is too good' }).count())) failures.push('Casting Montis testimonial missing');
   const castingText = await page.locator('body').innerText();
   if (/experienced moderator|panel moderator|has moderated|moderated panels/i.test(castingText)) failures.push('Casting claims specific past moderator experience without a public receipt');
   if (!(await page.locator('.booking-section a[href^="mailto:"]').first().count())) failures.push('Casting booking mailto link missing');
