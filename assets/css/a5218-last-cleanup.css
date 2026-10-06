@@ -258,3 +258,92 @@
     aspect-ratio:3/4!important;
   }
 }
+
+
+/* OCT 6 2026 — CURRENT LIVE HOSTING CREDIT */
+.v2-live-current{
+  margin-top:30px!important;
+  padding-top:24px!important;
+  border-top:1px solid rgba(255,255,255,.24)!important;
+}
+.v2-live-current>a{
+  display:grid!important;
+  grid-template-columns:auto 1fr!important;
+  gap:5px 18px!important;
+  align-items:baseline!important;
+  color:inherit!important;
+  text-decoration:none!important;
+}
+.v2-live-current>a span{
+  grid-column:1/-1!important;
+  font:700 10px/1.2 'Space Mono',monospace!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  color:#dfe7ff!important;
+}
+.v2-live-current>a strong{
+  font-size:clamp(24px,2.6vw,38px)!important;
+  line-height:1!important;
+  letter-spacing:-.045em!important;
+}
+.v2-live-current>a small{
+  font-size:12px!important;
+  line-height:1.4!important;
+  opacity:.72!important;
+}
+.v2-live-current>p{
+  margin:14px 0 0!important;
+  max-width:48ch!important;
+  font-size:14px!important;
+  line-height:1.55!important;
+  color:rgba(255,255,255,.68)!important;
+}
+
+.cast58 .casting-current-live{
+  display:block!important;
+  margin:0 0 22px!important;
+  padding:15px 0 14px!important;
+  border-top:1px solid rgba(11,15,20,.18)!important;
+  border-bottom:1px solid rgba(11,15,20,.18)!important;
+  color:inherit!important;
+  text-decoration:none!important;
+}
+.cast58 .casting-current-live span{
+  display:block!important;
+  font:700 8px/1.3 'Space Mono',monospace!important;
+  letter-spacing:.11em!important;
+  color:#2458ff!important;
+}
+.cast58 .casting-current-live strong{
+  display:block!important;
+  margin-top:5px!important;
+  font-size:22px!important;
+  line-height:1!important;
+  letter-spacing:-.035em!important;
+}
+.cast58 .casting-current-live small{
+  display:block!important;
+  margin-top:5px!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+  color:rgba(11,15,20,.6)!important;
+}
+.cast58 .credit-strip{
+  grid-template-columns:repeat(4,1fr)!important;
+}
+.cast58 .dirty-south-credit{
+  background:#fff!important;
+}
+.cast58 .dirty-south-credit .mono{
+  color:#2458ff!important;
+}
+
+@media(max-width:900px){
+  .v2-live-current>a{
+    grid-template-columns:1fr!important;
+    gap:5px!important;
+  }
+  .v2-live-current>a span{grid-column:auto!important}
+  .v2-live-current>a small{margin-top:2px!important}
+  .cast58 .credit-strip{grid-template-columns:1fr!important}
+}
